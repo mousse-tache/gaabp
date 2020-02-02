@@ -1,24 +1,31 @@
-.App {
-  text-align: center;
+.next-steps .fa-link {
+  margin-right: 5px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+/* Fix for use only flexbox in content area */
+.next-steps .row {
+  margin-bottom: 0;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.next-steps .col-md-5 {
+  margin-bottom: 3rem;
 }
 
-.App-intro {
-  font-size: large;
+@media (max-width: 768px) {
+  .next-steps .col-md-5 {
+    margin-bottom: 0;
+  }
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.spinner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

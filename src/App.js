@@ -1,41 +1,44 @@
-import React, {useState} from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import PrivateRoute from './PrivateRoute';
-import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Login from "./pages/Login";
-import Signup from './pages/Signup';
-import { AuthContext } from "./context/auth";
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import { Container } from "reactstrap";
 
-function App(props) {
+import PrivateRoute from "./components/PrivateRoute";
+import Loading from "./components/Loading";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Home from "./views/Home";
+import Profile from "./views/Profile";
+import { useAuth0 } from "./react-auth0-spa";
+import history from "./utils/history";
 
-	const [authTokens, setAuthTokens] = useState();
-  
-  const setTokens = (data) => {
-    localStorage.setItem("tokens", JSON.stringify(data));
-    setAuthTokens(data);
+// styles
+import "./App.css";
+
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
+
+const App = () => {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <Loading />;
   }
 
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <Router>
-        <div>
-        <ul>
-          <li>
-            <Link to="/">Home Page</Link>
-          </li>
-          <li>
-            <Link to="/admin">Admin Page</Link>
-          </li>
-        </ul>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <PrivateRoute path="/admin" component={Admin} />
-        </div>
-      </Router>
-    </AuthContext.Provider>
+    <Router history={history}>
+      <div id="app" className="d-flex flex-column h-100">
+        <NavBar />
+        <Container className="flex-grow-1 mt-5">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <PrivateRoute path="/profile" component={Profile} />
+          </Switch>
+        </Container>
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
