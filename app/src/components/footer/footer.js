@@ -7,7 +7,7 @@ const Footer = () => (
   <footer> 
           <p className="left-footer">
           <Link to="/">
-            <img src={Logo}/>
+            <img src={Logo} alt="Logo"/>
           </Link>
           </p>
           <p className="center-footer">

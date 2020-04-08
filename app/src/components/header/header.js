@@ -10,6 +10,12 @@ const Header = ({ siteTitle }) => (
         <Link to="/">
           <img src={Logo} alt="Logo"/> {siteTitle}
         </Link>
+        {
+        // caroussel homepage
+        // carte des groupes
+        // catchy mission et branches
+        // contact 
+        }
         <Link to="/account"  className="auth">Membres</Link>
     </div>
   </header>
