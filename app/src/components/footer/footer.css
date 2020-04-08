@@ -1,0 +1,43 @@
+:root {
+    --primary: #A3233A;
+    --secondary: #EEC72C;
+    --light: #f5e9eb;
+    --medium-light: #d1919c;
+    --dark: #410e17;
+  }
+
+  footer img {
+      max-width: 40px;
+      float: left;
+  }
+
+  footer {
+      max-width: 70%;
+      margin:auto;
+      transition-property: text-shadow, color;
+      
+      min-height: 3em;
+  }
+
+  footer a, footer a:visited {
+      display: block;
+      text-decoration: none;
+      color:grey;
+      margin-top: 1em;
+  }
+
+  footer a:hover {
+      text-shadow: 0 0 0 2px black;
+      color:black;
+  }
+
+  footer p {
+      margin-top: 2em;
+      margin-bottom: .5em;
+      display: inline-block;
+      margin-right: 20em;
+  }
+
+  footer h4 {
+      margin-bottom: .5em;
+  }

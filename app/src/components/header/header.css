@@ -1,0 +1,44 @@
+:root {
+    --primary: #A3233A;
+    --secondary: #EEC72C;
+    --light: #f5e9eb;
+    --medium-light: #d1919c;
+    --dark: #410e17;
+  }
+  
+.header {
+    background-color: var(--light);
+    margin: .5em;
+    padding: .5em;
+    display: block;
+    max-height: 15%;
+}
+
+.header a {
+    color: var(--light);
+    font-style: normal;
+}
+
+.header img {
+    margin-right: 1em;
+}
+
+.header img {
+    vertical-align:middle;
+}
+
+.header a {
+    display: inline-block;
+    text-align: center;
+    color: var(--dark);
+    text-decoration: none;
+}
+
+.auth {
+    float:right;
+}
+
+
+.auth:hover {
+    font-size: 110%;
+}

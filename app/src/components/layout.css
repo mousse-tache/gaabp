@@ -1,3 +1,11 @@
+:root {
+  --primary: #A3233A;
+  --secondary: #EEC72C;
+  --light: #f5e9eb;
+  --medium-light: #d1919c;
+  --dark: #410e17;
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

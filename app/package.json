@@ -3,8 +3,11 @@
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "f.brobillard@gmail.com",
   "dependencies": {
+    "@okta/okta-react": "^1.2.0",
+    "@okta/okta-signin-widget": "^3.7.2",
+    "core-js": "^3.6.4",
     "gatsby": "^2.20.12",
     "gatsby-image": "^2.3.1",
     "gatsby-plugin-manifest": "^2.3.3",
@@ -13,10 +16,12 @@
     "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.3",
+    "he": "^1.2.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
