@@ -1,7 +1,7 @@
 import React from 'react'
 import { navigate, Router } from '@reach/router'
 import { Link } from 'gatsby'
-import Login, { signIn } from './../components/Login/login'
+import Login, { signIn } from './login'
 
 const Home = () => <p>Account Information</p>;
 const Settings = () => <p>Settings</p>;

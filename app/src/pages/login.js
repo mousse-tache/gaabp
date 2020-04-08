@@ -2,7 +2,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import React from 'react';
 
-import Logo from "../../images/Logo_AABP.gif"
+import Logo from "../images/Logo_AABP.gif"
 
 const config = {
   baseUrl: 'https://dev-132704.okta.com',
