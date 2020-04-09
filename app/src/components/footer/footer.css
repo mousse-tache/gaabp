@@ -15,7 +15,6 @@
       max-width: 70%;
       margin:auto;
       transition-property: text-shadow, color;
-      
       min-height: 3em;
   }
 
@@ -27,15 +26,15 @@
   }
 
   footer a:hover {
-      text-shadow: 0 0 0 2px black;
-      color:black;
+      text-shadow: 0 0 0 2px var(--primary);
+      color:var(--primary);
   }
 
   footer p {
       margin-top: 2em;
       margin-bottom: .5em;
       display: inline-block;
-      margin-right: 20em;
+      margin-left: 15em;
   }
 
   footer h4 {
