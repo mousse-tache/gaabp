@@ -14,11 +14,9 @@ const Footer = () => (
           <Link to="/about">
             Qui sommes-nous?
           </Link>
-          <a href="https://carrickquebec.com/" target="_blank">Carrick (boutique)</a>
           </p>
-          <p className="right-footer">            
-          <h4>Suivez-nous</h4>
-          <a href="https://www.youtube.com/channel/UCa0v0Pl2dQl1_tC-13MoKcg" target="_blank">YouTube</a>
+          <p className="right-footer">         
+          <a href="https://carrickquebec.com/" target="_blank">Carrick (boutique)</a>
           </p>
   </footer>
 )

@@ -40,3 +40,25 @@
   footer h4 {
       margin-bottom: .5em;
   }
+
+  @media only screen and (max-width: 480px) {
+    html {
+        font-size: 120%;
+        margin-left:0%;
+    }
+    footer img {
+        max-width: 40px;
+        float: none;
+    }
+    footer {
+        max-width: 100%;
+    }
+    footer p{
+        text-align: center;
+        margin:auto;
+        width: 100%;
+    }
+    footer a {
+        display: block;
+    }
+  }

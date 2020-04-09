@@ -7,16 +7,17 @@ import Logo from "../../images/Logo_AABP.gif"
 const Header = ({ siteTitle }) => (
   <header className="header">
     <div>
-        <Link to="/">
-          <img src={Logo} alt="Logo"/> {siteTitle}
-        </Link>
-        <Link to="/inscrire">
+        <Link className="logo" to="/">
+          <img src={Logo} alt="Logo"/>
+        </Link>        
+        <Link className="navlink" to="/inscrire">
           S'inscrire
         </Link>
-        <Link to="/impliquer">
+        <Link className="navlink" to="/impliquer">
           S'impliquer
         </Link>
-        <Link to="/contact">
+        
+        <Link className="navlink" to="/contact">
           Nous joindre
         </Link>
         {

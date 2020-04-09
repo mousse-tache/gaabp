@@ -635,8 +635,7 @@ main h1 {
 
 @media only screen and (max-width: 480px) {
   html {
-    font-size: 100%;
+    font-size: 120%;
+    margin-left:0%;
   }
 }
-
-main {}
