@@ -12,6 +12,7 @@
     padding: .5em;
     display: block;
     max-height: 15%;
+    box-sizing: border-box;
 }
 
 .header a {
@@ -30,13 +31,19 @@
     text-decoration: none;
 }
 
+
 header {
+    position:absolute;
+    top:0;
+    width:100%;
+    text-align:center;
     margin:auto;
     transition-property: text-shadow, color;
     min-height: 3em;
-    position: relative;
     padding-bottom: 10%;
-}
+    background-color: white;
+    padding-bottom:10em;
+  }
 
 header a, header a:visited {
     display: inline-block;
@@ -66,6 +73,24 @@ header a:hover {
     margin-left: 15%;
 }
 
+a:active {
+    color: var(--primary);
+    text-shadow: 0 0 0 2px var(--primary);
+}
+
+
+  /* The sticky class is added to the header with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + div {
+    padding-top: 10em;
+  }
+
 @media only screen and (max-width: 480px) {
     .navlink {
         font-size: larger;
@@ -90,5 +115,10 @@ header a:hover {
     .auth {
         position: relative;
         font-size: larger;
+    }
+
+    .sticky {
+        position: relative;
+        display: block;
     }
   }

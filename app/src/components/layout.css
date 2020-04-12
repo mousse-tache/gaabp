@@ -633,9 +633,26 @@ main h1 {
   text-align: center;
 }
 
+.break {
+  height:10em;
+}
+section {
+  padding: 30px 20px; /* first number needs to be higher then height header/footer */ 
+  box-sizing:border-box;
+  height:100%;
+  overflow-x:hidden;;
+  min-height: 50em;
+}
+
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 120%;
     margin-left:0%;
+  }
+
+  .break {
+    display: hidden;
+    height: 1em;
   }
 }

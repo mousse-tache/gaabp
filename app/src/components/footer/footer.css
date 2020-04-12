@@ -16,6 +16,7 @@
       margin:auto;
       transition-property: text-shadow, color;
       min-height: 3em;
+      margin-bottom: 5em;
   }
 
   footer a, footer a:visited {
