@@ -15,7 +15,7 @@ const Layout = ({ children, username }) => {
 
   return (
     <>
-      <Header usename={username} siteTitle={"Section membres"} />
+      <Header username={username} siteTitle={"Section membres"} />
       <div>
         <main>{children}</main>
       </div>

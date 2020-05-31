@@ -644,6 +644,10 @@ section {
   min-height: 50em;
 }
 
+p {
+  font-size: 18px;
+}
+
 
 @media only screen and (max-width: 480px) {
   html {
@@ -654,5 +658,9 @@ section {
   .break {
     display: hidden;
     height: 1em;
+  }
+
+  p {
+    text-align: justify;
   }
 }

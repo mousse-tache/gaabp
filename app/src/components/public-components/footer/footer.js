@@ -16,7 +16,7 @@ const Footer = () => (
           </Link>
           </p>
           <p className="right-footer">         
-          <a href="https://carrickquebec.com/" target="_blank">Carrick (boutique)</a>
+          <a href="https://carrickquebec.com/" target="_blank" rel="noopener noreferrer">Carrick (boutique)</a>
           </p>
   </footer>
 )

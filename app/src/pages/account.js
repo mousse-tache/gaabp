@@ -1,4 +1,5 @@
 import React from 'react'
+import {ActivityIndicator} from 'react-native'
 import { navigate } from '@reach/router'
 import Login, { signIn } from './login'
 import AppAuthenticated from '../AppAuthenticated'
@@ -47,6 +48,13 @@ class Account extends React.Component {
       return (
         <Login/>
       );
+    }
+
+    if(this.state.user == null) 
+    {
+      return (
+        <ActivityIndicator></ActivityIndicator>
+      )        
     }
     
     return (

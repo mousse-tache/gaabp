@@ -3,13 +3,18 @@ import Layout from "./components/layout"
 
 import PropTypes from "prop-types"
 
+import {Text, View} from 'react-native';
+
+
 const AppAuthenticated = ({username}) => {
     return (        
-        <Layout username={username}>  
-            <React.Fragment>
-            <p>Welcome, {username}. </p>
-            </React.Fragment>
-        </Layout>
+        <View>
+            <Layout username={username}>  
+                <Text>
+                <p>Welcome, {username}. </p>
+                </Text>
+            </Layout>
+        </View>
           )
 }
 
