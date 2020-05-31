@@ -20,3 +20,5 @@
 * Gatsby pour pouvoir servir un front-end static et rapide
 * Netlify pour son intégration CI/CD à coût nul
 * Il reste encore à déterminer s'il sera possible de réutiliser la base de données actuelles ou s'il faudra migrer les données vers une nouvelle.
+
+## Pour contribuer, contacter f.brobillard@gmail.com
