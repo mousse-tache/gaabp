@@ -22,3 +22,8 @@
 * Il reste encore à déterminer s'il sera possible de réutiliser la base de données actuelles ou s'il faudra migrer les données vers une nouvelle.
 
 ## Pour contribuer, contacter f.brobillard@gmail.com
+
+### Nous recherchons:
+* Des développeurs
+* Un designer web
+* Un designer graphique
