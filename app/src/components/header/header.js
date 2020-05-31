@@ -4,33 +4,23 @@ import React from "react"
 import "./header.css"
 import Logo from "../../images/Logo_AABP.gif"
 
-const Header = ({ siteTitle }) => (
+const Header = ({ username }) => (
   <header className="header sticky">
         <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>
         </Link>        
-        <Link className="navlink" to="#inscrire" partiallyActive={true} activeClassName="active">
-          S'inscrire
+        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+          Unités
         </Link>
-        <Link className="navlink" to="#impliquer" partiallyActive={true} activeClassName="active">
-          S'impliquer
+        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+          Groupes
         </Link>
-        
-        <Link className="navlink" to="#contact" partiallyActive={true} activeClassName="active">
-          Nous joindre
-        </Link>
-        {
-        // caroussel homepage
-        // carte des groupes
-        // catchy mission et branches
-        // contact 
-        }
-        <Link to="/account" className="auth" >Membres</Link>
+        <Link to="/account/settings" className="auth" >{username}</Link>
   </header>
 )
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+  username: PropTypes.string,
 }
 
 Header.defaultProps = {

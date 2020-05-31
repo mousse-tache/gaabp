@@ -1,10 +1,8 @@
 import React from 'react'
-import { navigate, Router } from '@reach/router'
-import { Link } from 'gatsby'
+import { navigate } from '@reach/router'
 import Login, { signIn } from './login'
+import AppAuthenticated from '../AppAuthenticated'
 
-const Home = () => <p>Account Information</p>;
-const Settings = () => <p>Settings</p>;
 
 const isAuthenticated = () => {
   if (typeof window !== 'undefined') {
@@ -26,6 +24,7 @@ class Account extends React.Component {
     const token = await signIn.authClient.tokenManager.get('idToken');
     if (token) {
       this.setState({user: token.claims.name});
+      console.log(token.claims);
     } else {
       // Token has expired
       this.setState({user: false});
@@ -49,23 +48,10 @@ class Account extends React.Component {
         <Login/>
       );
     }
-
+    
     return (
-      <>
-        <nav>
-          <Link to="/">Home</Link>{' '}
-          <Link to="/account">My Account</Link>{' '}
-          <Link to="/account/settings">Settings</Link>{' '}
-        </nav>
-        <h1>My Account</h1>
-        <React.Fragment>
-          <p>Welcome, {this.state.user}. <button onClick={this.logout}>Logout</button></p>
-        </React.Fragment>
-        <Router>
-          <Home path="/account"/>
-          <Settings path="/account/settings"/>
-        </Router>
-      </>
+      <AppAuthenticated username={this.state.user}>
+      </ AppAuthenticated>
     )
   }
 }
