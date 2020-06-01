@@ -11,7 +11,7 @@ const Footer = () => (
           </Link>
           </p>
           <p className="center-footer">
-          <Link to="/about">
+          <Link to="#about">
             Qui sommes-nous?
           </Link>
           </p>
