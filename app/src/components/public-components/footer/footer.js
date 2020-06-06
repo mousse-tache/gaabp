@@ -5,19 +5,19 @@ import Logo from "../../../images/Logo_AABP.gif"
 
 const Footer = () => (
   <footer> 
-          <p className="left-footer">
+          <div className="left-footer">
           <Link to="/">
             <img src={Logo} alt="Logo"/>
           </Link>
-          </p>
-          <p className="center-footer">
+          </div>
+          <div className="center-footer">
           <Link to="#about">
             Qui sommes-nous?
           </Link>
-          </p>
-          <p className="right-footer">         
+          </div>
+          <div className="right-footer">         
           <a href="https://carrickquebec.com/" target="_blank" rel="noopener noreferrer">Carrick (boutique)</a>
-          </p>
+          </div>
   </footer>
 )
 

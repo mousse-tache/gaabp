@@ -7,7 +7,7 @@
   }
   
 .header {
-    max-width: 80%;
+    max-width: 100%;
     margin: auto;
     padding: .5em;
     display: block;
@@ -42,13 +42,14 @@ header {
     min-height: 3em;
     padding-bottom: 10%;
     background-color: white;
-    padding-bottom:10em;
+    padding-bottom:30em;
+    border-bottom: 4px dotted var(--light);
   }
 
 header a, header a:visited {
     display: inline-block;
     text-decoration: none;
-    color:grey;
+    color:var(--dark);
     margin-top: 3em;
 }
 
@@ -59,7 +60,7 @@ header a:hover {
 
 .auth {
     position: absolute;
-    right: 0%;
+    right: 2%;
     top: 0%;
 }
 
