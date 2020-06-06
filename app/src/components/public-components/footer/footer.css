@@ -8,19 +8,22 @@
 
   footer img {
       max-width: 40px;
-      float: left;
   }
 
   footer {
-      max-width: 70%;
+      max-width: 90%;
       margin:auto;
       transition-property: text-shadow, color;
       min-height: 3em;
       margin-bottom: 5em;
+      border: 4px dotted var(--light);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
   }
 
   footer a, footer a:visited {
-      display: block;
       text-decoration: none;
       color:grey;
       margin-top: 1em;
@@ -31,11 +34,11 @@
       color:var(--primary);
   }
 
-  footer p {
+  footer div {
+      display: inline-flex;
       margin-top: 2em;
       margin-bottom: .5em;
-      display: inline-block;
-      margin-left: 15em;
+      width: 33%;
   }
 
   footer h4 {
@@ -53,13 +56,12 @@
     }
     footer {
         max-width: 100%;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
     }
-    footer p{
-        text-align: center;
+    footer div{
         margin:auto;
         width: 100%;
-    }
-    footer a {
-        display: block;
     }
   }
