@@ -10,7 +10,6 @@
     max-width: 100%;
     margin: auto;
     padding: .5em;
-    display: block;
     max-height: 15%;
     box-sizing: border-box;
 }
@@ -44,10 +43,12 @@ header {
     background-color: white;
     padding-bottom:30em;
     border-bottom: 4px dotted var(--light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
 header a, header a:visited {
-    display: inline-block;
     text-decoration: none;
     color:var(--dark);
     margin-top: 3em;
@@ -98,7 +99,7 @@ a:active {
         margin-left: 0%;
     }
     .header {
-        max-width: 100%;
+        flex-direction: column;
     }
 
     .logo {
@@ -116,6 +117,7 @@ a:active {
     .auth {
         position: relative;
         font-size: larger;
+        right: 0;
     }
 
     .sticky {

@@ -8,25 +8,36 @@
 
   footer img {
       max-width: 40px;
+    vertical-align:middle;
+    display: inline-block;
+    margin:auto;
   }
 
   footer {
       max-width: 90%;
+      width: 100%;
       margin:auto;
       transition-property: text-shadow, color;
       min-height: 3em;
       margin-bottom: 5em;
+      margin-top: 5em;
       border: 4px dotted var(--light);
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      align-content: center;
+      justify-content: space-around;
+      align-content: space-between;
+      text-align: center;
   }
 
   footer a, footer a:visited {
       text-decoration: none;
       color:grey;
       margin-top: 1em;
+      display: inline-flex;
+      width: 30%;
+      min-height: 3em;
+      text-align: center;
+      margin:auto;
   }
 
   footer a:hover {
@@ -35,10 +46,7 @@
   }
 
   footer div {
-      display: inline-flex;
-      margin-top: 2em;
-      margin-bottom: .5em;
-      width: 33%;
+      display: inline;
   }
 
   footer h4 {
@@ -47,7 +55,6 @@
 
   @media only screen and (max-width: 480px) {
     html {
-        font-size: 120%;
         margin-left:0%;
     }
     footer img {
@@ -55,7 +62,6 @@
         float: none;
     }
     footer {
-        max-width: 100%;
         width: 100%;
         flex-direction: column;
         justify-content: center;
