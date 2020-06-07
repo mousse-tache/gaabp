@@ -3,7 +3,6 @@ import ApiClient from "./apiClient";
 export class UserClient {
     constructor(appUrl) {
         this._apiClient = new ApiClient({ baseURL: "https://formation-aabp.herokuapp.com/api/" });
-        this._webApiClient = new WebApiClient({ baseURL: `${appUrl}` });
     }
 
     getById = (id) => {
@@ -17,7 +16,7 @@ export class UserClient {
     }
 
     addUser = (user) => {
-        return this._apiClient.post("user", { user });
+        return this._apiClient.post("user/", { user });
     }
 
     updateUser = (user) => {

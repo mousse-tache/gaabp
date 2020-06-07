@@ -1,20 +1,18 @@
 import React from "react"
 import Layout from "./components/layout"
-
+import Profile from "./profile/profile"
+import UserContext from "./context/userContext"
 import PropTypes from "prop-types"
 
-import {Text, View} from 'react-native';
+const AppAuthenticated = ({user}) => {
 
-
-const AppAuthenticated = ({username}) => {
     return (        
-        <View>
-            <Layout username={username}>  
-                <Text>
-                <p>Welcome, {username}. </p>
-                </Text>
+        <UserContext.Provider value={{courriel: user.email, nomcomplet:user.name}}>
+            <Layout username={user.name}>  
+                <p>Salut, {user.name}. </p>
+                <Profile></Profile>
             </Layout>
-        </View>
+        </UserContext.Provider>
           )
 }
 

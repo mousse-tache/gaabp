@@ -66,8 +66,9 @@
         flex-direction: column;
         justify-content: center;
     }
-    footer div{
+    footer div, footer a{
         margin:auto;
         width: 100%;
+        display: block;
     }
   }
