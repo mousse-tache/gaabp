@@ -6,7 +6,6 @@ const UserContext = React.createContext({
     prenom: null,
     nom: null,
     nomcomplet: null
-
 });
 
 export default UserContext;

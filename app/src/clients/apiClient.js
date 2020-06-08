@@ -24,8 +24,8 @@ export class ApiClient {
         onSendingRequest = callback;
     }
 
-    get(url, configuration = {}) {
-        return this._client.get(url, configuration)
+    async get(url, configuration = {}) {
+        return await this._client.get(url, configuration)
             .then(this._processApiResponse)
             .catch(this._processApiError);
     }
@@ -65,21 +65,13 @@ export class ApiClient {
             return null;
         }
 
-        const { isSuccess, errorMessage, data } = response.data;
-
-        if (!isSuccess || errorMessage) {
-            return Promise.reject({
-                response,
-                message: errorMessage
-            });
-        }
+        const data = response.data;
 
         return data;
     }
 
     _processApiError(error) {
         const { response } = error;
-
         return Promise.reject({
             error,
             message: response && response.data && response.data.message ? response.data.message : error.message

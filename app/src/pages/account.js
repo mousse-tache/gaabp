@@ -1,5 +1,5 @@
 import React from 'react'
-import {ActivityIndicator} from 'react-native'
+import Loading from '../components/loading/loading'
 import { navigate } from '@reach/router'
 import Login, { signIn } from './login'
 import AppAuthenticated from '../AppAuthenticated'
@@ -24,8 +24,8 @@ class Account extends React.Component {
   async componentDidMount() {
     const token = await signIn.authClient.tokenManager.get('idToken');
     if (token) {
-      this.setState({user: token.claims});
-      console.log(token.claims);
+      await this.setState({user: token.claims});
+      //console.log(token.claims);
     } else {
       // Token has expired
       this.setState({user: false});
@@ -50,10 +50,10 @@ class Account extends React.Component {
       );
     }
 
-    if(this.state.user == null) 
+    if(this.state.user == null || !this.state.user) 
     {
       return (
-        <ActivityIndicator></ActivityIndicator>
+        <Loading />
       )        
     }
     

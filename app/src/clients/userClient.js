@@ -11,17 +11,20 @@ export class UserClient {
         return this._apiClient.get("user", { params });
     }
 
+    getByEmail = (email) => {
+        return this._apiClient.get(`/user/email/${email}`);
+    }
+
     getUsers = () => {
         return this._apiClient.get("users");
     }
 
     addUser = (user) => {
-        console.log(user)
         return this._apiClient.post("user", user );
     }
 
     updateUser = (user) => {
-        return this._apiClient.put("user", user );
+        return this._apiClient.put(`user/${user.id}`, user );
     }
 
     deleteUser = (id) => {
