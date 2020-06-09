@@ -1,7 +1,4 @@
 import React from 'react'
-import Loading from '../components/loading/loading'
-import { navigate } from '@reach/router'
-import Login, { signIn } from './login'
 import AppAuthenticated from '../AppAuthenticated'
 
 
@@ -13,27 +10,9 @@ const isAuthenticated = () => {
   }
 };
 
-class Account extends React.Component {
-  constructor(props) {
-    super(props);
+const Account = () => {
 
-    this.state = {user: false};
-    this.logout = this.logout.bind(this);
-  }
-
-  async componentDidMount() {
-    const token = await signIn.authClient.tokenManager.get('idToken');
-    if (token) {
-      await this.setState({user: token.claims});
-      //console.log(token.claims);
-    } else {
-      // Token has expired
-      this.setState({user: false});
-      localStorage.setItem('isAuthenticated', 'false');
-    }
-  }
-
-  logout() {
+  /* const logout = () => {
     signIn.authClient.signOut().catch((error) => {
       console.error('Sign out error: ' + error)
     }).then(() => {
@@ -42,26 +21,11 @@ class Account extends React.Component {
       navigate('/');
     });
   }
+  */
 
-  render() {
-    if (!isAuthenticated()) {
-      return (
-        <Login/>
-      );
-    }
-
-    if(this.state.user == null || !this.state.user) 
-    {
-      return (
-        <Loading />
-      )        
-    }
-    
-    return (
-      <AppAuthenticated user={this.state.user}>
-      </ AppAuthenticated>
-    )
-  }
-}
+  return (
+    <AppAuthenticated />
+  )
+};
 
 export default Account

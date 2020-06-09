@@ -15,6 +15,14 @@ exports.onCreatePage = async ({ page, actions }) => {
     }
   };
 
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  if (page.path.match(/^\/profile/)) {
+    page.matchPath = "/profile/*"
+    createPage(page)
+  }
+}
+
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === 'build-html') {
     // Exclude Sign-In Widget from compilation path

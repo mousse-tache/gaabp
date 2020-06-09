@@ -8,14 +8,17 @@ const Header = ({ username }) => (
   <header className="header sticky">
         <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>
-        </Link>        
+        </Link>                
+        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+          Liste de membres
+        </Link>       
         <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
           Unités
         </Link>
         <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
           Groupes
         </Link>
-        <Link to="/account/settings" className="auth" >{username}</Link>
+        <Link to="/profile" className="auth" >{username}</Link>
   </header>
 )
 

@@ -53,7 +53,7 @@ const Profile = () => {
 
 
     return  (
-    <section>
+    <section className="profile">
         <form onSubmit={saveUser}>        
             <h3>Informations de base</h3>
             <label>Courriel</label>

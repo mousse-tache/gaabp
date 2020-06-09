@@ -8,6 +8,7 @@ const config = {
   baseUrl: 'https://dev-132704.okta.com',
   clientId: '0oa5i1e8aXo6JNxOx4x6',
   logo: Logo,
+  // TODO paramétrisé par env
   redirectUri: "http://localhost:8000/account",
   el: '#signIn',
   authParams: {
