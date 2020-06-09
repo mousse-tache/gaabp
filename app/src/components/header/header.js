@@ -9,16 +9,16 @@ const Header = ({ username }) => (
         <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>
         </Link>                
-        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+        <Link className="navlink" to="/app/membres" partiallyActive={true} activeClassName="active">
           Liste de membres
         </Link>       
-        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+        <Link className="navlink" to="/app/account" partiallyActive={true} activeClassName="active">
           Unités
         </Link>
-        <Link className="navlink" to="/account" partiallyActive={true} activeClassName="active">
+        <Link className="navlink" to="/app/account" partiallyActive={true} activeClassName="active">
           Groupes
         </Link>
-        <Link to="/profile" className="auth" >{username}</Link>
+        <Link to="/app/account" className="auth" >{username}</Link>
   </header>
 )
 

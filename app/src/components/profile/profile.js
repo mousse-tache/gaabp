@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react"
-import Loading from "../components/loading/loading"
-import UserContext from "../context/userContext"
+import Loading from "../loading/loading"
+import UserContext from "../../context/userContext"
 import "./profile.css"
 
-import UserClient from "../clients/userClient"
+import UserClient from "../../clients/userClient"
 
 const Profile = () => {
     const user = useContext(UserContext)
@@ -17,7 +17,7 @@ const Profile = () => {
 
     useEffect(() => {
         FetchUser();
-    },[])
+    })
 
     async function FetchUser() {
         try {               

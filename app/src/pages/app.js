@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Router } from "@reach/router"
-import Layout from "./components/layout"
-import Profile from "./profile/profile"
-import UserContext from "./context/userContext"
-import Loading from './components/loading/loading'
-import Login, { signIn } from './pages/login'
-import NotFoundPage from "./pages/404"
+import Layout from "../components/layout"
+import Profile from "../components/profile/profile"
+import Membres from "../components/membres/membres"
+import UserContext from "../context/userContext"
+import Loading from '../components/loading/loading'
+import Login, { signIn } from './login'
+import NotFoundPage from "./404"
 
-const AppAuthenticated = ({children}) => {
+const App = ({children}) => {
     const [user, setUser] = useState(false);
 
     const isAuthenticated = () => {
@@ -48,13 +49,14 @@ const AppAuthenticated = ({children}) => {
     return (        
         <UserContext.Provider value={{courriel: user.email, nomcomplet:user.name}}>
             <Layout username={user.name}> 
-                <Router> 
+                <Router basepath="/app"> 
                     <Profile path="/account" />
-                    <NotFoundPage default />
+                    <Membres path="/membres" />
+                    <Profile default />
                 </Router>
             </Layout>
         </UserContext.Provider>
           )
 }
 
-export default AppAuthenticated
+export default App

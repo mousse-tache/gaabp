@@ -4,12 +4,13 @@ import React from 'react';
 
 import Logo from "../images/Logo_AABP.gif"
 
+const redirectUri = window.location.hostname === "localhost" ? "http://localhost:8000/app" : "https://aabp-dev.netlify.app/app";
+
 const config = {
   baseUrl: 'https://dev-132704.okta.com',
   clientId: '0oa5i1e8aXo6JNxOx4x6',
   logo: Logo,
-  // TODO paramétrisé par env
-  redirectUri: "http://localhost:8000/account",
+  redirectUri: redirectUri,
   el: '#signIn',
   authParams: {
     pkce: true,
