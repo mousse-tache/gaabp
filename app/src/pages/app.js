@@ -6,7 +6,9 @@ import Membres from "../components/membres/membres"
 import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
 import Login, { signIn } from './login'
-import NotFoundPage from "./404"
+
+
+import "../components/profile/profile.css"
 
 const App = ({children}) => {
     const [user, setUser] = useState(false);

@@ -1,14 +1,13 @@
-import OktaSignIn from '@okta/okta-signin-widget';
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import React from 'react';
-
-import Logo from "../images/Logo_AABP.gif"
+import OktaSignIn from '@okta/okta-signin-widget';
+import Logo from "../images/Logo_AABP.gif";
+import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 const config = {
   baseUrl: 'https://dev-132704.okta.com',
   clientId: '0oa5i1e8aXo6JNxOx4x6',
   logo: Logo,
-  redirectUri: "https://aabp-dev.netlify.app/app",
+  redirectUri: "http://localhost:8000/app",
   el: '#signIn',
   authParams: {
     pkce: true,

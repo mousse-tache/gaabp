@@ -26,8 +26,4 @@ Header.propTypes = {
   username: PropTypes.string,
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
 export default Header

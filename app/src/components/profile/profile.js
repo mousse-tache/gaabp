@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
-import "./profile.css"
-
 import UserClient from "../../clients/userClient"
 
 const Profile = () => {
