@@ -7,17 +7,18 @@ import UserClient from "../../clients/userClient"
 
 const Profile = () => {
     const user = useContext(UserContext)
-    const [courriel, setCourriel] = useState(user.courriel)
-    const [prenom, setPrenom] = useState(user.prenom)
-    const [nom, setNom] = useState(user.nom)
-    const [id, setId] = useState(false)
+    const [courriel, setCourriel] = useState(user.courriel);
+    const [prenom, setPrenom] = useState(user.prenom);
+    const [nom, setNom] = useState(user.nom);
+    const [id, setId] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
     
     const userClient = new UserClient();
 
     useEffect(() => {
         FetchUser();
-    })
+    }, [])
 
     async function FetchUser() {
         try {               
@@ -27,6 +28,7 @@ const Profile = () => {
                 setNom(data[0].nom.toString());
                 setPrenom(data[0].prenom.toString());
                 setId(data[0]._id.toString());
+                setIsAdmin(data[0].isAdmin ? data[0].isAdmin: false);
             }            
         } catch (e) {
             console.log(e.message);   
@@ -39,13 +41,16 @@ const Profile = () => {
         e.preventDefault();
         e.stopPropagation();    
         if(id) {
-            await userClient.updateUser({id:id, courriel: courriel, nom: nom, prenom: prenom});
+            await userClient.updateUser({id:id, courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
         }
         else {
-            await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom});
+            await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
         }
-
     }
+
+    const handleAdminCheck = () => {
+        setIsAdmin(!isAdmin);
+    };
 
     if(isFecthingUser) {
         return (<Loading />)
@@ -65,6 +70,10 @@ const Profile = () => {
             <label>Nom de famille</label>
             <input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
 
+            <h3>Permissions</h3>
+            <label>Administrateur de la base de donnée</label>
+            <input type="checkbox" checked={isAdmin} onChange={handleAdminCheck} />
+            
             <input type="submit" value="Sauvegarder" />
         </form>
     </section>
