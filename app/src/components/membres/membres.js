@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Loading from "../loading/loading"
-import "./membres.css"
 
 import UserClient from "../../clients/userClient"
 
@@ -12,8 +11,6 @@ const Membres = () => {
     const [id, setId] = useState(false)
     const [isFetchingUserList, setIsFetchingUserList] = useState(true);
     
-
-
     const userClient = new UserClient();
 
     useEffect(() => {
