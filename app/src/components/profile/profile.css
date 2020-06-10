@@ -1,10 +1,13 @@
+
 .profile  form {
     display: flex;
     flex-direction: column;
+    width: 70%;
+    margin:auto;
 }
 
 .profile form input {
-    max-width: 30%;
+    max-width: 80%;
     text-align: center;
     margin: .5em;
 }
@@ -12,5 +15,9 @@
 @media only screen and (max-width: 1100px) {
     .profile form input {
         max-width: 100%;
+    }
+
+    .profile form {
+        width: 100%;
     }
   }

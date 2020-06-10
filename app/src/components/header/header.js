@@ -6,7 +6,7 @@ import Logo from "../../images/Logo_AABP.gif"
 
 const Header = ({ username }) => (
   <header className="header sticky">
-        <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
+        <Link className="logo" to="/app" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>
         </Link>                
         <Link className="navlink" to="/app/membres" partiallyActive={true} activeClassName="active">

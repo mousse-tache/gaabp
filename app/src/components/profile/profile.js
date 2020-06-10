@@ -57,8 +57,9 @@ const Profile = () => {
 
     return  (
     <section className="profile">
-        <form onSubmit={saveUser}>        
+        <form onSubmit={saveUser} className="form">        
             <h3>Informations de base</h3>
+            
             <label>Courriel</label>
             <input type="text" value={courriel} placeholder="robert@badenpowell.ca" onChange={event => setCourriel(event.target.value)} />
 
@@ -72,7 +73,7 @@ const Profile = () => {
             <label>Administrateur de la base de donnée</label>
             <input type="checkbox" checked={isAdmin} onChange={handleAdminCheck} />
             
-            <input type="submit" value="Sauvegarder" />
+            <input type="submit" value="Sauvegarder" className="submit" />
         </form>
     </section>
     )
