@@ -25,7 +25,7 @@ const Header = ({ siteTitle }) => (
         // catchy mission et branches
         // contact 
         }
-        <Link to="/account" className="auth" >Membres</Link>
+        <Link to="/app" className="auth" >Membres</Link>
   </header>
 )
 
