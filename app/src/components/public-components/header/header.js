@@ -4,7 +4,7 @@ import React from "react"
 import "../../header/header.css"
 import Logo from "../../../images/Logo_AABP.gif"
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <header className="header sticky">
         <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>

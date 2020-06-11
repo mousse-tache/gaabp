@@ -39,6 +39,7 @@ header {
     margin:auto;
     transition-property: text-shadow, color;
     min-height: 3em;
+    padding-bottom: 10%;
     background-color: white;
     padding-bottom:30em;
     border-bottom: 4px dotted var(--light);

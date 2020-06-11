@@ -7,11 +7,12 @@ import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
 import Login, { signIn } from './login'
 
-
 import "../components/profile/profile.css"
 
-const App = ({children}) => {
+const App = () => {
     const [user, setUser] = useState(false);
+    const [authedUser, setAuthedUser] = useState({});
+
 
     const isAuthenticated = () => {
         if (typeof window !== 'undefined') {
@@ -27,7 +28,7 @@ const App = ({children}) => {
           await setUser(token.claims);
         } else {
           // Token has expired
-          setUser(false)
+          setUser(false);
           localStorage.setItem('isAuthenticated', 'false');
         }
     }
@@ -35,7 +36,7 @@ const App = ({children}) => {
     useEffect(() => {
         fetchAuth();
     }, []);
-    
+
     if (!isAuthenticated()) {
         return (
           <Login/>
@@ -49,7 +50,7 @@ const App = ({children}) => {
     }
 
     return (        
-        <UserContext.Provider value={{courriel: user.email, nomcomplet:user.name}}>
+        <UserContext.Provider value={{claims: user, authedUser, setAuthedUser}}>
             <Layout username={user.name}> 
                 <Router basepath="/app"> 
                     <Profile path="/account" />

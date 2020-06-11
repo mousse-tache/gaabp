@@ -1,0 +1,41 @@
+
+.membres  form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin:auto;
+    text-align: center;
+}
+
+.membres form input {
+    text-align: center;
+    margin: .5em;
+}
+
+.membres h3 {
+    text-align: center;
+}
+
+.membres > form > .submitInput {
+    max-width: 50%;
+    margin: auto;
+}
+
+.membres form {
+    padding: 3em;
+}
+
+@media only screen and (max-width: 1100px) {
+    .membres form input {
+        max-width: 100%;
+    }
+
+    .membres form {
+        width: 100%;
+    }
+
+    .membres > form > .submitInput {
+        max-width: 70%;
+        margin: auto;
+    }
+  }

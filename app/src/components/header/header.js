@@ -10,7 +10,7 @@ const Header = ({ username }) => (
           <img src={Logo} alt="Logo"/>
         </Link>                
         <Link className="navlink" to="/app/membres" partiallyActive={true} activeClassName="active">
-          Liste de membres
+          Membres
         </Link>       
         <Link className="navlink" to="/app/account" partiallyActive={true} activeClassName="active">
           Unités

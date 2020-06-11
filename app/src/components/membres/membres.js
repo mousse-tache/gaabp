@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react"
 import Loading from "../loading/loading"
-
+import "./membres.css"
 import UserClient from "../../clients/userClient"
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
 
 const Membres = () => {
     const [userList, setUserList] = useState([])
@@ -51,7 +55,7 @@ const Membres = () => {
 
 
     return  (
-    <section className="profile">
+    <Paper className="membres">
         <form onSubmit={saveUser}>        
             <h3>Liste des membres</h3>
             <label>Courriel</label>
@@ -63,12 +67,12 @@ const Membres = () => {
             <label>Nom de famille</label>
             <input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
 
-            <input type="submit" value="Ajouter un membre" />
+            <input type="submit" value="Ajouter un membre" className="submitInput" />
         </form>
         <ol>
     {userList.map(x => <li>{x.courriel} {x.prenom} {x.nom}</li>)}
         </ol>
-    </section>
+    </Paper>
     )
 }
 

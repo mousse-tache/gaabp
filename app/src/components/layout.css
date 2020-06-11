@@ -7,7 +7,7 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: Roboto, sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -193,7 +193,7 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
+  font: 112.5%/1.45em Roboto, serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -208,7 +208,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: Robot, georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;

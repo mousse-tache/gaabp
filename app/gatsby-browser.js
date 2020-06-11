@@ -8,3 +8,4 @@
 
 require('./src/components/header/header.css')
 require('./src/components/layout.css')
+require('fontsource-roboto')
