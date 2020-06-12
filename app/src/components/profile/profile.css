@@ -10,9 +10,14 @@
     max-width: 80%;
     text-align: center;
     margin: .5em;
+    margin-top: 1em;
 }
 
-.profile .button {
+.profile form label {
+    margin-top: 2em;
+}
+
+.profile .submit-button {
     top:2em;
     max-width: 50%;
     text-align: center;
@@ -25,6 +30,7 @@
 .profile h3 {
     margin:2em;
 }
+
 
 @media only screen and (max-width: 1100px) {
     .profile form input {
@@ -40,8 +46,7 @@
         text-align: center;
     }
 
-
-    .profile .button {
+    .profile .submit-button {
         max-width: 80%;
         text-align: center;
         position: relative;

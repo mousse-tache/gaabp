@@ -2,11 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Tooltip from '@material-ui/core/Tooltip'
+import { Input, Paper, Button, Switch, FormControlLabel, InputLabel } from '@material-ui/core';
 
 const Profile = () => {
     const userContext = useContext(UserContext);
@@ -91,14 +87,14 @@ const Profile = () => {
         <form onSubmit={saveUser} className="form">        
             <h3>Informations de base</h3>
             
-            <label>Courriel</label>
-            <input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled={!isAdmin} onChange={event => setCourriel(event.target.value)} />
+            <InputLabel>Courriel</InputLabel>
+            <Input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled={!isAdmin} onChange={event => setCourriel(event.target.value)} />
 
-            <label>Prénom</label>
-            <input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
+            <InputLabel>Prénom</InputLabel>
+            <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
 
-            <label>Nom de famille</label>
-            <input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
+            <InputLabel>Nom de famille</InputLabel>
+            <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
 
             <h3>Permissions</h3>
             <FormControlLabel
@@ -107,6 +103,7 @@ const Profile = () => {
                     checked={isAdmin}
                     onChange={handleAdminCheck}
                     name="checkedB"
+                    className="switch"
                 />
                 }
                 label="Administrateur de la base de donnée"
@@ -114,7 +111,7 @@ const Profile = () => {
             
         </form>
                 
-        <Button className="button" variant="contained" disabled={courriel !== user.email} onClick={saveUser}>Sauvegarder</Button>
+        <Button className="submit-button" variant="contained" color="secondary" disabled={courriel !== user.email} onClick={saveUser}>Sauvegarder</Button>
     </Paper>
     )
 }

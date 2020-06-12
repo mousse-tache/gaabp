@@ -1,28 +1,53 @@
+.close-icon {
+    margin-left:100%;
+}
 
-.membres  form {
+.membres-paper h3 {
+    padding:1em;
+}
+
+.membres form {
     display: flex;
     flex-direction: column;
     width: 50%;
     margin:auto;
+    position: absolute;
+    width: 400;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+    border-radius: 1em;
+    box-shadow: 2px 2px black;
 }
 
 .membres form input {
+    max-width: 100%;
     text-align: center;
     margin: .5em;
+    margin-top: 1em;
+}
+
+
+.membres form .submit-button {
+    max-width: 50%;
+    left:25%;
+    text-align: center;
+    margin: .5em;
+    margin-top: 1em;
+}
+
+.membres form label {
+    margin-top: 2em;
 }
 
 .membres h3 {
-    text-align: center;
-}
-
-.membres > form > .submitInput {
-    max-width: 50%;
-    margin: auto;
-}
-
-.membres form {
-    padding: 3em;
+    margin:1em;
+    display: inline-flex;
+    vertical-align: center;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -34,8 +59,15 @@
         width: 100%;
     }
 
-    .membres > form > .submitInput {
-        max-width: 70%;
-        margin: auto;
+    .membres {
+        margin:-1em;
+        text-align: center;
+    }
+
+    .membres .submit-button {
+        max-width: 80%;
+        text-align: center;
+        position: relative;
+        margin:auto;
     }
   }
