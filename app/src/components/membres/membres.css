@@ -2,24 +2,29 @@
     margin-left:100%;
 }
 
-.membres-paper h3 {
-    padding:1em;
+.membres-title {
+    display: flex;
+    justify-content: stretch;
 }
+
+.membres-title-element {
+    padding:1em;
+    display: inline;
+}   
 
 .membres form {
     display: flex;
     flex-direction: column;
-    width: 50%;
     margin:auto;
     position: absolute;
-    width: 400;
-    background-color: white;
+    background-color: whitesmoke;
+    width: 60%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     border-radius: 1em;
-    box-shadow: 2px 2px black;
+    box-shadow: 1px 1px var(--light);
 }
 
 .membres form input {

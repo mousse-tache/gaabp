@@ -11,6 +11,7 @@
     margin: auto;
     padding: .5em;
     max-height: 15%;
+    min-height: 8em;
     box-sizing: border-box;
 }
 
