@@ -1,15 +1,6 @@
-export default PermissionTypes = {
-    CreateUser: "createUser",
-    UpdateUser: "updateUser",
-    DeleteUser: "deleteUser",
-    CreateUnit: "createUnit",
-    UpdateUnit: "updateUnit",
-    DeactivateUnit: "deactivateUnit",
-    CreateGroup: "createGroup",
-    UpdateGroup: "updateGroup"
-}
+import PermissionTypes from "./PermissionTypes"
 
-const Permissions = (user, permission) => {
+function Permissions(user, permission) {
     switch(permission) {
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:

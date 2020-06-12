@@ -9,10 +9,10 @@ const Profile = () => {
     const authedUser = userContext.authedUser;
     const user = userContext.claims;
     const [courriel, setCourriel] = useState(user.email);
-    const [prenom, setPrenom] = useState(authedUser.prenom);
-    const [nom, setNom] = useState(authedUser.nom);
-    const [id, setId] = useState(authedUser._id);
-    const [isAdmin, setIsAdmin] = useState(authedUser.isAdmin);
+    const [prenom, setPrenom] = useState(authedUser?.prenom);
+    const [nom, setNom] = useState(authedUser?.nom);
+    const [id, setId] = useState(authedUser?._id);
+    const [isAdmin, setIsAdmin] = useState(authedUser?.isAdmin);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
     
     const userClient = new UserClient();

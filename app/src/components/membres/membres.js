@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import "./membres.css"
 import UserClient from "../../clients/userClient"
@@ -6,9 +6,14 @@ import { Input, Paper, Button, Fab, Switch, FormControlLabel, InputLabel, Modal 
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import MembresTable from "./membresTable";
+import UserContext from "../../context/userContext";
+import Permissions from "../../auth/permissions";
+import PermissionTypes from "../../auth/permissionTypes";
 import { Helmet } from "react-helmet";
 
 const Membres = () => {
+    const authedUser = useContext(UserContext).authedUser;
+    console.log(authedUser);
     const [userList, setUserList] = useState([])
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
@@ -68,7 +73,7 @@ const Membres = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Membres</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open} onClick={handleOpen}>
+                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open || !Permissions(authedUser, PermissionTypes.CreateUser)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -96,7 +101,7 @@ const Membres = () => {
 
                     <InputLabel>Nom de famille</InputLabel>
                     <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
-                    <Button className="submit-button" variant="contained" color="secondary" onClick={AddUser}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>

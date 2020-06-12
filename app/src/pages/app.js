@@ -5,6 +5,7 @@ import Profile from "../components/profile/profile"
 import Membres from "../components/membres/membres"
 import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
+import UserClient from "../clients/userClient"
 import Login, { signIn } from './login'
 
 import "../components/profile/profile.css"
@@ -12,7 +13,7 @@ import "../components/profile/profile.css"
 const App = () => {
     const [user, setUser] = useState(false);
     const [authedUser, setAuthedUser] = useState({});
-
+    const userClient = new UserClient("");
 
     const isAuthenticated = () => {
         if (typeof window !== 'undefined') {
@@ -33,8 +34,21 @@ const App = () => {
         }
     }
 
+    async function FetchUser() {
+      try {               
+          var data = await userClient.getByEmail(user.email);
+          if(data !== null)
+          {
+              setAuthedUser(data[0]);
+          }            
+      } catch (e) {
+          console.log(e.message);   
+      }
+  }
+
     useEffect(() => {
         fetchAuth();
+        FetchUser();
     }, []);
 
     if (!isAuthenticated()) {
