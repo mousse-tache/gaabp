@@ -21,6 +21,14 @@
 * Netlify pour son intégration CI/CD à coût nul - voir https://aabp-dev.netlify.app pour voir l'état des travaux
 * Il reste encore à déterminer s'il sera possible de réutiliser la base de données actuelles ou s'il faudra migrer les données vers une nouvelle.
 
+### Installation local
+
+* Clôner le repo
+    ``` cd gaabp/app/src && npm install ```
+* Installer Gatsby-cli globalement si ce n'est pas déjà fait, puis 
+    ```gatsby develop```
+ Cela lancera un environnement de développement accessible à localhost:8000
+
 ## Pour contribuer, contacter f.brobillard@gmail.com
 
 ### Nous recherchons:
