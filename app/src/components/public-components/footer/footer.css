@@ -6,11 +6,13 @@
     --dark: #410e17;
   }
 
-  footer img {
-      max-width: 40px;
-    vertical-align:middle;
-    display: inline-block;
-    margin:auto;
+  footer div img {
+        margin:auto;
+        vertical-align:middle;
+  }
+
+  footer div {
+      padding: 3em;
   }
 
   footer {
@@ -34,7 +36,7 @@
       color:grey;
       margin-top: 1em;
       display: inline-flex;
-      width: 30%;
+      width: 60%;
       min-height: 3em;
       text-align: center;
       margin:auto;

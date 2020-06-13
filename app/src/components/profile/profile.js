@@ -44,7 +44,6 @@ const Profile = () => {
     async function FetchUser() {
         try {               
             var data = await userClient.getByEmail(user.email);
-            console.log(data);
             if(data !== null)
             {
                 setNom(data[0].nom.toString());
@@ -52,7 +51,6 @@ const Profile = () => {
                 setId(data[0]._id.toString());
                 setIsAdmin(data[0].isAdmin ? data[0].isAdmin: false);
                 userContext.setAuthedUser(data[0]);
-                console.log(userContext);
             }            
         } catch (e) {
             console.log(e.message);   

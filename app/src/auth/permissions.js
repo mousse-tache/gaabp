@@ -1,6 +1,11 @@
-import PermissionTypes from "./PermissionTypes"
+import PermissionTypes from "./permissionTypes"
 
 function Permissions(user, permission) {
+
+    if (!user) {
+        return false;
+    }
+
     switch(permission) {
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:

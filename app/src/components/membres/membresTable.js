@@ -7,7 +7,7 @@ const MembresTable = ({users, title}) => {
     columns: [
       { title: 'Prénom', field: 'prenom' },
       { title: 'Nom de famille', field: 'nom' },
-      { title: 'Courriel', field: 'courriel', type: 'email' },
+      { title: 'Courriel', field: 'courriel' },
     ],
     data: users,
   });

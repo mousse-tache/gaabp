@@ -31,6 +31,9 @@
     text-decoration: none;
 }
 
+.header {
+    font-size:20px;
+}
 
 header {
     position:absolute;
@@ -40,13 +43,13 @@ header {
     margin:auto;
     transition-property: text-shadow, color;
     min-height: 3em;
-    padding-bottom: 10%;
     background-color: white;
-    padding-bottom:30em;
+    padding-bottom:20em;
     border-bottom: 4px dotted var(--light);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    z-index: 10;
   }
 
 header a, header a:visited {
@@ -73,7 +76,7 @@ header a:hover {
 
 .navlink {
     font-size: larger;
-    margin-left: 15%;
+    margin-right:10%;
 }
 
 a:active {

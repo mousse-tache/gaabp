@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
-import "./membres.css"
 import UserClient from "../../clients/userClient"
 import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import MembresTable from "./membresTable";
+import MembresTable from "../membres/membresTable";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { Helmet } from "react-helmet";
 
-const Membres = () => {
+const Group = () => {
     const authedUser = useContext(UserContext).authedUser;
     console.log(authedUser);
     const [userList, setUserList] = useState([])
@@ -111,4 +110,4 @@ const Membres = () => {
     )
 }
 
-export default Membres
+export default Group

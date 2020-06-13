@@ -15,7 +15,7 @@ const Header = ({ username }) => (
         <Link className="navlink" to="/app/account" partiallyActive={true} activeClassName="active">
           Unités
         </Link>
-        <Link className="navlink" to="/app/account" partiallyActive={true} activeClassName="active">
+        <Link className="navlink" to="/app/groupes" partiallyActive={true} activeClassName="active">
           Groupes
         </Link>
         <Link to="/app/account" className="auth" >{username}</Link>
