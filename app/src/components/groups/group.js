@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
-import UserClient from "../../clients/userClient"
-import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
+import GroupClient from "../../clients/groupClient"
+import { Input, Paper, Button, Fab, InputLabel, Modal, Snackbar } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import MembresTable from "../membres/membresTable";
+import GroupTable from "./groupTable";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
@@ -13,14 +13,16 @@ import { Helmet } from "react-helmet";
 const Group = () => {
     const authedUser = useContext(UserContext).authedUser;
     console.log(authedUser);
-    const [userList, setUserList] = useState([])
-    const [courriel, setCourriel] = useState("");
-    const [prenom, setPrenom] = useState("")
-    const [nom, setNom] = useState("")
-    const [isFetchingUserList, setIsFetchingUserList] = useState(true);
+    const [groupList, setGroupList] = useState([]);
+    const [numero, setNumero] = useState(null);
+    const [ville, setVille] = useState(null);
+    const [nom, setNom] = useState(null);
+    const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
     const [open, setOpen] = React.useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarText, setSnackbarText] = useState("");
     
-    const userClient = new UserClient();
+    const groupClient = new GroupClient();
 
     const handleOpen = () => {
         setOpen(true);
@@ -31,48 +33,68 @@ const Group = () => {
     };
 
     useEffect(() => {
-        FetchUsers();
+        FetchGroups();
     }, [])
 
-    async function FetchUsers() {
+    useEffect(() => {
+        if(!openSnackbar) {
+            setSnackbarText("");
+        }
+    }, [openSnackbar])
+
+    async function FetchGroups() {
         try {               
-            var data = await userClient.getUsers();
+            var data = await groupClient.getGroups();
             if(data !== null)
             {
-                setUserList(data);
+                setGroupList(data);
             }            
         } catch (e) {
             console.log(e.message);   
         }
 
-        setIsFetchingUserList(false);
+        setIsFetchingGroupList(false);
     }
 
-    async function AddUser(e) {           
+    async function AddGroup(e) {           
         e.preventDefault();
         e.stopPropagation();    
         try {
-            await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom});
-            FetchUsers();
+            await groupClient.addGroup({nom: nom, numero: numero, ville: ville});
+            FetchGroups();
             setOpen(false);
+            setNom("");
+            setVille("");
+            setNumero(null);
+            setSnackbarText('Le groupe ' + nom + " a été créé");
+            setOpenSnackbar(true);
         }
         catch(e) {
             console.log(e);
         }
     }
 
-    if(isFetchingUserList) {
+    if(isFetchingGroupList) {
         return (<Loading />)
     }
 
 
     return  (
     <Paper className="membres-paper">    
+        <Snackbar
+            anchorOrigin={{ vertical:"top", horizontal: "center" }}
+            open={openSnackbar}
+            autoHideDuration={6000}
+            onClose={() => setOpenSnackbar(false)}
+            severity="info"
+            message={snackbarText}
+            key={"topcenter"}
+        />
         <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet>        
         <div className="membres-title">
-            <div className="membres-title-element"><h3>Membres</h3></div>
+            <div className="membres-title-element"><h3>Groupes</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open || !Permissions(authedUser, PermissionTypes.CreateUser)} onClick={handleOpen}>
+                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateGroup)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -84,28 +106,30 @@ const Group = () => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
             <Paper className="membres">
-                <form onSubmit={AddUser}>
+                <form>
                     <div className="close-icon">    
                         <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
                     </div>   
-                    <h3>Nouveau membre</h3>
+                    <h3>Nouveau groupe</h3>
                     
-                    <InputLabel>Courriel</InputLabel>
-                    <Input type="text" value={courriel} required={true} placeholder="robert@badenpowell.ca" onChange={event => setCourriel(event.target.value)} />
+                    <InputLabel>Numéro</InputLabel>
+                    <Input type="text" value={numero} required={true} placeholder="1er" onChange={event => setNumero(event.target.value)} />
 
-                    <InputLabel>Prénom</InputLabel>
-                    <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
 
-                    <InputLabel>Nom de famille</InputLabel>
-                    <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
+                    <InputLabel>Nom du groupe</InputLabel>
+                    <Input type="text" value={nom} placeholder="Group scout de Glasgow" onChange={event => setNom(event.target.value)} />
+
+                    <InputLabel>Ville</InputLabel>
+                    <Input type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
+
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddGroup}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>
 
-        <MembresTable users={userList} />
+        <GroupTable groups={groupList} />
     </Paper>
     )
 }
