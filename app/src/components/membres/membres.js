@@ -10,16 +10,18 @@ import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { Helmet } from "react-helmet";
+import { useSnackbar } from 'notistack';
 
 const Membres = () => {
     const authedUser = useContext(UserContext).authedUser;
-    console.log(authedUser);
     const [userList, setUserList] = useState([])
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
     const [nom, setNom] = useState("")
     const [isFetchingUserList, setIsFetchingUserList] = useState(true);
     const [open, setOpen] = React.useState(false);
+
+    const { enqueueSnackbar } = useSnackbar();
     
     const userClient = new UserClient();
 
@@ -43,7 +45,7 @@ const Membres = () => {
                 setUserList(data);
             }            
         } catch (e) {
-            console.log(e.message);   
+            enqueueSnackbar(e.message, {variant: "error"});   
         }
 
         setIsFetchingUserList(false);
@@ -56,9 +58,10 @@ const Membres = () => {
             await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom});
             FetchUsers();
             setOpen(false);
+            enqueueSnackbar(`${prenom} ${nom} a été ajouté`, { variant: "success" });
         }
         catch(e) {
-            console.log(e);
+            enqueueSnackbar(e.message, {variant: "error"});
         }
     }
 

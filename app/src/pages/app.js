@@ -8,6 +8,7 @@ import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
 import UserClient from "../clients/userClient"
 import Login, { signIn } from './login'
+import { SnackbarProvider } from 'notistack';
 
 import "../components/profile/profile.css"
 
@@ -66,13 +67,16 @@ const App = () => {
 
     return (        
         <UserContext.Provider value={{claims: user, authedUser, setAuthedUser}}>
+            
             <Layout username={user.name}> 
-                <Router basepath="/app"> 
-                    <Profile path="/account" />
-                    <Membres path="/membres" />
-                    <Group path="/groupes" />
-                    <Profile default />
-                </Router>
+                <SnackbarProvider maxSnack={3}>
+                        <Router basepath="/app"> 
+                            <Profile path="/account" />
+                            <Membres path="/membres" />
+                            <Group path="/groupes" />
+                            <Profile default />
+                        </Router>                    
+                </SnackbarProvider>
             </Layout>
         </UserContext.Provider>
           )
