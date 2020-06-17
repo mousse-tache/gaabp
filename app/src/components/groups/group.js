@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import GroupClient from "../../clients/groupClient"
-import { Input, Paper, Button, Fab, InputLabel, Modal, Snackbar } from '@material-ui/core';
+import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import GroupTable from "./groupTable";
@@ -9,6 +9,7 @@ import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { Helmet } from "react-helmet";
+import { useSnackbar } from 'notistack';
 
 const Group = () => {
     const authedUser = useContext(UserContext).authedUser;
@@ -19,8 +20,8 @@ const Group = () => {
     const [nom, setNom] = useState(null);
     const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
     const [open, setOpen] = React.useState(false);
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [snackbarText, setSnackbarText] = useState("");
+
+    const { enqueueSnackbar } = useSnackbar();
     
     const groupClient = new GroupClient();
 
@@ -35,12 +36,6 @@ const Group = () => {
     useEffect(() => {
         FetchGroups();
     }, [])
-
-    useEffect(() => {
-        if(!openSnackbar) {
-            setSnackbarText("");
-        }
-    }, [openSnackbar])
 
     async function FetchGroups() {
         try {               
@@ -66,8 +61,7 @@ const Group = () => {
             setNom("");
             setVille("");
             setNumero(null);
-            setSnackbarText('Le groupe ' + nom + " a été créé");
-            setOpenSnackbar(true);
+            enqueueSnackbar('Le groupe ' + nom + " a été créé");
         }
         catch(e) {
             console.log(e);
@@ -81,15 +75,6 @@ const Group = () => {
 
     return  (
     <Paper className="membres-paper">    
-        <Snackbar
-            anchorOrigin={{ vertical:"top", horizontal: "center" }}
-            open={openSnackbar}
-            autoHideDuration={6000}
-            onClose={() => setOpenSnackbar(false)}
-            severity="info"
-            message={snackbarText}
-            key={"topcenter"}
-        />
         <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet>        
         <div className="membres-title">
             <div className="membres-title-element"><h3>Groupes</h3></div>
