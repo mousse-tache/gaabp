@@ -5,6 +5,7 @@ import Inscrire from "../components/public-components/inscrire"
 import Impliquer from "../components/public-components/impliquer"
 import Contact from "../components/public-components/contact"
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ImageCarousel from  "../components/public-components/imageCarousel"
 
 import {View} from 'react-native';
 
@@ -14,6 +15,7 @@ const IndexPage = () => (
     <Layout>  
       <section name="home" className="sitename">
       <h1>L'Association des Aventuriers de Baden-Powell</h1>
+      {ImageCarousel()}
       </section>
       <About/>
       <Inscrire />
@@ -22,5 +24,7 @@ const IndexPage = () => (
     </Layout>
   </View>
 )
+ 
+
 
 export default IndexPage
