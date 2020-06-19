@@ -66,14 +66,14 @@ const App = () => {
     }
 
     return (        
-        <UserContext.Provider value={{claims: user, authedUser, setAuthedUser}}>
-            
+        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}>
             <Layout username={user.name}> 
                 <SnackbarProvider maxSnack={3}>
                         <Router basepath="/app"> 
                             <Profile path="/account" />
                             <Membres path="/membres" />
                             <Group path="/groupes" />
+                            <Group path="/unites" />
                             <Profile default />
                         </Router>                    
                 </SnackbarProvider>

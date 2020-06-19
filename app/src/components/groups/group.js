@@ -13,7 +13,6 @@ import { useSnackbar } from 'notistack';
 
 const Group = () => {
     const authedUser = useContext(UserContext).authedUser;
-    console.log(authedUser);
     const [groupList, setGroupList] = useState([]);
     const [numero, setNumero] = useState(null);
     const [ville, setVille] = useState(null);
@@ -47,7 +46,7 @@ const Group = () => {
         } catch (e) {
             console.log(e.message);   
         }
-
+        
         setIsFetchingGroupList(false);
     }
 
@@ -114,7 +113,7 @@ const Group = () => {
             </Paper>
         </Modal>
 
-        <GroupTable groups={groupList} />
+        <GroupTable groups={groupList} canEdit={Permissions(authedUser, PermissionTypes.UpdateGroup)} />
     </Paper>
     )
 }

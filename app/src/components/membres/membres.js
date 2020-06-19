@@ -13,7 +13,8 @@ import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
 const Membres = () => {
-    const authedUser = useContext(UserContext).authedUser;
+    const authedUserContext = useContext(UserContext);
+    const authedUser = authedUserContext.authedUser;
     const [userList, setUserList] = useState([])
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
@@ -24,6 +25,10 @@ const Membres = () => {
     const { enqueueSnackbar } = useSnackbar();
     
     const userClient = new UserClient();
+
+    if (!authedUser) {
+        authedUserContext.FetchUser();  
+    }
 
     const handleOpen = () => {
         setOpen(true);

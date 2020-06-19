@@ -2,16 +2,17 @@ import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 
-const GroupTable = ({groups}) => {
+const GroupTable = ({groups, canEdit}) => {
   const [state, setState] = React.useState({
     columns: [
-      { Id: "Identifiant", field: '_id' },
+      { Id: "Id", field: '_id' },
       { title: 'Numéro', field: 'numero' },
       { title: 'Nom', field: 'nom' },
       { title: 'Ville', field: 'ville' },
     ],
     data: groups,
   });
+
 
   return (
     <MaterialTable
@@ -28,6 +29,7 @@ const GroupTable = ({groups}) => {
     }}
       columns={state.columns}
       data={state.data}
+      
       editable={{
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
@@ -60,7 +62,7 @@ const GroupTable = ({groups}) => {
 
 GroupTable.propTypes = {
     groups: Proptypes.array, 
-    title: Proptypes.func
+    canEdit: Proptypes.bool,
 };
 
 export default GroupTable;
