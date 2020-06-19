@@ -8,7 +8,7 @@ export class UserClient {
     getById = (id) => {
         const params = { id };
 
-        return this._apiClient.get("user", { params });
+        return this._apiClient.get(`/user/${id}`);
     }
 
     getByEmail = (email) => {

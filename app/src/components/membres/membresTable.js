@@ -2,7 +2,7 @@ import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 
-const MembresTable = ({users, title}) => {
+const MembresTable = ({users, canEdit}) => {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Prénom', field: 'prenom' },
@@ -11,6 +11,28 @@ const MembresTable = ({users, title}) => {
     ],
     data: users,
   });
+
+  const editableFunctions = {
+    onRowUpdate: (newData, oldData) =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+          if (oldData) {
+            setState((prevState) => {
+              const data = [...prevState.data];
+              data[data.indexOf(oldData)] = newData;
+              return { ...prevState, data };
+            });
+          }
+        }, 600);
+      })
+  }
+
+  var editable = {};
+
+  if(canEdit) {
+    editable = editableFunctions;
+  }
 
   return (
     <MaterialTable
@@ -24,42 +46,29 @@ const MembresTable = ({users, title}) => {
             editTooltip: "Modifier",
             addTooltip: "Nouveau"
         }
-    }}
+      }}
+      options={
+        {
+          pageSize: 10
+        }
+      }
       columns={state.columns}
       data={state.data}
-      editable={{
-        onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              if (oldData) {
-                setState((prevState) => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
-              }
-            }, 600);
-          }),
-        onRowDelete: (oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-            }, 600);
-          }),
-      }}
+      actions={[
+        {
+          icon: 'edit',
+          tooltip: 'Modifier',
+          onClick: (event, rowData) => window.location.href =  "/app/membre/"+rowData.courriel
+        }
+      ]
+      }
     />
   );
 };
 
 MembresTable.propTypes = {
     users: Proptypes.array, 
-    title: Proptypes.func
+    canEdit: Proptypes.bool
 };
 
 export default MembresTable;

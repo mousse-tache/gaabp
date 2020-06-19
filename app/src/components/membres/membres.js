@@ -114,7 +114,7 @@ const Membres = () => {
             </Paper>
         </Modal>
 
-        <MembresTable users={userList} />
+        <MembresTable users={userList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUser)} />
     </Paper>
     )
 }

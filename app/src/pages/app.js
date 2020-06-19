@@ -3,6 +3,7 @@ import { Router } from "@reach/router"
 import Layout from "../components/layout"
 import Profile from "../components/profile/profile"
 import Membres from "../components/membres/membres"
+import EditMembre from "../components/membres/editMembre"
 import Group from "../components/groups/group"
 import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
@@ -74,6 +75,7 @@ const App = () => {
                             <Membres path="/membres" />
                             <Group path="/groupes" />
                             <Group path="/unites" />
+                            <EditMembre path="membre/:email" />
                             <Profile default />
                         </Router>                    
                 </SnackbarProvider>
