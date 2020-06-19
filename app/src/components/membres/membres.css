@@ -55,6 +55,10 @@
     justify-content: space-evenly;
 }
 
+.crumbs {
+    padding: 1em;
+}
+
 @media only screen and (max-width: 1100px) {
     .membres form input {
         max-width: 100%;

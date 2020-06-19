@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react"
+import { Link } from "gatsby"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Input, Paper, Button, Switch, FormControlLabel, InputLabel } from '@material-ui/core';
+import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography } from '@material-ui/core';
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -67,7 +68,12 @@ const EditMembre = ({email}) => {
 
     return  (
     <Paper className="profile">
-        <h2></h2>
+        <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+            <Link color="inherit" href="/app/membres">
+                Membres
+            </Link>
+            <Typography color="textPrimary">{`${prenom} ${nom}`}</Typography>
+        </Breadcrumbs>
         <form onSubmit={saveUser} className="form">        
             <h3>Informations de base</h3>
             

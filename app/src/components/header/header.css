@@ -13,13 +13,9 @@
     margin: auto;
     padding: .5em;
     max-height: 15%;
-    min-height: 8em;
+    min-height: 5em;
     box-sizing: border-box;
-}
-
-.header a {
-    color: var(--light);
-    font-style: normal;
+    font-size:18px;
 }
 
 .header img {
@@ -28,14 +24,12 @@
 
 .header a {
     display: inline-block;
+    font-style: normal;
     text-align: center;
     color: var(--dark);
     text-decoration: none;
 }
 
-.header {
-    font-size:20px;
-}
 
 header {
     position:absolute;
@@ -54,13 +48,16 @@ header {
     z-index: 10;
   }
 
-header a, header a:visited {
+a, a:visited {
     text-decoration: none;
     color:var(--dark);
-    margin-top: 3em;
 }
 
-header a:hover {
+.header a, .header a:hover {
+    margin-top: 2em;
+}
+
+a:hover {
     text-shadow: 0 0 0 2px var(--primary);
     color:var(--primary);
 }
