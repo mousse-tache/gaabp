@@ -34,17 +34,17 @@ function Sidebar(props) {
             <img src={Logo} alt="Logo"/>
       </Link>                
       <List>
-        <ListItem>       
+        <ListItem button divider>       
           <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
               Membres
           </Link>  
         </ListItem>
-        <ListItem>      
+        <ListItem button divider>      
           <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
               Unités
           </Link>  
         </ListItem>
-        <ListItem>     
+        <ListItem button divider>     
           <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
               Groupes
           </Link>  
