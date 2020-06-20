@@ -1,9 +1,9 @@
 import React from 'react'
-import {ActivityIndicator} from 'react-native'
+import { LinearProgress } from '@material-ui/core';
 
 const Loading = () => {
     return (
-    <ActivityIndicator></ActivityIndicator>
+    <LinearProgress />
 )}
 
 export default Loading;
