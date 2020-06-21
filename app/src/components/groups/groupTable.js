@@ -5,7 +5,6 @@ import MaterialTable from 'material-table';
 const GroupTable = ({groups, canEdit}) => {
   const [state, setState] = React.useState({
     columns: [
-      { Id: "Id", field: '_id' },
       { title: 'Numéro', field: 'numero' },
       { title: 'Nom', field: 'nom' },
       { title: 'Ville', field: 'ville' },

@@ -57,8 +57,8 @@ const Group = () => {
             await groupClient.addGroup({nom: nom, numero: numero, ville: ville});
             FetchGroups();
             setOpen(false);
-            setNom("");
-            setVille("");
+            setNom(null);
+            setVille(null);
             setNumero(null);
             enqueueSnackbar('Le groupe ' + nom + " a été créé");
         }
@@ -108,7 +108,7 @@ const Group = () => {
                     <InputLabel>Ville</InputLabel>
                     <Input type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
 
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddGroup}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser) || (nom === null || numero === null || ville == null)} onClick={AddGroup}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>

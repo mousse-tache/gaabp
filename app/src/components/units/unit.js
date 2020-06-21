@@ -1,28 +1,39 @@
 import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import UnitClient from "../../clients/unitClient"
-import { Input, Select, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
+import GroupClient from "../../clients/groupClient"
+import { Input, Select, Paper, Button, Fab, InputLabel, Modal, MenuItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import UnitTable from "./unitTable";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import Branches from "../../utils/branches";
+import Genre from "../../utils/genre";
 import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
 const Unit = () => {
-    const authedUser = useContext(UserContext).authedUser;
+    const userContext = useContext(UserContext);
+    const authedUser = userContext.authedUser;
+    
     const [unitList, setUnitList] = useState([]);
-    const [numero, setNumero] = useState(null);
-    const [ville, setVille] = useState(null);
+    const [groupe, setGroup] = useState(null);
     const [nom, setNom] = useState(null);
     const [isFetchingUnitList, setIsFetchingUnitList] = useState(true);
+    const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
+    const [branche, setBranche] = useState(null);
+    const [genre, setGenre] = useState(null)
     const [open, setOpen] = React.useState(false);
+
+
+    const [groupList, setGroupList] = useState([]);
 
     const { enqueueSnackbar } = useSnackbar();
     
     const unitClient = new UnitClient();
+    const groupClient = new GroupClient();
 
     const handleOpen = () => {
         setOpen(true);
@@ -34,6 +45,8 @@ const Unit = () => {
 
     useEffect(() => {
         FetchUnits();
+        FetchGroups();
+        userContext.FetchUser();
     }, [])
 
     async function FetchUnits() {
@@ -50,24 +63,38 @@ const Unit = () => {
         setIsFetchingUnitList(false);
     }
 
+    async function FetchGroups() {
+        try {               
+            var data = await groupClient.getGroups();
+            if(data !== null)
+            {
+                setGroupList(data);
+                setIsFetchingGroupList(false);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    }
+
     async function AddUnit(e) {           
         e.preventDefault();
         e.stopPropagation();    
         try {
-            await unitClient.addUnit({nom: nom, numero: numero, ville: ville});
-            FetchUnits();
-            setOpen(false);
+            await unitClient.addUnit({nom: nom, group: groupe, branche: branche, genre: genre});
             setNom("");
-            setVille("");
-            setNumero(null);
-            enqueueSnackbar('Le unite ' + nom + " a été créé");
+            setGroup("");
+            setBranche(null);
+            setGenre(null);
+            setOpen(false);
+            enqueueSnackbar("L'unité " + nom + " a été créée");
+            FetchUnits();
         }
         catch(e) {
             console.log(e);
         }
     }
 
-    if(isFetchingUnitList) {
+    if(isFetchingUnitList || isFetchingGroupList) {
         return (<Loading />)
     }
 
@@ -107,22 +134,43 @@ const Unit = () => {
                     </div>   
                     <h3>Nouvelle unité</h3>
                     
-                    <InputLabel>Numéro</InputLabel>
-                    <Input type="text" value={numero} required={true} placeholder="1er" onChange={event => setNumero(event.target.value)} />
+                    <InputLabel>Nom de l'unité</InputLabel>
+                    <Input type="text" value={nom} placeholder="1ère Troupe de Glasgow" onChange={event => setNom(event.target.value)} />                    
 
+                    <InputLabel>Groupe</InputLabel>
+                    <Select 
+                     value={groupe} 
+                     onChange={event => setGroup(event.target.value)}
+                     displayEmpty
+                     >
+                    <MenuItem value="" disabled>
+                        Glasgow
+                    </MenuItem>
+                    {groupList.map(x => <MenuItem value={x._id}>{x.numero} {x.nom}</MenuItem>)}
+                    </Select>
 
-                    <InputLabel>Nom du unite</InputLabel>
-                    <Input type="text" value={nom} placeholder="Unit scout de Glasgow" onChange={event => setNom(event.target.value)} />                    
+                    <InputLabel>Branche</InputLabel>
+                    <Select
+                    value={branche}
+                    onChange={x => setBranche(x.target.value)}
+                    >
+                    {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
+                    </Select>
 
-                    <InputLabel>Ville</InputLabel>
-                    <Input type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
+                    <InputLabel>Type</InputLabel>
+                    <Select
+                    value={genre}
+                    onChange={x => setGenre(x.target.value)}
+                    >
+                    {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
+                    </Select>
 
                     <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUnit}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>
 
-        <UnitTable units={unitList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUnit)} />
+        <UnitTable units={unitList} groups={groupList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUnit)} />
     </Paper>
     )
 }

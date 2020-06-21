@@ -13,19 +13,19 @@ export class UserClient {
         return this._apiClient.get(`user/name/${name}`);
     }
 
-    getGroups = () => {
+    getUnits = () => {
         return this._apiClient.get("units");
     }
 
-    addGroup = (user) => {
+    addUnit = (user) => {
         return this._apiClient.post("unit", user );
     }
 
-    updateGroup = (user) => {
+    updateUnit = (user) => {
         return this._apiClient.put(`unit/${user.id}`, user );
     }
 
-    deleteGroup = (id) => {
+    deleteUnit = (id) => {
         return this._apiClient.delete("unit", { id });
     }
 

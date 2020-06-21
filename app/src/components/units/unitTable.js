@@ -2,13 +2,13 @@ import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 
-const UnitTable = ({units, canEdit}) => {
+const UnitTable = ({units, canEdit, groups}) => {
   const [state, setState] = React.useState({
     columns: [
-      { Id: "Id", field: '_id' },
-      { title: 'Numéro', field: 'numero' },
       { title: 'Nom', field: 'nom' },
-      { title: 'Ville', field: 'ville' },
+      { title: 'Branche', field: 'branche', lookup: {0: "Bleue", 1: "Jaune", 2: "Vert", 3: "Rouge"} },
+      { title: 'Genre', field: 'genre', lookup: {0: "Masculin", 1: "Féminin", 2: "Mixte"} },
+      { title: "Groupe", field: "group", render: row => <span>{groups.filter(x => x._id == row.group)[0]?.nom}</span> }
     ],
     data: units,
   });
@@ -44,17 +44,6 @@ const UnitTable = ({units, canEdit}) => {
               }
             }, 600);
           }),
-        onRowDelete: (oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-            }, 600);
-          }),
       }}
     />
   );
@@ -63,6 +52,7 @@ const UnitTable = ({units, canEdit}) => {
 UnitTable.propTypes = {
     units: Proptypes.array, 
     canEdit: Proptypes.bool,
+    groups: Proptypes.array
 };
 
 export default UnitTable;
