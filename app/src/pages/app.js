@@ -5,6 +5,7 @@ import Profile from "../components/profile/profile"
 import Membres from "../components/membres/membres"
 import EditMembre from "../components/membres/editMembre"
 import Group from "../components/groups/group"
+import EditGroup from "../components/groups/editGroup"
 import Unit from "../components/units/unit"
 import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
@@ -75,6 +76,7 @@ const App = () => {
                             <Profile path="/account" />
                             <Membres path="/membres" />
                             <Group path="/groupes" />
+                            <EditGroup path="/groupe/:id" />
                             <Unit path="/unites" />
                             <EditMembre path="membre/:email" />
                             <Profile default />

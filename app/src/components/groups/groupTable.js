@@ -7,7 +7,7 @@ const GroupTable = ({groups, canEdit}) => {
     columns: [
       { title: 'Numéro', field: 'numero' },
       { title: 'Nom', field: 'nom' },
-      { title: 'Ville', field: 'ville' },
+      { title: 'Ville', field: 'ville' }
     ],
     data: groups,
   });
@@ -27,23 +27,8 @@ const GroupTable = ({groups, canEdit}) => {
         }
     }}
       columns={state.columns}
-      data={state.data}
-      
-      editable={{
-        onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              if (oldData) {
-                setState((prevState) => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
-              }
-            }, 600);
-          })
-      }}
+      data={state.data}     
+      onRowClick={(event, rowData) => window.location.href =  "/app/groupe/"+rowData._id}
     />
   );
 };

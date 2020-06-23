@@ -15,6 +15,7 @@ function Permissions(user, permission) {
         case PermissionTypes.DeactivateUnit:
         case PermissionTypes.CreateUnit:
         case PermissionTypes.CreateGroup:
+        case PermissionTypes.UpdateGroup:
             return (user.isAdmin || user.isGroupChief)
         default:
           return false

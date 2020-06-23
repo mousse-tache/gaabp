@@ -1,6 +1,6 @@
 import ApiClient from "./apiClient";
 
-export class UserClient {
+export class UnitClient {
     constructor() {
         this._apiClient = new ApiClient({ baseURL: "https://formation-aabp.herokuapp.com/api/" });
     }
@@ -31,4 +31,4 @@ export class UserClient {
 
 }    
 
-export default UserClient;
+export default UnitClient;

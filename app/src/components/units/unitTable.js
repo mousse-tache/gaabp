@@ -29,22 +29,7 @@ const UnitTable = ({units, canEdit, groups}) => {
     }}
       columns={state.columns}
       data={state.data}
-      
-      editable={{
-        onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              if (oldData) {
-                setState((prevState) => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
-              }
-            }, 600);
-          }),
-      }}
+      onRowClick={(event, rowData) => window.location.href =  "/app/unite/"+rowData._id}
     />
   );
 };

@@ -1,6 +1,6 @@
 import ApiClient from "./apiClient";
 
-export class UserClient {
+export class GroupClient {
     constructor() {
         this._apiClient = new ApiClient({ baseURL: "https://formation-aabp.herokuapp.com/api/" });
     }
@@ -17,12 +17,12 @@ export class UserClient {
         return this._apiClient.get("groups");
     }
 
-    addGroup = (user) => {
-        return this._apiClient.post("group", user );
+    addGroup = (group) => {
+        return this._apiClient.post("group", group );
     }
 
-    updateGroup = (user) => {
-        return this._apiClient.put(`group/${user.id}`, user );
+    updateGroup = (group) => {
+        return this._apiClient.put(`group/${group.id}`, group );
     }
 
     deleteGroup = (id) => {
@@ -31,4 +31,4 @@ export class UserClient {
 
 }    
 
-export default UserClient;
+export default GroupClient;
