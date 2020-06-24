@@ -25,7 +25,7 @@ const Unit = () => {
     const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
     const [branche, setBranche] = useState(null);
     const [genre, setGenre] = useState(null)
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);  
 
 
     const [groupList, setGroupList] = useState([]);
@@ -95,7 +95,7 @@ const Unit = () => {
     }
 
     if(isFetchingUnitList || isFetchingGroupList) {
-        return (<Loading />)
+        return (<Loading />);
     }
 
 

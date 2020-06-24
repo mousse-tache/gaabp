@@ -18,12 +18,10 @@
 }
 
 .profile .submit-button {
-    top:2em;
     max-width: 50%;
     text-align: center;
     position: relative;
     margin:auto;
-    flex-direction: row-reverse;
 
 }
 

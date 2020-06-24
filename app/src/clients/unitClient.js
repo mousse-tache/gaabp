@@ -17,6 +17,10 @@ export class UnitClient {
         return this._apiClient.get("units");
     }
 
+    getByGroupId = (id) => {
+        return this._apiClient.get(`unit/group/${id}`);
+    }
+
     addUnit = (user) => {
         return this._apiClient.post("unit", user );
     }
