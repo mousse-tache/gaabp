@@ -14,6 +14,7 @@ import Login, { signIn } from './login'
 import { SnackbarProvider } from 'notistack';
 
 import "../components/profile/profile.css"
+import EditUnit from "../components/units/editUnit"
 
 const App = () => {
     const [user, setUser] = useState(false);
@@ -75,10 +76,11 @@ const App = () => {
                         <Router basepath="/app"> 
                             <Profile path="/account" />
                             <Membres path="/membres" />
+                            <EditMembre path="membre/:email" />
                             <Group path="/groupes" />
                             <EditGroup path="/groupe/:id" />
                             <Unit path="/unites" />
-                            <EditMembre path="membre/:email" />
+                            <EditUnit path="/unite/:id" />
                             <Profile default />
                         </Router>                    
                 </SnackbarProvider>
