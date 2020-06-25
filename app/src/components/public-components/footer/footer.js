@@ -18,6 +18,9 @@ const Footer = () => (
         <div>         
           <a href="https://carrickquebec.com/" target="_blank" rel="noopener noreferrer">Carrick (boutique)</a>
         </div>
+        <div>
+          <a href="https://www.canadahelps.org/fr/organismesdebienfaisance/association-des-aventuriers-de-baden-powell/" target="_blank" rel="noopener noreferrer">Faire un don</a>
+        </div>
   </footer>
 )
 
