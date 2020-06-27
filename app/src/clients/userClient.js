@@ -6,9 +6,11 @@ export class UserClient {
     }
 
     getById = (id) => {
-        const params = { id };
-
         return this._apiClient.get(`/user/${id}`);
+    }
+
+    getByUnitId = (id) => {
+        return this._apiClient.get(`/users/unit/${id}`);
     }
 
     getByEmail = (email) => {

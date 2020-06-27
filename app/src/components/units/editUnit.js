@@ -5,8 +5,10 @@ import UserContext from "../../context/userContext"
 import UnitContext from "../../context/unit/unitContext"
 import GroupClient from "../../clients/groupClient"
 import UnitClient from "../../clients/unitClient"
+import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import MembresTable from "../../components/membres/membresTable"
 import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, MenuItem,  Select } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
@@ -21,16 +23,24 @@ const EditUnit = ({id}) => {
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const [group, setGroup] = useState(null);
+    const [allMembers, setAllMembers] = useState([]);
+    const [selectUser, setSelectUser] = useState({_id: null});
+
+    const [membres, setMembres] = useState([]);
+
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
+    const userClient = new UserClient();
 
     if (!authedUser) {
         userContext.FetchUser();  
     }
 
     useEffect(() => {
-        FetchUnit()
+        FetchUnit();
+        FetchMembres();
+        FetchAllUsers();
         userContext.FetchUser();  
     }, [])
 
@@ -47,6 +57,30 @@ const EditUnit = ({id}) => {
         }
         
         setIsFetchingUnit(false);
+    }
+
+    async function FetchAllUsers() {
+        try {               
+            var data = await userClient.getUsers();
+            if(data !== null)
+            {
+                setAllMembers(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    }
+
+    async function FetchMembres() {
+        try {               
+            var data = await userClient.getByUnitId(id);
+            if(data !== null)
+            {
+                setMembres(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
     }
 
     async function FetchGroup(groupId) {
@@ -76,6 +110,21 @@ const EditUnit = ({id}) => {
         }
     }
 
+    const addToUnit = async() => { 
+        try {            
+            await unitClient.updateUnit({...unit, membres: [...unit.membres, selectUser]});
+            await userClient.updateUser({_id: selectUser, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
+            enqueueSnackbar("Membre ajouté");
+        } catch (e) {
+            enqueueSnackbar(e);
+        }
+        
+    }
+
+    const handleChangeSelectUser = (x) => {
+        setSelectUser(allMembers.filter(e => e._id === x.target.value)[0]);
+    }
+
     if(isFetchingUnit || isFetchingGroup) {
         return (<Loading />)
     }
@@ -84,8 +133,8 @@ const EditUnit = ({id}) => {
     <Paper className="profile">
         <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" href="/app/groupes">
-                Groupes
+            <Link color="inherit" href="/app/unite">
+                Unités
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
@@ -119,7 +168,16 @@ const EditUnit = ({id}) => {
                     >
                     {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
                     </Select>
+
+
+                    <Select hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} value={selectUser._id} onChange={x => handleChangeSelectUser(x)}>
+                        {allMembers.map(x => <MenuItem value={x._id}>{x.prenom} {x.nom}, {x.courriel}</MenuItem>)}
+                    </Select>
+                    <Button hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)} onClick={addToUnit}>Ajouter à l'unité</Button>
                 </form>
+            </CardContent>
+            <CardContent>
+                <MembresTable membres={membres} />
             </CardContent>
         <Typography>
                     <Button variant="contained" color="secondary" hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)} onClick={SaveUnit}>Sauvegarder</Button>
