@@ -1,6 +1,7 @@
 import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
+import { navigate } from 'gatsby';
 
 const GroupTable = ({groups, canEdit}) => {
   const [state, setState] = React.useState({
@@ -28,7 +29,7 @@ const GroupTable = ({groups, canEdit}) => {
     }}
       columns={state.columns}
       data={state.data}     
-      onRowClick={(event, rowData) => window.location.href =  "/app/groupe/"+rowData._id}
+      onRowClick={(event, rowData) => navigate("/app/groupe/"+rowData._id)}
     />
   );
 };

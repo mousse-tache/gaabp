@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import { Link } from "gatsby"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
+import UnitContext from "../../context/unit/unitContext"
 import GroupClient from "../../clients/groupClient"
 import UnitClient from "../../clients/unitClient"
 import Permissions from "../../auth/permissions";
@@ -15,9 +16,8 @@ import { useSnackbar } from 'notistack';
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
-    const [nom, setNom] = useState(null);
-    const [branche, setBranche] = useState(null);
-    const [genre, setGenre] = useState(null)
+    const unitContext = useContext(UnitContext);
+    const {unit, setUnit} = unitContext;
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const [group, setGroup] = useState(null);
@@ -39,10 +39,8 @@ const EditUnit = ({id}) => {
             var data = await unitClient.getById(id);
             if(data !== null)
             {
-                setNom(data.nom);
-                setBranche(data.branche);
-                setGenre(data.genre);
-                FetchGroup(data.group);
+                setUnit(data);
+                await FetchGroup(data.group);
             }            
         } catch (e) {
             console.log(e.message);   
@@ -69,8 +67,8 @@ const EditUnit = ({id}) => {
         e.preventDefault();
         e.stopPropagation();    
         try {
-            await unitClient.updateUnit({id: id, nom: nom, genre: genre, branche: branche});
-            enqueueSnackbar("L'unité " + nom + " a été sauvegardée");
+            await unitClient.updateUnit({...unit, id: unit._id});
+            enqueueSnackbar("L'unité " + unit.nom + " a été sauvegardée");
             FetchUnit();
         }
         catch(e) {
@@ -89,7 +87,7 @@ const EditUnit = ({id}) => {
             <Link color="inherit" href="/app/groupes">
                 Groupes
             </Link>
-            <Typography color="textPrimary">{`${nom}`}</Typography>
+            <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
         <Card>
             <CardContent>
@@ -98,7 +96,7 @@ const EditUnit = ({id}) => {
                 <form className="form">
                 
                 <InputLabel>Nom de l'unité</InputLabel>
-                    <Input type="text" value={nom} placeholder="1ère Troupe de Glasgow" onChange={event => setNom(event.target.value)} />                    
+                    <Input type="text" value={unit.nom} placeholder="1ère Troupe de Glasgow" onChange={event => setUnit({...unit, nom: event.target.value})} />                    
 
                     <InputLabel>Groupe</InputLabel>
                     <Input 
@@ -108,22 +106,21 @@ const EditUnit = ({id}) => {
 
                     <InputLabel>Branche</InputLabel>
                     <Select
-                    value={branche}
-                    onChange={x => setBranche(x.target.value)}
+                    value={unit.branche}
+                    onChange={x => setUnit({...unit, branche: x.target.value})}
                     >
                     {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
                     </Select>
 
                     <InputLabel>Type</InputLabel>
                     <Select
-                    value={genre}
-                    onChange={x => setGenre(x.target.value)}
+                    value={unit.genre}
+                    onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
                     {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
                     </Select>
                 </form>
             </CardContent>
-
         <Typography>
                     <Button variant="contained" color="secondary" hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)} onClick={SaveUnit}>Sauvegarder</Button>
         </Typography>

@@ -11,6 +11,7 @@ import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
 import UserClient from "../clients/userClient"
 import Login, { signIn } from './login'
+import UnitContextProvider from "../context/unit/unitContextProvider"
 import { SnackbarProvider } from 'notistack';
 
 import "../components/profile/profile.css"
@@ -57,34 +58,36 @@ const App = () => {
         FetchUser();
     }, []);
 
-    if (!isAuthenticated()) {
+    if (!isAuthenticated() || user == null) {
         return (
           <Login/>
         );
     }
   
-    if(user == null || !user)  {
+    if(!user)  {
         return (
             <Loading />
         )        
     }
 
     return (        
-        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}>
-            <Layout username={user.name}> 
-                <SnackbarProvider maxSnack={3}>
-                        <Router basepath="/app"> 
-                            <Profile path="/account" />
-                            <Membres path="/membres" />
-                            <EditMembre path="membre/:email" />
-                            <Group path="/groupes" />
-                            <EditGroup path="/groupe/:id" />
-                            <Unit path="/unites" />
-                            <EditUnit path="/unite/:id" />
-                            <Profile default />
-                        </Router>                    
-                </SnackbarProvider>
-            </Layout>
+        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
+            <UnitContextProvider>
+                <Layout username={user.name}> 
+                    <SnackbarProvider maxSnack={3}>
+                            <Router basepath="/app"> 
+                                <Profile path="/account" />
+                                <Membres path="/membres" />
+                                <EditMembre path="membre/:email" />
+                                <Group path="/groupes" />
+                                <EditGroup path="/groupe/:id" />
+                                <Unit path="/unites" />
+                                <EditUnit path="/unite/:id" />
+                                <Profile default />
+                            </Router>                    
+                    </SnackbarProvider>
+                </Layout>
+            </UnitContextProvider>            
         </UserContext.Provider>
           )
 }

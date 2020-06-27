@@ -105,7 +105,7 @@ const EditGroup = ({id}) => {
 
 
                 <InputLabel>Nom du groupe</InputLabel>
-                <Input type="text" value={nom} placeholder="Group scout de Glasgow" onChange={event => setNom(event.target.value)} />
+                <Input type="text" value={nom} placeholder="Groupe scout de Glasgow" onChange={event => setNom(event.target.value)} />
 
                 <InputLabel>Ville</InputLabel>
                 <Input type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />

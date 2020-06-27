@@ -1,6 +1,7 @@
 import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
+import { navigate } from 'gatsby';
 
 const MembresTable = ({users, canEdit}) => {
   const [state, setState] = React.useState({
@@ -27,7 +28,7 @@ const MembresTable = ({users, canEdit}) => {
       }
       columns={state.columns}
       data={state.data}
-      onRowClick={(event, rowData) => window.location.href =  "/app/membre/"+rowData.courriel}
+      onRowClick={(event, rowData) => navigate("/app/membre/"+rowData.courriel)}
     />
   );
 };

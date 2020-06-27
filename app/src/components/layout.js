@@ -29,6 +29,9 @@ const Layout = ({ children, username }) => {
         dark: '#b69600',
         contrastText: '#000',
       },
+      root: {
+        textTransform: 'none',
+      }
     },
   });
 

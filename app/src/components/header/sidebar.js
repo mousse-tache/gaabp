@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 import Logo from "../../images/Logo_AABP.gif"
 
-function Sidebar(props) {
+function Sidebar({window, tab}) {
 
   return (
     <Drawer
@@ -19,24 +19,30 @@ function Sidebar(props) {
 
       <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
             <img src={Logo} alt="Logo"/>
-      </Link>                
+      </Link>   
+
+      {
+        tab == 0 && (
       <List>
-        <ListItem divider>       
-          <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
-              Membres
-          </Link>  
-        </ListItem>
-        <ListItem divider>      
-          <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
-              Unités
-          </Link>  
-        </ListItem>
-        <ListItem divider>     
-          <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
-              Groupes
-          </Link>  
+        <ListItem divider button disableRipple onClick={() => navigate("/app/membres")}>       
+        <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
+            Membres
+        </Link>  
+      </ListItem>
+      <ListItem divider button disableRipple onClick={() => navigate("/app/unites")}>      
+        <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
+            Unités
+        </Link>  
+      </ListItem>
+      <ListItem divider button disableRipple onClick={() => navigate("/app/groupes")}>     
+        <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
+            Groupes
+        </Link>  
         </ListItem>
       </List>
+        )
+      }
+
     </Drawer>
   );
 }
@@ -47,6 +53,7 @@ Sidebar.propTypes = {
    * You won't need it on your project.
    */
   window: PropTypes.func,
+  tab: PropTypes.number
 };
 
 export default Sidebar;
