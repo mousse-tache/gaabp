@@ -30,6 +30,18 @@
     margin-top: 2em;
 }
 
+.add-user-search {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.add-user-search div {
+    margin:auto;
+}
+
 .save-unit-button, .add-user-button {
     max-width: 50%;
     text-align: center;

@@ -8,12 +8,14 @@ import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import MembresTable from "../../components/membres/membresTable"
-import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, MenuItem, Select, Autocomplete, TextField } from '@material-ui/core';
+import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, MenuItem, Select, TextField } from '@material-ui/core';
+import { Autocomplete } from "@material-ui/lab";
 
 import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
 import UnitDetails from "./unitDetails";
+import "./unit.css"
 
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);
@@ -22,7 +24,7 @@ const EditUnit = ({id}) => {
     const {unit, setUnit} = unitContext;
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const [allMembers, setAllMembers] = useState([]);
-    const [selectUser, setSelectUser] = useState({_id: 0});
+    const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: ""});
 
     const [membres, setMembres] = useState([]);
 
@@ -93,7 +95,7 @@ const EditUnit = ({id}) => {
             await unitClient.updateUnit({...unit, id: unit._id, membres: [...unit.membres, selectUser._id]});
             await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
             setMembres(membres.push(selectUser))
-            setSelectUser({_id:0})
+            setSelectUser({_id: 0, prenom: "", nom: ""})
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
@@ -102,7 +104,16 @@ const EditUnit = ({id}) => {
     }
 
     const handleChangeSelectUser = (x) => {
-        setSelectUser(allMembers.filter(e => e._id === x.target.value)[0]);
+        if(x?._id) {
+            setSelectUser(allMembers.filter(e => e._id === x.target.value)[0]);
+        }
+        {
+
+        }
+    }
+
+    function handleChangeAutoUser(x) {
+        setSelectUser(x);
     }
 
     if(isFetchingUnit) {
@@ -121,16 +132,30 @@ const EditUnit = ({id}) => {
         <Card>
             <CardContent>
                 <UnitDetails disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}/>
-                <form>
-                <InputLabel id="adduser">Membre à ajouter</InputLabel>
-                <Select labelId="adduser" hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} value={selectUser._id} onChange={x => handleChangeSelectUser(x)}>
-                        <MenuItem value="0" disabled>Aucun</MenuItem>
-                        {allMembers.filter(x => !unit.membres.includes(x._id)).map(x => <MenuItem value={x._id}>{x.prenom} {x.nom}, {x.courriel}</MenuItem>)}
-                </Select>
+                <div className="add-user-search">
+                    <div>
+                    <Autocomplete
+                        fullWidth={true}
+                        disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
+                        autocomplete
+                        autoSelect
+                        blurOnSelect                        
+                        disableClearable
+                        onChange={(event, newValue) => {
+                            handleChangeAutoUser(newValue);
+                        }}
+                        value={selectUser}
+                        defaultValue={{prenom: "", nom: ""}}
+                        options={allMembers.filter(x => !unit.membres.includes(x._id))}
+                        getOptionLabel={(option) => option.prenom + " " + option.nom}
+                        style={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
+                    />
+                    </div>
                 <div className="add-user-button">
                 <Button hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
                 </div>
-                </form>
+                </div>
             </CardContent>
             <CardContent>
                 <MembresTable users={membres} />

@@ -7,6 +7,7 @@
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@okta/okta-react": "^1.4.1",
     "@okta/okta-signin-widget": "^3.9.2",
     "core-js": "^3.6.5",

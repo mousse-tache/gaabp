@@ -8,6 +8,7 @@ import { Input, InputLabel, Typography, CardContent, MenuItem, Select, Button } 
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
 import { useSnackbar } from 'notistack';
+import "./unit.css"
 
 
 const UnitDetails = ({disabled}) => { 
