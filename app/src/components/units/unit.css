@@ -34,8 +34,8 @@
     max-width: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: baseline;
 }
 
 .add-user-search div {

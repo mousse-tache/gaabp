@@ -1,22 +1,21 @@
 import React, { useState, useContext, useEffect } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography } from '@material-ui/core';
+import MaterialTable from "material-table"
+import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography, CardContent, MenuList, MenuItem } from '@material-ui/core';
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
-    const [courriel, setCourriel] = useState("");
-    const [prenom, setPrenom] = useState("");
-    const [nom, setNom] = useState("");
-    const [id, setId] = useState(id);
-    const [isAdmin, setIsAdmin] = useState(false);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
-    
+
+    const [canEdit, setCanEdit] = useState(Permissions(authedUser, PermissionTypes.UpdateUser));
+    const [member, setMember] = useState(false);
+
     const userClient = new UserClient();
 
     if (!authedUser) {
@@ -32,11 +31,7 @@ const EditMembre = ({email}) => {
             var data = await userClient.getByEmail(email);
             if(data !== null)
             {
-                setNom(data[0].nom.toString());
-                setPrenom(data[0].prenom.toString());
-                setId(data[0]._id.toString());
-                setCourriel(data[0].courriel.toString())
-                setIsAdmin(data[0].isAdmin ? data[0].isAdmin: false);
+                setMember(data[0]);
             }            
         } catch (e) {
             console.log(e.message);   
@@ -48,20 +43,16 @@ const EditMembre = ({email}) => {
     async function saveUser(e) {           
         e.preventDefault();
         e.stopPropagation();    
-        if(id) {
-            await userClient.updateUser({id:id, courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
+        if(member?._id) {
+            await userClient.updateUser({...member, id: member._id});
         }
-        else {
-            await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
-        }
-        window.location.reload();
     }
 
     const handleAdminCheck = () => {
-        setIsAdmin(!isAdmin);
+        setMember({...member, isAdmin: !member.isAdmin});
     };
 
-    if(isFecthingUser) {
+    if(isFecthingUser || !member) {
         return (<Loading />)
     }
 
@@ -72,25 +63,26 @@ const EditMembre = ({email}) => {
             <Link color="inherit" href="/app/membres">
                 Membres
             </Link>
-            <Typography color="textPrimary">{`${prenom} ${nom}`}</Typography>
+            <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
         </Breadcrumbs>
         <form onSubmit={saveUser} className="form">        
             <h3>Informations de base</h3>
             
             <InputLabel>Courriel</InputLabel>
-            <Input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled={!authedUser?.isAdmin} onChange={event => setCourriel(event.target.value)} />
+            <Input type="email" disabled={!canEdit} value={member.courriel} placeholder="robert@badenpowell.ca" disabled={!authedUser?.isAdmin} onChange={event => setMember({...member, courriel: event.target.value})} />
 
             <InputLabel>Prénom</InputLabel>
-            <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
+            <Input type="text" value={member.prenom} disabled={!canEdit} placeholder="Robert" onChange={event => setMember({...member, prenom:event.target.value})} />
 
             <InputLabel>Nom de famille</InputLabel>
-            <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
+            <Input type="text" value={member.nom} disabled={!canEdit} placeholder="Baden-Powell" onChange={event => setMember({...member, nom: event.target.value})} />
 
             <h3>Permissions</h3>
             <FormControlLabel
+                disabled={!canEdit && !authedUser.isAdmin}
                 control={
                 <Switch
-                    checked={isAdmin}
+                    checked={member.isAdmin}
                     onChange={handleAdminCheck}
                     name="checkedB"
                     className="switch"
@@ -100,8 +92,22 @@ const EditMembre = ({email}) => {
             />
             
         </form>
-                
-        <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser)} onClick={saveUser}>Sauvegarder</Button>
+        <div className="submit-button">
+            <Button variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser) || member.courriel == ""} onClick={saveUser}>Sauvegarder</Button>
+        </div>        
+        <CardContent>
+            <MaterialTable
+            title=""
+            options={
+                {
+                pageSize: 10,
+                search: false
+                }
+            }
+            onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}
+            />
+        </CardContent>
+        
     </Paper>
     )
 }

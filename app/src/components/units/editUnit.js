@@ -103,15 +103,6 @@ const EditUnit = ({id}) => {
         
     }
 
-    const handleChangeSelectUser = (x) => {
-        if(x?._id) {
-            setSelectUser(allMembers.filter(e => e._id === x.target.value)[0]);
-        }
-        {
-
-        }
-    }
-
     function handleChangeAutoUser(x) {
         setSelectUser(x);
     }
@@ -124,7 +115,7 @@ const EditUnit = ({id}) => {
     <Paper className="unit">
         <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" href="/app/unite">
+            <Link color="inherit" href="/app/unites">
                 Unités
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
@@ -153,11 +144,12 @@ const EditUnit = ({id}) => {
                     />
                     </div>
                 <div className="add-user-button">
-                <Button hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+                <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
                 </div>
-                </div>
+            </div>
             </CardContent>
             <CardContent>
+                <Typography variant="h5">Membres de l'unité</Typography>
                 <MembresTable users={membres} />
             </CardContent>
         </Card>

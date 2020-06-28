@@ -28,7 +28,7 @@ const Header = ({ username }) => {
             className="tabnav"
           >
             <Tab disableRipple component="a" label="Membres" />
-            <Tab disableRipple component="a" label="Documents" />
+            <Tab disableRipple disabled component="a" label="Documents" />
           </Tabs>
           <Link className="navlink morelinks" to="/app/membres" partiallyActive={true} activeClassName="active">
             Membres

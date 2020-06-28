@@ -13,6 +13,7 @@ import UserClient from "../clients/userClient"
 import Login, { signIn } from './login'
 import UnitContextProvider from "../context/unit/unitContextProvider"
 import { SnackbarProvider } from 'notistack';
+import { Helmet } from "react-helmet";
 
 import "../components/profile/profile.css"
 import EditUnit from "../components/units/editUnit"
@@ -72,6 +73,7 @@ const App = () => {
 
     return (        
         <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
+            <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
             <UnitContextProvider>
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
