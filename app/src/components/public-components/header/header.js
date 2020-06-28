@@ -19,12 +19,7 @@ const Header = () => (
         <Link className="navlink" to="#contact" partiallyActive={true} activeClassName="active">
           Nous joindre
         </Link>
-        {
-        // caroussel homepage
-        // carte des groupes
-        // catchy mission et branches
-        // contact 
-        }
+        <a className="navlink lien-don" href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
         <Link to="/app" className="auth" >Membres</Link>
   </header>
 )

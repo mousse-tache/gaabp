@@ -83,7 +83,6 @@ a:active {
     text-shadow: 0 0 0 2px var(--primary);
 }
 
-
   /* The sticky class is added to the header with JS when it reaches its scroll position */
   .sticky {
     position: fixed;
