@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
@@ -12,6 +12,18 @@ const MembresTable = ({users, canEdit}) => {
     ],
     data: users,
   });
+
+  useEffect(() => {
+    setState(
+      {
+      columns: [
+        { title: "Nom", field:'prenom' },
+        { title:"", field:'nom'},
+        { title: 'Courriel', field: 'courriel' },
+      ],
+      data: users,
+    });
+  }, [users])
 
   return (
     <MaterialTable

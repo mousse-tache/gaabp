@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UnitContext from "../../context/unit/unitContext"
@@ -9,7 +9,7 @@ import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import MembresTable from "../../components/membres/membresTable"
-import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, MenuItem,  Select } from '@material-ui/core';
+import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, MenuItem, Select, Autocomplete } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
 import { Helmet } from "react-helmet";
@@ -24,7 +24,7 @@ const EditUnit = ({id}) => {
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const [group, setGroup] = useState(null);
     const [allMembers, setAllMembers] = useState([]);
-    const [selectUser, setSelectUser] = useState({_id: null});
+    const [selectUser, setSelectUser] = useState({_id: 0});
 
     const [membres, setMembres] = useState([]);
 
@@ -39,21 +39,30 @@ const EditUnit = ({id}) => {
 
     useEffect(() => {
         FetchUnit();
-        FetchMembres();
         FetchAllUsers();
         userContext.FetchUser();  
     }, [])
 
+    useEffect(() => {
+        FetchMembres();
+    }, [unit, selectUser])
+
     async function FetchUnit() {
         try {               
             var data = await unitClient.getById(id);
-            if(data !== null)
+            console.log(data);
+            if(data !== null && data._id)
             {
                 setUnit(data);
                 await FetchGroup(data.group);
             }            
+            else {
+                navigate("/app/unites");
+            }
         } catch (e) {
             console.log(e.message);   
+            enqueueSnackbar("L'unité n'a pas été trouvée");
+            navigate("/app/unites");
         }
         
         setIsFetchingUnit(false);
@@ -103,7 +112,7 @@ const EditUnit = ({id}) => {
         try {
             await unitClient.updateUnit({...unit, id: unit._id});
             enqueueSnackbar("L'unité " + unit.nom + " a été sauvegardée");
-            FetchUnit();
+            setSelectUser(false);
         }
         catch(e) {
             enqueueSnackbar(e);
@@ -112,8 +121,8 @@ const EditUnit = ({id}) => {
 
     const addToUnit = async() => { 
         try {            
-            await unitClient.updateUnit({...unit, membres: [...unit.membres, selectUser]});
-            await userClient.updateUser({_id: selectUser, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
+            await unitClient.updateUnit({...unit, id: unit._id, membres: [...unit.membres, selectUser._id]});
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
@@ -140,7 +149,6 @@ const EditUnit = ({id}) => {
         </Breadcrumbs>
         <Card>
             <CardContent>
-
                 <Typography variant="h5">Informations de base</Typography>
                 <form className="form">
                 
@@ -161,23 +169,30 @@ const EditUnit = ({id}) => {
                     {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
                     </Select>
 
-                    <InputLabel>Type</InputLabel>
+                    <InputLabel id="typelabel">Type</InputLabel>
                     <Select
+                    labelId="typelabel"
                     value={unit.genre}
                     onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
                     {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
                     </Select>
 
-
-                    <Select hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} value={selectUser._id} onChange={x => handleChangeSelectUser(x)}>
+                    <InputLabel id="adduser">Membre à ajouter</InputLabel>
+                <Select labelId="adduser" hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} value={selectUser._id} onChange={x => handleChangeSelectUser(x)}>
+                        <MenuItem value="0" disabled>Aucun</MenuItem>
                         {allMembers.map(x => <MenuItem value={x._id}>{x.prenom} {x.nom}, {x.courriel}</MenuItem>)}
-                    </Select>
-                    <Button hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)} onClick={addToUnit}>Ajouter à l'unité</Button>
-                </form>
+                </Select>
+                <Button hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+            
+                 </form>
+
+            <CardContent className="add-user-to-unit">
+            
+            </CardContent>
             </CardContent>
             <CardContent>
-                <MembresTable membres={membres} />
+                <MembresTable users={membres} />
             </CardContent>
         <Typography>
                     <Button variant="contained" color="secondary" hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)} onClick={SaveUnit}>Sauvegarder</Button>

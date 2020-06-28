@@ -63,7 +63,7 @@ const Profile = () => {
         e.preventDefault();
         e.stopPropagation();    
         if(id) {
-            await userClient.updateUser({id:id, courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
+            await userClient.updateUser({_id:id, courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
         }
         else {
             await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});

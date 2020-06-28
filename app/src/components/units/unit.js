@@ -13,6 +13,7 @@ import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
 import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
+import "./unit.css";
 
 const Unit = () => {
     const userContext = useContext(UserContext);
