@@ -129,7 +129,7 @@ const Unit = () => {
             <Paper className="membres">
                 <form>
                     <div className="close-icon">    
-                        <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
+                        <Fab color="primary" aria-label="close" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
                     </div>   

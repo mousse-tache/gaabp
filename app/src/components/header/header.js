@@ -9,7 +9,7 @@ import { Tabs, Tab } from "@material-ui/core";
 
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
-  const tabValue = ["/app/membres", "/app"];
+  const tabValue = ["/app/membres", "/app", "/app"];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -28,7 +28,8 @@ const Header = ({ username }) => {
             className="tabnav"
           >
             <Tab disableRipple component="a" label="Membres" />
-            <Tab disableRipple disabled component="a" label="Documents" />
+            <Tab disableRipple disabled component="a" label="Ressources" />
+            <Tab disableRipple disabled component="a" label="Progression" />
           </Tabs>
           <Link className="navlink morelinks" to="/app/membres" partiallyActive={true} activeClassName="active">
             Membres

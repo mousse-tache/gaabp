@@ -7,6 +7,7 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import MaterialTable from "material-table"
 import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography, CardContent, MenuList, MenuItem } from '@material-ui/core';
+import UnitClient from "../../clients/unitClient"
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -15,16 +16,56 @@ const EditMembre = ({email}) => {
 
     const [canEdit, setCanEdit] = useState(Permissions(authedUser, PermissionTypes.UpdateUser));
     const [member, setMember] = useState(false);
-
+    const [memberUnits, setMemberUnits] = useState(false);
+    const [state, setState] = React.useState({
+        columns: [
+            { title: 'Rôle', field: 'type' },
+            { title: "Unité", field: "unitId", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> }
+        ],
+        data: member.nominations,
+      });
     const userClient = new UserClient();
+    const unitClient = new UnitClient();
 
     if (!authedUser) {
         userContext.FetchUser();  
     }
 
     useEffect(() => {
+        setState({
+            columns: [
+                { title: 'Rôle', field: 'type' },
+                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> }
+            ],
+            data: member.nominations,
+          });
+    }, [memberUnits])
+
+    useEffect(() => {
+        setCanEdit(Permissions(authedUser, PermissionTypes.UpdateUser))
+    }, [authedUser])
+
+    useEffect(() => {
         FetchUser();
     }, [])
+
+    useEffect(() => {
+        if(member.nominations !== null && member.nominations !== undefined) {
+            FetchMemberUnits();
+        }
+    }, [member])
+
+    async function FetchMemberUnits() {
+        try {               
+            var data = await unitClient.getMultipleById(member?.nominations?.map(x => x.unitId));
+            if(data !== null)
+            {
+                setMemberUnits(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    }
 
     async function FetchUser() {
         try {               
@@ -60,7 +101,7 @@ const EditMembre = ({email}) => {
     return  (
     <Paper className="profile">
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" href="/app/membres">
+            <Link color="inherit" to="/app/membres">
                 Membres
             </Link>
             <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
@@ -79,7 +120,7 @@ const EditMembre = ({email}) => {
 
             <h3>Permissions</h3>
             <FormControlLabel
-                disabled={!canEdit && !authedUser.isAdmin}
+                disabled={!canEdit && !authedUser?.isAdmin}
                 control={
                 <Switch
                     checked={member.isAdmin}
@@ -93,11 +134,13 @@ const EditMembre = ({email}) => {
             
         </form>
         <div className="submit-button">
-            <Button variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser) || member.courriel == ""} onClick={saveUser}>Sauvegarder</Button>
+            <Button variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser) || member.courriel === ""} onClick={saveUser}>Sauvegarder</Button>
         </div>        
         <CardContent>
             <MaterialTable
             title=""
+            columns={state.columns}
+            data={state.data}
             options={
                 {
                 pageSize: 10,
@@ -111,7 +154,5 @@ const EditMembre = ({email}) => {
     </Paper>
     )
 }
-
-
 
 export default EditMembre

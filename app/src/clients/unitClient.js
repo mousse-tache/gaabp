@@ -9,6 +9,10 @@ export class UnitClient {
          return this._apiClient.get(`unit/${id}`);
     }
 
+    getMultipleById = (ids) => {
+        return this._apiClient.post("units/ids", ids );
+    }
+
     getUnitsByName = (name) => {
         return this._apiClient.get(`user/name/${name}`);
     }
