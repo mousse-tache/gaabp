@@ -1,5 +1,6 @@
 import React from "react"
 import { Typography, Card, CardContent, CardMedia } from "@material-ui/core"
+import CastorCard from "./branches/castor/castorCard"
 
 const About = () => (
   <section>
@@ -21,15 +22,7 @@ const About = () => (
       </CardContent>
     </Card>
     <div className="branches">
-      <Card className="branchecard bleu">
-        <CardContent>
-          <Typography>
-            Les Castors
-          </Typography>
-          <Typography color="textSecondary">Pour les 7-9 ans</Typography>
-        </CardContent>
-        <CardContent className="bleu"></CardContent>
-      </Card>
+      <CastorCard />
       <Card className="branchecard jaune">
         <CardContent>
           <Typography>

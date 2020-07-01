@@ -36,7 +36,7 @@ const UserMenu = ({username}) => {
                 <MenuItem onClick={handleClose}>
                     <Link to="/app/account">{username}</Link>
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
         </div>
     )
