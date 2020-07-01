@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Suspense } from "react"
 import { Router } from "@reach/router"
 import Layout from "../components/layout"
 import Profile from "../components/profile/profile"
@@ -71,26 +71,28 @@ const App = () => {
         )        
     }
 
-    return (        
-        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
-            <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
-            <UnitContextProvider>
-                <Layout username={user.name}> 
-                    <SnackbarProvider maxSnack={3}>
-                            <Router basepath="/app"> 
-                                <Profile path="/account" />
-                                <Membres path="/membres" />
-                                <EditMembre path="membre/:email" />
-                                <Group path="/groupes" />
-                                <EditGroup path="/groupe/:id" />
-                                <Unit path="/unites" />
-                                <EditUnit path="/unite/:id" />
-                                <Profile default />
-                            </Router>                    
-                    </SnackbarProvider>
-                </Layout>
-            </UnitContextProvider>            
-        </UserContext.Provider>
+    return ( 
+        <Suspense fallback={Loading}>
+            <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
+                <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
+                <UnitContextProvider>
+                    <Layout username={user.name}> 
+                        <SnackbarProvider maxSnack={3}>
+                                <Router basepath="/app"> 
+                                    <Profile path="/account" />
+                                    <Membres path="/membres" />
+                                    <EditMembre path="membre/:email" />
+                                    <Group path="/groupes" />
+                                    <EditGroup path="/groupe/:id" />
+                                    <Unit path="/unites" />
+                                    <EditUnit path="/unite/:id" />
+                                    <Profile default />
+                                </Router>                    
+                        </SnackbarProvider>
+                    </Layout>
+                </UnitContextProvider>            
+            </UserContext.Provider>
+        </Suspense>       
           )
 }
 

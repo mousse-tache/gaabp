@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from "gatsby";
 import OktaSignIn from '@okta/okta-signin-widget';
 import Logo from "../images/Logo_AABP.gif";
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
@@ -21,6 +22,16 @@ const config = {
 };
 
 export const signIn = typeof window !== 'undefined' && new OktaSignIn(config);
+
+export const logout = () => {
+  signIn.authClient.signOut().catch((error) => {
+    console.error('Sign out error: ' + error)
+  }).then(() => {
+    localStorage.setItem('isAuthenticated', 'false');
+    this.setState({user: false});
+    navigate('/');
+  });
+}
 
 export default class Login extends React.Component {
   constructor(props) {

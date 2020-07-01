@@ -9,22 +9,25 @@ function ImageCarousel(props)
     var items = [
         {
             description: "Jamboree 2017",
-            src: image1
+            src: image1,
+            key:1
         },
         {
             description: "Camp de formation national 2018",
-            src: image2
+            src: image2,
+            key:2
         },
         {
             description: "Levée des couleurs castor",
-            src: image3
+            src: image3,
+            key:3
         }
     ]
  
     return (
         <Carousel className="carousel-public">
             {
-                items.map( item => <img src={item.src} alt={image1.description} /> )
+                items.map( item => <img src={item.src} alt={item.description} key={item.key} /> )
             }
         </Carousel>
     )

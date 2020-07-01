@@ -5,7 +5,7 @@ import "../../header/header.css"
 import Logo from "../../../images/Logo_AABP.gif"
 
 const Header = () => (
-  <header className="header sticky">
+  <header className="header headerpublic sticky">
         <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
           <img src={Logo} alt="Logo"/>
         </Link>        

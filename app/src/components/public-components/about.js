@@ -28,7 +28,7 @@ const About = () => (
           </Typography>
           <Typography color="textSecondary">Pour les 7-9 ans</Typography>
         </CardContent>
-        <CardMedia className="bleu"></CardMedia>
+        <CardContent className="bleu"></CardContent>
       </Card>
       <Card className="branchecard jaune">
         <CardContent>
@@ -37,7 +37,7 @@ const About = () => (
           </Typography>
           <Typography color="textSecondary">Pour les 9-12 ans</Typography>
         </CardContent>
-        <CardMedia className="jaune"></CardMedia>
+        <CardContent className="jaune"></CardContent>
       </Card>
       <Card className="branchecard vert">
         <CardContent>
@@ -46,7 +46,7 @@ const About = () => (
           </Typography>
           <Typography color="textSecondary">Pour les 12-17 ans</Typography>
         </CardContent>
-        <CardMedia className="vert"></CardMedia>
+        <CardContent className="vert"></CardContent>
       </Card>
       <Card className="branchecard rouge">
         <CardContent>
@@ -55,7 +55,7 @@ const About = () => (
           </Typography>
           <Typography color="textSecondary">Pour les 17 ans et plus</Typography>
         </CardContent>
-        <CardMedia className="rouge"></CardMedia>
+        <CardContent className="rouge"></CardContent>
       </Card>
     </div>
   </section>

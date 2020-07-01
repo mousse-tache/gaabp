@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense} from "react"
 import Layout from "../components/public-components/layout"
 import About from "../components/public-components/about"
 import Inscrire from "../components/public-components/inscrire"
@@ -6,11 +6,10 @@ import Impliquer from "../components/public-components/impliquer"
 import Contact from "../components/public-components/contact"
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageCarousel from  "../components/public-components/imageCarousel"
-
-import {View} from 'react-native';
+import Loading from "../components/loading/loading"
 
 const IndexPage = () => (
-  <View>
+  <Suspense fallback={Loading}>
     <CssBaseline />
     <Layout>  
       <section name="home" className="sitename">
@@ -22,7 +21,7 @@ const IndexPage = () => (
       <Impliquer />
       <Contact />    
     </Layout>
-  </View>
+  </Suspense>
 )
  
 

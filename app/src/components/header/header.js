@@ -6,6 +6,7 @@ import Sidebar from "./sidebar"
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Tabs, Tab } from "@material-ui/core"; 
+import UserMenu from "./accountMenu";
 
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
@@ -49,7 +50,7 @@ const Header = ({ username }) => {
           <Link className="navlink morelinks" to="/app/membres" partiallyActive={true} activeClassName="active">
             Documents
           </Link>      
-          <Link to="/app/account" className="auth" >{username}</Link>
+          <UserMenu username={username} />
           <Sidebar tab={value} />
     </header>
   )  
