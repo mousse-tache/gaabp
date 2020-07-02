@@ -1,11 +1,12 @@
-import React from "react"
-import Layout from "../components/public-components/layout"
-import About from "../components/public-components/about"
-import Inscrire from "../components/public-components/inscrire"
-import Impliquer from "../components/public-components/impliquer"
-import Contact from "../components/public-components/contact"
+import React from "react";
+import Layout from "../components/public-components/layout";
+import About from "../components/public-components/about";
+import Inscrire from "../components/public-components/inscrire";
+import Impliquer from "../components/public-components/impliquer";
+import Contact from "../components/public-components/contact";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ImageCarousel from  "../components/public-components/imageCarousel"
+import ImageCarousel from  "../components/public-components/imageCarousel";
+import { Typography } from "@material-ui/core";
 
 import {View} from 'react-native';
 
@@ -14,8 +15,8 @@ const IndexPage = () => (
     <CssBaseline />
     <Layout>  
       <section name="home" className="sitename">
-      <h1>L'Association des Aventuriers de Baden-Powell</h1>
-      {ImageCarousel()}
+      <Typography variant="h4" gutterBottom>Association des Aventuriers de Baden-Powell</Typography>
+      <ImageCarousel />
       </section>
       <About/>
       <Inscrire />

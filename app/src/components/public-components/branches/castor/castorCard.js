@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CastorModal from "./castorModal";
-import { Card, CardContent, Typography, ButtonBase } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const CastorCard = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -12,15 +12,11 @@ const CastorCard = () => {
     return (
       <Card className="branchecard bleu" onClick={() => setOpenModal(!openModal)}>
         <CardContent>
-
-          <Typography>
-            Les Castors
-          </Typography>
+            <Typography>La Branche bleue</Typography>
+            <Typography color="textSecondary">Pour les 7-9 ans</Typography>
         </CardContent>
-        <CardContent className="bleu" onClick={() => setOpenModal(!openModal)}>
-            <ButtonBase>
-              <Typography color="textSecondary">Pour les 7-9 ans</Typography>
-            </ButtonBase>
+        <CardContent className="bleu">
+          <Typography color="textSecondary">Les castors</Typography>
         </CardContent>
         <CastorModal open={openModal} handleClose={handleCloseModal} />
       </Card>

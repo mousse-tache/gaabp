@@ -1,6 +1,9 @@
 import React from "react"
-import { Typography, Card, CardContent, CardMedia } from "@material-ui/core"
+import { Typography, Card, CardContent } from "@material-ui/core"
 import CastorCard from "./branches/castor/castorCard"
+import LouveteauxCard from "./branches/louveteaux/louveteauxCard"
+import VerteCard from "./branches/verte/verteCard"
+import RougeCard from "./branches/rouge/rougeCard"
 
 const About = () => (
   <section>
@@ -23,33 +26,9 @@ const About = () => (
     </Card>
     <div className="branches">
       <CastorCard />
-      <Card className="branchecard jaune">
-        <CardContent>
-          <Typography>
-            Les Louveteaux
-          </Typography>
-          <Typography color="textSecondary">Pour les 9-12 ans</Typography>
-        </CardContent>
-        <CardContent className="jaune"></CardContent>
-      </Card>
-      <Card className="branchecard vert">
-        <CardContent>
-          <Typography>
-            Les Guides et Éclaireurs
-          </Typography>
-          <Typography color="textSecondary">Pour les 12-17 ans</Typography>
-        </CardContent>
-        <CardContent className="vert"></CardContent>
-      </Card>
-      <Card className="branchecard rouge">
-        <CardContent>
-          <Typography>
-            La Route
-          </Typography>
-          <Typography color="textSecondary">Pour les 17 ans et plus</Typography>
-        </CardContent>
-        <CardContent className="rouge"></CardContent>
-      </Card>
+      <LouveteauxCard />
+      <VerteCard />
+      <RougeCard />
     </div>
   </section>
 )

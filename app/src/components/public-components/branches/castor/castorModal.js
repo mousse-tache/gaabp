@@ -10,10 +10,10 @@ const CastorModal = ({open, handleClose}) => {
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="branche-modal-paper">
+            <Paper className="branche-modal-paper bleu">
                 <Card>
                     <CardContent>
-                        <Typography>
+                        <Typography variant="h5">
                             Les castors sont les plus jeunes scouts à l'AABP.
                         </Typography>
                     </CardContent>
@@ -28,14 +28,15 @@ const CastorModal = ({open, handleClose}) => {
                         <Typography>
                             Comme pour tous les scouts, l'apprentissage par le jeu est une partie importante du cursus des castors. Les activités courantes incluent également le bricolage, le partage d'histoire, le jeu actif et l'apprentissage de techniques de base du scoutisme.
                         </Typography>
-
-                        <Typography>
-                            Comme pour tous les scouts, l'apprentissage par le jeu est une partie importante du cursus des castors. Les activités courantes incluent également le bricolage, le partage d'histoire, le jeu actif et l'apprentissage de techniques de base du scoutisme.
-                        </Typography>
                     </CardContent>
 
                     <CardContent>
                         <Typography>
+                            Typiquement, les castors tiennent un camp en hiver et un autre en été. Celui d'hiver est généralement d'une durée d'une fin de semaine, alors que celui d'été peut durer jusqu'à 5 jours.
+                        </Typography>
+                    </CardContent>
+                    <CardContent>
+                        <Typography variant="h6">
                             Devise: Partager
                         </Typography>
                     </CardContent>
