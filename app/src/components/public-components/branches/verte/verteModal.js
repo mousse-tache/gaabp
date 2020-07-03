@@ -1,16 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Modal, Paper, Card, CardContent, Typography } from "@material-ui/core";
+import { Dialog, Paper, Card, CardContent, Typography, IconButton } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 
 const VerteModal = ({open, handleClose}) => {
     return (
-        <Modal 
+        <Dialog 
             className="branche-modal"
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
             <Paper className="branche-modal-paper vert">
+            <IconButton onClick={handleClose}>
+                    <CloseIcon />
+                </IconButton>
                 <Card>
                     <CardContent>
                         <Typography variant="h5">
@@ -38,7 +42,7 @@ const VerteModal = ({open, handleClose}) => {
                     </CardContent>
                 </Card>
             </Paper>
-        </Modal>
+        </Dialog>
     )
 }
 

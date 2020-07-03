@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Modal, Paper, Card, CardContent, Typography } from "@material-ui/core";
+import { Dialog, Paper, Card, CardContent, Typography, IconButton } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 
 const CastorModal = ({open, handleClose}) => {
     return (
-        <Modal 
+        <Dialog 
             className="branche-modal"
             open={open}
             onClose={handleClose}
@@ -12,6 +13,9 @@ const CastorModal = ({open, handleClose}) => {
             aria-describedby="simple-modal-description">
             <Paper className="branche-modal-paper bleu">
                 <Card>
+                    <IconButton onClick={handleClose}>
+                        <CloseIcon />
+                    </IconButton>
                     <CardContent>
                         <Typography variant="h5">
                             Les castors sont les plus jeunes scouts à l'AABP.
@@ -42,7 +46,7 @@ const CastorModal = ({open, handleClose}) => {
                     </CardContent>
                 </Card>
             </Paper>
-        </Modal>
+        </Dialog>
     )
 }
 
