@@ -5,7 +5,7 @@ import "./header.css"
 import Sidebar from "./sidebar"
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Tabs, Tab } from "@material-ui/core"; 
+import { Tabs, Tab, Button } from "@material-ui/core"; 
 import UserMenu from "./accountMenu";
 
 const Header = ({ username }) => {
@@ -27,6 +27,7 @@ const Header = ({ username }) => {
             onChange={handleChange}
             aria-label="mainnav"
             className="tabnav"
+            sc
           >
             <Tab disableRipple component="a" label="Membres" />
             <Tab disableRipple disabled component="a" label="Ressources" />
@@ -50,6 +51,9 @@ const Header = ({ username }) => {
           <Link className="navlink morelinks" to="/app/membres" partiallyActive={true} activeClassName="active">
             Documents
           </Link>      
+          <Button className="header-nomination-button" variant="contained" color="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSclYn8ZnDRxk--1hfCz4m3JXx8mHv7ke0S7HGIavlt6MnzsQA/viewform?usp=pp_url" target="_blank" rel="noopener noreferrer">
+            Demande de nomination
+          </Button>
           <UserMenu username={username} />
           <Sidebar tab={value} />
     </header>
