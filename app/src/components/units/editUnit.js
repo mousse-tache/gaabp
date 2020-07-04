@@ -7,7 +7,7 @@ import UnitClient from "../../clients/unitClient"
 import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import MembresTable from "../../components/membres/membresTable"
+import UnitMembersTable from "./unitMembersTable";
 import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, TextField } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 
@@ -150,7 +150,7 @@ const EditUnit = ({id}) => {
             </CardContent>
             <CardContent>
                 <Typography variant="h5">Membres de l'unité</Typography>
-                <MembresTable users={membres} />
+                <UnitMembersTable users={membres} unitId={unit._id} />
             </CardContent>
         </Card>
     </Paper>
