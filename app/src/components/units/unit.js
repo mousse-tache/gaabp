@@ -20,12 +20,14 @@ const Unit = () => {
     const authedUser = userContext.authedUser;
     
     const [unitList, setUnitList] = useState([]);
-    const [groupe, setGroup] = useState(null);
-    const [nom, setNom] = useState(null);
     const [isFetchingUnitList, setIsFetchingUnitList] = useState(true);
     const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
-    const [branche, setBranche] = useState(null);
-    const [genre, setGenre] = useState(null)
+    const [unit, setUnit] = useState({
+        group: null,
+        nom: null,
+        branche: null,
+        genre: null
+    });
     const [open, setOpen] = React.useState(false);  
 
 
@@ -81,14 +83,11 @@ const Unit = () => {
         e.preventDefault();
         e.stopPropagation();    
         try {
-            await unitClient.addUnit({nom: nom, group: groupe, branche: branche, genre: genre});
-            setNom("");
-            setGroup("");
-            setBranche(null);
-            setGenre(null);
+            await unitClient.addUnit(unit);
             setOpen(false);
-            enqueueSnackbar("L'unité " + nom + " a été créée");
+            enqueueSnackbar("L'unité " + unit.nom + " a été créée");
             FetchUnits();
+            
         }
         catch(e) {
             console.log(e);
@@ -136,12 +135,12 @@ const Unit = () => {
                     <h3>Nouvelle unité</h3>
                     
                     <InputLabel>Nom de l'unité</InputLabel>
-                    <Input type="text" value={nom} placeholder="1ère Troupe de Glasgow" onChange={event => setNom(event.target.value)} />                    
+                    <Input type="text" value={unit.nom} placeholder="1ère Troupe de Glasgow" onChange={event => setUnit({...unit, nom: event.target.value})} />                    
 
                     <InputLabel>Groupe</InputLabel>
                     <Select 
-                     value={groupe} 
-                     onChange={event => setGroup(event.target.value)}
+                     value={unit.group} 
+                     onChange={event => setUnit({...unit, group: event.target.value})}
                      displayEmpty
                      >
                     <MenuItem value="" disabled>
@@ -152,16 +151,16 @@ const Unit = () => {
 
                     <InputLabel>Branche</InputLabel>
                     <Select
-                    value={branche}
-                    onChange={x => setBranche(x.target.value)}
+                    value={unit.branche}
+                    onChange={x => setUnit({...unit, branche: x.target.value})}
                     >
                     {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
                     </Select>
 
                     <InputLabel>Type</InputLabel>
                     <Select
-                    value={genre}
-                    onChange={x => setGenre(x.target.value)}
+                    value={unit.genre}
+                    onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
                     {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
                     </Select>

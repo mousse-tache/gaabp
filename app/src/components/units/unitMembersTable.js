@@ -9,7 +9,7 @@ const UnitMembresTable = ({users, canEdit, unitId}) => {
       { title: "Nom", field:'prenom' },
       { title:"", field:'nom'},
       { title: 'Courriel', field: 'courriel' },
-      { title: "Rôle", field: 'nominations', render: row => <span>{row.nominations.filter(x => x.unitId === unitId)[0]?.type}</span>}
+      { title: "Rôle", field: 'nominations', render: row => <span>{row.nominations.filter(x => x.unitId === unitId)[0]?.type}</span> }
       
     ],
     data: users,

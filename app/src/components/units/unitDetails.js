@@ -70,7 +70,7 @@ const UnitDetails = ({disabled}) => {
 
             <InputLabel>Groupe</InputLabel>
             <Input 
-             value={group.nom} 
+             value={group?.nom} 
              disabled
             />
 
