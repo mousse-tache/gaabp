@@ -7,7 +7,9 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import MaterialTable from "material-table"
 import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography, CardContent, MenuList, MenuItem } from '@material-ui/core';
-import UnitClient from "../../clients/unitClient"
+import UnitClient from "../../clients/unitClient";
+import CheckIcon from '@material-ui/icons/Check';
+import { useSnackbar } from 'notistack';
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -18,14 +20,13 @@ const EditMembre = ({email}) => {
     const [member, setMember] = useState(false);
     const [memberUnits, setMemberUnits] = useState(false);
     const [state, setState] = React.useState({
-        columns: [
-            { title: 'Rôle', field: 'type' },
-            { title: "Unité", field: "unitId", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> }
-        ],
+        columns: [],
         data: member.nominations,
-      });
+      })
     const userClient = new UserClient();
     const unitClient = new UnitClient();
+
+    const { enqueueSnackbar } = useSnackbar();
 
     if (!authedUser) {
         userContext.FetchUser();  
@@ -35,7 +36,10 @@ const EditMembre = ({email}) => {
         setState({
             columns: [
                 { title: 'Rôle', field: 'type' },
-                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> }
+                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> , editable: 'never'},
+                { title: "Début", field:"sd"},
+                { title: "Fin", field:"ed", type:"date"},
+                { title: "Nomination approuvée", field: "approved", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
             ],
             data: member.nominations,
           });
@@ -81,12 +85,11 @@ const EditMembre = ({email}) => {
         setIsFetchingUser(false);
     }
 
-    async function saveUser(e) {           
-        e.preventDefault();
-        e.stopPropagation();    
+    async function saveUser() {       
         if(member?._id) {
             await userClient.updateUser({...member, id: member._id});
         }
+        enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
     }
 
     const handleAdminCheck = () => {
@@ -144,9 +147,26 @@ const EditMembre = ({email}) => {
             options={
                 {
                 pageSize: 10,
-                search: false
+                search: true
                 }
             }
+            editable={{
+                isEditable: rowData => Permissions(authedUser, PermissionTypes.RemoveNomination),
+                isEditHidden: rowData => !Permissions(authedUser, PermissionTypes.RemoveNomination),
+                onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
+                onRowUpdate: (newData, oldData) =>
+                new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        const index = oldData.tableData.id;
+                        let nominations = member?.nominations;
+                        nominations[index] = newData
+                        setMember({...member, nominations: nominations})
+                        saveUser();
+                        resolve();
+                }, 1000);
+            })
+
+            }}
             onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}
             />
         </CardContent>

@@ -17,6 +17,9 @@ function Permissions(user, permission) {
         case PermissionTypes.CreateGroup:
         case PermissionTypes.UpdateGroup:
             return (user.isAdmin || user.isGroupChief)
+        case PermissionTypes.AddNomination:
+        case PermissionTypes.RemoveNomination:
+            return (user.isAdmin || user.isGeneralCommissionner)
         default:
           return false
       } 

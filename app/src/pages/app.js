@@ -55,8 +55,13 @@ const App = () => {
   }
 
     useEffect(() => {
-        fetchAuth();
-        FetchUser();
+        try {
+            fetchAuth();
+            FetchUser();
+        }
+        catch(e) {
+            console.log(e.message);
+        }
     }, []);
 
     if (!isAuthenticated() || user == null) {

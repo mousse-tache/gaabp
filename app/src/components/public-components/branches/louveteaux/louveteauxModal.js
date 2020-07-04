@@ -10,7 +10,9 @@ const LouveteauxModal = ({open, handleClose}) => {
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description">
+            aria-describedby="simple-modal-description"
+            fullWidth
+            maxWidth="lg">
             <Paper className="branche-modal-paper jaune">
                 <Card>
                     <IconButton onClick={handleClose}>
