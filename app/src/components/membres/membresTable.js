@@ -7,7 +7,7 @@ const MembresTable = ({users, canEdit}) => {
   const [state, setState] = React.useState({
     columns: [
       { title: "Nom", field:'prenom' },
-      { title:"", field:'nom'},
+      { title:"", field:'nom', defaultSort: "asc"},
       { title: 'Courriel', field: 'courriel' },
     ],
     data: users,
@@ -18,7 +18,7 @@ const MembresTable = ({users, canEdit}) => {
       {
       columns: [
         { title: "Nom", field:'prenom' },
-        { title:"", field:'nom'},
+        { title:"", field:'nom', defaultSort: "asc"},
         { title: 'Courriel', field: 'courriel' },
       ],
       data: users,

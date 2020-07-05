@@ -44,7 +44,7 @@ const GroupTable = ({groups, canEdit}) => {
       }
       columns={state?.columns}
       data={state?.data}     
-      onRowClick={(event, rowData) => navigate("/app/groupe/"+rowData._id)}
+      onRowClick={(event, rowData) => canEdit && navigate("/app/groupe/"+rowData._id)}
     />
   );
 };

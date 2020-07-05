@@ -33,6 +33,7 @@ main {
 
 main h1, h2, h3, h4 {
   text-align: center;
+  padding-bottom:1em;
   word-wrap: none;
   word-break: keep-all;
 }
@@ -40,12 +41,15 @@ main h1, h2, h3, h4 {
 .break {
   height:10em;
 }
+
 section {
-  padding: 30px 20px; /* first number needs to be higher then height header/footer */ 
+  padding: 30px 5px; /* first number needs to be higher then height header/footer */ 
   box-sizing:border-box;
   height:100%;
   overflow-x:visible;;
-  min-height: 50em;
+  min-height: 10em;
+  text-align: center;
+  font-size: 16px;
 }
 
 p {
