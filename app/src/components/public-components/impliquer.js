@@ -76,7 +76,10 @@ const Impliquer = () => {
         }}
           options={
             {
-              pageSize: 10
+              pageSize: 10,
+              headerStyle: {
+                zIndex: 8
+              }
             }
           }
           columns={state?.columns}
