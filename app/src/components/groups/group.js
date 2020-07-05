@@ -8,6 +8,7 @@ import GroupTable from "./groupTable";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import Regions from "../../utils/regions";
 import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 

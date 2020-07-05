@@ -2,14 +2,11 @@
 .profile form {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    max-width: 70%;
     margin:auto;
 }
 
 .profile form input {
-    max-width: 80%;
-    text-align: center;
-    margin: .5em;
     margin-top: 1em;
 }
 

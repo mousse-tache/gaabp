@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, TextField } from "@material-ui/core";
-import GroupTable from "../groups/groupTable";
 import GroupClient from "../../clients/groupClient";
 import { Helmet } from "react-helmet";
+import MaterialTable from 'material-table';
+import Regions from "../../utils/regions";
+import { navigate } from 'gatsby';
 
 const Impliquer = () => {
   const [groupList, setGroupList] = useState(false);
@@ -10,6 +12,24 @@ const Impliquer = () => {
   useEffect(() => {
       FetchGroups();
   }, [])
+
+  const [state, setState] = React.useState(false);
+
+  useEffect(() => {
+    if(!groupList) {
+      return;
+    }
+
+    setState({
+      columns: [
+        { title: '', field: 'numero', render: rowData => `${rowData.numero} ${rowData.nom}` },
+        { title: 'Ville', field: 'ville' },
+        { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null}
+
+      ],
+      data: groupList.filter(x => x.nom != "Instances nationales"),
+    });
+  }, [groupList])
 
   const groupClient = new GroupClient();
 
@@ -41,7 +61,30 @@ const Impliquer = () => {
       <Card>
         <Typography variant="h4">Trouver un groupe</Typography>
         <Typography>Entrer le nom d'une ville pour savoir s'il s'y trouve un groupe ou consulter la liste de nos groupes.</Typography>
-        {groupList !== false && <GroupTable groups={groupList} canEdit={false} />}
+        {groupList !== false && 
+        <MaterialTable
+          title=""
+          localization={{
+            toolbar: {
+                searchPlaceholder: "Chercher"
+            },
+            body: {
+                deleteTooltip: "Supprimer",
+                editTooltip: "Modifier",
+                addTooltip: "Nouveau"
+            }
+        }}
+          options={
+            {
+              pageSize: 10
+            }
+          }
+          columns={state?.columns}
+          data={state?.data}     
+    />}
+
+
+
       </Card>
       </section>
       
