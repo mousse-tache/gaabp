@@ -137,7 +137,7 @@ const EditUnit = ({id}) => {
                         }}
                         value={selectUser}
                         defaultValue={{prenom: "", nom: ""}}
-                        options={allMembers.filter(x => !unit.membres.includes(x._id))}
+                        options={allMembers}
                         getOptionLabel={(option) => option.prenom + " " + option.nom}
                         style={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
@@ -150,7 +150,7 @@ const EditUnit = ({id}) => {
             </CardContent>
             <CardContent>
                 <Typography variant="h5">Membres de l'unité</Typography>
-                <UnitMembersTable users={membres} unitId={unit._id} />
+                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id).length !== 0)} unitId={unit._id} />
             </CardContent>
         </Card>
     </Paper>

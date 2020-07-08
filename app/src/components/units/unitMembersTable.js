@@ -9,7 +9,9 @@ const UnitMembresTable = ({users, canEdit, unitId}) => {
       { title: "Nom", field:'prenom' },
       { title:"", field:'nom'},
       { title: 'Courriel', field: 'courriel' },
-      { title: "Rôle", field: 'nominations', render: row => <span>{row.nominations.filter(x => x.unitId === unitId)[0]?.type}</span> }
+      { title: "Début", field:"sd", type:"date"},
+      { title: "Fin", field:"ed", type:"date"},
+      { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId)[0]?.type }
       
     ],
     data: users,
@@ -22,7 +24,8 @@ const UnitMembresTable = ({users, canEdit, unitId}) => {
         { title: "Nom", field:'prenom' },
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
-        { title: "Rôle", field: 'nominations', render: row => <span>{row.nominations.filter(x => x.unitId === unitId)[0]?.type}</span>}
+        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.unitId === unitId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
+        { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId && !x.ed)[0]?.type}
       ],
       data: users,
     });

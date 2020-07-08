@@ -38,8 +38,8 @@ const EditMembre = ({email}) => {
                 { title: 'Rôle', field: 'type' },
                 { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> , editable: 'never'},
                 { title: "Début", field:"sd", type:"date"},
-                { title: "Fin", field:"ed", type:"date"},
-                { title: "Nomination approuvée", field: "approved", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
+                { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
+                { title: "Nomination approuvée", field: "approved", type:"boolean", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
             ],
             data: member.nominations,
           });
@@ -147,7 +147,8 @@ const EditMembre = ({email}) => {
             options={
                 {
                 pageSize: 10,
-                search: true
+                search: true,
+                grouping: true
                 }
             }
             editable={{
