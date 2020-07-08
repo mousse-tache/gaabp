@@ -86,7 +86,7 @@ const Profile = () => {
             <h3>Informations de base</h3>
             
             <InputLabel>Courriel</InputLabel>
-            <Input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled={!isAdmin} onChange={event => setCourriel(event.target.value)} />
+            <Input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled onChange={event => setCourriel(event.target.value)} />
 
             <InputLabel>Prénom</InputLabel>
             <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
@@ -100,6 +100,7 @@ const Profile = () => {
                 <Switch
                     checked={isAdmin}
                     onChange={handleAdminCheck}
+                    disabled
                     name="checkedB"
                     className="switch"
                 />

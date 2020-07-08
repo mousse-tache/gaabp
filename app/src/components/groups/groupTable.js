@@ -4,7 +4,7 @@ import MaterialTable from 'material-table';
 import Regions from "../../utils/regions";
 import { navigate } from 'gatsby';
 
-const GroupTable = ({groups, canEdit}) => {
+const GroupTable = ({groups, canSee}) => {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Numéro', field: 'numero' },
@@ -49,14 +49,14 @@ const GroupTable = ({groups, canEdit}) => {
       }
       columns={state?.columns}
       data={state?.data}     
-      onRowClick={(event, rowData) => canEdit && navigate("/app/groupe/"+rowData._id)}
+      onRowClick={(event, rowData) => canSee && navigate("/app/groupe/"+rowData._id)}
     />
   );
 };
 
 GroupTable.propTypes = {
     groups: Proptypes.array, 
-    canEdit: Proptypes.bool,
+    canSee: Proptypes.bool,
 };
 
 export default GroupTable;

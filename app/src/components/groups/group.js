@@ -114,7 +114,7 @@ const Group = () => {
             </Paper>
         </Modal>
 
-        <GroupTable groups={groupList} canEdit={Permissions(authedUser, PermissionTypes.UpdateGroup)} />
+        <GroupTable groups={groupList} canSee={true} />
     </Paper>
     )
 }

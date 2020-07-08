@@ -24,6 +24,12 @@ const EditGroup = ({id}) => {
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
 
+    var canEdit = Permissions(authedUser, PermissionTypes.UpdateGroup);
+
+    useEffect(() => {
+        canEdit = Permissions(authedUser, PermissionTypes.UpdateGroup);
+    }, [authedUser])
+
     if (!authedUser) {
         userContext.FetchUser();  
     }
@@ -96,20 +102,21 @@ const EditGroup = ({id}) => {
                 <form className="form">
                 
                 <InputLabel>Numéro</InputLabel>
-                <Input type="text" value={group.numero} required={true} placeholder="1er" onChange={event => setGroup({...group, numero: event.target.value})} />
+                <Input type="text" value={group.numero} disabled={!canEdit} required={true} placeholder="1er" onChange={event => setGroup({...group, numero: event.target.value})} />
 
 
                 <InputLabel>Nom du groupe</InputLabel>
-                <Input type="text" value={group.nom} placeholder="Groupe scout de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
+                <Input type="text" value={group.nom} disabled={!canEdit} placeholder="Groupe scout de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
 
                 <InputLabel>Ville</InputLabel>
-                <Input type="text" value={group.ville} placeholder="Glasgow" onChange={event => setGroup({...group, ville: event.target.value})} />
+                <Input type="text" value={group.ville} disabled={!canEdit} placeholder="Glasgow" onChange={event => setGroup({...group, ville: event.target.value})} />
                 
                 
                 <InputLabel id="region-label">Région</InputLabel>
                 <Select
                     labelId="region-label"
                     value={group.region}
+                    disabled={!canEdit}
                     onChange={x => setGroup({...group, region: x.target.value})}
                     >
                     {Regions.map(x => <MenuItem value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>)}
@@ -128,7 +135,7 @@ const EditGroup = ({id}) => {
                 }
             </CardContent>
         <Typography>
-                    <Button variant="contained" color="secondary" hidden={!Permissions(authedUser, PermissionTypes.UpdateGroup)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)} onClick={SaveGroup}>Sauvegarder</Button>
+                    <Button variant="contained" color="secondary" disabled={!canEdit} hidden={!canEdit} onClick={SaveGroup}>Sauvegarder</Button>
         </Typography>
         </Card>
     </Paper>
