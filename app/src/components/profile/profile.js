@@ -8,6 +8,7 @@ const Profile = () => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
     const user = userContext.claims;
+
     const [courriel, setCourriel] = useState(user.email);
     const [prenom, setPrenom] = useState(authedUser?.prenom);
     const [nom, setNom] = useState(authedUser?.nom);
@@ -25,22 +26,6 @@ const Profile = () => {
         FetchUser();
     }, [])
 
-    useEffect(() => {
-        userContext.setAuthedUser({...authedUser, id: id})
-    }, [id]);
-
-    useEffect(() => {
-        userContext.setAuthedUser({...authedUser, isAdmin: isAdmin})
-    }, [isAdmin]);
-
-    useEffect(() => {
-        userContext.setAuthedUser({...authedUser, prenom: prenom})
-    }, [prenom]);
-
-    useEffect(() => {
-        userContext.setAuthedUser({...authedUser, nom: nom})
-    }, [nom]);
-
     async function FetchUser() {
         try {               
             var data = await userClient.getByEmail(user.email);
@@ -50,7 +35,6 @@ const Profile = () => {
                 setPrenom(data[0].prenom.toString());
                 setId(data[0]._id.toString());
                 setIsAdmin(data[0].isAdmin ? data[0].isAdmin: false);
-                userContext.setAuthedUser(data[0]);
             }            
         } catch (e) {
             console.log(e.message);   

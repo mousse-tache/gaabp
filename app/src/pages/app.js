@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Router } from "@reach/router"
 import Layout from "../components/layout"
-import Profile from "../components/profile/profile"
-import Membres from "../components/membres/membres"
-import EditMembre from "../components/membres/editMembre"
-import Group from "../components/groups/group"
-import EditGroup from "../components/groups/editGroup"
-import Unit from "../components/units/unit"
 import UserContext from "../context/userContext"
 import Loading from '../components/loading/loading'
 import UserClient from "../clients/userClient"
@@ -15,12 +8,14 @@ import UnitContextProvider from "../context/unit/unitContextProvider"
 import { SnackbarProvider } from 'notistack';
 import { Helmet } from "react-helmet";
 
+import NominatedUserRouter from "../components/routers/nominatedUserRouter";
+import AnonymousUserRouter from "../components/routers/anonymousUserRouter";
+
 import "../components/profile/profile.css"
-import EditUnit from "../components/units/editUnit"
 
 const App = () => {
     const [user, setUser] = useState(false);
-    const [authedUser, setAuthedUser] = useState({});
+    const [authedUser, setAuthedUser] = useState(false);
     const userClient = new UserClient("");
 
     const isAuthenticated = () => {
@@ -43,16 +38,18 @@ const App = () => {
     }
 
     async function FetchUser() {
-      try {               
-          var data = await userClient.getByEmail(user.email);
-          if(data !== null)
-          {
-              setAuthedUser(data[0]);
-          }            
-      } catch (e) {
-          console.log(e.message);   
-      }
-  }
+        if(!authedUser) {
+            try {               
+                var data = await userClient.getByEmail(user.email);
+                if(data !== null)
+                {
+                    setAuthedUser(data[0]);
+                }            
+            } catch (e) {
+                console.log(e.message);   
+            }
+        }
+    }
 
     useEffect(() => {
         try {
@@ -64,34 +61,30 @@ const App = () => {
         }
     }, []);
 
+    useEffect(() => {
+        FetchUser();
+    }, [user])
+
     if (!isAuthenticated() || user == null) {
         return (
           <Login/>
         );
     }
   
-    if(!user)  {
+    if(!user || !authedUser)  {
         return (
             <Loading />
         )        
     }
-
+    
     return (        
         <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
             <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
             <UnitContextProvider>
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
-                            <Router basepath="/app"> 
-                                <Profile path="/account" />
-                                <Membres path="/membres" />
-                                <EditMembre path="membre/:email" />
-                                <Group path="/groupes" />
-                                <EditGroup path="/groupe/:id" />
-                                <Unit path="/unites" />
-                                <EditUnit path="/unite/:id" />
-                                <Profile default />
-                            </Router>                    
+                            {authedUser?.nominations?.length > 0 && <NominatedUserRouter />}  
+                            {!authedUser?.nominations && <AnonymousUserRouter />} 
                     </SnackbarProvider>
                 </Layout>
             </UnitContextProvider>            
