@@ -76,8 +76,6 @@ const App = () => {
             <Loading />
         )        
     }
-
-    console.log(authedUser)
     
     return (        
         <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
