@@ -32,7 +32,6 @@ const Header = ({ username }) => {
             onChange={handleChange}
             aria-label="mainnav"
             className="tabnav"
-            sc
           >
             <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Membres" />
             <Tab disableRipple disabled component="a" label="Ressources" />
