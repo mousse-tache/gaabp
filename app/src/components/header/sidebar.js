@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 import Logo from "../../images/Logo_AABP.gif"
 
-function Sidebar({window, tab}) {
+function Sidebar({window, tab, canAccessMemberSection}) {
 
   return (
     <Drawer
@@ -22,7 +22,7 @@ function Sidebar({window, tab}) {
       </Link>   
 
       {
-        tab == 0 && (
+        canAccessMemberSection && tab == 0 && (
       <List>
         <ListItem divider button disableRipple onClick={() => navigate("/app/membres")}>       
         <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
@@ -53,7 +53,8 @@ Sidebar.propTypes = {
    * You won't need it on your project.
    */
   window: PropTypes.func,
-  tab: PropTypes.number
+  tab: PropTypes.number,
+  canAccessMemberSection: PropTypes.bool
 };
 
 export default Sidebar;

@@ -76,6 +76,8 @@ const App = () => {
             <Loading />
         )        
     }
+
+    console.log(authedUser)
     
     return (        
         <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
@@ -84,7 +86,7 @@ const App = () => {
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
                             {authedUser?.nominations?.length > 0 && <NominatedUserRouter />}  
-                            {!authedUser?.nominations && <AnonymousUserRouter />} 
+                            {(!authedUser?.nominations || authedUser?.nominations?.length == 0) && <AnonymousUserRouter />} 
                     </SnackbarProvider>
                 </Layout>
             </UnitContextProvider>            
