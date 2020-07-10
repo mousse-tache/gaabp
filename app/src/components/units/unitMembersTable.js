@@ -1,9 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
+import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
+import UserContext from "../../context/userContext";
+import Permissions from "../../auth/permissions";
+import PermissionTypes from "../../auth/permissionTypes";
 
-const UnitMembresTable = ({users, canEdit, unitId}) => {
+const UnitMembresTable = ({users, canEdit, unitId, removeFromUnit}) => {
+  const userContext = useContext(UserContext);
+  const authedUser = userContext.authedUser;
+  const [open, setOpen] = React.useState(false);
+  const [userToDelete, setUserToDelete] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    setUserToDelete(false);
+  };
+
   const [state, setState] = React.useState({
     columns: [
       { title: "Nom", field:'prenom' },
@@ -31,8 +45,32 @@ const UnitMembresTable = ({users, canEdit, unitId}) => {
     });
   }, [users])
 
+  useEffect(() => {
+    if(userToDelete) {
+      setOpen(true);
+    }
+  }, [userToDelete])
+
   return (
-    <MaterialTable
+    <div>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+          <DialogTitle id="alert-dialog-slide-title">{"Voulez-vous vraiment retiré cette personne de l'unité?"}</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Non
+            </Button>
+            <Button onClick={() => removeFromUnit({...userToDelete}) && handleClose()} color="primary">
+              Oui
+            </Button>
+          </DialogActions>
+      </Dialog>
+      <MaterialTable
       title=""
       localization={{
         toolbar: {
@@ -44,17 +82,27 @@ const UnitMembresTable = ({users, canEdit, unitId}) => {
           pageSize: 10
         }
       }
+      actions={[
+        {
+          icon: 'delete',
+          tooltip: "Retirer de l'unité",
+          onClick: (event, rowData) => setUserToDelete(rowData),
+          disabled: !Permissions(authedUser, PermissionTypes.UpdateUnit)
+        }
+      ]}
       columns={state.columns}
       data={state.data}
       onRowClick={(event, rowData) => navigate("/app/membre/"+rowData.courriel)}
     />
+    </div>    
   );
 };
 
 UnitMembresTable.propTypes = {
     users: Proptypes.array, 
     canEdit: Proptypes.bool,
-    unitId: Proptypes.string
+    unitId: Proptypes.string,
+    removeFromUnit: Proptypes.func
 };
 
 export default UnitMembresTable;

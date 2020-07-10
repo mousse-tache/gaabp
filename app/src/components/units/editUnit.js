@@ -94,20 +94,31 @@ const EditUnit = ({id}) => {
         try {            
             await unitClient.updateUnit({...unit, id: unit._id, membres: [...unit.membres, selectUser._id]});
             await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
-            setMembres(membres.push(selectUser))
+            FetchMembres();
             setSelectUser({_id: 0, prenom: "", nom: ""})
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
-        }
-        
+        }        
+    }
+
+    const RemoveFromUnit = async(user) => { 
+        try {            
+            user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id)[0].ed = new Date();
+            await unitClient.updateUnit({...unit, id: unit._id, membres: unit.membres.filter(x => x != user._id)});
+            await userClient.updateUser({...user, id: user._id})
+            setMembres(membres?.filter(x => x._id !== user._id))
+            enqueueSnackbar("Membre retiré en date d'aujourd'hui");
+        } catch (e) {
+            enqueueSnackbar(e);
+        }        
     }
 
     function handleChangeAutoUser(x) {
         setSelectUser(x);
     }
 
-    if(isFetchingUnit) {
+    if(isFetchingUnit || !membres) {
         return (<Loading />)
     }
 
@@ -150,7 +161,7 @@ const EditUnit = ({id}) => {
             </CardContent>
             <CardContent>
                 <Typography variant="h5">Membres de l'unité</Typography>
-                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id).length !== 0)} unitId={unit._id} />
+                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id).length !== 0)} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
             </CardContent>
         </Card>
     </Paper>
