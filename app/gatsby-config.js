@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `AABP`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `Site web de l'Association des Aventuriers de Baden-Powell qui offre du scoutisme traditionnel à partir de 7 ans.`,
+    author: `AABP`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -22,8 +22,8 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#A3233A`,
+        theme_color: `#A3233A`,
         display: `minimal-ui`,
         icon: `src/images/Logo_AABP.gif`, // This path is relative to the root of the site.
       },
