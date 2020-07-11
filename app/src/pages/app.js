@@ -79,12 +79,15 @@ const App = () => {
     
     return (        
         <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
-            <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>AABP | Scoutisme traditionnel</title>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
             <UnitContextProvider>
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
                             {authedUser?.nominations?.length > 0 && <NominatedUserRouter />}  
-                            {(!authedUser?.nominations || authedUser?.nominations?.length == 0) && <AnonymousUserRouter />} 
+                            {(!authedUser?.nominations || authedUser?.nominations?.length === 0) && <AnonymousUserRouter />} 
                     </SnackbarProvider>
                 </Layout>
             </UnitContextProvider>            

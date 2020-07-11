@@ -9,9 +9,14 @@ import ImageCarousel from  "../components/public-components/imageCarousel";
 import { Typography } from "@material-ui/core";
 
 import {View} from 'react-native';
+import { Helmet } from "react-helmet";
 
 const IndexPage = () => (
   <View>
+    <Helmet>
+          <meta name="description" content="L'Association des Aventuriers de Baden-Powell est une association de scoutisme traditionnel pour les 7 ans et plus."/>
+          <title>AABP | Scoutisme traditionnel</title>
+    </Helmet>
     <CssBaseline />
     <Layout>  
       <section name="home" className="sitename">
