@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import RecommendFormation from "./recommendFormation";
 import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
@@ -32,6 +33,7 @@ const Formation = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Formation</h3></div>
         </div>
+        <RecommendFormation />
     </Paper>
     )
 }

@@ -104,6 +104,13 @@ p {
   border: solid 3px green;
 }
 
+.formation-recommender-card {
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 
 @media only screen and (max-width: 1100px) {
   html {

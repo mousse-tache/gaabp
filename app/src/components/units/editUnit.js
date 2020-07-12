@@ -39,7 +39,6 @@ const EditUnit = ({id}) => {
     useEffect(() => {
         FetchUnit();
         FetchAllUsers();
-        userContext.FetchUser();  
     }, [])
 
     useEffect(() => {
