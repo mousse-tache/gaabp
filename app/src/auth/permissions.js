@@ -20,6 +20,10 @@ function Permissions(user, permission) {
         case PermissionTypes.AddNomination:
         case PermissionTypes.RemoveNomination:
             return (user.isAdmin || user.isGeneralCommissionner)
+        case PermissionTypes.RecommendFormation:
+            return (user.isAdmin || user.isFormateur)
+        case PermissionTypes.ConfirmFormation:
+            return (user.isAdmin || user.isCommissionner)
         default:
           return false
       } 

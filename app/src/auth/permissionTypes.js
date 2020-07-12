@@ -16,7 +16,12 @@ const PermissionTypes = {
 
     // nominations
     AddNomination: "addNomination",
-    RemoveNomination: "removeNomination"
+    ValidateNomination: "validateNomination",
+    RemoveNomination: "removeNomination",
+
+    // formations
+    RecommendFormation: "recommendFormation",
+    ConfirmFormation: "confirmFormation"
 
 }
 
