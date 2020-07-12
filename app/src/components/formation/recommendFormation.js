@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import UserClient from "../../clients/userClient"
-import { Paper, TextField, Typography, Card } from '@material-ui/core';
+import { Paper, TextField, Typography, Card, Button } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import Branches from "../../utils/branches";
 import Formations from "../../utils/formations";
@@ -16,7 +16,7 @@ import { useSnackbar } from 'notistack';
 const RecommendFormation = () => {
     const authedUser = useContext(UserContext).authedUser;
     const { enqueueSnackbar } = useSnackbar();
-    const [formation, setFormation] = useState({branche: {couleur: ""}, niveau: {id: ""}, dateRecommende: new Date(), dateConfirme: null});
+    const [formation, setFormation] = useState({branche: {couleur: ""}, niveau: {id: ""}, dateRecommende: new Date(), dateConfirme: null, recommendedBy: authedUser._id});
     const [allMembers, setAllMembers] = useState(false);
     const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: ""});
 
@@ -127,8 +127,20 @@ const RecommendFormation = () => {
                 label="Date de la recommendation" 
                 variant="outlined"
                 type="date"
-            />        
-
+            />       
+            <div>
+                <Button 
+                    variant={selectUser?._id !== null ? "contained" : "outlined"} 
+                    
+                    color={selectUser?._id !== null ? "primary" : "secondary"} 
+                    hidden={!Permissions(authedUser, PermissionTypes.RecommendFormation)} 
+                    disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation) || selectUser._id === 0 || formation.branche.couleur === "" || formation.niveau.id === ""} 
+                    onClick={addFormation}
+                    >
+                        Recommender
+                </Button>
+            </div> 
+            
         </Card>        
     </Paper>
     )

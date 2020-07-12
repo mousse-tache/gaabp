@@ -33,7 +33,7 @@ const Formation = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Formation</h3></div>
         </div>
-        <RecommendFormation />
+        {Permissions(authedUser, PermissionTypes.RecommendFormation) && <RecommendFormation />}
     </Paper>
     )
 }
