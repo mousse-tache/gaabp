@@ -16,6 +16,7 @@ const IndexPage = () => (
     <Helmet>
           <meta name="description" content="L'Association des Aventuriers de Baden-Powell est une association de scoutisme traditionnel pour les 7 ans et plus."/>
           <title>AABP | Scoutisme traditionnel</title>
+          <html lang="fr" />
     </Helmet>
     <CssBaseline />
     <Layout>  

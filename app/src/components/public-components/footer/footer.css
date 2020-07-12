@@ -32,7 +32,7 @@
 
   footer a, footer a:visited {
       text-decoration: none;
-      color:grey;
+      color:var(--dark);
       margin-top: 1em;
       display: inline-flex;
       width: 60%;
