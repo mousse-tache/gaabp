@@ -25,24 +25,34 @@ function Sidebar({window, tab, canAccessMemberSection}) {
         canAccessMemberSection && tab == 0 && (
       <List>
         <ListItem divider button disableRipple onClick={() => navigate("/app/membres")}>       
-        <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
-            Membres
-        </Link>  
-      </ListItem>
-      <ListItem divider button disableRipple onClick={() => navigate("/app/unites")}>      
-        <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
-            Unités
-        </Link>  
-      </ListItem>
-      <ListItem divider button disableRipple onClick={() => navigate("/app/groupes")}>     
-        <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
-            Groupes
-        </Link>  
+          <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
+              Membres
+          </Link>  
+        </ListItem>
+        <ListItem divider button disableRipple onClick={() => navigate("/app/unites")}>      
+          <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
+              Unités
+          </Link>  
+        </ListItem>
+        <ListItem divider button disableRipple onClick={() => navigate("/app/groupes")}>     
+          <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
+              Groupes
+          </Link>  
         </ListItem>
       </List>
         )
       }
-
+      {
+        canAccessMemberSection && tab == 1 && (
+      <List>
+        <ListItem divider button disableRipple onClick={() => navigate("/app/formation")}>     
+          <Link className="" to="/app/formation" partiallyActive={true} activeClassName="active">
+              Formation
+          </Link>  
+        </ListItem>
+      </List>
+        )
+      }
     </Drawer>
   );
 }

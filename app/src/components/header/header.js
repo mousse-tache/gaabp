@@ -11,7 +11,7 @@ import UserContext from "../../context/userContext";
 
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
-  const tabValue = ["/app/membres", "/app", "/app"];
+  const tabValue = ["/app/membres", "/app/formation", "/app"];
   const userContext = useContext(UserContext);
   const authedUser = userContext.authedUser;
 
@@ -34,8 +34,9 @@ const Header = ({ username }) => {
             className="tabnav"
           >
             <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Membres" />
+            <Tab disableRipple disabled={!canAccessMemberSection}  component="a" label="Progression" />
             <Tab disableRipple disabled component="a" label="Ressources" />
-            <Tab disableRipple disabled component="a" label="Progression" />
+            
           </Tabs>
           {canAccessMemberSection && 
           (
@@ -53,6 +54,11 @@ const Header = ({ username }) => {
               <ListItem>     
                 <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
                     Groupes
+                </Link>  
+              </ListItem>
+              <ListItem>     
+                <Link className="" to="/app/formations" partiallyActive={true} activeClassName="active">
+                    Formations
                 </Link>  
               </ListItem>
             </List>
