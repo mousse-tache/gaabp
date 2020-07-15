@@ -1,6 +1,6 @@
 import { Link, navigate } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import "./header.css"
 import Sidebar from "./sidebar"
 import List from '@material-ui/core/List';
@@ -9,11 +9,26 @@ import { Tabs, Tab, Button } from "@material-ui/core";
 import UserMenu from "./accountMenu";
 import UserContext from "../../context/userContext";
 
+
+
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
-  const tabValue = ["/app/membres", "/app/formation", "/app"];
+  const tabValue = ["/app/membres", "/app/formation", "/app/ressources"];
   const userContext = useContext(UserContext);
   const authedUser = userContext.authedUser;
+
+  const defineBaseTab = () => {
+    for (let index = 0; index < tabValue.length; index++) {
+      
+      if(window?.location?.href.includes(tabValue[index])) {
+        setValue(index);
+      }
+    }
+  }
+
+  useEffect(() => {
+    defineBaseTab();
+  }, [])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
