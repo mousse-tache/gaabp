@@ -11,6 +11,7 @@ import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { Helmet } from "react-helmet";
+import MaterialTable from 'material-table';
 import { useSnackbar } from 'notistack';
 
 const RecommendFormation = () => {
@@ -139,9 +140,36 @@ const RecommendFormation = () => {
                     >
                         Recommender
                 </Button>
-            </div> 
-            
+            </div>            
         </Card>        
+        <Card>
+            <MaterialTable
+                title="Recommandations en attente d'approbation"
+                localization={{
+                    toolbar: {
+                        searchPlaceholder: "Chercher"
+                    },
+                    body: {
+                        deleteTooltip: "Supprimer",
+                        editTooltip: "Modifier",
+                        addTooltip: "Nouveau"
+                    }
+                }}
+                options={
+                    {
+                    pageSize: 10,
+                    headerStyle: {
+                        zIndex: 8
+                    }
+                    }
+                }
+                columns={[
+                    { title: 'Membre', field: 'prenom', render: (rowData) => `${rowData.prenom} ${rowData.nom}` },
+                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.niveau?.id} ${rowData.formations.filter(x => !x.dateConfirme)[0]?.branche?.couleur}`},
+                  ]}
+                data={allMembers.filter(x => x.formations.length > 0 && x.formations.filter(y => !y.dateConfirme && y.niveau))}     
+            />
+        </Card>
     </Paper>
     )
 }
