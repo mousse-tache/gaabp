@@ -56,22 +56,22 @@ const Header = ({ username }) => {
           {canAccessMemberSection && 
           (
             <List className="morelinks">
-              <ListItem>
+              <ListItem className="morelinks-items">
                 <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
                   Membres
                 </Link>
               </ListItem>
-              <ListItem>      
+              <ListItem className="morelinks-items">      
                 <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
                     Unités
                 </Link>  
-              </ListItem>
-              <ListItem>     
+              </ListItem >
+              <ListItem className="morelinks-items">     
                 <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
                     Groupes
                 </Link>  
               </ListItem>
-              <ListItem>     
+              <ListItem className="morelinks-items">     
                 <Link className="" to="/app/formations" partiallyActive={true} activeClassName="active">
                     Formations
                 </Link>  

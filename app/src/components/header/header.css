@@ -6,8 +6,6 @@
     --dark: #410e17;
   }
   
-
-
 .header {
     max-width: 100%;
     margin: auto;
@@ -17,6 +15,19 @@
     box-sizing: border-box;
     font-size:18px;
     z-index: 10em;
+    position:absolute;
+    top:0;
+    width:100%;
+    text-align:center;
+    margin:auto;
+    transition-property: text-shadow, color;
+    min-height: 3em;
+    background-color: white;
+    border-bottom: 4px dotted var(--light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    z-index: 10;
 }
 
 .header img {
@@ -32,35 +43,26 @@
 }
 
 
-header {
-    position:absolute;
-    top:0;
-    width:100%;
-    text-align:center;
-    margin:auto;
-    transition-property: text-shadow, color;
-    min-height: 3em;
-    background-color: white;
-    padding-bottom:20em;
-    border-bottom: 4px dotted var(--light);
+.main-header {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    z-index: 10;
+    align-items: center
+    
   }
+
+
 
 a, a:visited {
     text-decoration: none;
     color:var(--dark);
 }
 
-.header a, .header a:hover, .auth {
+.header a, .header a:hover {
     margin-top:.5em;
 }
 
-.headerpublic a, .headerpublic a:hover {
-    margin-top: 2em;
-}
 
 a:hover {
     text-shadow: 0 0 0 2px var(--primary);
@@ -69,18 +71,16 @@ a:hover {
 
 .auth {
     position: absolute;
-    right: 2%;
+    right: 1%;
     top: 0%;
 }
 
 .logo {
-    margin-left:5%;
     transition-property: border-style;
 }
 
 .navlink {
     font-size: larger;
-    margin-right:10%;
 }
 
 a:active {
@@ -117,20 +117,11 @@ a:active {
     }
     .header {
         flex-direction: column;
+
+        align-items: center;
+        justify-items: center;
     }
 
-    .logo {
-        margin:auto;
-        text-align: center;
-    }
-
-    header a {
-        width:100%;
-        display: block;
-        text-align: justify;
-        margin-left: 0%;
-    }
-    
     .auth {
         position: relative;
         font-size: larger;
@@ -147,16 +138,35 @@ a:active {
     }
 
     .morelinks {
-        display: inline;
+        display: flex;
+        flex-direction: column;
         visibility: visible;
+
+        align-items: center;
+        justify-items: center;
+    }
+
+    .morelinks-item {
+        max-width: 50%;
     }
 
     .tabnav {
         display: none;
         visibility: collapse;
+        
     }
 
     .header-nomination-button { 
         max-width: 10em;
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+      }
+
+    .main-header a {
+        max-width: 50%;
     }
 }
