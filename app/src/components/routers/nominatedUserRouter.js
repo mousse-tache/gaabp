@@ -21,7 +21,6 @@ const NominatedUserRouter = () => {
         <EditUnit path="/unite/:id" />
         <Formation path="/formation" />
         <Profile default />
-
     </Router> 
     )
 };
