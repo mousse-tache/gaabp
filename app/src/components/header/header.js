@@ -32,7 +32,6 @@ const Header = ({ username }) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(value);
     navigate(tabValue[newValue]);
   };
 

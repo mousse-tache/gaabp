@@ -160,7 +160,8 @@ const EditMembre = ({email}) => {
                     setTimeout(() => {
                         const index = oldData.tableData.id;
                         let nominations = member?.nominations;
-                        nominations[index] = newData
+                        nominations[index] = newData;
+                        nominations[index].approvedBy = authedUser._id;
                         setMember({...member, nominations: nominations})
                         saveUser();
                         resolve();
