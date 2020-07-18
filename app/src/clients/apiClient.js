@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosDefaultConfiguration = {
     timeout: 0,
-    headers: { "X-Requested-With": "XMLHttpRequest", Authorization: `Bearer ${process.env.API_TOKEN}`}
+    headers: { "X-Requested-With": "XMLHttpRequest", Authorization: `Bearer ${process.env.GATSBY_API_TOKEN}`}
 };
 
 let onSendingRequest = null;
