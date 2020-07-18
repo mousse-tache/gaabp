@@ -10,7 +10,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Helmet } from "react-helmet";
 import MaterialTable from 'material-table';
 import { useSnackbar } from 'notistack';
 
@@ -26,11 +25,16 @@ const RecommendFormation = () => {
     const addFormation = async() => { 
         try {            
             await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
-            setSelectUser({_id: 0, prenom: "", nom: ""})
+            setSelectUser({_id: 0, prenom: "", nom: "", });
             enqueueSnackbar("Formation recommendée");
+            FetchAllUsers();
         } catch (e) {
             enqueueSnackbar(e);
         }        
+    }
+
+    const confirmFormation = async(user) => {
+        //await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
     }
 
     useEffect(() => {
@@ -118,8 +122,8 @@ const RecommendFormation = () => {
                 InputLabelProps={{
                     shrink: true,
                   }}
-                onChange={(event, newValue) => {                    
-                    setFormation({...formation, dateRecommende: newValue});
+                onChange={(event) => {            
+                    setFormation({...formation, dateRecommende: event.target.value});
                 }}
                 value={formation.dateRecommende}
                 getOptionLabel={(option) => option}
@@ -160,12 +164,22 @@ const RecommendFormation = () => {
                     pageSize: 10,
                     headerStyle: {
                         zIndex: 8
-                    }
+                        }
                     }
                 }
+                // actions={[
+                //     {
+                //       icon: 'check',
+                //       tooltip: "Approuver la recommandation",
+                //       onClick: (event, rowData) => confirmFormation(rowData),
+                //       disabled: !Permissions(authedUser, PermissionTypes.ConfirmFormation)
+                //     }
+                //   ]}
                 columns={[
                     { title: 'Membre', field: 'prenom', render: (rowData) => `${rowData.prenom} ${rowData.nom}` },
-                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.niveau?.id} ${rowData.formations.filter(x => !x.dateConfirme)[0]?.branche?.couleur}`},
+                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.niveau?.id} branche ${rowData.formations.filter(x => !x.dateConfirme)[0]?.branche?.couleur.toLowerCase()}`},
+                    { title: 'Recommandé le', field: 'formation.dateRecommended', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.dateRecommende}`},
+                    { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${allMembers.filter(member => member._id == rowData.formations.filter(x => !x.dateConfirme)[0]?.recommendedBy)[0]?.prenom} ${allMembers.filter(member => member._id == rowData.formations.filter(x => !x.dateConfirme)[0]?.recommendedBy)[0]?.nom}`},
                   ]}
                 data={allMembers.filter(x => x.formations.length > 0 && x.formations.filter(y => !y.dateConfirme && y.niveau))}     
             />
