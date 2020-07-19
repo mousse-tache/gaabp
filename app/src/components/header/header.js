@@ -54,28 +54,28 @@ const Header = ({ username }) => {
           </Tabs>
           {canAccessMemberSection && 
           (
-            <List className="morelinks">
-              <ListItem className="morelinks-items">
+            <div className="morelinks">
+              <div className="morelinks-items">
                 <Link className="" to="/app/membres" partiallyActive={true} activeClassName="active">
                   Membres
                 </Link>
-              </ListItem>
-              <ListItem className="morelinks-items">      
+              </div>
+              <div className="morelinks-items">      
                 <Link className="" to="/app/unites" partiallyActive={true} activeClassName="active">
                     Unités
                 </Link>  
-              </ListItem >
-              <ListItem className="morelinks-items">     
+              </div >
+              <div className="morelinks-items">     
                 <Link className="" to="/app/groupes" partiallyActive={true} activeClassName="active">
                     Groupes
                 </Link>  
-              </ListItem>
-              <ListItem className="morelinks-items">     
+              </div>
+              <div className="morelinks-items">     
                 <Link className="" to="/app/formations" partiallyActive={true} activeClassName="active">
                     Formations
                 </Link>  
-              </ListItem>
-            </List>
+              </div>
+            </div>
           )}  
           <Button className="header-nomination-button" variant="contained" color="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSclYn8ZnDRxk--1hfCz4m3JXx8mHv7ke0S7HGIavlt6MnzsQA/viewform?usp=pp_url" target="_blank" rel="noopener noreferrer">
             Demande de nomination

@@ -146,8 +146,10 @@ a:active {
         justify-items: center;
     }
 
-    .morelinks-item {
+    .morelinks-items {
         max-width: 50%;
+        margin: auto;
+        text-align: center;
     }
 
     .tabnav {

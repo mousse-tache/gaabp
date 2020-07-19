@@ -5,6 +5,7 @@ import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import NominationsType from "../../utils/nominationTypes"
 import MaterialTable from "material-table"
 import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography, CardContent, MenuList, MenuItem } from '@material-ui/core';
 import UnitClient from "../../clients/unitClient";
@@ -35,7 +36,7 @@ const EditMembre = ({email}) => {
     useEffect(() => {
         setState({
             columns: [
-                { title: 'Rôle', field: 'type' },
+                { title: 'Rôle', field: 'type', lookup: NominationsType },
                 { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> , editable: 'never'},
                 { title: "Début", field:"sd", type:"date"},
                 { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
