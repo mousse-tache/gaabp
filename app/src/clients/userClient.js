@@ -14,7 +14,7 @@ export class UserClient {
     }
 
     getByUnitId = (id) => {
-        return this._apiClient.get(`/users/unit/[${id}]`);
+        return this._apiClient.get(`/users/unit/${id}`);
     }
 
     getByEmail = (email) => {

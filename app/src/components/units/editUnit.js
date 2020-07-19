@@ -39,6 +39,7 @@ const EditUnit = ({id}) => {
     useEffect(() => {
         FetchUnit();
         FetchAllUsers();
+        FetchMembres();
     }, [])
 
     useEffect(() => {
@@ -160,7 +161,7 @@ const EditUnit = ({id}) => {
             </CardContent>
             <CardContent>
                 <Typography variant="h5">Membres de l'unité</Typography>
-                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id).length !== 0)} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
+                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id).length !== 0)} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
             </CardContent>
         </Card>
     </Paper>

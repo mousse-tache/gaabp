@@ -11,26 +11,37 @@ const FormationMembre = ({formations}) => {
 
     const [formateurs, setFormateurs] = useState({});
 
+    // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
+    Array.prototype.unique = function() {
+        var a = this.concat();
+        for(var i=0; i<a.length; ++i) {
+            for(var j=i+1; j<a.length; ++j) {
+                if(a[i] === a[j])
+                    a.splice(j--, 1);
+            }
+        }
+    
+        return a;
+    };
+
     const FetchFormateurs = async() => {
         try {
             var ids = formations.map(x => x.recommendedBy);
-            ids.concat(formations.map(x => x.confirmedBy));
+            ids.concat(formations.map(x => x.confirmedBy)).unique();
 
             var formateurArray = []
-
             const reducedFormateurs = {};
+            var data = await userClient.getByIds(ids);
 
-            ids.forEach(async id => {
-                var data = await userClient.getById(id);
-                var formateur = data[0]
+            data.forEach(formateur => {
                 if(formateurArray.filter(x => x._id === formateur._id).length < 1) {
                     formateurArray.push(formateur);
+                    const id = formateur._id
                     const nom = `${formateur.prenom} ${formateur.nom}`
-                    console.log(nom)
                     reducedFormateurs[ id ] = nom;
-                }
-            });               
-            
+                }                   
+            });
+                      
             setFormateurs(reducedFormateurs)
         } catch (e) {
             console.log(e)
