@@ -9,8 +9,12 @@ export class UserClient {
         return this._apiClient.get(`/user/${id}`);
     }
 
+    getByIds = (ids) => {
+        return this._apiClient.get(`/users/${ids}`);
+    }
+
     getByUnitId = (id) => {
-        return this._apiClient.get(`/users/unit/${id}`);
+        return this._apiClient.get(`/users/unit/[${id}]`);
     }
 
     getByEmail = (email) => {

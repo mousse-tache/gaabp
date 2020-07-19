@@ -20,8 +20,8 @@ const IndexPage = () => (
     <Layout>  
       <section name="home" className="sitename anchor">
       <Typography variant="h4" gutterBottom>Association des Aventuriers de Baden-Powell</Typography>
-      <ImageCarousel />
       </section>
+      <ImageCarousel />
       <About/>
       <Inscrire />
       <Impliquer />

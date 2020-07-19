@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import Logo from "../../images/Logo_AABP.gif"
+import Logo from "../../images/Logo_AABP.png"
 
 function Sidebar({window, tab, canAccessMemberSection}) {
 

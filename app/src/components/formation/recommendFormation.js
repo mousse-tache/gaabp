@@ -26,7 +26,7 @@ const RecommendFormation = () => {
     const addFormation = async() => { 
         try {            
             await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
-            setSelectUser({_id: 0, prenom: "", nom: "", });
+            setSelectUser({...selectUser, _id: 0, prenom: "", nom: "", });
             enqueueSnackbar("Formation recommendée");
             FetchAllUsers();
         } catch (e) {

@@ -11,6 +11,7 @@ import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs
 import UnitClient from "../../clients/unitClient";
 import CheckIcon from '@material-ui/icons/Check';
 import { useSnackbar } from 'notistack';
+import FormationMembre from "./formationMembre"
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -173,6 +174,7 @@ const EditMembre = ({email}) => {
             onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}
             />
         </CardContent>
+        <FormationMembre formations={member.formations} />
         
     </Paper>
     )
