@@ -7,12 +7,10 @@ import Contact from "../components/public-components/contact";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageCarousel from  "../components/public-components/imageCarousel";
 import { Typography } from "@material-ui/core";
-
-import {View} from 'react-native';
 import { Helmet } from "react-helmet";
 
 const IndexPage = () => (
-  <View>
+  <div>
     <Helmet>
           <meta name="description" content="L'Association des Aventuriers de Baden-Powell est une association de scoutisme traditionnel pour les 7 ans et plus."/>
           <title>AABP | Scoutisme traditionnel</title>
@@ -29,7 +27,7 @@ const IndexPage = () => (
       <Impliquer />
       <Contact />    
     </Layout>
-  </View>
+  </div>
 )
  
 
