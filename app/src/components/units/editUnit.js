@@ -10,8 +10,6 @@ import PermissionTypes from "../../auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
 import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, TextField } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
-
-import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
 import UnitDetails from "./unitDetails";
@@ -124,7 +122,6 @@ const EditUnit = ({id}) => {
 
     return  (
     <Paper className="unit">
-        <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
             <Link color="inherit" href="/app/unites">
                 Unités

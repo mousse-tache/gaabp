@@ -11,7 +11,6 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
-import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 import "./unit.css";
 
@@ -109,8 +108,7 @@ const Unit = () => {
     */
 
     return  (
-    <Paper className="membres-paper">    
-        <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet>        
+    <Paper className="membres-paper">      
         <div className="membres-title">
             <div className="membres-title-element"><h3>Liste des unités</h3></div>
             <div className="membres-title-element">

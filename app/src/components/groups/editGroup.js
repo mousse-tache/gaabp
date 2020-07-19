@@ -88,7 +88,6 @@ const EditGroup = ({id}) => {
 
     return  (
     <Paper className="profile">
-        <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
             <Link color="inherit" href="/app/groupes">
                 Groupes

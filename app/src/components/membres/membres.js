@@ -9,7 +9,6 @@ import MembresTable from "./membresTable";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
 
 const Membres = () => {
@@ -76,8 +75,7 @@ const Membres = () => {
 
 
     return  (
-    <Paper className="membres-paper">    
-        <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet>        
+    <Paper className="membres-paper">           
         <div className="membres-title">
             <div className="membres-title-element"><h3>Membres</h3></div>
             <div className="membres-title-element">

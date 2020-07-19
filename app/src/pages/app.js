@@ -12,6 +12,7 @@ import NominatedUserRouter from "../components/routers/nominatedUserRouter";
 import AnonymousUserRouter from "../components/routers/anonymousUserRouter";
 
 import "../components/profile/profile.css"
+import '@material/react-material-icon/dist/material-icon.css';
 
 const App = () => {
     const [user, setUser] = useState(false);
@@ -82,7 +83,7 @@ const App = () => {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>AABP | Scoutisme traditionnel</title>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
+            </Helmet> 
             <UnitContextProvider>
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
