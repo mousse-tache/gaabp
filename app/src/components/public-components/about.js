@@ -7,7 +7,7 @@ import RougeCard from "./branches/rouge/rougeCard"
 
 const About = () => (
   <section>
-    <div id="about"></div>
+    <div className="break" id="about"></div>
     <Card className="about">
       <CardContent>
       <Typography variant="h4" gutterBottom>

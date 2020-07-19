@@ -46,7 +46,7 @@ const Impliquer = () => {
   }
 
   return (
-    <section>
+    <section className="anchor">
       <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
       <div className="break" id="impliquer"></div>
       <Card>
