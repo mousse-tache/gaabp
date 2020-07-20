@@ -7,8 +7,8 @@ import Logo from "../../../images/Logo_AABP.png"
 const Header = () => (
   <header className="header headerpublic sticky">
     <div className="main-header">
-      <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
-          <img src={Logo} alt="Logo"/>
+      <Link className="navlink" to="/" partiallyActive={true} activeClassName="active">
+          <img className="logo" src={Logo} alt="Logo"/> <span>Association des Aventuriers de Baden-Powell</span>
         </Link>        
         <Link className="navlink" to="#inscrire" partiallyActive={true} activeClassName="active">
           S'inscrire

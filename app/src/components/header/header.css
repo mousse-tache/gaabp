@@ -11,7 +11,6 @@
     margin: auto;
     padding: .5em;
     max-height: 15%;
-    min-height: 5em;
     box-sizing: border-box;
     font-size:18px;
     z-index: 10em;
@@ -47,9 +46,8 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center
-    
+    justify-content: space-around;
+    align-items: center    
   }
 
 
@@ -77,6 +75,8 @@ a:hover {
 
 .logo {
     transition-property: border-style;
+    max-width: 3em;
+
 }
 
 .navlink {
@@ -169,6 +169,6 @@ a:active {
       }
 
     .main-header a {
-        max-width: 50%;
+        max-width: 70%;
     }
 }
