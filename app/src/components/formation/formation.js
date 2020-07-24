@@ -28,8 +28,7 @@ const Formation = () => {
     };
 
     return  (
-    <Paper className="membres-paper">    
-        <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet>        
+    <Paper className="membres-paper">        
         <div className="membres-title">
             <div className="membres-title-element"><h3>Formation</h3></div>
         </div>

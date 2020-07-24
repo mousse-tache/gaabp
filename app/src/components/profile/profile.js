@@ -9,7 +9,7 @@ const Profile = () => {
     const authedUser = userContext.authedUser;
     const user = userContext.claims;
 
-    const [courriel, setCourriel] = useState(user.email);
+    const [courriel, setCourriel] = useState(user?.email);
     const [prenom, setPrenom] = useState(authedUser?.prenom);
     const [nom, setNom] = useState(authedUser?.nom);
     const [id, setId] = useState(authedUser?._id);
@@ -20,15 +20,14 @@ const Profile = () => {
 
     useEffect(() => {
         FetchUser();
-    }, [user])
-
-    useEffect(() => {
-        FetchUser();
     }, [])
 
     async function FetchUser() {
+        if(!user?.email) {
+            return;
+        }
         try {               
-            var data = await userClient.getByEmail(user.email);
+            var data = await userClient.getByEmail(user?.email);
             if(data !== null)
             {
                 setNom(data[0].nom.toString());
