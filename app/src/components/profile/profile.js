@@ -3,20 +3,21 @@ import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
 import { Input, Paper, Button, Switch, FormControlLabel, InputLabel } from '@material-ui/core';
+import MemberDetails from "../membres/memberDetails";
+import { useSnackbar } from 'notistack';
 
 const Profile = () => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
     const user = userContext.claims;
 
-    const [courriel, setCourriel] = useState(user?.email);
-    const [prenom, setPrenom] = useState(authedUser?.prenom);
-    const [nom, setNom] = useState(authedUser?.nom);
-    const [id, setId] = useState(authedUser?._id);
-    const [isAdmin, setIsAdmin] = useState(authedUser?.isAdmin);
+    const [member, setMember] = useState(authedUser?.prenom);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
     
     const userClient = new UserClient();
+
+
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         FetchUser();
@@ -30,10 +31,7 @@ const Profile = () => {
             var data = await userClient.getByEmail(user?.email);
             if(data !== null)
             {
-                setNom(data[0].nom.toString());
-                setPrenom(data[0].prenom.toString());
-                setId(data[0]._id.toString());
-                setIsAdmin(data[0].isAdmin ? data[0].isAdmin: false);
+                setMember(data[0]);
             }            
         } catch (e) {
             console.log(e.message);   
@@ -42,21 +40,12 @@ const Profile = () => {
         setIsFetchingUser(false);
     }
 
-    async function saveUser(e) {           
-        e.preventDefault();
-        e.stopPropagation();    
-        if(id) {
-            await userClient.updateUser({_id:id, courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
+    async function saveUser() {       
+        if(member?._id) {
+            await userClient.updateUser({...member, id: member._id});
         }
-        else {
-            await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom, isAdmin: isAdmin});
-        }
-        window.location.reload();
+        enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
     }
-
-    const handleAdminCheck = () => {
-        setIsAdmin(!isAdmin);
-    };
 
     if(isFecthingUser) {
         return (<Loading />)
@@ -64,36 +53,8 @@ const Profile = () => {
 
 
     return  (
-    <Paper className="profile">
-        <form onSubmit={saveUser} className="form">        
-            <h3>Informations de base</h3>
-            
-            <InputLabel>Courriel</InputLabel>
-            <Input type="email" value={courriel} placeholder="robert@badenpowell.ca" disabled onChange={event => setCourriel(event.target.value)} />
-
-            <InputLabel>Prénom</InputLabel>
-            <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
-
-            <InputLabel>Nom de famille</InputLabel>
-            <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
-
-            <h3>Permissions</h3>
-            <FormControlLabel
-                control={
-                <Switch
-                    checked={isAdmin}
-                    onChange={handleAdminCheck}
-                    disabled
-                    name="checkedB"
-                    className="switch"
-                />
-                }
-                label="Administrateur de la base de donnée"
-            />
-            
-        </form>
-                
-        <Button className="submit-button" variant="contained" color="secondary" disabled={courriel !== user.email} onClick={saveUser}>Sauvegarder</Button>
+    <Paper className="profile">        
+        <MemberDetails member={member} isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
     </Paper>
     )
 }

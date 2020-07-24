@@ -25,9 +25,13 @@ const FormationMembre = ({formations}) => {
     };
 
     const FetchFormateurs = async() => {
+
         try {
             var ids = formations.map(x => x.recommendedBy);
             ids.concat(formations.map(x => x.confirmedBy)).unique();
+            if(ids.length < 1) {
+                return;
+            }
 
             var formateurArray = []
             const reducedFormateurs = {};

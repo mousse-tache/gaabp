@@ -12,6 +12,7 @@ import UnitClient from "../../clients/unitClient";
 import CheckIcon from '@material-ui/icons/Check';
 import { useSnackbar } from 'notistack';
 import FormationMembre from "./formationMembre"
+import MemberDetails from "./memberDetails"
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -94,10 +95,6 @@ const EditMembre = ({email}) => {
         enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
     }
 
-    const handleAdminCheck = () => {
-        setMember({...member, isAdmin: !member.isAdmin});
-    };
-
     if(isFecthingUser || !member) {
         return (<Loading />)
     }
@@ -111,33 +108,8 @@ const EditMembre = ({email}) => {
             </Link>
             <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
         </Breadcrumbs>
-        <form onSubmit={saveUser} className="form">        
-            <h3>Informations de base</h3>
-            
-            <InputLabel>Courriel</InputLabel>
-            <Input type="email" disabled={!canEdit} value={member.courriel} placeholder="robert@badenpowell.ca" disabled={!authedUser?.isAdmin} onChange={event => setMember({...member, courriel: event.target.value})} />
-
-            <InputLabel>Prénom</InputLabel>
-            <Input type="text" value={member.prenom} disabled={!canEdit} placeholder="Robert" onChange={event => setMember({...member, prenom:event.target.value})} />
-
-            <InputLabel>Nom de famille</InputLabel>
-            <Input type="text" value={member.nom} disabled={!canEdit} placeholder="Baden-Powell" onChange={event => setMember({...member, nom: event.target.value})} />
-
-            <h3>Permissions</h3>
-            <FormControlLabel
-                disabled={!canEdit && !authedUser?.isAdmin}
-                control={
-                <Switch
-                    checked={member.isAdmin}
-                    onChange={handleAdminCheck}
-                    name="checkedB"
-                    className="switch"
-                />
-                }
-                label="Administrateur de la base de donnée"
-            />
-            
-        </form>
+        <MemberDetails member={member} canEdit={canEdit} setMember={setMember} saveUser={saveUser} />
+        
         <div className="submit-button">
             <Button variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser) || member.courriel === ""} onClick={saveUser}>Sauvegarder</Button>
         </div>        
