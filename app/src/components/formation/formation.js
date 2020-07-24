@@ -27,6 +27,10 @@ const Formation = () => {
         setOpen(false);
     };
 
+    if(authedUser?._id == undefined) {
+        return <Loading />;
+    }
+
     return  (
     <Paper className="membres-paper">        
         <div className="membres-title">

@@ -71,7 +71,7 @@ const Header = ({ username }) => {
                 </Link>  
               </div>
               <div className="morelinks-items">     
-                <Link className="" to="/app/formations" partiallyActive={true} activeClassName="active">
+                <Link className="" to="/app/formation" partiallyActive={true} activeClassName="active">
                     Formations
                 </Link>  
               </div>
