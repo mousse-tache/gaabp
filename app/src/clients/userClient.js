@@ -10,7 +10,7 @@ export class UserClient {
     }
 
     getByIds = (ids) => {
-        return this._apiClient.get(`/users/${ids}`);
+        return this._apiClient.post(`/users/ids`, ids);
     }
 
     getByUnitId = (id) => {

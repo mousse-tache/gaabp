@@ -53,7 +53,9 @@ const FormationMembre = ({formations}) => {
     };
 
     useEffect(() => {
-        FetchFormateurs();
+        if (!formateurs) {
+            FetchFormateurs();
+        }
     }, [formations])
 
     return (

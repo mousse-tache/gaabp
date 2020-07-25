@@ -56,12 +56,6 @@ const EditMembre = ({email}) => {
         FetchUser();
     }, [])
 
-    useEffect(() => {
-        if(member.nominations !== null && member.nominations !== undefined) {
-            FetchMemberUnits();
-        }
-    }, [member])
-
     async function FetchMemberUnits() {
         try {               
             var data = await unitClient.getMultipleById(member?.nominations?.map(x => x.unitId));
@@ -109,10 +103,7 @@ const EditMembre = ({email}) => {
             <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
         </Breadcrumbs>
         <MemberDetails member={member} canEdit={canEdit} setMember={setMember} saveUser={saveUser} />
-        
-        <div className="submit-button">
-            <Button variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.UpdateUser) || member.courriel === ""} onClick={saveUser}>Sauvegarder</Button>
-        </div>        
+    
         <CardContent>
             <MaterialTable
             title=""
