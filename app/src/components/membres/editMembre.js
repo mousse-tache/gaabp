@@ -56,6 +56,10 @@ const EditMembre = ({email}) => {
         FetchUser();
     }, [])
 
+    useEffect(() => {
+        FetchMemberUnits();
+    }, [member?.nominations])
+
     async function FetchMemberUnits() {
         try {               
             var data = await unitClient.getMultipleById(member?.nominations?.map(x => x.unitId));
