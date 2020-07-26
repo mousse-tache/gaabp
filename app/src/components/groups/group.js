@@ -87,8 +87,8 @@ const Group = () => {
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="unit-modal-content">
-                <form>
+            <Paper>
+                <form className="unit-modal-content">
                     <div className="close-icon">    
                         <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />

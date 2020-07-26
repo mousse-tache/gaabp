@@ -7,7 +7,7 @@ import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 
-const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
+const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
   const userContext = useContext(UserContext);
   const authedUser = userContext.authedUser;
   const [open, setOpen] = React.useState(false);
@@ -25,7 +25,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       { title: 'Courriel', field: 'courriel' },
       { title: "Début", field:"sd", type:"date"},
       { title: "Fin", field:"ed", type:"date"},
-      { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId)[0]?.type }
+      { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.groupId === groupId)[0]?.type }
       
     ],
     data: users,
@@ -38,8 +38,8 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
         { title: "Nom", field:'prenom' },
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
-        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.unitId === unitId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
-        { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId && !x.ed)[0]?.type}
+        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.groupId === groupId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
+        { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.groupId === groupId && !x.ed)[0]?.type}
       ],
       data: users,
     });
@@ -60,12 +60,12 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-          <DialogTitle id="alert-dialog-slide-title">{"Voulez-vous vraiment retiré cette personne de l'unité?"}</DialogTitle>
+          <DialogTitle id="alert-dialog-slide-title">{"Voulez-vous vraiment retiré cette personne de la maîtrise de groupe?"}</DialogTitle>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Non
             </Button>
-            <Button onClick={() => removeFromUnit({...userToDelete}) && handleClose()} color="primary">
+            <Button onClick={() => removeFromGroup({...userToDelete}) && handleClose()} color="primary">
               Oui
             </Button>
           </DialogActions>
@@ -85,9 +85,9 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       actions={[
         {
           icon: 'delete',
-          tooltip: "Retirer de l'unité",
+          tooltip: "Retirer du groupe",
           onClick: (event, rowData) => setUserToDelete(rowData),
-          disabled: !Permissions(authedUser, PermissionTypes.UpdateUnit)
+          disabled: !Permissions(authedUser, PermissionTypes.UpdateGroup)
         }
       ]}
       columns={state.columns}
@@ -98,10 +98,10 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   );
 };
 
-UnitMembresTable.propTypes = {
+GroupMembresTable.propTypes = {
     users: Proptypes.array, 
-    unitId: Proptypes.string,
-    removeFromUnit: Proptypes.func
+    groupId: Proptypes.string,
+    removeFromGroup: Proptypes.func
 };
 
-export default UnitMembresTable;
+export default GroupMembresTable;

@@ -17,6 +17,10 @@ export class UserClient {
         return this._apiClient.get(`/users/unit/${id}`);
     }
 
+    getByGroupId = (id) => {
+        return this._apiClient.get(`/users/group/${id}`);
+    }
+
     getByEmail = (email) => {
         return this._apiClient.get(`/user/email/${email}`);
     }

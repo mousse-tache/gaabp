@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import UnitClient from "../../clients/unitClient"
 import GroupClient from "../../clients/groupClient"
-import { Input, Select, Paper, Button, Fab, InputLabel, Modal, MenuItem, TextField } from '@material-ui/core';
+import { Paper, Button, Fab, Modal, MenuItem, TextField } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import UnitTable from "./unitTable";
@@ -123,20 +123,21 @@ const Unit = () => {
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="unit-modal-content">
-                <form>
-                    <div className="close-icon">    
+            <Paper>
+                <div className="close-icon">    
                         <Fab color="primary" aria-label="close" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
-                    </div>   
+                </div>   
+                <form className="unit-modal-content">
+                    
                     <h3>Nouvelle unité</h3>
                     
-                    <InputLabel>Nom de l'unité</InputLabel>
-                    <TextField fullWidth type="text" value={unit.nom} placeholder="1ère Troupe de Glasgow" onChange={event => setUnit({...unit, nom: event.target.value})} />                    
+                    <TextField label="Nom de l'unité" fullWidth type="text" value={unit.nom} placeholder="1ère Troupe de Glasgow" onChange={event => setUnit({...unit, nom: event.target.value})} />                    
 
-                    <InputLabel>Groupe</InputLabel>
-                    <Select 
+                    <TextField
+                    select
+                    label="Group" 
                     fullWidth
                      value={unit.group} 
                      onChange={event => setUnit({...unit, group: event.target.value})}
@@ -146,25 +147,27 @@ const Unit = () => {
                         Glasgow
                     </MenuItem>
                     {groupList.map(x => <MenuItem value={x._id}>{x.numero} {x.nom}</MenuItem>)}
-                    </Select>
+                    </TextField>
 
-                    <InputLabel>Branche</InputLabel>
-                    <Select
+                    <TextField
+                    select
+                    label="Branche"
                     fullWidth
                     value={unit.branche}
                     onChange={x => setUnit({...unit, branche: x.target.value})}
                     >
                     {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
-                    </Select>
+                    </TextField>
 
-                    <InputLabel>Type</InputLabel>
-                    <Select
+                    <TextField
+                    select
+                    label="Type"
                     fullWidth
                     value={unit.genre}
                     onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
                     {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
-                    </Select>
+                    </TextField>
 
                     <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUnit}>Ajouter</Button>
                 </form>

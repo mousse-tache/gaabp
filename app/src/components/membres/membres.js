@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import Loading from "../loading/loading"
 import "./membres.css"
 import UserClient from "../../clients/userClient"
-import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
+import { TextField, Paper, Button, Fab, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import MembresTable from "./membresTable";
@@ -90,23 +90,22 @@ const Membres = () => {
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="unit-modal-content">
-                <form onSubmit={AddUser}>
-                    <div className="close-icon">    
+            <Paper>
+                <div className="close-icon">    
                         <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
-                    </div>   
+                </div>  
+                <form className="unit-modal-content">
+                     
                     <h3>Nouveau membre</h3>
                     
-                    <InputLabel>Courriel</InputLabel>
-                    <Input type="text" value={courriel} required={true} placeholder="robert@badenpowell.ca" onChange={event => setCourriel(event.target.value)} />
+                    <TextField fullWidth label="Courriel" type="text" value={courriel} required={true} placeholder="robert@badenpowell.ca" onChange={event => setCourriel(event.target.value)} />
 
-                    <InputLabel>Prénom</InputLabel>
-                    <Input type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
+                    <TextField fullWidth label="Prénom" type="text" value={prenom} placeholder="Robert" onChange={event => setPrenom(event.target.value)} />
 
-                    <InputLabel>Nom de famille</InputLabel>
-                    <Input type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
+                    <TextField fullWidth label="Nom de famille" type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
+                    
                     <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
                 </form>
             </Paper>

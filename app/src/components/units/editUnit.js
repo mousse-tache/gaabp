@@ -150,10 +150,10 @@ const EditUnit = ({id}) => {
                         renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
                     />
                     </div>
-                <div className="add-user-button">
-                <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+                    <div className="add-user-button">
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+                    </div>
                 </div>
-            </div>
             </CardContent>
             <CardContent>
                 <Typography variant="h5">Membres de l'unité</Typography>
