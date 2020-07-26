@@ -66,7 +66,7 @@ const App = () => {
         FetchUser();
     }, [user])
 
-    if (!isAuthenticated() || user == null) {
+    if (!isAuthenticated()) {
         return (
           <Login/>
         );

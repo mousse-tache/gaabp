@@ -47,6 +47,7 @@ export default class Login extends React.Component {
   async componentDidMount() {
     const authClient = this.signIn.authClient;
     const session = await authClient.session.get();
+    console.log(session);
     console.log('session.status', session.status);
     // Session exists, show logged in state.
     if (session.status === 'ACTIVE') {

@@ -11,13 +11,18 @@ function Sidebar({window, tab, canAccessMemberSection}) {
 
   return (
     <Drawer
+
     anchor="left"
     open
     variant="persistent"
     className="sidebar"    
     >
 
-      <Link className="logo" to="/" partiallyActive={true} activeClassName="active">
+      <Link
+      style={{
+        minWidth:"7rem"
+      }}      
+      className="logo" to="/" partiallyActive={true} activeClassName="active">
             <img src={Logo} alt="Logo"/>
       </Link>   
 
