@@ -72,7 +72,7 @@ const App = () => {
         );
     }
   
-    if(!user || !authedUser)  {
+    if(!user)  {
         return (
             <Loading />
         )        

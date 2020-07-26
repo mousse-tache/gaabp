@@ -85,12 +85,12 @@ const Membres = () => {
             </div>
         </div>
         <Modal 
-            className="membres-modal"
+            className="unit-modal"
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="membres">
+            <Paper className="unit-modal-content">
                 <form onSubmit={AddUser}>
                     <div className="close-icon">    
                         <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>

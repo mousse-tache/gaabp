@@ -82,12 +82,12 @@ const Group = () => {
             </div>
         </div>
         <Modal 
-            className="membres-modal"
+            className="unit-modal"
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <Paper className="membres">
+            <Paper className="unit-modal-content">
                 <form>
                     <div className="close-icon">    
                         <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
@@ -97,14 +97,14 @@ const Group = () => {
                     <h3>Nouveau groupe</h3>
                     
                     <InputLabel>Numéro</InputLabel>
-                    <Input type="text" value={numero} required={true} placeholder="1er" onChange={event => setNumero(event.target.value)} />
+                    <Input fullWidth type="text" value={numero} required={true} placeholder="1er" onChange={event => setNumero(event.target.value)} />
 
 
                     <InputLabel>Nom du groupe</InputLabel>
-                    <Input type="text" value={nom} placeholder="Group scout de Glasgow" onChange={event => setNom(event.target.value)} />
+                    <Input fullWidth type="text" value={nom} placeholder="Group scout de Glasgow" onChange={event => setNom(event.target.value)} />
 
                     <InputLabel>Ville</InputLabel>
-                    <Input type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
+                    <Input fullWidth type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
 
                     <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser) || (nom === null || numero === null || ville == null)} onClick={AddGroup}>Ajouter</Button>
                 </form>

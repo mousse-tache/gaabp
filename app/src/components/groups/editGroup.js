@@ -101,18 +101,19 @@ const EditGroup = ({id}) => {
                 <form className="form">
                 
                 <InputLabel>Numéro</InputLabel>
-                <Input type="text" value={group.numero} disabled={!canEdit} required={true} placeholder="1er" onChange={event => setGroup({...group, numero: event.target.value})} />
+                <Input fullWidth type="text" value={group.numero} disabled={!canEdit} required={true} placeholder="1er" onChange={event => setGroup({...group, numero: event.target.value})} />
 
 
                 <InputLabel>Nom du groupe</InputLabel>
-                <Input type="text" value={group.nom} disabled={!canEdit} placeholder="Groupe scout de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
+                <Input fullWidth type="text" value={group.nom} disabled={!canEdit} placeholder="Groupe scout de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
 
                 <InputLabel>Ville</InputLabel>
-                <Input type="text" value={group.ville} disabled={!canEdit} placeholder="Glasgow" onChange={event => setGroup({...group, ville: event.target.value})} />
+                <Input fullWidth type="text" value={group.ville} disabled={!canEdit} placeholder="Glasgow" onChange={event => setGroup({...group, ville: event.target.value})} />
                 
                 
                 <InputLabel id="region-label">Région</InputLabel>
                 <Select
+                    fullWidth
                     labelId="region-label"
                     value={group.region}
                     disabled={!canEdit}

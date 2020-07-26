@@ -13,7 +13,6 @@ import { Autocomplete } from "@material-ui/lab";
 import { useSnackbar } from 'notistack';
 
 import UnitDetails from "./unitDetails";
-import "./unit.css"
 
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);

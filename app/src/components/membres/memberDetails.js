@@ -77,7 +77,7 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
                 <Switch
                     disabled={!canEdit }
                     checked={member?.isAdmin}
-                    onChange={() => setMember({...member, isAdmin: !member.isAdmin})}
+                    onChange={() => setMember({...member, isAdmin: !member?.isAdmin})}
                     name="checkedB"
                     className="switch"
                 />
@@ -88,7 +88,7 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
                 <Button variant="contained" color="secondary" 
                     disabled={!(canEdit || isPersonalProfile)}
                     onClick={saveUser}>
-                        Sauvegarder
+                        {member?._id ? "Sauvegarder" : "Compléter l'inscription"}
                 </Button>
             </div>                    
         </form>

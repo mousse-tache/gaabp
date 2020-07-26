@@ -8,22 +8,18 @@
   }
 
 
-.unit form {
+.unit-modal-content {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    margin:auto;
+    align-items: center;
+
 }
 
-.unit {
-    text-align: left;
-    justify-content: left;
-}
-
-.unit form input {
-    max-width: 80%;
-    margin: .5em;
-    margin-top: 1em;
+.unit-modal {
+    margin-top: 10%;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .unit form label {

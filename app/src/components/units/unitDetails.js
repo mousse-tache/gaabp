@@ -4,11 +4,10 @@ import Loading from "../loading/loading"
 import UnitContext from "../../context/unit/unitContext"
 import UnitClient from "../../clients/unitClient"
 import GroupClient from "../../clients/groupClient"
-import { Input, InputLabel, Typography, CardContent, MenuItem, Select, Button } from '@material-ui/core';
+import { Input, InputLabel, TextField, Typography, CardContent, MenuItem, Select, Button } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
 import { useSnackbar } from 'notistack';
-import "./unit.css"
 
 
 const UnitDetails = ({disabled}) => { 
@@ -58,11 +57,12 @@ const UnitDetails = ({disabled}) => {
 
     return (
         <CardContent>
-        <Typography variant="h5">Informations de base</Typography>
         <form className="form">
-        
+        <Typography variant="h5">Informations de base</Typography>
+
         <InputLabel>Nom de l'unité</InputLabel>
-            <Input type="text" 
+            <TextField type="text" 
+            fullWidth
             disabled={disabled} 
             value={unit.nom} 
             placeholder="1ère Troupe de Glasgow" 
@@ -70,12 +70,14 @@ const UnitDetails = ({disabled}) => {
 
             <InputLabel>Groupe</InputLabel>
             <Input 
+            fullWidth
              value={group?.nom} 
              disabled
             />
 
             <InputLabel>Branche</InputLabel>
             <Select
+            fullWidth
             value={unit.branche}
             disabled={disabled}
             onChange={x => setUnit({...unit, branche: x.target.value})}
@@ -85,6 +87,7 @@ const UnitDetails = ({disabled}) => {
 
             <InputLabel id="typelabel">Type</InputLabel>
             <Select
+            fullWidth
             labelId="typelabel"
             value={unit.genre}
             disabled={disabled}
