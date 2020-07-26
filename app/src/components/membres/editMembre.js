@@ -39,7 +39,7 @@ const EditMembre = ({email}) => {
         setState({
             columns: [
                 { title: 'Rôle', field: 'type', lookup: NominationsType },
-                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom}</span> , editable: 'never'},
+                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom ?? "Groupe"}</span> , editable: 'never'},
                 { title: "Début", field:"sd", type:"date"},
                 { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
                 { title: "Nomination approuvée", field: "approved", type:"boolean", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
@@ -138,7 +138,7 @@ const EditMembre = ({email}) => {
             })
 
             }}
-            onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}
+            onRowClick={(event, rowData) => rowData.unitId ? navigate("/app/unite/"+rowData.unitId) : navigate("/app/groupe/"+rowData.groupId)}
             />
         </CardContent>
         <FormationMembre formations={member.formations} />

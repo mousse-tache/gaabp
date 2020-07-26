@@ -1,20 +1,20 @@
-import React, { useState, useContext, useEffect } from "react"
-import { Link } from "gatsby"
-import Loading from "../loading/loading"
-import UserContext from "../../context/userContext"
-import GroupClient from "../../clients/groupClient"
-import UnitClient from "../../clients/unitClient"
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "gatsby";
+import Loading from "../loading/loading";
+import UserContext from "../../context/userContext";
+import GroupClient from "../../clients/groupClient";
+import UnitClient from "../../clients/unitClient";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Input, Paper, Button, Card, InputLabel, Breadcrumbs, Typography, CardContent, Select, MenuItem, TextField } from '@material-ui/core';
+import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, MenuItem, TextField } from '@material-ui/core';
 import Regions from "../../utils/regions";
 
-import { Helmet } from "react-helmet";
 import { useSnackbar } from 'notistack';
-import UnitTable from "../units/unitTable"
-import UserClient from "../../clients/userClient"
-import GroupMembresTable from "./groupMembersTable"
-import {Autocomplete} from "@material-ui/lab";
+import UnitTable from "../units/unitTable";
+import UserClient from "../../clients/userClient";
+import GroupMembresTable from "./groupMembersTable";
+import { Autocomplete } from "@material-ui/lab";
+import NominationTypes from "../../utils/nominationTypes";
 
 const EditGroup = ({id}) => {
     const userContext = useContext(UserContext);
@@ -116,7 +116,7 @@ const EditGroup = ({id}) => {
 
     async function SaveGroup(e) {           
         e.preventDefault();
-        e.stopPropagation();    
+        e.stopPropagation();
         try {
             await groupClient.updateGroup({...group, id: group._id});
             enqueueSnackbar('Le groupe ' + group.nom + " a été sauvegardé");
@@ -182,9 +182,8 @@ const EditGroup = ({id}) => {
 
             <CardContent>
                 <div className="add-user-search">
-                    <div>
+                    
                         <Autocomplete
-                            fullWidth={true}
                             disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)}
                             autoSelect
                             blurOnSelect                        
@@ -197,11 +196,23 @@ const EditGroup = ({id}) => {
                             options={allMembers}
                             getOptionLabel={(option) => option.prenom + " " + option.nom}
                             style={{ width: 300 }}
-                            renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
+                            renderInput={(params) => <TextField fullWidth {...params} label="Cherchez un membre" variant="outlined" />}
                         />
-                    </div>
+                    
+                        <TextField
+                            label="Rôle"
+                            select
+                            fullWidth
+                            value={selectRole}
+                            disabled={!canEdit}
+                            variant="outlined"
+                            onChange={x => setSelectRole(x.target.value)}
+                            >
+                            {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
+                        </TextField>
+                    
                     <div className="add-user-button">
-                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateGroup)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup) || selectUser._id === 0} onClick={addToGroup}>Ajouter au groupe</Button>
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateGroup)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup) || selectUser._id === 0 || !selectRole} onClick={addToGroup}>Ajouter au groupe</Button>
                     </div>
                 </div>
             </CardContent>

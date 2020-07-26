@@ -6,6 +6,7 @@ import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import NominationTypes from "../../utils/nominationTypes";
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   const userContext = useContext(UserContext);
@@ -39,7 +40,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
         { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.unitId === unitId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
-        { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId && !x.ed)[0]?.type}
+        { title: "Rôle", field: 'nominations', render: row => NominationTypes[row.nominations.filter(x => x.unitId === unitId && !x.ed)[0]?.type]}
       ],
       data: users,
     });

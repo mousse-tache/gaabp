@@ -6,6 +6,7 @@ import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
+import NominationTypes from "../../utils/nominationTypes";
 
 const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
   const userContext = useContext(UserContext);
@@ -39,7 +40,7 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
         { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.groupId === groupId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
-        { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.groupId === groupId && !x.ed)[0]?.type}
+        { title: "Rôle", field: 'nominations', render: row => NominationTypes[row.nominations.filter(x => x.groupId === groupId && !x.ed)[0]?.type]}
       ],
       data: users,
     });

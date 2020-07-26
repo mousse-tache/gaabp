@@ -37,12 +37,15 @@
     max-width: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: baseline;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.add-user-search div {
+.add-user-search > div {    
     margin:auto;
+    max-width: 25%;
+    margin-top: 1rem;
 }
 
 .save-unit-button, .add-user-button {
