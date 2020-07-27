@@ -7,12 +7,13 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import NominationsType from "../../utils/nominationTypes"
 import MaterialTable from "material-table"
-import { Input, Paper, Button, Switch, FormControlLabel, InputLabel, Breadcrumbs, Typography, CardContent, MenuList, MenuItem } from '@material-ui/core';
+import { Paper, Breadcrumbs, Typography, CardContent } from '@material-ui/core';
 import UnitClient from "../../clients/unitClient";
 import CheckIcon from '@material-ui/icons/Check';
 import { useSnackbar } from 'notistack';
 import FormationMembre from "./formationMembre"
 import MemberDetails from "./memberDetails"
+import GroupClient from "../../clients/groupClient"
 
 const EditMembre = ({email}) => {
     const userContext = useContext(UserContext);
@@ -22,12 +23,14 @@ const EditMembre = ({email}) => {
     const [canEdit, setCanEdit] = useState(Permissions(authedUser, PermissionTypes.UpdateUser));
     const [member, setMember] = useState(false);
     const [memberUnits, setMemberUnits] = useState(false);
+    const [groups, setGroups] = useState(false);
     const [state, setState] = React.useState({
         columns: [],
         data: member.nominations,
       })
     const userClient = new UserClient();
     const unitClient = new UnitClient();
+    const groupClient = new GroupClient();
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -39,14 +42,14 @@ const EditMembre = ({email}) => {
         setState({
             columns: [
                 { title: 'Rôle', field: 'type', lookup: NominationsType },
-                { title: "Unité", field: "nominations._id", render: row => <span>{memberUnits.filter(x => x._id === row.unitId)[0]?.nom ?? "Groupe"}</span> , editable: 'never'},
+                { title: "Unité", field: "nominations._id", render: row => <span>{(memberUnits ? memberUnits?.filter(x => x._id === row.unitId)[0]?.nom : null) ?? (groups? `Groupe ${groups?.filter(x => x._id === row.groupId)[0]?.numero} ${groups.filter(x => x._id === row.groupId)[0]?.nom}` : null)}</span> , editable: 'never'},
                 { title: "Début", field:"sd", type:"date"},
                 { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
                 { title: "Nomination approuvée", field: "approved", type:"boolean", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
             ],
             data: member.nominations,
           });
-    }, [memberUnits])
+    }, [memberUnits, groups])
 
     useEffect(() => {
         setCanEdit(Permissions(authedUser, PermissionTypes.UpdateUser))
@@ -57,7 +60,10 @@ const EditMembre = ({email}) => {
     }, [])
 
     useEffect(() => {
-        FetchMemberUnits();
+        if(member?.nominations) {
+            FetchMemberUnits();
+            FetchGroups()
+        }
     }, [member?.nominations])
 
     async function FetchMemberUnits() {
@@ -66,6 +72,18 @@ const EditMembre = ({email}) => {
             if(data !== null)
             {
                 setMemberUnits(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    }
+
+    async function FetchGroups() {
+        try {               
+            var data = await groupClient.getMultipleById(member?.nominations?.map(x => x.groupId));
+            if(data !== null)
+            {
+                setGroups(data);
             }            
         } catch (e) {
             console.log(e.message);   
@@ -93,7 +111,7 @@ const EditMembre = ({email}) => {
         enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
     }
 
-    if(isFecthingUser || !member) {
+    if(isFecthingUser || !member ) {
         return (<Loading />)
     }
 

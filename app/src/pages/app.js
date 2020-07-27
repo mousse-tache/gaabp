@@ -55,7 +55,6 @@ const App = () => {
     useEffect(() => {
         try {
             fetchAuth();
-            FetchUser();
         }
         catch(e) {
             console.log(e.message);

@@ -9,6 +9,10 @@ export class GroupClient {
          return this._apiClient.get(`group/${id}`);
     }
 
+    getMultipleById = (ids) => {
+        return this._apiClient.post("groups/ids", ids );
+    }
+
     getByNumero = (numero) => {
         return this._apiClient.get(`user/numero/${numero}`);
     }
