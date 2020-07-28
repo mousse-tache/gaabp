@@ -21,9 +21,6 @@ const Footer = () => (
         <div>
           <a href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
         </div>
-        <div>
-          <a href="#">Retourner en haut</a>
-        </div>
   </footer>
 )
 
