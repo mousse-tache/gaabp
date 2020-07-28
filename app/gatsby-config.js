@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: `${process.env.GATSBY_SITE_URL}`,
+    siteUrl: process.env.GATSBY_SITE_URL ? process.env.GATSBY_SITE_URL : "http://localhost:8000/",
     title: `AABP`,
     description: `Site web de l'Association des Aventuriers de Baden-Powell qui offre du scoutisme traditionnel à partir de 7 ans.`,
     author: `AABP`,

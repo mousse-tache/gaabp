@@ -12,7 +12,7 @@
     padding: .5em;
     max-height: 15%;
     box-sizing: border-box;
-    font-size:18px;
+    font-size:16px;
     z-index: 10em;
     position:absolute;
     top:0;
@@ -97,7 +97,7 @@ a:active {
   
   /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
   .sticky + div {
-    padding-top: 10em;
+    padding-top: 7em;
   }
 
   .morelinks {
@@ -108,6 +108,17 @@ a:active {
 
 .header-nomination-button:hover { 
     color:whitesmoke;
+}
+
+.quick-units {
+    max-width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title-list-item {
+    padding-left: .5rem;
 }
 
 @media only screen and (max-width: 1100px) {

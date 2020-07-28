@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 import Logo from "../../images/Logo_AABP.png"
+import QuickUnits from './quickUnits';
 
 function Sidebar({window, tab, canAccessMemberSection}) {
 
@@ -47,6 +48,13 @@ function Sidebar({window, tab, canAccessMemberSection}) {
       </List>
         )
       }
+
+      {
+        // Own units
+        tab == 0 && <QuickUnits />
+      }
+      
+
       {
         canAccessMemberSection && tab == 1 && (
       <List>

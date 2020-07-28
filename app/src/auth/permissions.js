@@ -27,20 +27,20 @@ function Permissions(user, permission) {
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:
         case PermissionTypes.UpdateUnit:
-            return (user.isAdmin || isChief());
+            return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
         case PermissionTypes.CreateUnit:
         case PermissionTypes.CreateGroup:
         case PermissionTypes.UpdateGroup:
-            return (user.isAdmin || isGroupChief());
+            return (user.isAdmin || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.AddNomination:
         case PermissionTypes.RemoveNomination:
             return (user.isAdmin || isGeneralCommissionner());
         case PermissionTypes.RecommendFormation:
             return (user.isAdmin || user.isFormateur);
         case PermissionTypes.ConfirmFormation:
-            return (user.isAdmin || isCommissionner());
+            return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         default:
           return false
       } 

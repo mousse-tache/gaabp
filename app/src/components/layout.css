@@ -40,7 +40,7 @@ main h1, h2, h3, h4 {
 }
 
 .break {
-  height:5.5em;
+  height:5rem;
 }
 
 /* fallback */
@@ -146,6 +146,10 @@ p {
 
 .formation-recommender-card div {
   max-width: 20rem;
+}
+
+.formation-recommender-card > div {
+  margin: 1rem;
 }
 
 form > div, .form div {

@@ -60,7 +60,9 @@ const Impliquer = () => {
       <section>
       <Card>
         <Typography variant="h4">Trouver un groupe</Typography>
-        <Typography>Entrer le nom d'une ville pour savoir s'il s'y trouve un groupe ou consulter la liste de nos groupes.</Typography>
+        <CardContent>
+          <Typography>Entrer le nom d'une ville pour savoir s'il s'y trouve un groupe ou consulter la liste de nos groupes.</Typography>
+        </CardContent>
         {groupList !== false && 
         <MaterialTable
           title=""

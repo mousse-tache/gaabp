@@ -86,8 +86,8 @@ const App = () => {
             <UnitContextProvider>
                 <Layout username={user.name}> 
                     <SnackbarProvider maxSnack={3}>
-                            {authedUser?.nominations?.length > 0 && <NominatedUserRouter />}  
-                            {(!authedUser?.nominations || authedUser?.nominations?.length === 0) && <AnonymousUserRouter />} 
+                            {(authedUser?.nominations?.length > 0 || authedUser?.isAdmin) && <NominatedUserRouter />}  
+                            {(!authedUser?.nominations || authedUser?.nominations?.length === 0) && !authedUser?.isAdmin && <AnonymousUserRouter />} 
                     </SnackbarProvider>
                 </Layout>
             </UnitContextProvider>            

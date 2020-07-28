@@ -48,7 +48,6 @@ const Unit = () => {
     useEffect(() => {
         FetchUnits();
         FetchGroups();
-        userContext.FetchUser();
     }, [])
 
     async function FetchUnits() {
