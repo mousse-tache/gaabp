@@ -1,11 +1,13 @@
 module.exports = {
   siteMetadata: {
+    siteUrl: `${process.env.GATSBY_SITE_URL}`,
     title: `AABP`,
     description: `Site web de l'Association des Aventuriers de Baden-Powell qui offre du scoutisme traditionnel à partir de 7 ans.`,
     author: `AABP`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
