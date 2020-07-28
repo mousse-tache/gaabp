@@ -7,7 +7,7 @@ const Footer = () => (
   <footer> 
         <div>
           <Link to="/">
-              <img src={Logo} alt="Logo"/>
+              <img className="logo" src={Logo} alt="Logo"/>
           </Link>
         </div>
         <div>        
@@ -20,6 +20,9 @@ const Footer = () => (
         </div>
         <div>
           <a href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
+        </div>
+        <div>
+          <a href="#">Retourner en haut</a>
         </div>
   </footer>
 )

@@ -24,7 +24,11 @@ const ImageCarousel = () => {
     ]
  
     return (
-        <Carousel className="carousel-public">
+        <Carousel 
+        className="carousel-public" 
+        indicators={false}
+        interval={6000}
+        timeout={1000} >
             {
                 items.map( item => <img src={item.src} alt={item.description} loading="lazy" key={item.key} /> )
             }
