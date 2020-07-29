@@ -23,6 +23,7 @@ const UserMenu = ({username}) => {
     
     return (
         <div className="auth">
+            <span>{username}</span>
             <IconButton onClick={handleClick}>
                 <AccountCircleIcon fontSize="large" color="primary" />
             </IconButton>
@@ -34,7 +35,7 @@ const UserMenu = ({username}) => {
             onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>
-                    <Link to="/app/account">{username}</Link>
+                    <Link to="/app/account">Mon profil</Link>
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
