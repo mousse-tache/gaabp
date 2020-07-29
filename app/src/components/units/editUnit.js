@@ -34,10 +34,13 @@ const EditUnit = ({id}) => {
     }
 
     useEffect(() => {
-        FetchUnit();
         FetchAllUsers();
-        FetchMembres();
     }, [])
+
+    useEffect(() => {
+        FetchUnit();        
+        FetchMembres();
+    }, [id])
 
     useEffect(() => {
         FetchMembres();
