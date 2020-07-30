@@ -9,7 +9,7 @@ const FormationMembre = ({formations}) => {
 
     const userClient = new UserClient();
 
-    const [formateurs, setFormateurs] = useState({});
+    const [formateurs, setFormateurs] = useState(false);
 
     // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
     Array.prototype.unique = function() {
@@ -46,7 +46,7 @@ const FormationMembre = ({formations}) => {
                 }                   
             });
                       
-            setFormateurs(reducedFormateurs)
+            setFormateurs(reducedFormateurs);
         } catch (e) {
             console.log(e)
         }

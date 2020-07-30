@@ -5,8 +5,6 @@ import { Paper, TextField, Typography, Card, Button } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import Branches from "../../utils/branches";
 import Formations from "../../utils/formations";
-import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
 import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
@@ -20,6 +18,7 @@ const RecommendFormation = () => {
     const [allMembers, setAllMembers] = useState(false);
     const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: "", formations: []});
     const [errorText, setErrorText] = useState(null);
+    const [allFormation, setAllFormation] = useState([]);
 
     const userClient = new UserClient();
 
@@ -27,7 +26,7 @@ const RecommendFormation = () => {
         try {            
             await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
             setSelectUser({...selectUser, _id: 0, prenom: "", nom: "", });
-            enqueueSnackbar("Formation recommendée");
+            enqueueSnackbar("Formation recommandée");
             FetchAllUsers();
         } catch (e) {
             enqueueSnackbar(e);
@@ -36,14 +35,16 @@ const RecommendFormation = () => {
 
     const confirmFormation = async(user) => {
         console.log(user);
-        var userFormations = [...user.formations];
+        var userFormations = [...allMembers.filter(x => x._id == user._id)[0].formations];
         console.log(userFormations)
 
+        var formationToUpdate = user.formation;
+
         try {
-            if (userFormations.filter(x => !x.dateConfirme).length > 0)
+            if (userFormations.filter(x => !x.dateConfirme && formationToUpdate.niveau == x.niveau && formationToUpdate.branche == x.branche).length > 0)
             {
-                userFormations.filter(x => !x.dateConfirme)[0].confirmedBy = authedUser._id;
-                userFormations.filter(x => !x.dateConfirme)[0].dateConfirme = new Date();
+                userFormations.filter(x => !x.dateConfirme && formationToUpdate.niveau == x.niveau && formationToUpdate.branche == x.branche)[0].confirmedBy = authedUser._id;
+                userFormations.filter(x => !x.dateConfirme && formationToUpdate.niveau == x.niveau && formationToUpdate.branche == x.branche)[0].dateConfirme = new Date();
                 console.log(userFormations);
             }
             await userClient.updateUser({...user, id: user._id, formations: userFormations});
@@ -60,6 +61,20 @@ const RecommendFormation = () => {
     }, [])
 
     useEffect(() => {
+        if(allMembers) {
+            var allMembersToConfirm =  allMembers.filter(x => x.formations.filter(y => !y.dateConfirme).length > 0);
+            var formations = [];
+            allMembersToConfirm.forEach(user => {
+                user.formations.filter(y => !y.dateConfirme).forEach(formation => {
+                    formations.push({prenom: user.prenom, nom: user.nom, _id: user._id, formation: formation})
+                })
+            });
+
+            setAllFormation(formations);
+        }
+    },[allMembers])
+
+    useEffect(() => {
         if(selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id).length > 0 && selectUser.formations.filter(x => x.branche?.couleur === formation.branche.couleur).length > 0)
         {
             setErrorText("Ce membre a déjà été recommandé pour cette formation");
@@ -74,7 +89,7 @@ const RecommendFormation = () => {
             var data = await userClient.getUsers();
             if(data !== null)
             {
-                setAllMembers(data);
+                setAllMembers(data);   
             }            
         } catch (e) {
             console.log(e.message);   
@@ -87,7 +102,7 @@ const RecommendFormation = () => {
 
     return  (
     <Paper>
-        <Typography component="h4">Recommender des formations</Typography>
+        <Typography component="h4">Recommander des formations</Typography>
         <Card className="formation-recommender-card">
             <Autocomplete
                 fullWidth={true}
@@ -150,7 +165,7 @@ const RecommendFormation = () => {
                 }}
                 value={formation.dateRecommende}
                 style={{ width: 300 }}
-                label="Date de la recommendation" 
+                label="Date de la recommandation" 
                 variant="outlined"
                 type="date"
             />       
@@ -168,7 +183,7 @@ const RecommendFormation = () => {
                         selectUser.formations.filter(x => x.branche?.couleur === formation.branche.couleur).length > 0) }  
                     onClick={addFormation}
                     >
-                        Recommender
+                        Recommander
                 </Button>
             </div>            
         </Card>        
@@ -203,12 +218,12 @@ const RecommendFormation = () => {
                   ]}
                 columns={[
                     { title: 'Membre', field: 'prenom', render: (rowData) => `${rowData.prenom} ${rowData.nom}` },
-                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.niveau?.id} branche ${rowData.formations.filter(x => !x.dateConfirme)[0]?.branche?.couleur.toLowerCase()}`},
-                    { title: 'Recommandé le', field: 'formation.dateRecommended', render: (rowData) =>  `${rowData.formations.filter(x => !x.dateConfirme)[0]?.dateRecommende}`},
-                    { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${allMembers.filter(member => member._id == rowData.formations.filter(x => !x.dateConfirme)[0]?.recommendedBy)[0]?.prenom} ${allMembers.filter(member => member._id == rowData.formations.filter(x => !x.dateConfirme)[0]?.recommendedBy)[0]?.nom}`},
+                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formation.niveau.id} branche ${rowData.formation.branche.couleur.toLowerCase()}`},
+                    { title: 'Recommandé le', field: 'formation.dateRecommended', render: (rowData) =>  `${rowData.formation.dateRecommende}`},
+                    { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${allMembers.filter(member => member._id == rowData.formation.recommendedBy)[0]?.prenom} ${allMembers.filter(member => member._id == rowData.formation.recommendedBy)[0]?.nom}`},
                   ]}
                 // Limitation for now, view only a single formation at a time
-                data={allMembers.filter(x => x.formations.filter(y => !y.dateConfirme).length > 0)}     
+                data={allFormation}     
             />
         </Card>
     </Paper>
