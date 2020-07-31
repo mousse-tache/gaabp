@@ -149,7 +149,7 @@ const RecommendFormation = () => {
                 getOptionLabel={(option) => option.couleur}
                 style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} required label="Branche" variant="outlined" 
-                error= {selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id).length > 0 && selectUser.formations.filter(x => x.branche?.couleur === formation.branche.couleur).length > 0}
+                error= {selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id && x.branche?.couleur === formation.branche.couleur).length > 0}
                 helperText={errorText} />}
             />     
 
@@ -179,8 +179,9 @@ const RecommendFormation = () => {
                         selectUser._id === 0 || 
                         formation.branche.couleur === "" || 
                         formation.niveau.id === "" ||
-                        (selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id).length > 0 &&     
-                        selectUser.formations.filter(x => x.branche?.couleur === formation.branche.couleur).length > 0) }  
+                        selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id &&
+                             x.branche?.couleur === formation.branche.couleur).length > 0     
+                         }  
                     onClick={addFormation}
                     >
                         Recommander
