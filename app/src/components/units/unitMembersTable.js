@@ -53,7 +53,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   }, [userToDelete])
 
   return (
-    <div>
+    <div className="unit-member-table-container">
       <Dialog
         open={open}
         keepMounted

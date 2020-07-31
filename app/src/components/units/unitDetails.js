@@ -4,9 +4,10 @@ import Loading from "../loading/loading"
 import UnitContext from "../../context/unit/unitContext"
 import UnitClient from "../../clients/unitClient"
 import GroupClient from "../../clients/groupClient"
-import { Input, InputLabel, TextField, Typography, CardContent, MenuItem, Select, Button } from '@material-ui/core';
+import { Input, InputLabel, TextField, Typography, CardContent, MenuItem, Select, Button, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSnackbar } from 'notistack';
 
 
@@ -16,6 +17,7 @@ const UnitDetails = ({disabled}) => {
 
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [group, setGroup] = useState(null);
+    const [expanded, setExpanded] = useState(true);
 
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
@@ -56,55 +58,61 @@ const UnitDetails = ({disabled}) => {
     }
 
     return (
-        <CardContent>
-        <form className="form">
-        <Typography variant="h5">Informations de base</Typography>
+        <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}> 
+            <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h5">Informations de base</Typography>
+            </AccordionSummary>
 
-        <InputLabel>Nom de l'unité</InputLabel>
-            <TextField type="text" 
-            fullWidth
-            disabled={disabled} 
-            value={unit.nom} 
-            placeholder="1ère Troupe de Glasgow" 
-            onChange={event => setUnit({...unit, nom: event.target.value})} />                    
+            <AccordionDetails>
+                <form className="form">
+                    <InputLabel>Nom de l'unité</InputLabel>
+                    <TextField type="text" 
+                    fullWidth
+                    disabled={disabled} 
+                    value={unit.nom} 
+                    placeholder="1ère Troupe de Glasgow" 
+                    onChange={event => setUnit({...unit, nom: event.target.value})} />                    
 
-            <InputLabel>Groupe</InputLabel>
-            <Input 
-            fullWidth
-             value={group?.nom} 
-             disabled
-            />
+                    <InputLabel>Groupe</InputLabel>
+                    <Input 
+                    fullWidth
+                    value={group?.nom} 
+                    disabled
+                    />
 
-            <InputLabel>Branche</InputLabel>
-            <Select
-            fullWidth
-            value={unit.branche}
-            disabled={disabled}
-            onChange={x => setUnit({...unit, branche: x.target.value})}
-            >
-            {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
-            </Select>
+                    <InputLabel>Branche</InputLabel>
+                    <Select
+                    fullWidth
+                    value={unit.branche}
+                    disabled={disabled}
+                    onChange={x => setUnit({...unit, branche: x.target.value})}
+                    >
+                    {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
+                    </Select>
 
-            <InputLabel id="typelabel">Type</InputLabel>
-            <Select
-            fullWidth
-            labelId="typelabel"
-            value={unit.genre}
-            disabled={disabled}
-            onChange={x => setUnit({...unit, genre: x.target.value})}
-            >
-            {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
-            </Select>           
-            
-        </form>
-        <div className="save-unit-button">
-            <Button  
-                    variant="contained" 
-                    color="secondary" 
-                    hidden={disabled} disabled={disabled} onClick={SaveUnit}>Sauvegarder
-            </Button>
-        </div>
-    </CardContent>
+                    <InputLabel id="typelabel">Type</InputLabel>
+                    <Select
+                    fullWidth
+                    labelId="typelabel"
+                    value={unit.genre}
+                    disabled={disabled}
+                    onChange={x => setUnit({...unit, genre: x.target.value})}
+                    >
+                    {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
+                    </Select>    
+                    
+                    <div className="save-unit-button">
+                        <Button  
+                                variant="contained" 
+                                color="secondary" 
+                                hidden={disabled} disabled={disabled} onClick={SaveUnit}>Sauvegarder
+                        </Button>
+                    </div>       
+                    
+                </form>
+            </AccordionDetails>            
+        </Accordion>
 
     );
 };

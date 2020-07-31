@@ -8,9 +8,11 @@ import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
-import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, TextField } from '@material-ui/core';
+import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import { useSnackbar } from 'notistack';
+import NominationTypes from "../../utils/nominationTypes";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import UnitDetails from "./unitDetails";
 
@@ -22,13 +24,12 @@ const EditUnit = ({id}) => {
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const [allMembers, setAllMembers] = useState([]);
     const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: ""});
-
+    const [selectRole, setSelectRole] = useState(NominationTypes.Membre);
     const [membres, setMembres] = useState([]);
-
     const { enqueueSnackbar } = useSnackbar();
     const unitClient = new UnitClient();
     const userClient = new UserClient();
-
+   
     if (!authedUser) {
         userContext.FetchUser();  
     }
@@ -130,11 +131,15 @@ const EditUnit = ({id}) => {
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
-        <Card>
-            <CardContent>
-                <UnitDetails disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}/>
+        <UnitDetails disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}/>
+        <Accordion>
+            <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h5">Recenser des membres</Typography>                
+            </AccordionSummary>
+            <AccordionDetails>
                 <div className="add-user-search">
-                    <div>
+                    
                     <Autocomplete
                         fullWidth={true}
                         disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
@@ -152,17 +157,34 @@ const EditUnit = ({id}) => {
                         style={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
                     />
-                    </div>
+
+                    <TextField
+                        label="Rôle"
+                        select
+                        fullWidth
+                        value={selectRole}
+                        disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
+                        variant="outlined"
+                        onChange={x => setSelectRole(x.target.value)}
+                        >
+                        {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
+                    </TextField>
                     <div className="add-user-button">
                         <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
                     </div>
                 </div>
-            </CardContent>
-            <CardContent>
+            </AccordionDetails>
+        </Accordion>
+        <Accordion>
+            <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h5">Membres de l'unité</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
                 <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id).length !== 0)} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
-            </CardContent>
-        </Card>
+            </AccordionDetails>            
+        </Accordion>
+        
     </Paper>
     )
 }
