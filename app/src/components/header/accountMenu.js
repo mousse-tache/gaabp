@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"
 import { Link, navigate } from "gatsby"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import Help from "./help";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { logout } from "../../pages/login";
 
@@ -40,10 +40,7 @@ const UserMenu = ({username}) => {
                     <Link to="/app/account">Mon profil</Link>
                 </MenuItem>
                 <MenuItem>
-                    Aide 
-                    <IconButton>
-                        <HelpOutlineIcon fontSize="large" color="primary" />
-                    </IconButton>
+                    <Help />
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
