@@ -26,6 +26,7 @@ const EditUnit = ({id}) => {
     const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: ""});
     const [selectRole, setSelectRole] = useState(NominationTypes.Membre);
     const [membres, setMembres] = useState([]);
+    const [activeMembers, setActiveMembers] = useState([]);
     const { enqueueSnackbar } = useSnackbar();
     const unitClient = new UnitClient();
     const userClient = new UserClient();
@@ -46,6 +47,13 @@ const EditUnit = ({id}) => {
     useEffect(() => {
         FetchMembres();
     }, [unit, selectUser])
+
+    useEffect(() => {
+        if(membres.length == 0) {
+            return;
+        }
+        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id).length !== 0))
+    }, membres)
 
     async function FetchUnit() {
         try {               
@@ -135,7 +143,7 @@ const EditUnit = ({id}) => {
         <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h5">Recenser des membres</Typography>                
+                <Typography variant="h5">Recenser des membres dans l'unité</Typography>                
             </AccordionSummary>
             <AccordionDetails>
                 <div className="add-user-search">
@@ -181,7 +189,21 @@ const EditUnit = ({id}) => {
                 <Typography variant="h5">Membres de l'unité</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <UnitMembersTable users={membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id).length !== 0)} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
+            <Typography>En résumé</Typography>
+                <ul>
+                    <li>
+                        {activeMembers.length} membre(s) actif(s)
+                    </li>  
+                    <li>
+                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id && x.type === NominationTypes.Membre).length > 0).length} membre(s) régulier(s)
+                    </li>                  
+                    <li>
+                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id && x.type !== NominationTypes.Membre).length > 0).length} membre(s) de maîtrise
+                    </li>
+                </ul>
+            </AccordionDetails>
+            <AccordionDetails>
+                <UnitMembersTable users={activeMembers} unitId={unit._id} removeFromUnit={RemoveFromUnit} />
             </AccordionDetails>            
         </Accordion>
         
