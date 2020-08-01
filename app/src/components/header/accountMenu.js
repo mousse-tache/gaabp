@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"
 import { Link, navigate } from "gatsby"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { logout } from "../../pages/login";
 
@@ -23,6 +24,7 @@ const UserMenu = ({username}) => {
     
     return (
         <div className="auth">
+            
             <span>{username}</span>
             <IconButton onClick={handleClick}>
                 <AccountCircleIcon fontSize="large" color="primary" />
@@ -36,6 +38,12 @@ const UserMenu = ({username}) => {
             >
                 <MenuItem onClick={handleClose}>
                     <Link to="/app/account">Mon profil</Link>
+                </MenuItem>
+                <MenuItem>
+                    Aide 
+                    <IconButton>
+                        <HelpOutlineIcon fontSize="large" color="primary" />
+                    </IconButton>
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>

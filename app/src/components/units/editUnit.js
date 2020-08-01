@@ -52,8 +52,8 @@ const EditUnit = ({id}) => {
         if(membres.length == 0) {
             return;
         }
-        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id).length !== 0))
-    }, membres)
+        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id).length !== 0))
+    }, [membres])
 
     async function FetchUnit() {
         try {               
@@ -195,10 +195,10 @@ const EditUnit = ({id}) => {
                         {activeMembers.length} membre(s) actif(s)
                     </li>  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id && x.type === NominationTypes.Membre).length > 0).length} membre(s) régulier(s)
+                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type === NominationTypes.Membre).length > 0).length} membre(s) régulier(s)
                     </li>                  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit._id && x.type !== NominationTypes.Membre).length > 0).length} membre(s) de maîtrise
+                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type !== NominationTypes.Membre).length > 0).length} membre(s) de maîtrise
                     </li>
                 </ul>
             </AccordionDetails>
