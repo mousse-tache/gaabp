@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types"
-import { Link, navigate } from "gatsby"
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import { Menu, MenuItem, IconButton, Dialog, DialogTitle } from "@material-ui/core";
-import { logout } from "../../pages/login";
+import { IconButton, Dialog, DialogTitle } from "@material-ui/core";
 import Bottin from "../bottin/bottin";
 
 const Help = () => {
@@ -19,7 +15,7 @@ const Help = () => {
             </div>
             <Dialog open={open} onClose={() => {setOpen(false)}}>
                 <DialogTitle>
-                    Bottin
+                    <HelpOutlineIcon fontSize="large" color="primary" label="bottin"/>
                 </DialogTitle>
                 <Bottin />
             </Dialog>
