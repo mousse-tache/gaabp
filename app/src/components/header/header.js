@@ -49,7 +49,7 @@ const Header = ({ username }) => {
           >
             <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Membres" />
             <Tab disableRipple disabled={!canAccessMemberSection}  component="a" label="Progression" />
-            <Tab disableRipple disabled component="a" label="Ressources" />
+            <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Ressources" />
             
           </Tabs>
           {canAccessMemberSection && 

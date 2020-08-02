@@ -8,6 +8,7 @@ import EditGroup from "./../groups/editGroup"
 import Unit from "./../units/unit"
 import EditUnit from "./../units/editUnit"
 import Formation from "./../formation/formation"
+import AccueilRessources from "../ressources/accueilRessources"
 
 const NominatedUserRouter = () => {
     return (
@@ -20,6 +21,7 @@ const NominatedUserRouter = () => {
         <Unit path="/unites" />
         <EditUnit path="/unite/:id" />
         <Formation path="/formation" />
+        <AccueilRessources path="/ressources" />
         <Profile default />
     </Router> 
     )

@@ -24,7 +24,6 @@ const UserMenu = ({username}) => {
     
     return (
         <div className="auth">
-            
             <span>{username}</span>
             <IconButton onClick={handleClick}>
                 <AccountCircleIcon fontSize="large" color="primary" />
