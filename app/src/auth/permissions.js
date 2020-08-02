@@ -1,5 +1,7 @@
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
+import Formations from "../utils/formations";
+
 
 function Permissions(user, permission) {
 
@@ -8,19 +10,23 @@ function Permissions(user, permission) {
     }
 
     const isGeneralCommissionner = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.VPScout && !x.ed);
+        return user?.nominations.filter(x => x.type === NominationTypes.VPScout && !x.ed).length > 0;
     };
 
     const isCommissionner = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Commissaire && !x.ed);
+        return user?.nominations.filter(x => x.type === NominationTypes.Commissaire && !x.ed).length > 0;
     };
 
     const isChief = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.ed);
+        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.ed).length > 0;
     };
     
     const isGroupChief = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.unitId && !x.ed);
+        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.unitId && !x.ed).length > 0;
+    };
+
+    const isFormateur = () => {
+        return user?.formations.filter(x => x.niveau.id === "BF" && x.dateConfirmed).length > 0;
     };
 
     switch(permission) {
@@ -38,7 +44,7 @@ function Permissions(user, permission) {
         case PermissionTypes.RemoveNomination:
             return (user.isAdmin || isGeneralCommissionner());
         case PermissionTypes.RecommendFormation:
-            return (user.isAdmin || user.isFormateur);
+            return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());
         case PermissionTypes.ConfirmFormation:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         default:

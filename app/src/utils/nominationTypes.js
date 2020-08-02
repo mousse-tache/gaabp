@@ -8,7 +8,6 @@ const NominationTypes = {
     VPGestion: "Vice-Président(e) à la Gestion",
     VPScout: "Commissaire Général",
     Administrateur: "Administrateur/Administratrice"
-
 }
 
 export default NominationTypes;

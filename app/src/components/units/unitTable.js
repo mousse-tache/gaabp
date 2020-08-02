@@ -24,7 +24,7 @@ const UnitTable = ({units, canEdit, groups}) => {
       ],
       data: units,
     }));
-  }, [units])
+  }, [units, groups])
 
   return (
     <MaterialTable

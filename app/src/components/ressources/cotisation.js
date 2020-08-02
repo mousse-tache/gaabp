@@ -1,6 +1,5 @@
 import React from "react";
-import { Card, CardContent, List, ListItem } from "@material-ui/core";
-
+import { List, ListItem } from "@material-ui/core";
 
 const Cotisation = () => {
 
