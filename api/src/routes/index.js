@@ -1,0 +1,156 @@
+// Import our Controllers
+const inscriptionController = require('../controllers/inscriptionController')
+const userController = require('../controllers/userController')
+const groupController = require('../controllers/groupController')
+const unitController = require('../controllers/unitController')
+
+const routes = [
+  {
+    method: 'GET',
+    url: '/api/inscriptions',
+    handler: inscriptionController.getInscriptions
+  },
+  {
+    method: 'GET',
+    url: '/api/inscription/:id',
+    handler: inscriptionController.getSingleInscription
+  },
+  {
+    method: 'POST',
+    url: '/api/inscription',
+    handler: inscriptionController.addInscription,
+    // schema: documentation.addInscriptionSchema
+  },
+  {
+    method: 'PUT',
+    url: '/api/inscription/:id',
+    handler: inscriptionController.updateInscription
+  },
+  {
+    method: 'DELETE',
+    url: '/api/inscription/:id',
+    handler: inscriptionController.deleteInscription
+  },
+  {
+    method: 'GET',
+    url: '/api/users',
+    handler: userController.getUsers
+  },
+  {
+    method: 'GET',
+    url: '/api/user/:id',
+    handler: userController.getSingleUser
+  },
+  {
+    method: 'POST',
+    url: '/api/users/ids',
+    handler: userController.getMultipleUsers
+  },
+  {
+    method: 'GET',
+    url: '/api/users/unit/:id',
+    handler: userController.getUsersByUnit
+  },
+  {
+    method: 'GET',
+    url: '/api/users/group/:id',
+    handler: userController.getUsersByGroup
+  },
+  {
+    method: 'GET',
+    url: '/api/user/email/:email',
+    handler: userController.getSingleUserByEmail
+  },  
+  {
+    method: 'POST',
+    url: '/api/user',
+    handler: userController.addUser
+  },
+  {
+    method: 'PUT',
+    url: '/api/user/:id',
+    handler: userController.updateUser
+  },
+  {
+    method: 'DELETE',
+    url: '/api/user/:id',
+    handler: userController.deleteUser
+  },
+  {
+    method: 'GET',
+    url: '/api/groups',
+    handler: groupController.getGroups
+  },
+  {
+    method: 'GET',
+    url: '/api/group/:id',
+    handler: groupController.getSingleGroup
+  },
+  {
+    method: 'GET',
+    url: '/api/group/numero/:numero',
+    handler: groupController.getSingleGroupByNumber
+  },  
+  {
+    method: 'POST',
+    url: '/api/group',
+    handler: groupController.addGroup
+  },
+  {
+    method: 'PUT',
+    url: '/api/group/:id',
+    handler: groupController.updateGroup
+  },
+  {
+    method: 'DELETE',
+    url: '/api/group/:id',
+    handler: groupController.deleteGroup
+  },
+  {
+    method: 'GET',
+    url: '/api/units',
+    handler: unitController.getUnits
+  },
+  {
+    method: 'GET',
+    url: '/api/unit/:id',
+    handler: unitController.getSingleUnit
+  },
+  {
+    method: 'POST',
+    url: '/api/units/ids',
+    handler: unitController.getUnitsById
+  },
+  {
+    method: 'POST',
+    url: '/api/groups/ids',
+    handler: groupController.getGroupsById
+  },
+  {
+    method: 'GET',
+    url: '/api/unit/group/:id',
+    handler: unitController.getByGroupId
+  },
+  {
+    method: 'GET',
+    url: '/api/unit/name/:name',
+    handler: unitController.getUnitsByName
+  },  
+  {
+    method: 'POST',
+    url: '/api/unit',
+    handler: unitController.addUnit
+  },
+  {
+    method: 'PUT',
+    url: '/api/unit/:id',
+    handler: unitController.updateUnit
+  },
+  {
+    method: 'DELETE',
+    url: '/api/unit/:id',
+    handler: unitController.deleteUnit
+  }
+]
+
+module.exports = routes
