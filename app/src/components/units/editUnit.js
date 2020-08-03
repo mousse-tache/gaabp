@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"
+import Branches from "../../utils/branches"
 
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);
@@ -147,7 +148,7 @@ const EditUnit = ({id}) => {
                 <Typography variant="h5">Recenser des membres dans l'unité</Typography>                
             </AccordionSummary>
             <AccordionDetails>
-                <Recensement unitId={unit._id} unitMembers={activeMembers} />
+                <Recensement unitId={unit._id} unitMembers={activeMembers} uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"} />
             </AccordionDetails>
             <AccordionDetails>
                 <div className="add-user-search">
