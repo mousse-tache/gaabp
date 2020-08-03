@@ -4,6 +4,8 @@ const userController = require('../controllers/userController')
 const groupController = require('../controllers/groupController')
 const unitController = require('../controllers/unitController')
 
+const RecensementRoutes = require('./recensementRoutes')
+
 const routes = [
   {
     method: 'GET',
@@ -152,5 +154,7 @@ const routes = [
     handler: unitController.deleteUnit
   }
 ]
+
+routes.concat(RecensementRoutes)
 
 module.exports = routes
