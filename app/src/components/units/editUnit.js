@@ -15,6 +15,7 @@ import NominationTypes from "../../utils/nominationTypes";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import UnitDetails from "./unitDetails";
+import Recensement from "../recensement/recensement"
 
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);
@@ -145,6 +146,9 @@ const EditUnit = ({id}) => {
             expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h5">Recenser des membres dans l'unité</Typography>                
             </AccordionSummary>
+            <AccordionDetails>
+                <Recensement unitId={unit._id} unitMembers={activeMembers} />
+            </AccordionDetails>
             <AccordionDetails>
                 <div className="add-user-search">
                     
