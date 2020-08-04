@@ -2,7 +2,7 @@ const NominationTypes = {
     Assistant: "Assistant(e)-Chef(taine)",
     Chef: "Chef(taine)",
     Commissaire: "Commissaire",
-    CommisaireAdjoint: "Commissaire adjoint",
+    CommissaireAdjoint: "Commissaire adjoint",
     Membre: "Membre",
     President: "Président(e)",
     VPGestion: "Vice-Président(e) à la Gestion",

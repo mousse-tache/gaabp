@@ -12,8 +12,8 @@ const QuickUnits = () => {
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
 
-    const ownUnits = userContext.authedUser?.nominations ? userContext.authedUser.nominations.filter(x => !x.ed).map(x => x.unitId) : [];
-    const ownGroups = userContext.authedUser?.nominations ? userContext.authedUser.nominations.map(x => x.groupId) : [];
+    const ownUnits = userContext.authedUser?.nominations ? userContext.authedUser.nominations.filter(x => !x.ed).map(x => x.unitId).filter(x => x) : [];
+    const ownGroups = userContext.authedUser?.nominations ? userContext.authedUser.nominations.map(x => x.groupId).filter(x => x) : [];
 
     useEffect(() => {
         FetchUnits();
@@ -21,6 +21,10 @@ const QuickUnits = () => {
     }, [userContext])
 
     async function FetchUnits() {
+        if(ownUnits.length == 0) {
+            return;
+        }
+
         try {               
             var data = await unitClient.getMultipleById(ownUnits);
             if(data !== null)
@@ -33,8 +37,12 @@ const QuickUnits = () => {
     }
 
     async function FetchGroups() {
+        if(ownGroups.length == 0) {
+            return;
+        }
+        
         try {               
-            var data = await groupClient.getMultipleById([ownGroups]);
+            var data = await groupClient.getMultipleById(ownGroups);
             if(data !== null)
             {
                 setGroupList(data);

@@ -22,11 +22,11 @@ const EditGroup = ({id}) => {
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [units, setUnits] = useState([]);
     const [isFetchingUnits, setIsFetchingUnits] = useState(true);
-    const [group, setGroup] = useState(null);
+    const [group, setGroup] = useState({adresse: "", nom: "", numero: ""});
     const [membres, setMembres] = useState([]);
     const [allMembers, setAllMembers] = useState([]);
-    const [selectUser, setSelectUser] = useState({_id:0, prenom:"", nom:""});
-    const [selectRole, setSelectRole] = useState(null);
+    const [selectUser, setSelectUser] = useState({prenom: "", nom: "", _id:0});
+    const [selectRole, setSelectRole] = useState("");
     
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
@@ -166,12 +166,19 @@ const EditGroup = ({id}) => {
                     label="Région"
                     select
                     fullWidth
-                    labelId="region-label"
                     value={group.region}
                     disabled={!canEdit}
                     onChange={x => setGroup({...group, region: x.target.value})}
                     >
                     {Regions.map(x => <MenuItem value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>)}
+                </TextField>
+                <TextField
+                    label="Adresse"
+                    fullWidth
+                    value={group.adresse}
+                    disabled={!canEdit}
+                    onChange={x => setGroup({...group, adresse: x.target.value})}
+                    >
                 </TextField>
                 <Typography>
                     <Button variant="contained" color="secondary" disabled={!canEdit} hidden={!canEdit} onClick={SaveGroup}>Sauvegarder</Button>
@@ -193,7 +200,7 @@ const EditGroup = ({id}) => {
                             }}
                             value={selectUser}
                             defaultValue={{prenom: "", nom: ""}}
-                            options={allMembers}
+                            options={[...allMembers, {prenom: "", nom: "", _id:0}]}
                             getOptionLabel={(option) => option.prenom + " " + option.nom}
                             style={{ width: 300 }}
                             renderInput={(params) => <TextField fullWidth {...params} label="Cherchez un membre" variant="outlined" />}
