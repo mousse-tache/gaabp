@@ -27,7 +27,7 @@ const RougeModal = ({open, handleClose}) => {
                         </Typography>
 
                         <Typography gutterBottom>     
-                            Les routiers et guides aînées font avant un chemin personnel, soutenu par leur clan. Le tout est guidé par le triangle de la route et toute leurs activités le rejoigne d'une certaine façon dans l'équilibre <b>Marche</b>, <b>Service</b> et <b>Palabre</b>.
+                            Les routiers et guides aînées font avant tout un chemin personnel, soutenu par leur clan. Le tout est guidé par le triangle de la route et toutes leurs activités le rejoigne d'une certaine façon dans l'équilibre <b>Marche</b>, <b>Service</b> et <b>Palabre</b>.
                         </Typography>
                     </CardContent>
                     <CardContent>

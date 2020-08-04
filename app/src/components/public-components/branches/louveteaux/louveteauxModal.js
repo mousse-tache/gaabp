@@ -60,7 +60,7 @@ const LouveteauxModal = ({open, handleClose}) => {
                     </CardContent>
                     <CardContent>
                         <Typography variant="h6">
-                            Devise: De son mieux
+                            Devise: De notre mieux
                         </Typography>
                     </CardContent>
                 </Card>

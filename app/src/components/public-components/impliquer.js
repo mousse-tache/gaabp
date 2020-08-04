@@ -53,7 +53,7 @@ const Impliquer = () => {
         <CardContent>
           <Typography variant="h4">S'impliquer</Typography>
           <Typography>
-            L'Association des Aventuriers de Baden-Powell est constamment à la recherche de bénévoles pour s'occuper de nos scouts. Pour ce faire, il y aura vérification des antécédents judiciaires de l'intéressé qu'il ne présente pas de risque. L'intéressé devra également être en contact avec le groupe dans lequel il désire s'impliquer et ses membres pourront le guider le processus. Il n'est pas nécessaire d'avoir été scout par le passé pour s'impliquer, il faut seulement avoir le désir de donner de son temps pour contribuer au développement des jeunes que nous accompagnons.
+            L'Association des Aventuriers de Baden-Powell est constamment à la recherche de bénévoles pour s'occuper de nos scouts. Pour ce faire, il y aura vérification des antécédents judiciaires de l'intéressé pour s'assurer qu'il ne présente pas de risque. L'intéressé devra également être en contact avec le groupe dans lequel il désire s'impliquer et ses membres pourront le guider dans le processus. Il n'est pas nécessaire d'avoir été scout par le passé pour s'impliquer, il faut seulement avoir le désir de donner de son temps pour contribuer au développement des jeunes que nous accompagnons.
           </Typography>
         </CardContent>
       </Card>
