@@ -22,7 +22,7 @@ const EditGroup = ({id}) => {
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [units, setUnits] = useState([]);
     const [isFetchingUnits, setIsFetchingUnits] = useState(true);
-    const [group, setGroup] = useState({adresse: "", nom: "", numero: ""});
+    const [group, setGroup] = useState({adresse: "", nom: "", numero: "", region:"", ville:""});
     const [membres, setMembres] = useState([]);
     const [allMembers, setAllMembers] = useState([]);
     const [selectUser, setSelectUser] = useState({prenom: "", nom: "", _id:0});
