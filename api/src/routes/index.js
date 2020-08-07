@@ -67,6 +67,11 @@ const routes = [
     method: 'POST',
     url: '/api/user',
     handler: userController.addUser
+  },  
+  {
+    method: 'POST',
+    url: '/api/users',
+    handler: userController.addUsers
   },
   {
     method: 'PUT',

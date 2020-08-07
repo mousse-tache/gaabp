@@ -33,6 +33,10 @@ export class UserClient {
         return this._apiClient.post("user", user );
     }
 
+    addUsers = (users) => {
+        return this._apiClient.post("users", users );
+    }
+
     updateUser = (user) => {
         return this._apiClient.put(`user/${user.id}`, user );
     }

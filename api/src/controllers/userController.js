@@ -83,6 +83,17 @@ exports.addUser = async (req, reply) => {
   }
 }
 
+// Add a new user
+exports.addUsers = async (req, reply) => {
+  try {
+    const userModels = req.body
+
+    return User.insertMany(userModels)
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 // Update an existing user
 exports.updateUser = async (req, reply) => {
   try {

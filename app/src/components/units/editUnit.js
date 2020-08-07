@@ -8,15 +8,15 @@ import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
-import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, Divider, Tooltip } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import { useSnackbar } from 'notistack';
 import NominationTypes from "../../utils/nominationTypes";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"
-import Branches from "../../utils/branches"
+import AddNewUsers from "../recensement/addNewUsers"
+import "./unit.css";
 
 const EditUnit = ({id}) => {
     const userContext = useContext(UserContext);
@@ -103,8 +103,7 @@ const EditUnit = ({id}) => {
 
     const addToUnit = async() => { 
         try {            
-            await unitClient.updateUnit({...unit, id: unit._id, membres: [...unit.membres, selectUser._id]});
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:"Membre"}]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole}]})
             FetchMembres();
             setSelectUser({_id: 0, prenom: "", nom: ""})
             enqueueSnackbar("Membre ajouté");
@@ -116,7 +115,6 @@ const EditUnit = ({id}) => {
     const RemoveFromUnit = async(user) => { 
         try {            
             user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id)[0].ed = new Date();
-            await unitClient.updateUnit({...unit, id: unit._id, membres: unit.membres.filter(x => x != user._id)});
             await userClient.updateUser({...user, id: user._id})
             setMembres(membres?.filter(x => x._id !== user._id))
             enqueueSnackbar("Membre retiré en date d'aujourd'hui");
@@ -145,15 +143,22 @@ const EditUnit = ({id}) => {
         <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h5">Recenser des membres dans l'unité</Typography>                
+                <Typography variant="h5">Recensement</Typography>    
             </AccordionSummary>
             <AccordionDetails>
-                <Recensement unitId={unit._id} unitMembers={activeMembers} uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"} />
+                <Recensement unitId={unit._id} unitMembers={activeMembers} 
+                uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"} />
             </AccordionDetails>
+        </Accordion>
+        <Accordion>
+            <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h5">Ajouter des membres dans l'unité</Typography>                
+            </AccordionSummary>
             <AccordionDetails>
-                <div className="add-user-search">
-                    
-                    <Autocomplete
+                <div className="add-user-search">  
+                    <Tooltip title="Entrer un nom pour rechercher parmi les membres existants">
+                    <Autocomplete                        
                         fullWidth={true}
                         disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
                         autocomplete
@@ -170,6 +175,7 @@ const EditUnit = ({id}) => {
                         style={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
                     />
+                    </Tooltip>           
 
                     <TextField
                         label="Rôle"
@@ -188,6 +194,13 @@ const EditUnit = ({id}) => {
                 </div>
             </AccordionDetails>
         </Accordion>
+        {
+            Permissions(authedUser, PermissionTypes.CreateUser) && Permissions(authedUser, PermissionTypes.UpdateUnit) && 
+            <AddNewUsers unitId={id} 
+                        uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"}
+                        triggerUpdateMembres={FetchMembres}
+                        />
+        }
         <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
