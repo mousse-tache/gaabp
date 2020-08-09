@@ -145,7 +145,7 @@ const Unit = () => {
                     <MenuItem value="0" disabled>
                         Glasgow
                     </MenuItem>
-                    {groupList.map(x => <MenuItem value={x._id}>{x.numero} {x.nom}</MenuItem>)}
+                    {groupList.map(x => <MenuItem key={x._id} value={x._id}>{x.numero} {x.nom}</MenuItem>)}
                     </TextField>
 
                     <TextField
@@ -155,7 +155,7 @@ const Unit = () => {
                     value={unit.branche}
                     onChange={x => setUnit({...unit, branche: x.target.value})}
                     >
-                    {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
+                    {Branches.map(x => <MenuItem key={x.id} value={x.id}>{x.couleur}</MenuItem>)}
                     </TextField>
 
                     <TextField
@@ -165,7 +165,7 @@ const Unit = () => {
                     value={unit.genre}
                     onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
-                    {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
+                    {Genre.map(x => <MenuItem key={x.id} value={x.id}>{x.nom}</MenuItem>)}
                     </TextField>
 
                     <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUnit}>Ajouter</Button>
