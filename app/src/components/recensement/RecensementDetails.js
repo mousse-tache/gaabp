@@ -1,11 +1,17 @@
 import React from 'react'
+import Loading from '../loading/loading'
+import { AccordionDetails } from '@material-ui/core'
 
 const RecensementDetails = ({recensement}) => {
 
+    if(!recensement) {
+        return <Loading />
+    }
+
     return (        
-        <div>
-            {recensement.totalPrice}
-        </div>
+        <AccordionDetails>
+            Le coût du dernier recensement était de {recensement.cost}$
+        </AccordionDetails>
     )
 }
 

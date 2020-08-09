@@ -10,7 +10,7 @@ export class RecensementClient {
     }
 
     getLatestByUnitId = (id) => {
-        return this._apiClient.post(`recensement/latest/${id}`);
+        return this._apiClient.get(`recensement/latest/${id}`);
     }
 
     addRecensement = (recensement) => {

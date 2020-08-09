@@ -1,10 +1,10 @@
 import React from "react"
 
-const PreviewCost = ({cost, latestRecensement}) => {
+const PreviewCost = ({cost, previousRecensement}) => {
 
     return ( 
         <div>
-            {!latestRecensement && "Aucun recensement n'a été enregistré par le passé."} Le coût de recensement actuel serait de {cost.totalPrice}$
+            {!previousRecensement && "Aucun recensement n'a été enregistré par le passé."} Le coût de recensement actuel serait de {cost.totalPrice}$
             <ul>
                 { cost.details.formedUsers ? (
                 <li>

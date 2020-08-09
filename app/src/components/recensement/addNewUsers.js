@@ -56,8 +56,8 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
             </AccordionSummary>
             <AccordionDetails>
                 <div className="add-new-users-recensement">
-                    <List fullWidth className="add-new-users-recensement">
-                        <ListItem fullWidth className="add-new-users-recensement-item" divider>
+                    <List className="add-new-users-recensement">
+                        <ListItem className="add-new-users-recensement-item" divider>
                             <TextField fullWidth 
                             required
                             value={nextUserToCreate.prenom} 
@@ -80,10 +80,11 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                                     value={nextUserToCreate.nominations[0].type}
                                     onChange={x => setNextUserToCreate({...nextUserToCreate, nominations: [{...nextUserToCreate.nominations[0], type:x.target.value }]})}
                                     >
-                                    {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
+                                    {Object.keys(NominationTypes).map(x => <MenuItem key={x} value={x}>{NominationTypes[x]}</MenuItem>)}
                             </TextField>
-                            <Button disabled={nextUserToCreate.prenom == "" || nextUserToCreate.nom == ""} onClick={addPreviewUser} >
-                                <AddCircleOutlineIcon size="large" color={nextUserToCreate.prenom == "" || nextUserToCreate.nom == "" ? "" : "primary"} Tooltip={nextUserToCreate.prenom == "" || nextUserToCreate.nom == "" ? "Le nom et le prénom sont nécessaires" : ""} />
+                            <Button disabled={nextUserToCreate.prenom == "" || nextUserToCreate.nom == ""} 
+                            onClick={addPreviewUser} >
+                                <AddCircleOutlineIcon size="large" color={nextUserToCreate.prenom == "" || nextUserToCreate.nom == "" ? "inherit" : "primary"} />
                             </Button>
                         </ListItem>
                         {usersToCreate.length > 0 &&

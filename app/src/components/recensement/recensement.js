@@ -4,9 +4,10 @@ import CalculateCost from "./calculateRecensementCost";
 import SoumettreRecensement from "./soumettreRecensement";
 import PreviewCost from "./previewCost";
 import RecensementDetails from "./RecensementDetails";
+import Loading from "../loading/loading";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
-    const [latestRecensement, setLatestRecensement] = useState({})
+    const [latestRecensement, setLatestRecensement] = useState(1)
     const cost = CalculateCost(unitMembers, uniteCadette)
 
     const recensementClient = new RecensementClient();
@@ -15,7 +16,6 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
         try {
             var data = await recensementClient.getLatestByUnitId(unitId);
             setLatestRecensement(data);
-            console.log(data)
         } catch (error) {
             console.log(error);   
             setLatestRecensement(false);
@@ -26,11 +26,15 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
         FetchLatestRecensement();
     }, [])
 
+    if (latestRecensement == 1) {
+        return <Loading />
+    }
+
     return (
         <div>
-            <PreviewCost cost={cost} previousRecensement={latestRecensement} />
+            <PreviewCost cost={cost} previousRecensement={latestRecensement !== null} />
             <SoumettreRecensement cost={cost} unitId={unitId} unitMembers={unitMembers} />
-            {latestRecensement && 
+            {latestRecensement !== null && 
             <RecensementDetails recensement={latestRecensement} />}
         </div>
     )

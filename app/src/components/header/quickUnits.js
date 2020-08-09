@@ -60,11 +60,11 @@ const QuickUnits = () => {
         <List>
             <ListItem className="title-list-item" disableGutters divider>Mes unités</ListItem>
             {unitList.map(unit => (
-            <ListItem dense>
+            <ListItem key={unit._id} dense>
                 <Link className="quick-units" to={"/app/unite/"+unit._id} >{unit.nom}</Link>
             </ListItem>))}
             {groupList.map(group => (
-            <ListItem dense>
+            <ListItem key={group._id} dense>
                 <Link className="quick-units" to={"/app/unite/"+group._id} >{"Groupe " + group.numero + " " + group.nom}</Link>
             </ListItem>))}
         </List>

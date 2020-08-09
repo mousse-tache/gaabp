@@ -88,7 +88,7 @@ const UnitDetails = ({disabled}) => {
                     disabled={disabled}
                     onChange={x => setUnit({...unit, branche: x.target.value})}
                     >
-                    {Branches.map(x => <MenuItem value={x.id}>{x.couleur}</MenuItem>)}
+                    {Branches.map(x => <MenuItem key={x.id} value={x.id}>{x.couleur}</MenuItem>)}
                     </Select>
 
                     <InputLabel id="typelabel">Type</InputLabel>
@@ -99,7 +99,7 @@ const UnitDetails = ({disabled}) => {
                     disabled={disabled}
                     onChange={x => setUnit({...unit, genre: x.target.value})}
                     >
-                    {Genre.map(x => <MenuItem value={x.id}>{x.nom}</MenuItem>)}
+                    {Genre.map(x => <MenuItem key={x.id} value={x.id}>{x.nom}</MenuItem>)}
                     </Select>    
                     
                     <div className="save-unit-button">

@@ -60,7 +60,6 @@ const EditUnit = ({id}) => {
     async function FetchUnit() {
         try {               
             var data = await unitClient.getById(id);
-            console.log(data);
             if(data !== null && data._id)
             {
                 setUnit(data);
@@ -134,7 +133,7 @@ const EditUnit = ({id}) => {
     return  (
     <Paper className="unit">
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" href="/app/unites">
+            <Link color="inherit" to="/app/unites">
                 Unités
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
@@ -161,7 +160,6 @@ const EditUnit = ({id}) => {
                     <Autocomplete                        
                         fullWidth={true}
                         disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
-                        autocomplete
                         autoSelect
                         blurOnSelect                        
                         disableClearable
@@ -186,7 +184,7 @@ const EditUnit = ({id}) => {
                         variant="outlined"
                         onChange={x => setSelectRole(x.target.value)}
                         >
-                        {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
+                        {Object.keys(NominationTypes).map(x => <MenuItem key={x} value={x}>{NominationTypes[x]}</MenuItem>)}
                     </TextField>
                     <div className="add-user-button">
                         <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
