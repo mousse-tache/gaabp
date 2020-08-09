@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import RecensementClient from "../../clients/recensementClient";
 import CalculateCost from "./calculateRecensementCost";
+import SoumettreRecensement from "./soumettreRecensement";
+import PreviewCost from "./previewCost";
+import RecensementDetails from "./RecensementDetails";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
     const [latestRecensement, setLatestRecensement] = useState({})
@@ -23,33 +26,12 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
         FetchLatestRecensement();
     }, [])
 
-    if (!latestRecensement) {
-        return (
-            <div>
-                Aucun recensement n'a été enregistré par le passé. Le coût de recensement actuel serait de {cost.totalPrice}
-                <ul>
-                    { cost.details.formedUsers ? (
-                    <li>
-                        {cost.details.formedUsers} membre(s) formés à 1$ chacun - {cost.details.formedUsers}$
-                    </li>) : null
-                    }
-                   { cost.details.adultUsers ? ( 
-                    <li>
-                        {cost.details.adultUsers} membre(s) de maîtrise non formés à 25$ chacun - {cost.details.adultUsers*25}$
-                    </li>) : null}
-                   { cost.details.others ? (
-                    <li>
-                        {cost.details.others} membre(s) à {cost.basePrice}$ chacun - {cost.details.others}$
-                    </li>
-                   ) : null} 
-                </ul>
-            </div>
-        )
-    }
-
     return (
         <div>
-            {unitId}
+            <PreviewCost cost={cost} previousRecensement={latestRecensement} />
+            <SoumettreRecensement cost={cost} unitId={unitId} unitMembers={unitMembers} />
+            {latestRecensement && 
+            <RecensementDetails recensement={latestRecensement} />}
         </div>
     )
 };

@@ -119,14 +119,15 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                     </List>
                 </div>
             </AccordionDetails> 
-            <AccordionActions>
+            {usersToCreate.length > 0 &&
+             <AccordionActions>
                 <Button size="small" onClick={() => setUsersToCreate([]) && setNextUserToCreate(defaultUserState)}>
                     Annuler
                 </Button>
                 <Button size="small" color="primary" onClick={addUsers}>
                     Sauvegarder
                 </Button>
-            </AccordionActions>
+            </AccordionActions>}
         </Accordion>
         
     )

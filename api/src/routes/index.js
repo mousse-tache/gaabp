@@ -6,7 +6,7 @@ const unitController = require('../controllers/unitController')
 
 const RecensementRoutes = require('./recensementRoutes')
 
-const routes = [
+const otherRoutes = [
   {
     method: 'GET',
     url: '/api/inscriptions',
@@ -160,6 +160,6 @@ const routes = [
   }
 ]
 
-routes.concat(RecensementRoutes)
+var routes = otherRoutes.concat(RecensementRoutes)
 
 module.exports = routes
