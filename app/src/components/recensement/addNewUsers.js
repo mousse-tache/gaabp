@@ -59,10 +59,12 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                     <List fullWidth className="add-new-users-recensement">
                         <ListItem fullWidth className="add-new-users-recensement-item" divider>
                             <TextField fullWidth 
+                            required
                             value={nextUserToCreate.prenom} 
                             onChange={x => setNextUserToCreate({...nextUserToCreate, prenom:x.target.value})} 
                             label="Prénom" />
                             <TextField fullWidth 
+                            required
                             value={nextUserToCreate.nom}                    
                             onChange={x => setNextUserToCreate({...nextUserToCreate, nom:x.target.value})} 
                             label="Nom" />
@@ -80,8 +82,8 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                                     >
                                     {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
                             </TextField>
-                            <Button onClick={addPreviewUser} >
-                                <AddCircleOutlineIcon size="large" color="primary" />
+                            <Button disabled={nextUserToCreate.prenom == "" || nextUserToCreate.nom == ""} onClick={addPreviewUser} >
+                                <AddCircleOutlineIcon size="large" color={nextUserToCreate.prenom == "" || nextUserToCreate.nom == "" ? "" : "primary"} Tooltip={nextUserToCreate.prenom == "" || nextUserToCreate.nom == "" ? "Le nom et le prénom sont nécessaires" : ""} />
                             </Button>
                         </ListItem>
                         {usersToCreate.length > 0 &&
