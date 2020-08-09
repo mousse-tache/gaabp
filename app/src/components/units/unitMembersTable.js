@@ -93,7 +93,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       ]}
       columns={state.columns}
       data={state.data}
-      onRowClick={(event, rowData) => navigate("/app/membre/"+rowData.courriel)}
+      onRowClick={(event, rowData) => navigate("/app/membre/"+rowData._id)}
     />
     </div>    
   );

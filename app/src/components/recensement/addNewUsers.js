@@ -26,8 +26,9 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
 
     const addUsers = async() => { 
         try {            
-            //create the users
-            //await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole}]})
+            await userClient.addUsers(usersToCreate);
+            setUsersToCreate([])
+            setNextUserToCreate(defaultUserState)
             triggerUpdateMembres();
             enqueueSnackbar("Membres créés");
         } catch (e) {

@@ -15,7 +15,7 @@ import FormationMembre from "./formationMembre"
 import MemberDetails from "./memberDetails"
 import GroupClient from "../../clients/groupClient"
 
-const EditMembre = ({email}) => {
+const EditMembre = ({id}) => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
     const [isFecthingUser, setIsFetchingUser] = useState(true);
@@ -92,7 +92,7 @@ const EditMembre = ({email}) => {
 
     async function FetchUser() {
         try {               
-            var data = await userClient.getByEmail(email);
+            var data = await userClient.getById(id);
             if(data !== null)
             {
                 setMember(data[0]);

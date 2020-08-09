@@ -15,7 +15,7 @@ const NominatedUserRouter = () => {
     <Router basepath="/app"> 
         <Profile path="/account" />
         <Membres path="/membres" />
-        <EditMembre path="membre/:email" />
+        <EditMembre path="membre/:id" />
         <Group path="/groupes" />
         <EditGroup path="/groupe/:id" />
         <Unit path="/unites" />
