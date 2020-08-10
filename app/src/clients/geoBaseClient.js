@@ -3,7 +3,6 @@ import axios from "axios";
 const axiosDefaultConfiguration = {
     timeout: 0,
     headers: { 
-        "X-Requested-With": "XMLHttpRequest"
         }
 };
 

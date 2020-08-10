@@ -6,8 +6,11 @@ export class GeoClient {
     }
 
     forward = (query) => {
-                
-        return this._apiClient.get(`forward?access_key=${process.env.GATSBY_GEO_API_KEY}&query=${query}`);
+        var params = {
+            "access_key": process.env.GATSBY_GEO_API_KEY,
+            query:query
+        }
+        return this._apiClient.get(`forward`, { params });
     }
 }    
 

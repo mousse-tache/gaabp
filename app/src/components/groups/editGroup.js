@@ -15,6 +15,7 @@ import UserClient from "../../clients/userClient";
 import GroupMembresTable from "./groupMembersTable";
 import { Autocomplete } from "@material-ui/lab";
 import NominationTypes from "../../utils/nominationTypes";
+import GeoClient from "../../clients/geoClient";
 
 const EditGroup = ({id}) => {
     const userContext = useContext(UserContext);
@@ -32,6 +33,7 @@ const EditGroup = ({id}) => {
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
     const userClient = new UserClient();
+    const geoClient = new GeoClient();
 
     var canEdit = Permissions(authedUser, PermissionTypes.UpdateGroup);
 
@@ -49,6 +51,13 @@ const EditGroup = ({id}) => {
         FetchMembres();
         FetchAllUsers();
     }, [])
+
+    async function FetchGeoLocalisation() {
+        if(group.adresse !== undefined && group.adresse !== "") {
+            var data = await geoClient.forward(group.adresse) 
+            console.log(data);
+        }
+    }
 
     async function FetchAllUsers() {
         try {               
@@ -118,6 +127,7 @@ const EditGroup = ({id}) => {
         e.preventDefault();
         e.stopPropagation();
         try {
+            //FetchGeoLocalisation();
             await groupClient.updateGroup({...group, id: group._id});
             enqueueSnackbar('Le groupe ' + group.nom + " a été sauvegardé");
             FetchGroup();
@@ -145,7 +155,7 @@ const EditGroup = ({id}) => {
     return  (
     <Paper className="profile">
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" href="/app/groupes">
+            <Link color="inherit" to="/app/groupes">
                 Groupes
             </Link>
             <Typography color="textPrimary">{`${group.numero} ${group.nom}`}</Typography>
@@ -170,7 +180,7 @@ const EditGroup = ({id}) => {
                     disabled={!canEdit}
                     onChange={x => setGroup({...group, region: x.target.value})}
                     >
-                    {Regions.map(x => <MenuItem value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>)}
+                    {Regions.map(x => <MenuItem key={x.id} value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>)}
                 </TextField>
                 <TextField
                     label="Adresse"
@@ -215,7 +225,7 @@ const EditGroup = ({id}) => {
                             variant="outlined"
                             onChange={x => setSelectRole(x.target.value)}
                             >
-                            {Object.keys(NominationTypes).map(x => <MenuItem value={x}>{NominationTypes[x]}</MenuItem>)}
+                            {Object.keys(NominationTypes).map(x => <MenuItem key={x} value={x}>{NominationTypes[x]}</MenuItem>)}
                         </TextField>
                     
                     <div className="add-user-button">
