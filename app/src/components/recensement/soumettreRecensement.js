@@ -21,7 +21,7 @@ date: Date,
                 date: new Date(),
                 details: {
                     cost,
-                    unitMembers
+                    unitMembers: unitMembers.map(x => x._id)
                 },
                 unitId,
                 cost: cost.totalPrice
