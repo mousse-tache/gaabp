@@ -1,3 +1,7 @@
 .recensement-overview-container > div {
     padding:1rem;
 }
+
+.recensement-detail-container svg {
+    vertical-align: middle;
+}
