@@ -4,7 +4,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import Logo from "../images/Logo_AABP.gif";
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
-const redirectUri = typeof window !== 'undefined' && window.location.href.toString().includes("localhost") ? "http://localhost:8000/app" : "https://aabp-dev.netlify.app/app";
+const redirectUri = typeof window !== 'undefined' && window.location.href.toString().includes("localhost") ? "http://localhost:8000/app" : process.env.GATSBY_SIGNIN_REDIRECT;
 
 const config = {
   baseUrl: 'https://dev-132704.okta.com',
