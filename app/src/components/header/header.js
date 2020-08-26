@@ -35,7 +35,7 @@ const Header = ({ username }) => {
     navigate(tabValue[newValue]);
   };
 
-  const canAccessMemberSection = authedUser?.nominations?.length > 0;
+  const canAccessMemberSection = authedUser?.nominations?.length > 0 || authedUser?.isAdmin;
 
   return (
     <header className="header sticky">
