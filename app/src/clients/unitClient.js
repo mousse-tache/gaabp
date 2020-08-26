@@ -2,7 +2,7 @@ import ApiClient from "./apiClient";
 
 export class UnitClient {
     constructor() {
-        this._apiClient = new ApiClient({ baseURL: "https://formation-aabp.herokuapp.com/api/" });
+        this._apiClient = new ApiClient({ baseURL: process.env.GATSBY_API_URL });
     }
 
     getById = (id) => {
