@@ -38,7 +38,10 @@ const Membres = () => {
     };
 
     useEffect(() => {
-        FetchUsers();
+        if(Permissions(authedUser, PermissionTypes.ViewUsers))
+        {
+            FetchUsers();
+        }
     }, [])
 
     async function FetchUsers() {
@@ -72,7 +75,6 @@ const Membres = () => {
     if(isFetchingUserList) {
         return (<Loading />)
     }
-
 
     return  (
     <Paper className="membres-paper">           
@@ -110,7 +112,7 @@ const Membres = () => {
                 </form>
             </Paper>
         </Modal>
-
+        {!Permissions(authedUser, PermissionTypes.ViewUsers) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
         <MembresTable users={userList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUser)} />
     </Paper>
     )

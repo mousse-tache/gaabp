@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Router } from "@reach/router"
 import Profile from "./../profile/profile"
 import Membres from "./../membres/membres"
@@ -11,6 +11,7 @@ import Formation from "./../formation/formation"
 import AccueilRessources from "../ressources/accueilRessources"
 
 const NominatedUserRouter = () => {
+
     return (
     <Router basepath="/app"> 
         <Profile path="/account" />
