@@ -4,7 +4,7 @@ import Loading from "../loading/loading"
 import UnitContext from "../../context/unit/unitContext"
 import UnitClient from "../../clients/unitClient"
 import GroupClient from "../../clients/groupClient"
-import { Input, InputLabel, TextField, Typography, CardContent, MenuItem, Select, Button, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
+import { Input, InputLabel, TextField, Typography, MenuItem, Select, Button, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -19,6 +19,8 @@ const UnitDetails = ({disabled}) => {
     const [group, setGroup] = useState(null);
     const [expanded, setExpanded] = useState(true);
 
+    const [groupList, setGroupList] = useState([]);
+
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
@@ -28,17 +30,34 @@ const UnitDetails = ({disabled}) => {
     }, [unit])
 
     async function FetchGroup(groupId) {
-        try {               
-            var data = await groupClient.getById(groupId);
-            if(data !== null)
-            {
-                setGroup(data);
-            }            
-        } catch (e) {
-            enqueueSnackbar(e.message);   
+        if(!groupId) {
+            await FetchGroups();
+        }
+        else {
+            try {               
+                var data = await groupClient.getById(groupId);
+                if(data !== null)
+                {
+                    setGroup(data);
+                }            
+            } catch (e) {
+                enqueueSnackbar(e.message);   
+            }
         }
 
         setIsFetchingGroup(false);
+    }
+
+    async function FetchGroups() {
+        try {               
+            var data = await groupClient.getGroups();
+            if(data !== null)
+            {
+                setGroupList(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
     }
 
     async function SaveUnit(e) {           
@@ -75,11 +94,23 @@ const UnitDetails = ({disabled}) => {
                     onChange={event => setUnit({...unit, nom: event.target.value})} />                    
 
                     <InputLabel>Groupe</InputLabel>
-                    <Input 
+                    {unit.group && <Input 
                     fullWidth
                     value={group?.nom} 
                     disabled
-                    />
+                    />}
+
+                    {unit.group == undefined && <TextField
+                    select
+                    fullWidth
+                    value={unit.group} 
+                    onChange={event => setUnit({...unit, group: event.target.value})}
+                     >
+                    <MenuItem value="0" disabled>
+                        Glasgow
+                    </MenuItem>
+                    {groupList.map(x => <MenuItem key={x._id} value={x._id}>{x.numero} {x.nom}</MenuItem>)}
+                    </TextField> }
 
                     <InputLabel>Branche</InputLabel>
                     <Select
