@@ -14,7 +14,7 @@ const routes = require('./routes')
 // Register fastify-cors
 fastify.register(require('fastify-cors'), { 
   // put your options here
-  origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://www.aventuriersdebadenpowell.org", /localhost/]
+  origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
 })
 
 const bearerAuthPlugin = require('fastify-bearer-auth')
