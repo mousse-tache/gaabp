@@ -24,6 +24,25 @@ exports.getBasicUsers = async (req, reply) => {
   }
 }
 
+// Search in users
+exports.searchUsers = async (req, reply) => {
+  try {
+
+    const query = req.params.query
+    const users = await User.find({$or: 
+      [
+        {_id: {$regex: query}}, 
+        {courriel: {$regex: query}}, 
+        {prenom: {$regex: query}}, 
+        {nom: {$regex: query}}
+      ]})
+    return users
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
+
 exports.getUsersByUnit = async (req, reply) => {
   try {
     const id = req.params.id

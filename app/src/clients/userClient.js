@@ -30,7 +30,7 @@ export class UserClient {
     }
 
     getBasicUsers = () => {
-        return this._apiClient.post("user", user );
+        return this._apiClient.post("users/basic");
     }
 
     addUsers = (users) => {

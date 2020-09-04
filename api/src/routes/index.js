@@ -45,6 +45,11 @@ const otherRoutes = [
   },
   {
     method: 'GET',
+    url: '/api/users/search',
+    handler: userController.searchUsers
+  },
+  {
+    method: 'GET',
     url: '/api/user/:id',
     handler: userController.getSingleUser
   },
