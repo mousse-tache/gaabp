@@ -32,6 +32,7 @@ const EditUnit = ({id}) => {
     const { enqueueSnackbar } = useSnackbar();
     const unitClient = new UnitClient();
     const userClient = new UserClient();
+    const [query, setQuery] = useState("")
    
     if (!authedUser) {
         userContext.FetchUser();  
@@ -39,7 +40,7 @@ const EditUnit = ({id}) => {
 
     useEffect(() => {
         FetchAllUsers();
-    }, [])
+    }, [query])
 
     useEffect(() => {
         FetchUnit();        
@@ -77,8 +78,12 @@ const EditUnit = ({id}) => {
     }
 
     async function FetchAllUsers() {
+        if(query.length < 3) {
+            return;
+        }
+
         try {               
-            var data = await userClient.getUsers();
+            var data = await userClient.getBasicUsers(query);
             if(data !== null)
             {
                 setAllMembers(data);
@@ -171,7 +176,7 @@ const EditUnit = ({id}) => {
                         options={allMembers}
                         getOptionLabel={(option) => option.prenom + " " + option.nom}
                         style={{ width: 300 }}
-                        renderInput={(params) => <TextField {...params} label="Cherchez un membre" variant="outlined" />}
+                        renderInput={(params) => <TextField {...params} onChange={(event) => setQuery(event.target.value)} label="Cherchez un membre" variant="outlined" />}
                     />
                     </Tooltip>           
 

@@ -31,7 +31,6 @@ exports.searchUsers = async (req, reply) => {
     const query = req.params.query
     const users = await User.find({$or: 
       [
-        {_id: {$regex: query}}, 
         {courriel: {$regex: query}}, 
         {prenom: {$regex: query}}, 
         {nom: {$regex: query}}

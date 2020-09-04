@@ -29,8 +29,13 @@ export class UserClient {
         return this._apiClient.get("users");
     }
 
+    searchUsers = (query) => {
+        const params = { query };
+        return this._apiClient.get("users/search", params);
+    }
+
     getBasicUsers = () => {
-        return this._apiClient.post("users/basic");
+        return this._apiClient.get("users/basic");
     }
 
     addUsers = (users) => {
