@@ -40,6 +40,11 @@ const otherRoutes = [
   },
   {
     method: 'GET',
+    url: '/api/users/basic',
+    handler: userController.getBasicUsers
+  },
+  {
+    method: 'GET',
     url: '/api/user/:id',
     handler: userController.getSingleUser
   },

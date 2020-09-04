@@ -7,7 +7,9 @@ const NominationTypes = {
     President: "Président(e)",
     VPGestion: "Vice-Président(e) à la Gestion",
     VPScout: "Commissaire Général",
-    Administrateur: "Administrateur/Administratrice"
+    Administrateur: "Administrateur/Administratrice",
+    ConseillerSpiri: "Conseiller spirituel",
+    DCC: "Deputy Camp Chief"
 }
 
 export default NominationTypes;

@@ -46,7 +46,7 @@ const Membres = () => {
 
     async function FetchUsers() {
         try {               
-            var data = await userClient.getUsers();
+            var data = await userClient.getBasicUsers();
             if(data !== null)
             {
                 setUserList(data);

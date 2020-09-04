@@ -14,6 +14,16 @@ exports.getUsers = async (req, reply) => {
   }
 }
 
+// Get all users
+exports.getBasicUsers = async (req, reply) => {
+  try {
+    const users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1})
+    return users
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 exports.getUsersByUnit = async (req, reply) => {
   try {
     const id = req.params.id
