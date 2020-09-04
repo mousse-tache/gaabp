@@ -44,7 +44,7 @@ const otherRoutes = [
     handler: userController.getBasicUsers
   },
   {
-    method: 'GET',
+    method: 'POST',
     url: '/api/users/search',
     handler: userController.searchUsers
   },

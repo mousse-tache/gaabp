@@ -61,7 +61,7 @@ const EditGroup = ({id}) => {
 
     async function FetchAllUsers() {
         try {               
-            var data = await userClient.getUsers();
+            var data = await userClient.getBasicUsers();
             if(data !== null)
             {
                 setAllMembers(data);
