@@ -17,7 +17,7 @@ exports.getUsers = async (req, reply) => {
 exports.getUsersByUnit = async (req, reply) => {
   try {
     const id = req.params.id
-    const users = await User.find({$or:[{"nominations.unitId": id}, {"nominations.unitId": ObjectId(id)}] })
+    const users = await User.find({$or:[{"nominations.unitId": id}, {"nominations.unitId": mongoose.Types.ObjectId(id)}] })
     return users
   } catch (err) {
     throw boom.boomify(err)
