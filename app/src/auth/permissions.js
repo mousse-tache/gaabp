@@ -1,7 +1,5 @@
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
-import Formations from "../utils/formations";
-
 
 function Permissions(user, permission) {
 
@@ -26,7 +24,7 @@ function Permissions(user, permission) {
     };
 
     const isFormateur = () => {
-        return user?.formations.filter(x => x.niveau.id === "BF" && x.dateConfirmed).length > 0;
+        return user?.formations.filter(x => x.niveau.id === "32" && x.dateConfirmed).length > 0;
     };
 
     switch(permission) {

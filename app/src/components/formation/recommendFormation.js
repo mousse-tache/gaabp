@@ -65,7 +65,7 @@ const RecommendFormation = () => {
             var allMembersToConfirm =  allMembers.filter(x => x.formations.filter(y => !y.dateConfirme).length > 0);
             var formations = [];
             allMembersToConfirm.forEach(user => {
-                user.formations.filter(y => !y.dateConfirme).forEach(formation => {
+                user.formations.filter(y => !y.dateConfirme && y.dateRecommende).forEach(formation => {
                     formations.push({prenom: user.prenom, nom: user.nom, _id: user._id, formation: formation})
                 })
             });
