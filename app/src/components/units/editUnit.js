@@ -83,7 +83,7 @@ const EditUnit = ({id}) => {
         }
 
         try {               
-            var data = await userClient.getBasicUsers(query);
+            var data = await userClient.searchUsers(query);
             if(data !== null)
             {
                 setAllMembers(data);

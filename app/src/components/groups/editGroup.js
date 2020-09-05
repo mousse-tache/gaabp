@@ -28,6 +28,7 @@ const EditGroup = ({id}) => {
     const [allMembers, setAllMembers] = useState([]);
     const [selectUser, setSelectUser] = useState({prenom: "", nom: "", _id:0});
     const [selectRole, setSelectRole] = useState("");
+    const [query, setQuery] = useState("");
     
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
@@ -49,8 +50,11 @@ const EditGroup = ({id}) => {
         FetchGroup();
         FetchUnits();
         FetchMembres();
-        FetchAllUsers();
     }, [])
+
+    useEffect(() => {
+        FetchAllUsers();
+    }, [query])
 
     async function FetchGeoLocalisation() {
         if(group.adresse !== undefined && group.adresse !== "") {
@@ -60,8 +64,12 @@ const EditGroup = ({id}) => {
     }
 
     async function FetchAllUsers() {
+        if(query.length < 3) {
+            return;
+        }
+
         try {               
-            var data = await userClient.getBasicUsers();
+            var data = await userClient.searchUsers(query);
             if(data !== null)
             {
                 setAllMembers(data);
@@ -213,7 +221,7 @@ const EditGroup = ({id}) => {
                             options={[...allMembers, {prenom: "", nom: "", _id:0}]}
                             getOptionLabel={(option) => option.prenom + " " + option.nom}
                             style={{ width: 300 }}
-                            renderInput={(params) => <TextField fullWidth {...params} label="Cherchez un membre" variant="outlined" />}
+                            renderInput={(params) => <TextField fullWidth onChange={(event) => setQuery(event.target.value)} {...params} label="Cherchez un membre" variant="outlined" />}
                         />
                     
                         <TextField
