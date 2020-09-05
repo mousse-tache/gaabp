@@ -27,8 +27,7 @@ exports.getBasicUsers = async (req, reply) => {
 // Search in users
 exports.searchUsers = async (req, reply) => {
   try {
-
-    const query = req.params.query
+    const { query } = req.body
     const users = await User.find({$or: 
       [
         {courriel: {$regex: query}}, 

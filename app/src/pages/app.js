@@ -39,7 +39,7 @@ const App = () => {
     }
 
     async function FetchUser() {
-        if(!authedUser) {
+        if(!authedUser && user.email) {
             try {               
                 var data = await userClient.getByEmail(user.email);
                 if(data !== null)

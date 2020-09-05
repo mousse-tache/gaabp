@@ -30,7 +30,7 @@ export class UserClient {
     }
 
     searchUsers = (query) => {
-        return this._apiClient.post("users/search", query);
+        return this._apiClient.post("users/search", {query});
     }
 
     getBasicUsers = () => {
