@@ -147,7 +147,7 @@ const EditUnit = ({id}) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Recensement unitId={unit._id} unitMembers={activeMembers} 
-                uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"} />
+                uniteCadette={unit.branche !== 3 && unit.branche !== 4} />
             </AccordionDetails>
         </Accordion>
         <Accordion>

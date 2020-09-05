@@ -17,7 +17,7 @@ const PreviewCost = ({cost, previousRecensement}) => {
                 </li>) : null}
                 { cost.details.others ? (
                 <li>
-                    {cost.details.others} membre(s) à {cost.basePrice}$ chacun - {cost.details.others}$
+                    {cost.details.others} membre(s) à {cost.basePrice}$ chacun - {cost.details.others*cost.basePrice}$
                 </li>
                 ) : null} 
             </ul>
