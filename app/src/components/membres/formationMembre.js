@@ -64,7 +64,7 @@ const FormationMembre = ({formations}) => {
             title=""
             columns={
                 [
-                    { title: 'Niveau', field: 'niveau.id' },
+                    { title: 'Niveau', field: 'niveau.name' },
                     { title: 'Branche', field: 'branche.couleur' },
                     { title: 'Émis le', field: 'dateConfirme' },
                     { title: 'Émis par', field: 'confirmedBy', lookup: formateurs },   

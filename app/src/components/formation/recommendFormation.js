@@ -130,7 +130,7 @@ const RecommendFormation = () => {
                 }}
                 value={formation.niveau}
                 options={Formations}
-                getOptionLabel={(option) => option.id}
+                getOptionLabel={(option) => option.name}
                 style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} required label="Niveau" variant="outlined" />}
             />
@@ -219,7 +219,7 @@ const RecommendFormation = () => {
                   ]}
                 columns={[
                     { title: 'Membre', field: 'prenom', render: (rowData) => `${rowData.prenom} ${rowData.nom}` },
-                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formation.niveau.id} branche ${rowData.formation.branche.couleur.toLowerCase()}`},
+                    { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formation.niveau.name} ${rowData.formation.branche.couleur.toLowerCase()}`},
                     { title: 'Recommandé le', field: 'formation.dateRecommended', render: (rowData) =>  `${rowData.formation.dateRecommende}`},
                     { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${allMembers.filter(member => member._id == rowData.formation.recommendedBy)[0]?.prenom} ${allMembers.filter(member => member._id == rowData.formation.recommendedBy)[0]?.nom}`},
                   ]}
