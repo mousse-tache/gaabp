@@ -34,10 +34,6 @@ const EditUnit = ({id}) => {
     const userClient = new UserClient();
     const [query, setQuery] = useState("")
    
-    if (!authedUser) {
-        userContext.FetchUser();  
-    }
-
     useEffect(() => {
         FetchAllUsers();
     }, [query])

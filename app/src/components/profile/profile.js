@@ -10,36 +10,11 @@ import { navigate } from "gatsby";
 const Profile = () => {
     const userContext = useContext(UserContext);
     const authedUser = userContext.authedUser;
-    const user = userContext.claims;
 
-    const [member, setMember] = useState({});
-    const [isFecthingUser, setIsFetchingUser] = useState(true);
+    const [member, setMember] = useState(authedUser);
     
     const userClient = new UserClient();
-
-
     const { enqueueSnackbar } = useSnackbar();
-
-    useEffect(() => {
-        FetchUser();
-    }, [])
-
-    async function FetchUser() {
-        if(!user?.email) {
-            return;
-        }
-        try {               
-            var data = await userClient.getByEmail(user?.email);
-            if(data !== null)
-            {
-                setMember(data[0]);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-
-        setIsFetchingUser(false);
-    }
 
     async function AddUser() { 
         try {
@@ -61,11 +36,6 @@ const Profile = () => {
             await AddUser();
         }
     }
-
-    if(isFecthingUser) {
-        return (<Loading />)
-    }
-
 
     return  (
     <Paper className="profile">        

@@ -34,10 +34,6 @@ const EditMembre = ({id}) => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    if (!authedUser) {
-        userContext.FetchUser();  
-    }
-
     useEffect(() => {
         setState({
             columns: [
