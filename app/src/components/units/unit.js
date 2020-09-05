@@ -46,45 +46,45 @@ const Unit = () => {
     };
 
     useEffect(() => {
+        async function FetchGroups() {
+            try {               
+                var data = await groupClient.getGroups();
+                if(data !== null)
+                {
+                    setGroupList(data);
+                    setIsFetchingGroupList(false);
+                }            
+            } catch (e) {
+                console.log(e.message);   
+            }
+        }
+    
+        async function FetchUnits() {
+            try {               
+                var data = await unitClient.getUnits();
+                if(data !== null)
+                {
+                    setUnitList(data);
+                }            
+            } catch (e) {
+                console.log(e.message);   
+            }
+            
+            setIsFetchingUnitList(false);
+        } 
         FetchUnits();
         FetchGroups();
-    }, [])
-
-    async function FetchUnits() {
-        try {               
-            var data = await unitClient.getUnits();
-            if(data !== null)
-            {
-                setUnitList(data);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-        
-        setIsFetchingUnitList(false);
-    }
-
-    async function FetchGroups() {
-        try {               
-            var data = await groupClient.getGroups();
-            if(data !== null)
-            {
-                setGroupList(data);
-                setIsFetchingGroupList(false);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-    }
+    }, [unitList, unitClient, groupClient])
 
     async function AddUnit(e) {           
         e.preventDefault();
         e.stopPropagation();    
         try {
+
+            setUnitList([...unitList, unit])
             await unitClient.addUnit(unit);
             setOpen(false);
             enqueueSnackbar("L'unité " + unit.nom + " a été créée");
-            FetchUnits();
             
         }
         catch(e) {
@@ -96,22 +96,12 @@ const Unit = () => {
         return (<Loading />);
     }
 
-
-    /*
-    nom: String,
-    chef: mongoose.Types.ObjectId,
-    group: mongoose.Types.ObjectId,
-    assistants: Array,
-    cd: Date,
-    membres: Array
-    */
-
     return  (
     <Paper className="membres-paper">      
         <div className="membres-title">
             <div className="membres-title-element"><h3>Liste des unités</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUnit)} onClick={handleOpen}>
+                <Fab aria-label="add" size="small" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUnit)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -124,7 +114,7 @@ const Unit = () => {
             aria-describedby="simple-modal-description">
             <Paper>
                 <div className="close-icon">    
-                        <Fab color="primary" aria-label="close" size="small" color="secondary" onClick={handleClose}>
+                        <Fab aria-label="close" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
                 </div>   

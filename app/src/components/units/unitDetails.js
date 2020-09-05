@@ -26,39 +26,39 @@ const UnitDetails = ({disabled}) => {
     const unitClient = new UnitClient();
 
     useEffect(() => {
-        FetchGroup(unit?.group);
-    }, [unit])
-
-    async function FetchGroup(groupId) {
-        if(!groupId) {
-            await FetchGroups();
+        async function FetchGroup(groupId) {
+            if(!groupId) {
+                await FetchGroups();
+            }
+            else {
+                try {               
+                    var data = await groupClient.getById(groupId);
+                    if(data !== null)
+                    {
+                        setGroup(data);
+                    }            
+                } catch (e) {
+                    enqueueSnackbar(e.message);   
+                }
+            }
+    
+            setIsFetchingGroup(false);
         }
-        else {
+    
+        async function FetchGroups() {
             try {               
-                var data = await groupClient.getById(groupId);
+                var data = await groupClient.getGroups();
                 if(data !== null)
                 {
-                    setGroup(data);
+                    setGroupList(data);
                 }            
             } catch (e) {
-                enqueueSnackbar(e.message);   
+                console.log(e.message);   
             }
         }
 
-        setIsFetchingGroup(false);
-    }
-
-    async function FetchGroups() {
-        try {               
-            var data = await groupClient.getGroups();
-            if(data !== null)
-            {
-                setGroupList(data);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-    }
+        FetchGroup(unit?.group);
+    }, [unit])
 
     async function SaveUnit(e) {           
         e.preventDefault();
@@ -100,7 +100,7 @@ const UnitDetails = ({disabled}) => {
                     disabled
                     />}
 
-                    {unit.group == undefined && <TextField
+                    {!unit.groupZ && <TextField
                     select
                     fullWidth
                     value={unit.group} 

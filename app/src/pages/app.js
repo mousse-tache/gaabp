@@ -62,8 +62,21 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        FetchUser();
-    }, [user])
+        async function fetch() {
+            if(!authedUser && user.email) {
+                try {               
+                    var data = await userClient.getByEmail(user.email);
+                    if(data !== null)
+                    {
+                        setAuthedUser(data[0]);
+                    }            
+                } catch (e) {
+                    console.log(e.message);   
+                }
+            }
+        }
+        fetch();
+    }, [user, authedUser])
 
     if (!isAuthenticated()) {
         return (

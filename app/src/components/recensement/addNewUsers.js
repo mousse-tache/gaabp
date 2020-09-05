@@ -1,11 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import CalculateCost from "./calculateRecensementCost";
-
-import Loading from "../loading/loading"
-import UnitContext from "../../context/unit/unitContext"
+import React, { useState } from "react";
 import UserClient from "../../clients/userClient"
-import { List, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, Divider, Tooltip, ListItem } from '@material-ui/core';
-import { Autocomplete } from "@material-ui/lab";
+import { List, Button, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, ListItem } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import NominationTypes from "../../utils/nominationTypes";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -16,9 +11,6 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
     const defaultUserState= {prenom:"", nom:"", courriel:"", details: {}, nominations:[{type: NominationTypes.Membre, unitId: unitId, sd: new Date()}]};
     const [usersToCreate, setUsersToCreate] = useState([]);
     const [nextUserToCreate, setNextUserToCreate] = useState(defaultUserState);
-    const cost = CalculateCost(usersToCreate.filter(x => x.nom), uniteCadette);
-    const unitContext = useContext(UnitContext);
-    const { unit, setUnit } = unitContext;
 
     const { enqueueSnackbar } = useSnackbar();
 

@@ -44,7 +44,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       ],
       data: users,
     });
-  }, [users])
+  }, [users, unitId])
 
   useEffect(() => {
     if(userToDelete) {
