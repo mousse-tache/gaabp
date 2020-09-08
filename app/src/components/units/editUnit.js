@@ -181,7 +181,7 @@ const EditUnit = ({id}) => {
                         select
                         fullWidth
                         value={selectRole}
-                        disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
+                        disabled={!Permissions(authedUser, PermissionTypes.AddNomination)}
                         variant="outlined"
                         onChange={x => setSelectRole(x.target.value)}
                         >

@@ -12,7 +12,7 @@ function Permissions(user, permission) {
     };
 
     const isCommissionner = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Commissaire && !x.ed).length > 0;
+        return user?.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
 
     const isChief = () => {
