@@ -14,8 +14,7 @@ import Permissions from "../../auth/permissions"
 import PermissionTypes from "../../auth/permissionTypes"
 
 const NominatedUserRouter = () => {
-    const user = useContext(UserContext).autheduser;
-
+    const user = useContext(UserContext).authedUser;
 
     return (
     <Router basepath="/app"> 
