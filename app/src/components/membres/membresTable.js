@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
@@ -6,22 +6,26 @@ import { navigate } from 'gatsby';
 const MembresTable = ({users, canEdit}) => {
   const [state, setState] = React.useState({
     columns: [
-      { title: "Nom", field:'prenom' },
       { title:"", field:'nom', defaultSort: "asc"},
       { title: 'Courriel', field: 'courriel' },
     ],
-    data: users,
+    data: [],
   });
 
   useEffect(() => {
+    var filteredUsers = [];
+
+    users.forEach(x => {
+      filteredUsers.push({"_id": x._id, courriel: x.courriel, nom: `${x.prenom} ${x.nom}`})
+    })
+
     setState(
       {
       columns: [
-        { title: "Nom", field:'prenom' },
         { title:"", field:'nom', defaultSort: "asc"},
         { title: 'Courriel', field: 'courriel' },
       ],
-      data: users,
+      data: filteredUsers,
     });
   }, [users])
 
