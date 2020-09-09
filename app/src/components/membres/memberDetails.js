@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types";
 
-import { Input, Switch, FormControlLabel, InputLabel, TextField, Button } from '@material-ui/core';
+import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
 
 const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
 
@@ -35,6 +35,35 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
             placeholder="Baden-Powell" 
             onChange={event => setMember({...member, nom: event.target.value})} />
 
+            <div>
+                <TextField
+                    fullWidth
+                    disabled={!(canEdit || isPersonalProfile)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={(event) => {            
+                        setMember({...member, details: {...member?.details, ddn: event.target.value}});
+                    }}
+                    value={member?.details?.ddn}
+                    label="Date de naissance" 
+                    type="date"
+                />     
+
+                <TextField
+                    fullWidth
+                    disabled={!(canEdit || isPersonalProfile)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={(event) => {            
+                        setMember({...member, details: {...member?.details, ramq: event.target.value}});
+                    }}
+                    value={member?.details?.ramq}
+                    label="Numéro d'Assurance-Maladie" 
+                    type="string"
+                />     
+            </div>
 
             <TextField
                 fullWidth={true}
@@ -43,12 +72,26 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
                     shrink: true,
                   }}
                 onChange={(event) => {            
-                    setMember({...member, details: {...member?.details, ddn: event.target.value}});
+                    setMember({...member, details: {...member?.details, phone: event.target.value}});
                 }}
-                value={member?.details?.ddn}
-                label="Date de naissance" 
-                type="date"
-            />     
+                value={member?.details?.phone}
+                label="Numéro de téléphone" 
+                type="string"
+            />
+
+            <TextField
+                fullWidth={true}
+                disabled={!(canEdit || isPersonalProfile)}
+                InputLabelProps={{
+                    shrink: true,
+                  }}
+                onChange={(event) => {            
+                    setMember({...member, details: {...member?.details, addresse: event.target.value}});
+                }}
+                value={member?.details?.addresse}
+                label="Addresse complète" 
+                type="string"
+            />            
             </div>
 
             <div>   

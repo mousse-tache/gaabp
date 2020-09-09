@@ -4,6 +4,7 @@ const PermissionTypes = {
     UpdateUser: "updateUser",
     DeleteUser: "deleteUser",
     ViewUsers: "viewUsers",
+    ViewPersonalInfo: "viewPersonalInfo",
 
     // units
     CreateUnit: "createUnit",

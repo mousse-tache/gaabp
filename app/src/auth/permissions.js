@@ -31,6 +31,7 @@ function Permissions(user, permission) {
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:
         case PermissionTypes.UpdateUnit:
+        case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
             return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
@@ -43,7 +44,7 @@ function Permissions(user, permission) {
         case PermissionTypes.RemoveNomination:
             return (user.isAdmin || isGeneralCommissionner());
         case PermissionTypes.RecommendFormation:
-            return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());
+            return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         default:

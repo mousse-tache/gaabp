@@ -9,14 +9,19 @@ import Unit from "./../units/unit"
 import EditUnit from "./../units/editUnit"
 import Formation from "./../formation/formation"
 import AccueilRessources from "../ressources/accueilRessources"
+import UserContext from "../../context/userContext"
+import Permissions from "../../auth/permissions"
+import PermissionTypes from "../../auth/permissionTypes"
 
 const NominatedUserRouter = () => {
+    const user = useContext(UserContext).autheduser;
+
 
     return (
     <Router basepath="/app"> 
         <Profile path="/account" />
         <Membres path="/membres" />
-        <EditMembre path="membre/:id" />
+        {Permissions(user, PermissionTypes.ViewUsers) && <EditMembre path="membre/:id" />}
         <Group path="/groupes" />
         <EditGroup path="/groupe/:id" />
         <Unit path="/unites" />
