@@ -243,7 +243,7 @@ const EditGroup = ({id}) => {
                             select
                             fullWidth
                             value={selectRole}
-                            disabled={!canEdit}
+                            disabled={!Permissions(authedUser, PermissionTypes.AddNomination)}
                             variant="outlined"
                             onChange={x => setSelectRole(x.target.value)}
                             >
@@ -255,8 +255,6 @@ const EditGroup = ({id}) => {
                     </div>
                 </div>
             </CardContent>
-
-
             <CardContent>
                 <Typography variant="h5">Maîtrise de groupe</Typography>
                 <GroupMembresTable users={membres.filter(user => user.nominations.filter(x => !x.ed && x.groupId === group._id).length !== 0)} groupId={group._id} removeFromGroup={RemoveFromGroup} />

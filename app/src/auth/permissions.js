@@ -15,6 +15,10 @@ function Permissions(user, permission) {
         return user?.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
 
+    const isGroupCommissionner = () => {
+        return user?.nominations.filter(x => x.type === NominationTypes.CommissaireGroupes  && !x.ed).length > 0;
+    };
+
     const isChief = () => {
         return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.ed).length > 0;
     };
@@ -39,7 +43,7 @@ function Permissions(user, permission) {
         case PermissionTypes.CreateUnit:
         case PermissionTypes.CreateGroup:
         case PermissionTypes.UpdateGroup:
-            return (user.isAdmin || isGroupChief() || isGeneralCommissionner());
+            return (user.isAdmin || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.AddNomination:
         case PermissionTypes.RemoveNomination:
             return (user.isAdmin || isGeneralCommissionner());
