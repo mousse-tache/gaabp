@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Typography, TextField } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 import GroupClient from "../../clients/groupClient";
 import { Helmet } from "react-helmet";
 import MaterialTable from 'material-table';
 import Regions from "../../utils/regions";
-import { navigate } from 'gatsby';
 
 const Impliquer = () => {
   const [groupList, setGroupList] = useState(false);
@@ -24,8 +23,8 @@ const Impliquer = () => {
       columns: [
         { title: '', field: 'numero', render: rowData => `${rowData.numero} ${rowData.nom}` },
         { title: 'Ville', field: 'ville' },
-        { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null}
-
+        { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null},
+        { title: '', field: 'website', render: rowData => rowData.website ? <a href={rowData.website} target="_blank" rel="noopener noreferrer">Site web</a> : null}
       ],
       data: groupList.filter(x => x.nom != "Instances nationales"),
     });
@@ -35,7 +34,7 @@ const Impliquer = () => {
 
   async function FetchGroups() {
       try {               
-          var data = await groupClient.getGroups();
+          var data = await groupClient.getPublicGroups();
           if(data !== null)
           {
               setGroupList(data.filter(x => x.nom !== "Instances nationales"));

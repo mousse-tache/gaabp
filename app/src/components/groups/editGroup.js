@@ -206,6 +206,11 @@ const EditGroup = ({id}) => {
                 control={<Checkbox onClick={() => setGroup({...group, public: !group.public})} />}
                 label={(!group.region || !group.adresse || !group.ville) ? "Afficher sur le site public (Requiert ville, région et adresse)" : "Afficher sur le site public"}
                 />
+                <FormControlLabel 
+                value={group.website}
+                control={<TextField onChange={(event) => setGroup({...group, website: event.target.value})} />}
+                label="Site web (pour affichage public)"
+                />
                 
                 <Typography>
                     <Button variant="contained" color="secondary" disabled={!canEdit} hidden={!canEdit} onClick={SaveGroup}>Sauvegarder</Button>

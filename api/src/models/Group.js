@@ -12,7 +12,8 @@ const groupSchema = new mongoose.Schema({
   adresse: String,
   foulard: String,
   units: Array,
-  public: Boolean
+  public: Boolean,
+  website: String
 })
 
 module.exports = mongoose.model('Group', groupSchema)
