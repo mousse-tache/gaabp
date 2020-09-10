@@ -100,6 +100,11 @@ const otherRoutes = [
   },
   {
     method: 'GET',
+    url: '/api/groups/public',
+    handler: groupController.getPublicGroups
+  },
+  {
+    method: 'GET',
     url: '/api/group/:id',
     handler: groupController.getSingleGroup
   },

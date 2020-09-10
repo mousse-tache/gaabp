@@ -21,6 +21,10 @@ export class GroupClient {
         return this._apiClient.get("groups");
     }
 
+    getPublicGroups = () => {
+        return this._apiClient.get("groups/public");
+    }
+
     addGroup = (group) => {
         return this._apiClient.post("group", group );
     }

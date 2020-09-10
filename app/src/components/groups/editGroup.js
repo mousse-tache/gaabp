@@ -6,7 +6,7 @@ import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, MenuItem, TextField } from '@material-ui/core';
+import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, MenuItem, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
 import Regions from "../../utils/regions";
 
 import { useSnackbar } from 'notistack';
@@ -29,6 +29,7 @@ const EditGroup = ({id}) => {
     const [selectUser, setSelectUser] = useState({prenom: "", nom: "", _id:0});
     const [selectRole, setSelectRole] = useState("");
     const [query, setQuery] = useState("");
+    const regions = Regions.map(x => <MenuItem key={x.id} value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>);
     
     const { enqueueSnackbar } = useSnackbar();
     const groupClient = new GroupClient();
@@ -50,14 +51,14 @@ const EditGroup = ({id}) => {
         FetchGroup();
         FetchUnits();
         FetchMembres();
-    }, [])
+    }, [id])
 
     useEffect(() => {
         FetchAllUsers();
     }, [query])
 
     async function FetchGeoLocalisation() {
-        if(group.adresse !== undefined && group.adresse !== "") {
+        if(group.adresse !== undefined && group.adresse.length > 5) {
             var data = await geoClient.forward(group.adresse) 
             console.log(data);
         }
@@ -135,7 +136,6 @@ const EditGroup = ({id}) => {
         e.preventDefault();
         e.stopPropagation();
         try {
-            //FetchGeoLocalisation();
             await groupClient.updateGroup({...group, id: group._id});
             enqueueSnackbar('Le groupe ' + group.nom + " a été sauvegardé");
             FetchGroup();
@@ -188,7 +188,7 @@ const EditGroup = ({id}) => {
                     disabled={!canEdit}
                     onChange={x => setGroup({...group, region: x.target.value})}
                     >
-                    {Regions.map(x => <MenuItem key={x.id} value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>)}
+                    {regions}
                 </TextField>
                 <TextField
                     label="Adresse"
@@ -196,8 +196,17 @@ const EditGroup = ({id}) => {
                     value={group.adresse}
                     disabled={!canEdit}
                     onChange={x => setGroup({...group, adresse: x.target.value})}
+                    on
                     >
                 </TextField>
+                <FormControlLabel 
+                value={group.public}
+                disabled={!group.region || !group.adresse || !group.ville}
+                
+                control={<Checkbox onClick={() => setGroup({...group, public: !group.public})} />}
+                label={(!group.region || !group.adresse || !group.ville) ? "Afficher sur le site public (Requiert ville, région et adresse)" : "Afficher sur le site public"}
+                />
+                
                 <Typography>
                     <Button variant="contained" color="secondary" disabled={!canEdit} hidden={!canEdit} onClick={SaveGroup}>Sauvegarder</Button>
                 </Typography>

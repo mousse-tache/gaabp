@@ -14,6 +14,15 @@ exports.getGroups = async (req, reply) => {
   }
 }
 
+exports.getPublicGroups = async (req, reply) => {
+  try {
+    const groups = await Group.find({public: true})
+    return groups
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 // Get single group by ID
 exports.getSingleGroup = async (req, reply) => {
   try {
