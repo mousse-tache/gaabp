@@ -27,7 +27,7 @@ exports.getBasicUsers = async (req, reply) => {
 exports.getBasicUsersWithPaging = async (req, reply) => {
   try {
     const {page, pageSize, query} = req.params
-    var skip = (page-1)*pageSize;
+    var skip = page > 1 ? (page-1)*pageSize : 0;
 
     var users;
     var count;
