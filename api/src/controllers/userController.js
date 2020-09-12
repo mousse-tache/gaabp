@@ -45,11 +45,11 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
           {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
           {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
         ]     
-      },{_id:1, courriel:1, nom:1, prenom:1}).countDocuments
+      },{_id:1, courriel:1, nom:1, prenom:1}).countDocuments()
     }
     else {
       users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize)
-      count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize).countDocuments
+      count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize).countDocuments()
     }
 
     return { users, count }
