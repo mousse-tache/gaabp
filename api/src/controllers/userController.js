@@ -59,7 +59,7 @@ exports.searchUsersWithFormations = async (req, reply) => {
 // Search users by formation
 exports.searchUsersWithPendingFormations = async (req, reply) => {
   try {
-    const users = await User.find({"formations.dateConfirme": null},{nominations:0,details:0})
+    const users = await User.find({formations: {$elemMatch: {dateConfirme: null}}},{nominations:0,details:0})
     return users
   } catch (err) {
     throw boom.boomify(err)
