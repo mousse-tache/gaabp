@@ -24,6 +24,40 @@ exports.getBasicUsers = async (req, reply) => {
   }
 }
 
+exports.getBasicUsersWithPaging = async (req, reply) => {
+  try {
+    const {page, pageSize, query} = req.params
+    var skip = (page-1)*pageSize;
+
+    var users;
+    var count;
+    if(query !== "") {
+      users = await User.find({$or: 
+        [
+          {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+          {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+          {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+        ]     
+      },{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize)
+      count = await User.find({$or: 
+        [
+          {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+          {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+          {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+        ]     
+      },{_id:1, courriel:1, nom:1, prenom:1}).countDocuments
+    }
+    else {
+      users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize)
+      count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize).countDocuments
+    }
+
+    return { users, count }
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 // Search in users
 exports.searchUsers = async (req, reply) => {
   try {
@@ -59,7 +93,7 @@ exports.searchUsersWithFormations = async (req, reply) => {
 // Search users by formation
 exports.searchUsersWithPendingFormations = async (req, reply) => {
   try {
-    const users = await User.find({formations: {$elemMatch: {dateConfirme: null}}},{nominations:0,details:0})
+    const users = await User.find({formations: {$elemMatch: {dateConfirme: null, dateRecommende: {$ne: null}}}},{nominations:0,details:0})
     return users
   } catch (err) {
     throw boom.boomify(err)
