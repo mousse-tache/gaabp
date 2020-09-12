@@ -15,9 +15,10 @@ const RecommendFormation = () => {
     const authedUser = useContext(UserContext).authedUser;
     const { enqueueSnackbar } = useSnackbar();
     const [formation, setFormation] = useState({branche: {couleur: ""}, niveau: {id: ""}, dateRecommende: new Date(), dateConfirme: null, recommendedBy: authedUser._id});
-    const [allFormateurs, setAllFormateurs] = useState(false);
+    const [allPendingFormationMembers, setAllPendingFormationMembers] = useState(false);
     const [query, setQuery] = useState("");
-    const [searchUsers, setSearchUsers] = useState([])
+    const [queriedUsers, setQueriedUsers] = useState([]);
+    const [formateurs, setFormateurs] = useState([]);
     const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: "", formations: []});
     const [errorText, setErrorText] = useState(null);
     const [allFormation, setAllFormation] = useState([]);
@@ -27,7 +28,7 @@ const RecommendFormation = () => {
     const addFormation = async() => { 
         try {            
             await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
-            setSelectUser({_id: 0, prenom: "", nom: "", formations:[]});
+            setSelectUser({...selectUser, _id: 0, prenom: "", nom: "", });
             enqueueSnackbar("Formation recommandée");
             FetchAllUsers();
         } catch (e) {
@@ -37,7 +38,7 @@ const RecommendFormation = () => {
 
     const confirmFormation = async(user) => {
         console.log(user);
-        var userFormations = [...allFormation.filter(x => x._id == user._id)[0].formations];
+        var userFormations = [...allPendingFormationMembers.filter(x => x._id == user._id)[0].formations];
         console.log(userFormations)
 
         var formationToUpdate = user.formation;
@@ -59,13 +60,26 @@ const RecommendFormation = () => {
     }
 
     useEffect(() => {
-        FetchUsers();
-    }, [query])
+        FetchAllUsers();  
+    }, [])
 
     useEffect(() => {
-        FetchAllUsers();  
-        FetchFormateurs()
-    }, [])
+        if(allPendingFormationMembers) {
+            var allPendingFormationMembersToConfirm =  allPendingFormationMembers.filter(x => x.formations.filter(y => !y.dateConfirme).length > 0);
+            var formations = [];
+            allPendingFormationMembersToConfirm.forEach(user => {
+                user.formations.filter(y => !y.dateConfirme && y.dateRecommende).forEach(formation => {
+                    formations.push({prenom: user.prenom, nom: user.nom, _id: user._id, formation: formation})
+                })
+            });
+
+            setAllFormation(formations);
+        }
+    },[allPendingFormationMembers])
+
+    useEffect(() => {
+        FetchFormateurs();
+    }, [allFormation])
 
     useEffect(() => {
         if(selectUser.formations.filter(x => x.niveau?.id === formation.niveau.id).length > 0 && selectUser.formations.filter(x => x.branche?.couleur === formation.branche.couleur).length > 0)
@@ -77,47 +91,52 @@ const RecommendFormation = () => {
         }
     }, [formation])
 
-    async function FetchAllUsers() {
-        try {               
-            var data = await userClient.searchUsersWithPendingFormations();
-            if(data !== null)
-            {
-                setAllFormation(data);   
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-    }
+    useEffect(() => {
+        FetchQueriedUsers();
+    }, [query])
 
     const FetchFormateurs = async() => {
         try {               
-            var data = await userClient.getFormateurs();
+            const formateursIds = allFormation.map(x => x.formation.recommendedBy);
+            var data = await userClient.getByIds(formateursIds);
             if(data !== null)
             {
-                setAllFormateurs(data);   
+                setFormateurs(data);   
             }            
         } catch (e) {
             console.log(e.message);   
         }
-    }
+    };
 
-    const FetchUsers = async() => {
+    const FetchQueriedUsers = async() => {
         if(query.length < 3) {
             return;
         }
 
         try {               
-            var data = await userClient.searchUsersWithFormations(query);
+            var data = await userClient.searchUsers(query);
             if(data !== null)
             {
-                setSearchUsers(data);
+                setQueriedUsers(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    };
+
+    async function FetchAllUsers() {
+        try {               
+            var data = await userClient.searchUsersWithPendingFormations();
+            if(data !== null)
+            {
+                setAllPendingFormationMembers(data);   
             }            
         } catch (e) {
             console.log(e.message);   
         }
     }
     
-    if (!allFormation) {
+    if (!allPendingFormationMembers) {
         return <Loading />
     }
 
@@ -135,7 +154,7 @@ const RecommendFormation = () => {
                     setSelectUser(newValue);
                 }}
                 value={selectUser}
-                options={searchUsers}
+                options={queriedUsers}
                 getOptionLabel={(option) => option.prenom + " " + option.nom}
                 style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} onChange={(event) => setQuery(event.target.value)} required label="Membre" variant="outlined" />}
@@ -242,7 +261,7 @@ const RecommendFormation = () => {
                     { title: 'Membre', field: 'prenom', render: (rowData) => `${rowData.prenom} ${rowData.nom}` },
                     { title: 'Formation', field: 'formation', render: (rowData) =>  `${rowData.formation.niveau.name} ${rowData.formation.branche.couleur.toLowerCase()}`},
                     { title: 'Recommandé le', field: 'formation.dateRecommended', render: (rowData) =>  `${rowData.formation.dateRecommende}`},
-                    { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${allFormateurs.filter(member => member._id == rowData.formation.recommendedBy)[0]?.prenom} ${allFormateurs.filter(member => member._id == rowData.formation.recommendedBy)[0]?.nom}`},
+                    { title: 'Recommandé par', field: 'formation.recommendedBy', render: (rowData) =>  `${formateurs.filter(member => member._id == rowData.formation.recommendedBy)[0]?.prenom} ${formateurs.filter(member => member._id == rowData.formation.recommendedBy)[0]?.nom}`},
                   ]}
                 // Limitation for now, view only a single formation at a time
                 data={allFormation}     

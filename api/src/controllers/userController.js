@@ -30,9 +30,9 @@ exports.searchUsers = async (req, reply) => {
     const { query } = req.body
     const users = await User.find({$or: 
       [
-        {courriel: {$regex: query}}, 
-        {prenom: {$regex: query}}, 
-        {nom: {$regex: query}}
+        {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+        {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+        {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
       ]},{details:0, formations:0})
     return users
   } catch (err) {
@@ -46,9 +46,9 @@ exports.searchUsersWithFormations = async (req, reply) => {
     const { query } = req.body
     const users = await User.find({$or: 
       [
-        {courriel: {$regex: query}}, 
-        {prenom: {$regex: query}}, 
-        {nom: {$regex: query}}
+        {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+        {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
+        {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
       ]},{details:0, nominations:0})
     return users
   } catch (err) {
