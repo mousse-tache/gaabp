@@ -40,6 +40,22 @@ exports.searchUsers = async (req, reply) => {
   }
 }
 
+// Search in users
+exports.searchUsersWithFormations = async (req, reply) => {
+  try {
+    const { query } = req.body
+    const users = await User.find({$or: 
+      [
+        {courriel: {$regex: query}}, 
+        {prenom: {$regex: query}}, 
+        {nom: {$regex: query}}
+      ]},{details:0, nominations:0})
+    return users
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 // Search users by formation
 exports.searchUsersWithPendingFormations = async (req, reply) => {
   try {

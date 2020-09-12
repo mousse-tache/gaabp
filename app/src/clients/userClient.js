@@ -41,6 +41,10 @@ export class UserClient {
         return this._apiClient.post("users/search", {query});
     }
 
+    searchUsersWithFormations = (query) => {
+        return this._apiClient.post("users/formations/search", {query});
+    }
+
     getBasicUsers = () => {
         return this._apiClient.get("users/basic");
     }

@@ -49,6 +49,11 @@ const otherRoutes = [
     handler: userController.searchUsers
   },
   {
+    method: 'POST',
+    url: '/api/users/formations/search',
+    handler: userController.searchUsersWithFormations
+  },
+  {
     method: 'GET',
     url: '/api/user/:id',
     handler: userController.getSingleUser
