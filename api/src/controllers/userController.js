@@ -31,7 +31,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 
     var users;
     var count;
-    if(query !== "") {
+    if(query && query !== "") {
       users = await User.find({$or: 
         [
           {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
