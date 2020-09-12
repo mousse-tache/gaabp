@@ -31,6 +31,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 
     var users;
     var count;
+    var currentPage=page;
     if(query && query !== "") {
       users = await User.find({$or: 
         [
@@ -51,8 +52,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
       users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize)
       count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(pageSize).countDocuments()
     }
-
-    return { users, count, page: page }
+    return { users, page: currentPage, count }
   } catch (err) {
     throw boom.boomify(err)
   }
