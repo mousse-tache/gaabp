@@ -29,6 +29,14 @@ export class UserClient {
         return this._apiClient.get("users");
     }
 
+    searchUsersWithPendingFormations = () => {
+        return this._apiClient.get("users/pendingFormations");
+    }
+
+    getFormateurs = () => {
+        return this._apiClient.get("users/formateurs");
+    }
+
     searchUsers = (query) => {
         return this._apiClient.post("users/search", {query});
     }

@@ -33,13 +33,32 @@ exports.searchUsers = async (req, reply) => {
         {courriel: {$regex: query}}, 
         {prenom: {$regex: query}}, 
         {nom: {$regex: query}}
-      ]})
+      ]},{details:0, formations:0})
     return users
   } catch (err) {
     throw boom.boomify(err)
   }
 }
 
+// Search users by formation
+exports.searchUsersWithPendingFormations = async (req, reply) => {
+  try {
+    const users = await User.find({"formations.dateConfirme": null},{nominations:0,details:0})
+    return users
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
+// Get formateurs
+exports.getFormateurs = async (req, reply) => {
+  try {
+    const users = await User.find({"formations": { $elemMatch: { "niveau.id": {$in: ["32", "34"]}, dateConfirme: {$ne:null}}}},{nominations:0,details:0})
+    return users
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
 
 exports.getUsersByUnit = async (req, reply) => {
   try {

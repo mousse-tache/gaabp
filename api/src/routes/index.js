@@ -95,6 +95,16 @@ const otherRoutes = [
   },
   {
     method: 'GET',
+    url: '/api/users/pendingFormations',
+    handler: userController.searchUsersWithPendingFormations
+  },  
+  {
+    method: 'GET',
+    url: '/api/users/formateurs',
+    handler: userController.getFormateurs
+  },  
+  {
+    method: 'GET',
     url: '/api/groups',
     handler: groupController.getGroups
   },
