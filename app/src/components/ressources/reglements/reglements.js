@@ -1,17 +1,17 @@
 import React from "react";
 import { List, ListItem } from "@material-ui/core";
-import Rules from "../../../public/static/Règlements généraux.pdf"
-import r1 from "../../../public/static/Réglement spécifique 01 - Ages des chefs et assistants.pdf"
-import r2 from "../../../public/static/Réglement spécifique 02 - Le groupe et sont chef de groupe.pdf"
-import r3 from "../../../public/static/Réglement spécifique 03 - Ages des aides de camps.pdf"
-import r4 from "../../../public/static/Réglement spécifique 04 - Normes de campement.pdf"
-import r5 from "../../../public/static/Réglement spécifique 05 - Normes de campement sous tente.pdf"
-import r6 from "../../../public/static/Règlement spécifique 06 - Uniforme.pdf"
-import r7 from "../../../public/static/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf"
-import r8 from "../../../public/static/Règlement spécifique 08 - Médailles et honneur.pdf"
-import r9 from "../../../public/static/Règlement spécifique 09 - Recensement et cotisations.pdf"
-import r10 from "../../../public/static/Règlement spécifique 10 - Programme d'aide aux nouvelles unités.pdf"
-import r11 from "../../../public/static/Règlement spécifique 11 - Code de procédure.pdf"
+import Rules from "../../../docs/Règlements généraux.pdf"
+import r1 from "../../../docs/Réglement spécifique 01 - Ages des chefs et assistants.pdf"
+import r2 from "../../../docs/Réglement spécifique 02 - Le groupe et sont chef de groupe.pdf"
+import r3 from "../../../docs/Réglement spécifique 03 - Ages des aides de camps.pdf"
+import r4 from "../../../docs/Réglement spécifique 04 - Normes de campement.pdf"
+import r5 from "../../../docs/Réglement spécifique 05 - Normes de campement sous tente.pdf"
+import r6 from "../../../docs/Règlement spécifique 06 - Uniforme.pdf"
+import r7 from "../../../docs/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf"
+import r8 from "../../../docs/Règlement spécifique 08 - Médailles et honneur.pdf"
+import r9 from "../../../docs/Règlement spécifique 09 - Recensement et cotisations.pdf"
+import r10 from "../../../docs/Règlement spécifique 10 - Programme d'aide aux nouvelles unités.pdf"
+import r11 from "../../../docs/Règlement spécifique 11 - Code de procédure.pdf"
 
 const Reglements = () => {
     return (
