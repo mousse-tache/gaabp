@@ -51,7 +51,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
       users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(parseInt(pageSize))
       count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(parseInt(pageSize)).countDocuments()
     }
-    return { users, page, count }
+    return { users, page: parseInt(page), count }
   } catch (err) {
     throw boom.boomify(err)
   }
