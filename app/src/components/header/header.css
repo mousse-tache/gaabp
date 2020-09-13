@@ -131,6 +131,7 @@ a:active {
 
         align-items: center;
         justify-items: center;
+        min-height: 0em;
     }
 
     .auth {
@@ -155,6 +156,7 @@ a:active {
 
         align-items: center;
         justify-items: center;
+        
     }
 
     .morelinks-items {
@@ -163,10 +165,9 @@ a:active {
         text-align: center;
     }
 
-    .tabnav {
+    .tabnav, .collapsable {
         display: none;
         visibility: collapse;
-        
     }
 
     .header-nomination-button { 
@@ -182,4 +183,8 @@ a:active {
     .main-header a {
         max-width: 70%;
     }
+
+    .sticky + div {
+        padding-top: 0em;
+      }
 }

@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ImageCarousel from  "../components/public-components/imageCarousel";
 import { Typography } from "@material-ui/core";
 import { Helmet } from "react-helmet";
+import Logo from "../images/Logo_AABP.png"
 
 const IndexPage = () => (
   <div>
@@ -21,9 +22,12 @@ const IndexPage = () => (
     <CssBaseline />
     <Layout>  
       <section name="home" className="sitename anchor">
-      <Typography variant="h4" gutterBottom>Association des Aventuriers de Baden-Powell</Typography>
+      <Typography className="title-container" variant="h4" gutterBottom> 
+        <img className="morelinks hidden-logo" src={Logo} alt="Logo AABP"/>
+        <span>Association des Aventuriers de Baden-Powell</span>
+        <ImageCarousel />
+      </Typography>
       </section>
-      <ImageCarousel />
       <About/>
       <Inscrire />
       <Impliquer />

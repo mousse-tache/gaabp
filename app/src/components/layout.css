@@ -167,6 +167,16 @@ form {
   width: 100%;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-container > img {
+  max-width: 100px;
+  margin: auto;
+}
+
 @media only screen and (max-width: 1100px) {
   html {
     margin-left:0%;

@@ -6,7 +6,7 @@ import Logo from "../../../images/Logo_AABP.png"
 
 const Header = () => (
   <header className="header headerpublic sticky">
-    <div className="main-header">
+    <div className="main-header collapsable">
       <Link className="navlink" to="/" partiallyActive={true} activeClassName="active">
           <img className="logo" src={Logo} alt="Logo"/>
         </Link>        
@@ -21,8 +21,12 @@ const Header = () => (
           Nous joindre
         </Link>
         <a className="navlink lien-don" href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
-    </div>
-        <Link to="/app" className="auth" >Membres</Link>
+    </div>        
+        <Link to="/app" className="auth collapsable" >Membres</Link>
+        <div className="morelinks">
+          <Link to="/app" className="morelinks-item" >Connexion membres</Link>
+        </div>
+
   </header>
 )
 
