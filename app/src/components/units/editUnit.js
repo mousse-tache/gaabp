@@ -103,7 +103,7 @@ const EditUnit = ({id}) => {
 
     const addToUnit = async() => { 
         try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole}]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date("")}]})
             FetchMembres();
             setSelectUser({_id: 0, prenom: "", nom: ""})
             enqueueSnackbar("Membre ajouté");

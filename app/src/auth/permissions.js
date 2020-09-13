@@ -8,7 +8,7 @@ function Permissions(user, permission) {
     }
 
     const isGeneralCommissionner = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.VPScout && !x.ed).length > 0;
+        return user?.nominations.filter(x => x.type.includes("VPScout") && !x.ed).length > 0;
     };
 
     const isCommissionner = () => {
@@ -16,15 +16,15 @@ function Permissions(user, permission) {
     };
 
     const isGroupCommissionner = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.CommissaireGroupes  && !x.ed).length > 0;
+        return  user?.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("groupes") && !x.ed).length > 0;
     };
 
     const isChief = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.ed).length > 0;
+        return user?.nominations.filter(x => x.type.includes("Chef") && !x.ed).length > 0;
     };
     
     const isGroupChief = () => {
-        return user?.nominations.filter(x => x.type === NominationTypes.Chef && !x.unitId && !x.ed).length > 0;
+        return user?.nominations.filter(x => x.type.includes("Chef") && !x.unitId && !x.ed).length > 0;
     };
 
     const isFormateur = () => {
@@ -37,6 +37,8 @@ function Permissions(user, permission) {
         case PermissionTypes.UpdateUnit:
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
+
+            console.log(user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
             return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:

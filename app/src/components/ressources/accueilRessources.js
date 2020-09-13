@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Typography, Paper, Tabs, Tab } from "@material-ui/core";
+import { Paper, Tabs, Tab } from "@material-ui/core";
 import "./ressources.css"
 import Cotisation from "./cotisation";
+import Reglements from "./reglements/reglements";
 
 const AccueilRessources = () => {
 
@@ -23,9 +24,13 @@ const AccueilRessources = () => {
              >
                 <Tab disableRipple component="a" label="Cotisation" />
                 <Tab disableRipple disabled component="a" label="Code d'éthique" />
+                <Tab disableRipple disabled component="a" label="Règlements" />
             </Tabs>
             {
                 value === 0 && <Cotisation />
+            }
+            {
+                value === 2 && <Reglements />
             }
         </Paper>        
     );
