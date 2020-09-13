@@ -75,7 +75,7 @@ export default class Login extends React.Component {
           window.location.reload();
         });
       }).catch(error => console.error(error));
-      return;
+      //return;
     } else {
       this.signIn.remove();
     }
