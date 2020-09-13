@@ -27,7 +27,7 @@ exports.getBasicUsers = async (req, reply) => {
 exports.getBasicUsersWithPaging = async (req, reply) => {
   try {
     const {page, pageSize, query} = req.query
-    var skip = page > 1 ? parseInt((page-1))*pageSize : 0;
+    var skip = parseInt(page) > 1 ? parseInt((page-1))*pageSize : 0;
 
     var users;
     var count;
@@ -38,7 +38,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
           {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
           {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
         ]     
-      },{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(parseInt(pageSize))
+      },{_id:1, courriel:1, nom:1, prenom:1}).sort({prenom:1}).skip(skip).limit(parseInt(pageSize))
       count = await User.find({$or: 
         [
           {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
@@ -48,8 +48,8 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
       },{_id:1, courriel:1, nom:1, prenom:1}).countDocuments()
     }
     else {
-      users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(parseInt(pageSize))
-      count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).skip(skip).limit(parseInt(pageSize)).countDocuments()
+      users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).sort({prenom:1}).skip(skip).limit(parseInt(pageSize))
+      count = await User.find({},{_id:1, courriel:1, nom:1, prenom:1}).countDocuments()
     }
     return { users, page: parseInt(page), count }
   } catch (err) {

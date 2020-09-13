@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
-import Loading from "../loading/loading"
+import React, { useState, useContext } from "react"
 import "./membres.css"
 import UserClient from "../../clients/userClient"
 import { TextField, Paper, Button, Fab, Modal } from '@material-ui/core';
@@ -14,11 +13,9 @@ import { useSnackbar } from 'notistack';
 const Membres = () => {
     const authedUserContext = useContext(UserContext);
     const authedUser = authedUserContext.authedUser;
-    const [userList, setUserList] = useState([])
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
-    const [nom, setNom] = useState("")
-    const [isFetchingUserList, setIsFetchingUserList] = useState(true);
+    const [nom, setNom] = useState("");
     const [open, setOpen] = React.useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -37,43 +34,17 @@ const Membres = () => {
         setOpen(false);
     };
 
-    useEffect(() => {
-        if(Permissions(authedUser, PermissionTypes.ViewUsers))
-        {
-            FetchUsers();
-        }
-    }, [])
-
-    async function FetchUsers() {
-        try {               
-            var data = await userClient.getBasicUsers();
-            if(data !== null)
-            {
-                setUserList(data);
-            }            
-        } catch (e) {
-            enqueueSnackbar(e.message, {variant: "error"});   
-        }
-
-        setIsFetchingUserList(false);
-    }
-
     async function AddUser(e) {           
         e.preventDefault();
         e.stopPropagation();    
         try {
             await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom});
-            FetchUsers();
             setOpen(false);
             enqueueSnackbar(`${prenom} ${nom} a été ajouté`, { variant: "success" });
         }
         catch(e) {
             enqueueSnackbar(e.message, {variant: "error"});
         }
-    }
-
-    if(isFetchingUserList) {
-        return (<Loading />)
     }
 
     return  (
@@ -113,7 +84,7 @@ const Membres = () => {
             </Paper>
         </Modal>
         {!Permissions(authedUser, PermissionTypes.ViewUsers) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
-        <MembresTable users={userList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUser)} />
+        {Permissions(authedUser, PermissionTypes.ViewUsers) && <MembresTable canEdit={Permissions(authedUser, PermissionTypes.UpdateUser)} />}
     </Paper>
     )
 }

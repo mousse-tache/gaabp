@@ -49,6 +49,10 @@ export class UserClient {
         return this._apiClient.get("users/basic");
     }
 
+    getPagedUsers = (page, pageSize, query) => {
+        return this._apiClient.get(`users/paged?page=${page}&pageSize=${pageSize}&query=${query}`);
+    }
+
     addUsers = (users) => {
         return this._apiClient.post("users", users );
     }

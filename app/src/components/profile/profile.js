@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext } from "react"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
-import { Input, Paper, Button, Switch, FormControlLabel, InputLabel } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import MemberDetails from "../membres/memberDetails";
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
@@ -35,6 +35,10 @@ const Profile = () => {
         else {
             await AddUser();
         }
+    }
+
+    if(!member) {
+        return <Loading />
     }
 
     return  (
