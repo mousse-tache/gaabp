@@ -23,14 +23,13 @@ const AccueilRessources = () => {
             className="ressources-nav"
              >
                 <Tab disableRipple component="a" label="Cotisation" />
-                <Tab disableRipple disabled component="a" label="Code d'éthique" />
-                <Tab disableRipple disabled component="a" label="Règlements" />
+                <Tab disableRipple component="a" label="Règlements" />
             </Tabs>
             {
                 value === 0 && <Cotisation />
             }
             {
-                value === 2 && <Reglements />
+                value === 1 && <Reglements />
             }
         </Paper>        
     );
