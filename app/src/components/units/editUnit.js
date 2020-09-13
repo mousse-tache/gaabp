@@ -114,7 +114,7 @@ const EditUnit = ({id}) => {
 
     const RemoveFromUnit = async(user) => { 
         try {            
-            user.nominations.filter(x => x.ed === undefined && x.unitId === unit._id)[0].ed = new Date();
+            user.nominations.filter(x => !x.ed && x.unitId === unit._id)[0].ed = new Date();
             await userClient.updateUser({...user, id: user._id})
             setMembres(membres?.filter(x => x._id !== user._id))
             enqueueSnackbar("Membre retiré en date d'aujourd'hui");

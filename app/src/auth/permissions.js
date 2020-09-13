@@ -37,8 +37,6 @@ function Permissions(user, permission) {
         case PermissionTypes.UpdateUnit:
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
-
-            console.log(user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
             return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
