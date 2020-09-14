@@ -74,7 +74,7 @@ export default class Login extends React.Component {
           console.log(`Hello, ${idToken.claims.name} (${idToken.claims.email})`);
           window.location.reload();
         });
-      }).catch(error => console.error(error));
+      }).catch(error => console.error(error) && window.location.reload());
       return;
     } else {
       this.signIn.remove();
