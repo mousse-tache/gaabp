@@ -16,7 +16,7 @@ function Permissions(user, permission) {
     };
 
     const isGroupCommissionner = () => {
-        return  user?.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("groupes") && !x.ed).length > 0;
+        return  user?.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("Groupes") && !x.ed).length > 0;
     };
 
     const isChief = () => {
