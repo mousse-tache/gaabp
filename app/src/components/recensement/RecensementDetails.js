@@ -31,7 +31,7 @@ const RecensementDetails = ({recensement}) => {
                     <b>Coût total:</b> {recensement.cost},00$
                 </Grid>           
                 <Grid item xs={3}>
-                    <b style={recensement.paiementComplet ? {} : {color:"red"}} >Paiment complété:</b> {recensement.paiementComplet ? 
+                    <b style={recensement.paiementComplet ? {} : {color:"red"}} >Paiement complété:</b> {recensement.paiementComplet ? 
                     (<span>Oui <CheckIcon color="primary" /></span>) :   (<span>Non <BlockIcon color="primary" /></span>) }
                 </Grid>          
                 <Grid item xs={12}>

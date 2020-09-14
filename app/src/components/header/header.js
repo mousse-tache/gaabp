@@ -3,8 +3,6 @@ import PropTypes from "prop-types"
 import React, { useContext, useEffect } from "react"
 import "./header.css"
 import Sidebar from "./sidebar"
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import { Tabs, Tab, Button } from "@material-ui/core"; 
 import UserMenu from "./accountMenu";
 import UserContext from "../../context/userContext";
@@ -49,7 +47,7 @@ const Header = ({ username }) => {
           >
             <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Membres" />
             <Tab disableRipple disabled={!canAccessMemberSection}  component="a" label="Progression" />
-            <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Ressources" />
+            <Tab disableRipple component="a" label="Ressources" />
             
           </Tabs>
           {canAccessMemberSection && 
