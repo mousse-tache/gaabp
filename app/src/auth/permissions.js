@@ -50,10 +50,11 @@ function Permissions(user, permission) {
         case PermissionTypes.RecommendFormation:
             return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
+        case PermissionTypes.ViewRecensementSummary:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         default:
-          return false
+          return false;
       } 
 };
 
-export default Permissions
+export default Permissions;

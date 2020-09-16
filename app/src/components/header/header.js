@@ -7,8 +7,6 @@ import { Tabs, Tab, Button } from "@material-ui/core";
 import UserMenu from "./accountMenu";
 import UserContext from "../../context/userContext";
 
-
-
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
   const tabValue = ["/app/membres", "/app/formation", "/app/ressources"];

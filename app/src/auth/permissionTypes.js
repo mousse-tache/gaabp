@@ -23,7 +23,10 @@ const PermissionTypes = {
 
     // formations
     RecommendFormation: "recommendFormation",
-    ConfirmFormation: "confirmFormation"
+    ConfirmFormation: "confirmFormation",
+
+    // recensements
+    ViewRecensementSummary: "viewRecensements"
 
 }
 
