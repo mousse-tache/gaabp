@@ -7,7 +7,7 @@ const User = require('../models/User')
 // Get all users
 exports.getUsers = async (req, reply) => {
   try {
-    const users = await User.find()
+    const users = await User.find({},{"details.ramq":0})
     return users
   } catch (err) {
     throw boom.boomify(err)
@@ -112,7 +112,7 @@ exports.getFormateurs = async (req, reply) => {
 exports.getUsersByUnit = async (req, reply) => {
   try {
     const id = req.params.id
-    const users = await User.find({$or:[{"nominations.unitId": id}, {"nominations.unitId": mongoose.Types.ObjectId(id)}] })
+    const users = await User.find({$or:[{"nominations.unitId": id}, {"nominations.unitId": mongoose.Types.ObjectId(id)}] },{"details.ramq":0})
     return users
   } catch (err) {
     throw boom.boomify(err)
@@ -122,7 +122,7 @@ exports.getUsersByUnit = async (req, reply) => {
 exports.getUsersByGroup = async (req, reply) => {
   try {
     const id = req.params.id
-    const users = await User.find({"nominations.groupId": id})
+    const users = await User.find({"nominations.groupId": id},{"details.ramq":0})
     return users
   } catch (err) {
     throw boom.boomify(err)
@@ -133,7 +133,7 @@ exports.getUsersByGroup = async (req, reply) => {
 exports.getSingleUser = async (req, reply) => {
   try {
     const id = req.params.id
-    const user = await User.find({_id: id})
+    const user = await User.find({_id: id},{"details.ramq":0})
     return user
   } catch (err) {
     throw boom.boomify(err)
@@ -143,7 +143,7 @@ exports.getSingleUser = async (req, reply) => {
 exports.getMultipleUsers = async (req, reply) => {
   try {
     const ids = req.body
-    const user = await User.find({_id: {$in: ids }})
+    const user = await User.find({_id: {$in: ids }},{"details.ramq":0})
     return user
   } catch (err) {
     throw boom.boomify(err)
@@ -154,7 +154,7 @@ exports.getMultipleUsers = async (req, reply) => {
 exports.getSingleUserByEmail = async (req, reply) => {
   try {
     const email = req.params.email
-    const user = await User.find({courriel: email})
+    const user = await User.find({courriel: email},{"details.ramq":0})
     return user
   } catch (err) {
     throw boom.boomify(err)
