@@ -27,7 +27,7 @@ const EditGroup = ({id}) => {
     const [membres, setMembres] = useState([]);
     const [allMembers, setAllMembers] = useState([]);
     const [selectUser, setSelectUser] = useState({prenom: "", nom: "", _id:0});
-    const [selectRole, setSelectRole] = useState("");
+    const [selectRole, setSelectRole] = useState(NominationTypes.Membre);
     const [query, setQuery] = useState("");
     const regions = Regions.map(x => <MenuItem key={x.id} value={x.id}>{`${x.nom}, ${x.province}`}</MenuItem>);
     
