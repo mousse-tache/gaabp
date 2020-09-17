@@ -170,7 +170,6 @@ const EditGroup = ({id}) => {
         </Breadcrumbs>
         <Card>
             <CardContent>
-
                 <Typography variant="h5">Informations de base</Typography>
                 <form className="form">
                 
@@ -219,11 +218,11 @@ const EditGroup = ({id}) => {
 
             </CardContent>
 
-            <CardContent>
+            { Permissions(authedUser, PermissionTypes.UpdateGroup) &&
+            (<CardContent>
                 <div className="add-user-search">
                     
                         <Autocomplete
-                            disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup)}
                             autoSelect
                             blurOnSelect                        
                             disableClearable
@@ -243,7 +242,6 @@ const EditGroup = ({id}) => {
                             select
                             fullWidth
                             value={selectRole}
-                            disabled={!Permissions(authedUser, PermissionTypes.AddNomination)}
                             variant="outlined"
                             onChange={x => setSelectRole(x.target.value)}
                             >
@@ -251,10 +249,10 @@ const EditGroup = ({id}) => {
                         </TextField>
                     
                     <div className="add-user-button">
-                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateGroup)} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup) || selectUser._id === 0 || !selectRole} onClick={addToGroup}>Ajouter au groupe</Button>
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} disabled={!Permissions(authedUser, PermissionTypes.UpdateGroup) || selectUser._id === 0 || !selectRole} onClick={addToGroup}>Ajouter au groupe</Button>
                     </div>
                 </div>
-            </CardContent>
+            </CardContent>)}
             <CardContent>
                 <Typography variant="h5">Maîtrise de groupe</Typography>
                 <GroupMembresTable users={membres.filter(user => user.nominations.filter(x => !x.ed && x.groupId === group._id).length !== 0)} groupId={group._id} removeFromGroup={RemoveFromGroup} />
