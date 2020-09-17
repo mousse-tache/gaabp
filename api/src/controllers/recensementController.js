@@ -4,7 +4,7 @@ const Recensement = require('../models/Recensement')
 exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
-    const recensement = await Recensement.findOne({unitId: unit}).sort({annee: -1})
+    const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
     return recensement
   } catch (err) {
     throw boom.boomify(err)
@@ -14,12 +14,22 @@ exports.getLatestRecensementbyUnit = async (req, reply) => {
 exports.getbyUnit = async (req, reply) => {
     try {
       const unit = req.params.id
-      const recensements = await Recensement.find({unitId: unit}).sort({annee: -1})
+      const recensements = await Recensement.find({unitId: unit}).sort({_id: -1})
       return recensements
     } catch (err) {
       throw boom.boomify(err)
     }
   }
+
+exports.getbyPayment = async (req, reply) => {
+  try {
+    const { paiementComplet } = req.query
+    const recensements = await Recensement.find({paiementComplet: paiementComplet}).sort({_id: -1})
+    return recensements
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
 
 exports.updateOne = async (req, reply) => {
     try {

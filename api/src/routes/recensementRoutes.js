@@ -13,6 +13,11 @@ const RecensementRoutes = [
     handler: recensementController.getLatestRecensementbyUnit
   },
   {
+    method: 'GET',
+    url: '/api/recensement/paid',
+    handler: recensementController.getbyPayment
+  },
+  {
     method: 'POST',
     url: '/api/recensement',
     handler: recensementController.addOne
