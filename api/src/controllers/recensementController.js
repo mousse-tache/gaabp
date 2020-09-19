@@ -36,7 +36,7 @@ exports.updateOne = async (req, reply) => {
         const recensement = req.body
         const id = recensement._id
         const { ...updateData } = recensement
-        const update = await Group.findByIdAndUpdate(id, updateData, { new: true })
+        const update = await Recensement.findByIdAndUpdate(id, updateData, { new: true })
         return update
       } catch (err) {
         throw boom.boomify(err)
