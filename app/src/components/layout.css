@@ -20,6 +20,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.jss6, .jss7 {
+  display: none;
+}
+
 main {
   max-width: 80%;
   margin: auto;
