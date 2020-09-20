@@ -13,6 +13,10 @@ export class RecensementClient {
         return this._apiClient.get(`recensement/latest/${id}`);
     }
 
+    getByPayment = (paiementComplet) => {
+        return this._apiClient.get(`recensement/paid/${paiementComplet}`);
+    }
+
     addRecensement = (recensement) => {
         return this._apiClient.post("recensement", recensement );
     }

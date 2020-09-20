@@ -12,6 +12,7 @@ import AccueilRessources from "../ressources/accueilRessources"
 import UserContext from "../../context/userContext"
 import Permissions from "../../auth/permissions"
 import PermissionTypes from "../../auth/permissionTypes"
+import RecensementOverview from "../recensement/recensementOverview"
 
 const NominatedUserRouter = () => {
     const user = useContext(UserContext).authedUser;
@@ -27,6 +28,7 @@ const NominatedUserRouter = () => {
         <EditUnit path="/unite/:id" />
         <Formation path="/formation" />
         <AccueilRessources path="/ressources" />
+        {Permissions(user, PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
         <Profile default />
     </Router> 
     )

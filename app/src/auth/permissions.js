@@ -46,11 +46,11 @@ function Permissions(user, permission) {
             return (user.isAdmin || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.AddNomination:
         case PermissionTypes.RemoveNomination:
+        case PermissionTypes.ViewRecensementSummary:
             return (user.isAdmin || isGeneralCommissionner());
         case PermissionTypes.RecommendFormation:
             return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
-        case PermissionTypes.ViewRecensementSummary:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         default:
           return false;

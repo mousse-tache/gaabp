@@ -77,7 +77,7 @@ const Header = ({ username }) => {
             Demande de nomination
           </Button>
           <UserMenu username={username} />
-          <Sidebar tab={value} canAccessMemberSection={canAccessMemberSection} />
+          <Sidebar tab={value} />
     </header>
   )  
 }

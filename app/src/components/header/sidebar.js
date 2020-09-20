@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, navigate } from "gatsby"
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,8 +7,13 @@ import ListItem from '@material-ui/core/ListItem';
 
 import Logo from "../../images/Logo_AABP.png"
 import QuickUnits from './quickUnits';
+import UserContext from '../../context/userContext';
+import Permissions from '../../auth/permissions';
+import PermissionTypes from '../../auth/permissionTypes';
 
-function Sidebar({window, tab, canAccessMemberSection}) {
+function Sidebar({tab}) {
+  const { authedUser } = useContext(UserContext); 
+  const canAccessMemberSection = Permissions(authedUser, PermissionTypes.ViewUsers);
 
   return (
     <Drawer
@@ -45,6 +50,15 @@ function Sidebar({window, tab, canAccessMemberSection}) {
               Groupes
           </Link>  
         </ListItem>
+        {
+          Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && (
+          <ListItem divider button disableRipple onClick={() => navigate("/app/recensements")}>     
+            <Link className="" to="/app/recensements" partiallyActive={true} activeClassName="active">
+                Recensements
+            </Link>  
+          </ListItem>
+            )
+        }
       </List>
         )
       }
