@@ -24,7 +24,9 @@ exports.getbyUnit = async (req, reply) => {
 exports.getbyPayment = async (req, reply) => {
   try {
     const { paid } = req.params
-    const recensements = await Recensement.find({paiementComplet: {$ne: !paid}}).sort({_id: -1})
+    var isPaid = paid === "true" ? true : false
+
+    const recensements = await Recensement.find({paiementComplet: isPaid}).sort({_id: -1})
     return recensements
   } catch (err) {
     throw boom.boomify(err)
