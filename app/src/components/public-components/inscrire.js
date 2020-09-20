@@ -1,6 +1,5 @@
 import React from "react"
 import { Card, CardContent, Typography, Box, Button } from "@material-ui/core"
-import CoucherSoleil from "../../images/coucher.png"
 
 const Inscrire = () => (
   <section>
