@@ -26,8 +26,15 @@ exports.getbyPayment = async (req, reply) => {
     const { paid } = req.params
     var isPaid = paid === "true" ? true : false
 
-    const recensements = await Recensement.find({paiementComplet: isPaid}).sort({_id: -1})
-    return recensements
+    if(isPaid) {
+      const recensements = await Recensement.find({paiementComplet: true}).sort({_id: -1})
+      return recensements
+    }
+    else {
+      const recensements = await Recensement.find({paiementComplet: {$ne: true}}).sort({_id: -1})
+      return recensements
+    }
+
   } catch (err) {
     throw boom.boomify(err)
   }
