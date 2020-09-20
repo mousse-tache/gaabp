@@ -28,15 +28,13 @@
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
-      text-align: center;
+      text-align: left;
   }
 
   footer a, footer a:visited {
       text-decoration: none;
       color:var(--dark);
-      margin-top: 1em;
-      min-height: 3em;
-      text-align: center;
+      text-align: left;
       margin:auto;
   }
 

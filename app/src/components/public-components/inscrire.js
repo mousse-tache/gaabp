@@ -1,5 +1,6 @@
 import React from "react"
-import { Card, CardContent, Typography } from "@material-ui/core"
+import { Card, CardContent, Typography, Box, Button } from "@material-ui/core"
+import CoucherSoleil from "../../images/coucher.png"
 
 const Inscrire = () => (
   <section>
@@ -9,7 +10,19 @@ const Inscrire = () => (
         <Typography variant="h4">
           S'inscrire
         </Typography>
-        <Typography>L'inscription pour les jeunes se fait directement auprès des groupes scouts. Nous vous invitons à contacter vos groupes locaux afin d'obtenir plus d'informations quant à l'horaire de l'année et les détails relatifs à l'inscription. Si vous ne connaissez pas de groupe dans votre région, vous pouvez consulter la liste de nos groupes.</Typography>
+        <Box lineHeight={2}>L'inscription pour les jeunes se fait directement auprès des groupes scouts. Notre association offre une structure décentralisée pour nos groupes membres. Par le biais de nos règlements, de nos formations et de nos activités nationales, nous assurons une cohésion chez l'ensemble de nos membres, mais c'est dans vos localités que notre scoutisme se vie pleinement!</Box>
+
+        <Box component="h3" lineHeight={2}>
+            Si tu veux vivre une aventure incomparable, trouve un groupe et
+        </Box>
+
+        <Box component="h3" lineHeight={2}>
+            <a href="/groupes" target="_blank">
+              <Button variant="contained" color="primary" size="large">
+                Inscris-toi
+              </Button>
+            </a>
+          </Box>
       </CardContent>
     </Card>
   </section>

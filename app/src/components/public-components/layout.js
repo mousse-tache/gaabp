@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 
@@ -17,15 +10,35 @@ import "../layout.css"
 
 const Layout = ({ children }) => {
   
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        light: '#d95764',
+        main: '#a3233a',
+        dark: '#6e0015',
+        contrastText: '#fff',
+      },
+      secondary: {
+        light: '#fff961',
+        main: '#edc62a',
+        dark: '#b69600',
+        contrastText: '#000',
+      },
+      root: {
+        textTransform: 'none',
+      }
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Header />
       <CssBaseline />
       <div>
         <main>{children}</main>
         <Footer/>
       </div>
-    </>
+    </ThemeProvider>
   )
 }
 

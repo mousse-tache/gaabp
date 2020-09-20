@@ -24,7 +24,7 @@ const IndexPage = () => (
       <section name="home" className="sitename anchor">
       <Typography className="title-container" variant="h4" gutterBottom> 
         <img className="morelinks hidden-logo" src={Logo} alt="Logo AABP"/>
-        <span>Association des Aventuriers de Baden-Powell</span>
+        <span>Association des aventuriers de Baden-Powell</span>
         <ImageCarousel />
       </Typography>
       </section>

@@ -1,48 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, Typography } from "@material-ui/core";
-import GroupClient from "../../clients/groupClient";
+import React from "react";
+import { Card, CardContent, Typography, Box, Button } from "@material-ui/core";
 import { Helmet } from "react-helmet";
-import MaterialTable from 'material-table';
-import Regions from "../../utils/regions";
 
-const Impliquer = () => {
-  const [groupList, setGroupList] = useState(false);
-
-  useEffect(() => {
-      FetchGroups();
-  }, [])
-
-  const [state, setState] = React.useState(false);
-
-  useEffect(() => {
-    if(!groupList) {
-      return;
-    }
-
-    setState({
-      columns: [
-        { title: '', field: 'numero', render: rowData => `${rowData.numero} ${rowData.nom}` },
-        { title: 'Ville', field: 'ville' },
-        { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null},
-        { title: '', field: 'website', render: rowData => rowData.website ? <a href={rowData.website} target="_blank" rel="noopener noreferrer">Site web</a> : null}
-      ],
-      data: groupList.filter(x => x.nom != "Instances nationales"),
-    });
-  }, [groupList])
-
-  const groupClient = new GroupClient();
-
-  async function FetchGroups() {
-      try {               
-          var data = await groupClient.getPublicGroups();
-          if(data !== null)
-          {
-              setGroupList(data.filter(x => x.nom !== "Instances nationales"));
-          }            
-      } catch (e) {
-          console.log(e.message);   
-      }
-  }
+const Impliquer = () => {  
 
   return (
     <section className="anchor">
@@ -51,47 +11,22 @@ const Impliquer = () => {
       <Card>
         <CardContent>
           <Typography variant="h4">S'impliquer</Typography>
-          <Typography>
+          <Box lineHeight={2}>
             L'Association des Aventuriers de Baden-Powell est constamment à la recherche de bénévoles pour s'occuper de nos scouts. Pour ce faire, il y aura vérification des antécédents judiciaires de l'intéressé pour s'assurer qu'il ne présente pas de risque. L'intéressé devra également être en contact avec le groupe dans lequel il désire s'impliquer et ses membres pourront le guider dans le processus. Il n'est pas nécessaire d'avoir été scout par le passé pour s'impliquer, il faut seulement avoir le désir de donner de son temps pour contribuer au développement des jeunes que nous accompagnons.
-          </Typography>
+          </Box>
+          <Box component="h3" lineHeight={2}>
+            Si tu veux faire la différence pour nos jeunes, trouve un groupe et 
+          </Box>
+
+          <Box component="h3" lineHeight={2}>
+            <a href="/groupes" target="_blank">
+              <Button variant="contained" color="primary" size="large">
+                Implique-toi
+              </Button>
+            </a>
+          </Box>
         </CardContent>
-      </Card>
-      <section>
-      <Card>
-        <Typography variant="h4">Trouver un groupe</Typography>
-        <CardContent>
-          <Typography>Entrer le nom d'une ville pour savoir s'il s'y trouve un groupe ou consulter la liste de nos groupes.</Typography>
-        </CardContent>
-        {groupList !== false && 
-        <MaterialTable
-          title=""
-          localization={{
-            toolbar: {
-                searchPlaceholder: "Chercher"
-            },
-            body: {
-                deleteTooltip: "Supprimer",
-                editTooltip: "Modifier",
-                addTooltip: "Nouveau"
-            }
-        }}
-          options={
-            {
-              pageSize: 10,
-              headerStyle: {
-                zIndex: 8
-              }
-            }
-          }
-          columns={state?.columns}
-          data={state?.data}     
-    />}
-
-
-
-      </Card>
-      </section>
-      
+      </Card>      
     </section>
   )
 }
