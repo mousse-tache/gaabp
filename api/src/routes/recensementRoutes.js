@@ -14,7 +14,7 @@ const RecensementRoutes = [
   },
   {
     method: 'GET',
-    url: '/api/recensement/paid',
+    url: '/api/recensement/paid/:paid',
     handler: recensementController.getbyPayment
   },
   {

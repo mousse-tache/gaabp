@@ -23,8 +23,8 @@ exports.getbyUnit = async (req, reply) => {
 
 exports.getbyPayment = async (req, reply) => {
   try {
-    const { paiementComplet } = req.query
-    const recensements = await Recensement.find({paiementComplet: paiementComplet}).sort({_id: -1})
+    const { paid } = req.params
+    const recensements = await Recensement.find({paiementComplet: paid}).sort({_id: -1})
     return recensements
   } catch (err) {
     throw boom.boomify(err)
