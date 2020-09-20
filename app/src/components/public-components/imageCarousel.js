@@ -26,9 +26,9 @@ const ImageCarousel = () => {
     return (
         <Carousel 
         className="carousel-public" 
-        navButtonsAlwaysVisible={false}
-        navButtonsAlwaysInvisible={true}
-        indicators={false}
+        navButtonsAlwaysVisible={true}
+        navButtonsAlwaysInvisible={false}
+        indicators={true}
         interval={6000}
         timeout={1000} >
             {
