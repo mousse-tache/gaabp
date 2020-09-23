@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types";
 
 import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
+import UserContext from "../../context/userContext";
 
 const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
+    const { authedUser } = useContext(UserContext);
+
 
     return (
         <form onSubmit={saveUser} className="form"> 
@@ -103,10 +106,10 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
 
                 <h3>Permissions</h3>
                 <FormControlLabel
-                    disabled={!canEdit}
+                    disabled={!authedUser.isAdmin}
                     control={
                     <Switch
-                        disabled={!canEdit }
+                        disabled={!authedUser.isAdmin}
                         checked={member?.isAdmin}
                         onChange={() => setMember({...member, isAdmin: !member?.isAdmin})}
                         name="checkedB"
