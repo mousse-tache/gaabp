@@ -65,7 +65,7 @@ const QuickUnits = () => {
             </ListItem>))}
             {groupList.map(group => (
             <ListItem key={group._id} dense>
-                <Link className="quick-units" to={"/app/group/"+group._id} >{"Groupe " + group.numero + " " + group.nom}</Link>
+                <Link className="quick-units" to={"/app/groupe/"+group._id} >{"Groupe " + group.numero + " " + group.nom}</Link>
             </ListItem>))}
         </List>
     );
