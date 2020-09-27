@@ -39,6 +39,11 @@ const Footer = () => (
               </Grid>
           </Grid>
         </div>
+        <div>    
+          <a href="https://www.netlify.com">
+            <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
+          </a>       
+        </div>
   </footer>
 )
 
