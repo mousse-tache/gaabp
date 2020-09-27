@@ -64,6 +64,9 @@ main h1, h2, h3, h4 {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.preformatted {
+  white-space: pre-line;
+}
 
 section {
   padding: 30px 5px; /* first number needs to be higher then height header/footer */ 

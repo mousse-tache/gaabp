@@ -40,7 +40,7 @@ const Footer = () => (
           </Grid>
         </div>
         <div>    
-          <a href="https://www.netlify.com">
+          <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
             <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
           </a>       
         </div>
