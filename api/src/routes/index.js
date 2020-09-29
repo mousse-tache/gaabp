@@ -40,6 +40,11 @@ const otherRoutes = [
   },
   {
     method: 'GET',
+    url: '/api/pendingNominations',
+    handler: userController.getPendingNominationUsers
+  },
+  {
+    method: 'GET',
     url: '/api/users/basic',
     handler: userController.getBasicUsers
   },
