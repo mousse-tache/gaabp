@@ -14,6 +14,7 @@ import Permissions from "../../auth/permissions"
 import PermissionTypes from "../../auth/permissionTypes"
 import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
+import NominationsOverview from "../nominations/nominationsOverview"
 
 const NominatedUserRouter = () => {
     const { authedUser } = useContext(UserContext);
@@ -31,6 +32,7 @@ const NominatedUserRouter = () => {
         {Permissions(authedUser, PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
         <AccueilRessources path="/ressources" />
         {Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
+        {Permissions(authedUser, PermissionTypes.AddNomination) && <NominationsOverview path="/nominations" />}
         <Profile default />
     </Router> 
     )

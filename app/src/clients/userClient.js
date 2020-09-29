@@ -29,6 +29,10 @@ export class UserClient {
         return this._apiClient.get("users");
     }
 
+    searchUsersWithPendingNominations = () => {
+        return this._apiClient.get("pendingNominations");
+    }
+
     searchUsersWithPendingFormations = () => {
         return this._apiClient.get("users/pendingFormations");
     }

@@ -17,7 +17,7 @@ exports.getUsers = async (req, reply) => {
 // Get all users
 exports.getPendingNominationUsers = async (req, reply) => {
   try {
-    const users = await User.find({nominations: {$elemMatch: { $or: [{sd: {$gte: new Date("2020-09-01")}}, {sd: null}], "approved": {$ne: true}, "ed": {$ne: null}}}},{"details":0, formations: 0})
+    const users = await User.find({nominations: {$elemMatch: { $or: [{sd: {$gte: new Date("2020-09-01")}}, {sd: null}, {sd: {$exists:false}}], type: {$ne: "Membre"}, "approved": {$ne: true}, "ed": null}}},{"details":0, formations: 0})
     return users
   } catch (err) {
     throw boom.boomify(err)

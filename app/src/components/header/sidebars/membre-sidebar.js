@@ -39,6 +39,15 @@ function MembresSidebar({}) {
           </ListItem>
             )
         }
+        {
+          Permissions(authedUser, PermissionTypes.AddNomination) && (
+          <ListItem divider button disableRipple onClick={() => navigate("/app/nominations")}>     
+            <Link className="" to="/app/nominations" partiallyActive={true} activeClassName="active">
+                Nominations
+            </Link>  
+          </ListItem>
+            )
+        }
       </List>
       <QuickUnits />
     </div>
