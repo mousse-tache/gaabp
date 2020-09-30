@@ -1,7 +1,8 @@
 import React, { useContext } from "react"
 import Loading from "../loading/loading"
-import { Card, List, ListItem, Button, Fab } from '@material-ui/core';
+import { Card, List, ListItem, Button } from '@material-ui/core';
 import UserContext from "../../context/userContext";
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import "./formation.css";
 
 const Formation = () => {
@@ -22,34 +23,39 @@ const Formation = () => {
                     <b>Formations disponibles</b>
                     <List>
                         <ListItem divider button disableRipple>
+                            <BookmarkIcon style={{color: "grey"}} />  
                             <p>
-                            {"BC0 – Nouveau chef \n"}
+                            {"BC0 – Nouveau chef \n"} 
                             <i>Inscription obligatoire</i>   
-                            </p>       
+                            </p>     
                         </ListItem>
                         <ListItem divider button disableRipple>
+                            <BookmarkIcon style={{color: "blue"}} />   
                             <p>
                             {"BC1 - Bleu \n"}
                             <i>Inscription obligatoire</i>   
-                            </p>       
+                            </p>          
                         </ListItem>
                         <ListItem divider button disableRipple>
+                            <BookmarkIcon color="secondary" />   
                             <p>
                             {"BC1 - Jaune \n"}
                             <i>Inscription obligatoire</i>   
-                            </p>       
+                            </p>          
                         </ListItem>
                         <ListItem divider button disableRipple>
+                            <BookmarkIcon color="primary" />    
                             <p>
                             {"FR0 - Rouge \n"}
                             <i>Formation destiné aux membres</i>   
-                            </p>       
+                            </p>         
                         </ListItem>
                         <ListItem divider button disableRipple>
+                            <BookmarkIcon style={{color: "grey"}} /> 
                             <p>
                             {"La Coéducation \n"}
                             <i>{"Formation destiné aux unités en co-éducation \n Inscription obligatoire"}</i>   
-                            </p>       
+                            </p>            
                         </ListItem>
                     </List>
                 </Card>
