@@ -41,7 +41,7 @@ const NominationsOverview = () => {
             const users = await userClient.searchUsersWithPendingNominations();
             const nominationsFlat =[];
             users.forEach(user => {
-                user.nominations.filter(n => !n.approved).forEach(n => {
+                user.nominations.filter(n => n.type !== "Membre" && !n.approved && !n.ed).forEach(n => {
                     nominationsFlat.push({...n, _id: user._id, nom: `${user.prenom} ${user.nom}`})
                 })
             });
