@@ -1,9 +1,10 @@
 import React, { useContext } from "react"
 import Loading from "../loading/loading"
-import { Card, List, ListItem, Button } from '@material-ui/core';
+import { Card, List, ListItem, Button, ListItemIcon } from '@material-ui/core';
 import UserContext from "../../context/userContext";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import "./formation.css";
+import { navigate } from "gatsby";
 
 const Formation = () => {
     const authedUser = useContext(UserContext).authedUser;
@@ -22,36 +23,46 @@ const Formation = () => {
                 <Card className="formation-card preformatted">
                     <b>Formations disponibles</b>
                     <List>
-                        <ListItem divider button disableRipple>
-                            <BookmarkIcon style={{color: "grey"}} />  
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/BC0/")}>
+                            <ListItemIcon>
+                                <BookmarkIcon style={{color: "grey"}} />    
+                            </ListItemIcon>
                             <p>
                             {"BC0 – Nouveau chef \n"} 
                             <i>Inscription obligatoire</i>   
                             </p>     
                         </ListItem>
-                        <ListItem divider button disableRipple>
-                            <BookmarkIcon style={{color: "blue"}} />   
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/BC1/bleu")}>
+                            <ListItemIcon>
+                                <BookmarkIcon style={{color: "blue"}} />   
+                            </ListItemIcon>
                             <p>
                             {"BC1 - Bleu \n"}
                             <i>Inscription obligatoire</i>   
                             </p>          
                         </ListItem>
-                        <ListItem divider button disableRipple>
-                            <BookmarkIcon color="secondary" />   
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/BC1/jaune")}>
+                            <ListItemIcon>
+                                <BookmarkIcon color="secondary" />   
+                            </ListItemIcon>
                             <p>
                             {"BC1 - Jaune \n"}
                             <i>Inscription obligatoire</i>   
                             </p>          
                         </ListItem>
-                        <ListItem divider button disableRipple>
-                            <BookmarkIcon color="primary" />    
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/FR0/rouge")}>
+                            <ListItemIcon>
+                                <BookmarkIcon color="primary" />   
+                            </ListItemIcon>   
                             <p>
                             {"FR0 - Rouge \n"}
-                            <i>Formation destiné aux membres</i>   
+                            <i>Formation destinée aux membres</i>   
                             </p>         
                         </ListItem>
-                        <ListItem divider button disableRipple>
-                            <BookmarkIcon style={{color: "grey"}} /> 
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/coeducation/")}>
+                            <ListItemIcon>
+                                <BookmarkIcon style={{color: "grey"}} />   
+                            </ListItemIcon> 
                             <p>
                             {"La Coéducation \n"}
                             <i>{"Formation destiné aux unités en co-éducation \n Inscription obligatoire"}</i>   

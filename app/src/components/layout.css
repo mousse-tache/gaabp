@@ -1,6 +1,8 @@
 :root {
   --primary: #A3233A;
   --secondary: #EEC72C;
+  --tertiary: #262F54;
+  --highlight: #8AD0BD;
   --light: #f5e9eb;
   --medium-light: #d1919c;
   --dark: #410e17;
@@ -115,7 +117,7 @@ section {
 }
 
 .bleu {
-  border: solid 3px blue;
+  border: solid 3px var(--tertiary);
 }
 
 .rouge {
@@ -127,7 +129,7 @@ section {
 }
 
 .vert {
-  border: solid 3px green;
+  border: solid 3px var(--highlight);
 }
 
 .formation-recommender-card {

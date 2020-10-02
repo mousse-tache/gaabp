@@ -15,6 +15,7 @@ import PermissionTypes from "../../auth/permissionTypes"
 import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
+import FormationResume from "../formation/components/formationResume"
 
 const NominatedUserRouter = () => {
     const { authedUser } = useContext(UserContext);
@@ -29,6 +30,8 @@ const NominatedUserRouter = () => {
         <Unit path="/unites" />
         <EditUnit path="/unite/:id" />
         <Formation path="/formation" />
+        <FormationResume path="/formation/:niveau/" />
+        <FormationResume path="/formation/:niveau/:branche" />
         {Permissions(authedUser, PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
         <AccueilRessources path="/ressources" />
         {Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}

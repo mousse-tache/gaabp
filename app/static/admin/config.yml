@@ -15,3 +15,13 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
+  - name: formation
+    label: Formation
+    folder: Formation
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: niveau, label: Niveau, widget: select,  options: ["BC0", "BC1", "BC2", "BC3"] }
+      - { name: branche, label: Branche, widget: select,  options: ["Bleue", "Jaune", "Verte", "Rouge", "Multibranche"] }
+      - { name: title, label: Title }
+      - { name: body, label: Body, widget: markdown }
