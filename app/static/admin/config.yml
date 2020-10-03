@@ -21,7 +21,8 @@ collections:
     create: true
     fields:
       - { name: path, label: Path }
-      - { name: niveau, label: Niveau, widget: select,  options: ["BC0", "BC1", "BC2", "BC3"] }
+      - { name: niveau, label: Niveau, widget: select,  options: ["BC0", "BC1", "BC2", "BC3", "FR0", "Coeducation"] }
       - { name: branche, label: Branche, widget: select,  options: ["Bleue", "Jaune", "Verte", "Rouge", "Multibranche"] }
       - { name: title, label: Title }
+      - { name: externalLink, label: Lien vers contenu externe}
       - { name: body, label: Body, widget: markdown }

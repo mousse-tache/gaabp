@@ -23,7 +23,7 @@ const Formation = () => {
                 <Card className="formation-card preformatted">
                     <b>Formations disponibles</b>
                     <List>
-                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/BC0/")}>
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/BC0/multibranche")}>
                             <ListItemIcon>
                                 <BookmarkIcon style={{color: "grey"}} />    
                             </ListItemIcon>
@@ -59,7 +59,7 @@ const Formation = () => {
                             <i>Formation destinée aux membres</i>   
                             </p>         
                         </ListItem>
-                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/coeducation/")}>
+                        <ListItem divider button disableRipple onClick={() => navigate("/app/formation/coeducation/multibranche")}>
                             <ListItemIcon>
                                 <BookmarkIcon style={{color: "grey"}} />   
                             </ListItemIcon> 
