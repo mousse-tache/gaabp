@@ -25,7 +25,7 @@
     "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-remark-images-native-lazy-load": "^1.0.0",
     "gatsby-source-filesystem": "^2.3.31",
-    "gatsby-transformer-remark": "^2.8.25",
+    "gatsby-transformer-remark": "^2.8.37",
     "gatsby-transformer-sharp": "^2.5.5",
     "he": "^1.2.0",
     "material-table": "^1.60.0",
