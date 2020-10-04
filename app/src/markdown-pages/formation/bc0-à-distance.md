@@ -3,6 +3,8 @@ path: bc0
 niveau: BC0
 branche: Multibranche
 title: BC0 à distance
-externalLink: patate
+externalLink: https://youtu.be/Wq2-tK9unsM
 ---
-Cette formation initiale vous permet d'apprendre les notions essentielles du scoutisme traditionnel. Il s'agit d'une formation se départ sur le fonctionnement de l'Association et la
+Le BC0 est une formation pour les nouveaux bénévoles à l’AABP. Cette formation vous permettra de vous familiariser avec les bases du scoutisme, ainsi qu’avec l’histoire du scoutisme et de l’association. Vous aurez aussi l’occasion de découvrir les différentes branches.
+
+De plus, vous y apprendrez quel est votre rôle et votre cheminement comme adulte à l’association.
