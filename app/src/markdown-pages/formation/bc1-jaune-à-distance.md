@@ -3,7 +3,7 @@ path: bc1jaune
 niveau: BC1
 branche: Jaune
 title: BC1 Jaune à distance
-externalLink: https://youtu.be/zmR_7RTop_o
+externalLink: https://youtube.com/embed/zmR_7RTop_o
 ---
 Cette formation à distance s'adresse à tous les chefs n'ayant pas encore suivi leur BC1 jaune. Vous en apprendrez plus sur l'art de préparer vos réunions pour répondre aux besoins et pour favoriser le développement des jeunes de 9-12 ans.
 
