@@ -24,6 +24,6 @@ collections:
       - { name: niveau, label: Niveau, widget: select,  options: ["BC0", "BC1", "BC2", "BC3", "FR0", "Coeducation"] }
       - { name: branche, label: Branche, widget: select,  options: ["Bleue", "Jaune", "Verte", "Rouge", "Multibranche"] }
       - { name: title, label: Title }
-      - { name: externalLink, label: Lien vers contenu externe, required: false}
+      - { name: externalLink, label: Lien vers contenu externe, required: false, widget: string }
       - { name: file, label: Cahier du participant, required: false, widget: file}
       - { name: body, label: Body, widget: markdown }

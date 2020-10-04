@@ -16,6 +16,7 @@ const FormationResume = ({niveau, branche}) => {
                   title
                   niveau
                   branche
+                  externalLink
                 }
                 html
               }
@@ -35,6 +36,7 @@ const FormationResume = ({niveau, branche}) => {
     }
     
     const { frontmatter, html } = article;
+    console.log(frontmatter.externalLink)
     
     return (
         <div>        
@@ -66,6 +68,12 @@ const FormationResume = ({niveau, branche}) => {
                         <Button variant="outlined" color="primary" target="_blank" href="https://forms.gle/Qn7mP9VBKoDYGbCMA" >Inscription</Button>
                         </div>
                     </Card>
+                </div>
+                <div>
+                    {
+                        frontmatter.externalLink && 
+                        <iframe width="560" height="315" src={frontmatter.externalLink} frameBorder="0" allowFullScreen></iframe>
+                    }
                 </div>
             </div>
         </div>

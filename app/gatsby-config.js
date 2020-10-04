@@ -35,11 +35,28 @@ module.exports = {
       options: {
           plugins: [
               {
+                // Using gatsby-remark-embed-video before gatsby-remark-images & gatsby-remark-responsive-iframe plugins.
+                resolve: `gatsby-remark-embed-video`,
+                options: {
+                    maxWidth: 800,
+                    ratio: 1.77,
+                    height: 400,
+                    related: false,
+                    noIframerder: true,
+                },
+              },
+              {
                   resolve: `gatsby-remark-images-native-lazy-load`,
                   options: {
                       loading: "lazy" // "lazy" | "eager" | "auto"
                       }
-                  }
+              },
+              {
+                resolve: `gatsby-remark-responsive-iframe`,
+                options: {
+                    wrapperStyle: `margin-bottom: 1.0725rem`,
+                },
+              },
           ],
       },
     },
