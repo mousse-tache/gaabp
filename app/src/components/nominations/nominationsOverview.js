@@ -12,6 +12,10 @@ import UnitClient from "../../clients/unitClient";
 import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
 
+const dateFromObjectId = (objectId) => {
+	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+};
+	
 const NominationsOverview = () => {
     const { authedUser} = useContext(UserContext);
     const [nominations, setNominations] = useState([]);
@@ -31,9 +35,7 @@ const NominationsOverview = () => {
                 { title: 'Membre', field: 'user', render: row => <span>{users && `${users?.filter(x => x._id == row.user)[0]?.prenom} ${users?.filter(x => x._id == row.user)[0]?.nom}`}</span> },
                 { title: 'Rôle', field: 'role', lookup: NominationTypes },
                 { title: "Unité", field: "nominations._id", render: row => <span>{(units ? units?.filter(x => x._id === row.unit)[0]?.nom : null) ?? (groups? `Groupe ${groups?.filter(x => x._id === row.group)[0]?.numero} ${groups.filter(x => x._id === row.group)[0]?.nom}` : null)}</span> , editable: 'never'},
-                { title: "Début", field:"sd", type:"date"},
-                { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
-                { title: "Nomination approuvée", field: "approved", type:"boolean", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
+                { title: "Date de la demande", field:"_id", render: row => <span>{dateFromObjectId(row._id).toISOString()}</span>}
             ],
             data: nominations,
           });
@@ -96,7 +98,7 @@ const NominationsOverview = () => {
 
     return (
         <div>
-            <h3>Nominations en attente</h3>
+            <h3>Demandes de nomination</h3>
             {
                 <MaterialTable
                 title=""
