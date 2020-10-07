@@ -7,7 +7,7 @@ import MotivationStep from "./steps/motivationStep";
 import NominationContext from "../../../context/nominationContext";
 import { NominationClient } from "../../../clients/nominationClient";
 import FinalStep from "./steps/finalStep";
-import Help from "../../header/help";
+import UserContext from "../../../context/userContext";
 
 const steps = [
     "Choisir une nomination", "Antécédents judiciaires", "Serment des chefs", "Motivations et recommandations"
@@ -15,6 +15,7 @@ const steps = [
 
 const NominationStepper = () => {
     const { nomination } = useContext(NominationContext);
+    const { authedUser } = useContext(UserContext);
     const [activeStep, setActiveStep] = useState(0);
     const nominationClient = new NominationClient();
 
@@ -29,7 +30,7 @@ const NominationStepper = () => {
 
     const SubmitNomination = async() => {
         await nominationClient.addDemandeNomination(
-            {...nomination, 
+            {...nomination, user: authedUser._id,
             approvers: nomination.approvers.map(x => { return {_id: x._id, nom: `${x.prenom} ${x.nom}`}})
         })
 

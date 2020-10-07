@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import NominationTypes from "../../utils/nominationTypes";
-import UserClient from "../../clients/userClient";
 
 import { useSnackbar } from 'notistack';
 import MaterialTable from "material-table";
@@ -10,43 +9,40 @@ import PermissionTypes from "../../auth/permissionTypes";
 import CheckIcon from '@material-ui/icons/Check';
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
+import NominationClient from "../../clients/nominationClient";
+import UserClient from "../../clients/userClient";
 
 const NominationsOverview = () => {
     const { authedUser} = useContext(UserContext);
     const [nominations, setNominations] = useState([]);
-    const userClient = new UserClient("");
+    const nominationClient = new NominationClient("");
     const groupClient = new GroupClient("");
     const unitClient = new UnitClient("");
+    const userClient = new UserClient("");
     const [state, setState] = useState({columns: [], data: []})
     const { enqueueSnackbar } = useSnackbar();
     const [groups, setGroups] = useState([]);
     const [units, setUnits] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         setState({
             columns: [
-                { title: 'Membre', field: 'nom'},
-                { title: 'Rôle', field: 'type', lookup: NominationTypes },
-                { title: "Unité", field: "nominations._id", render: row => <span>{(units ? units?.filter(x => x._id === row.unitId)[0]?.nom : null) ?? (groups? `Groupe ${groups?.filter(x => x._id === row.groupId)[0]?.numero} ${groups.filter(x => x._id === row.groupId)[0]?.nom}` : null)}</span> , editable: 'never'},
+                { title: 'Membre', field: 'user', render: row => <span>{users && `${users?.filter(x => x._id == row.user)[0]?.prenom} ${users?.filter(x => x._id == row.user)[0]?.nom}`}</span> },
+                { title: 'Rôle', field: 'role', lookup: NominationTypes },
+                { title: "Unité", field: "nominations._id", render: row => <span>{(units ? units?.filter(x => x._id === row.unit)[0]?.nom : null) ?? (groups? `Groupe ${groups?.filter(x => x._id === row.group)[0]?.numero} ${groups.filter(x => x._id === row.group)[0]?.nom}` : null)}</span> , editable: 'never'},
                 { title: "Début", field:"sd", type:"date"},
                 { title: "Fin", field:"ed", type:"date", defaultSort: "asc"},
                 { title: "Nomination approuvée", field: "approved", type:"boolean", render: row => row.approved ? <CheckIcon color="primary" /> : "" }
             ],
             data: nominations,
           });
-    }, [nominations, groups, units])
+    }, [nominations, groups, units, users])
 
     const FetchNominations = async() => {
         try {
-            const users = await userClient.searchUsersWithPendingNominations();
-            const nominationsFlat =[];
-            users.forEach(user => {
-                user.nominations.filter(n => n.type !== "Membre" && !n.approved && !n.ed).forEach(n => {
-                    nominationsFlat.push({...n, _id: user._id, nom: `${user.prenom} ${user.nom}`})
-                })
-            });
-
-            setNominations(nominationsFlat);
+            const demandesNomination = await nominationClient.getPending();
+            setNominations(demandesNomination);
         } catch (error) {
             enqueueSnackbar(error.toString());
         }
@@ -54,7 +50,7 @@ const NominationsOverview = () => {
 
     async function FetchMemberUnits() {
         try {               
-            var data = await unitClient.getMultipleById(nominations?.map(x => x.unitId));
+            var data = await unitClient.getMultipleById(nominations?.filter(x => x.unit !== "").map(x => x.unit));
             if(data !== null)
             {
                 setUnits(data);
@@ -66,7 +62,7 @@ const NominationsOverview = () => {
 
     async function FetchGroups() {
         try {               
-            var data = await groupClient.getMultipleById(nominations?.map(x => x.groupId));
+            var data = await groupClient.getMultipleById(nominations?.filter(x => x.group !== "").map(x => x.group));
             if(data !== null)
             {
                 setGroups(data);
@@ -76,9 +72,22 @@ const NominationsOverview = () => {
         }
     }
 
+    async function FetchUsers() {
+        try {               
+            var data = await userClient.getByIds(nominations?.map(x => x.user));
+            if(data !== null)
+            {
+                setUsers(data);
+            }            
+        } catch (e) {
+            console.log(e.message);   
+        }
+    }
+
     useEffect(() => {
         FetchMemberUnits();
         FetchGroups();
+        FetchUsers();
     }, [nominations]);
 
     useEffect(() => {
