@@ -111,7 +111,6 @@ const EditMembre = ({id}) => {
         return (<Loading />)
     }
 
-
     return  (
     <Paper className="profile">
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">

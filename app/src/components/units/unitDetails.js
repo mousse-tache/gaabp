@@ -100,7 +100,7 @@ const UnitDetails = ({disabled}) => {
                     disabled
                     />}
 
-                    {!unit.groupZ && <TextField
+                    {!unit.group && <TextField
                     select
                     fullWidth
                     value={unit.group} 

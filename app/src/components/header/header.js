@@ -6,6 +6,7 @@ import Sidebar from "./sidebar"
 import { Tabs, Tab, Button, Tooltip } from "@material-ui/core"; 
 import UserMenu from "./accountMenu";
 import UserContext from "../../context/userContext";
+import NouvelleNomination from "../nominations/nouvelle-nomination/nouvelleNomination"
 
 const Header = ({ username }) => {
   const [value, setValue] = React.useState(0);
@@ -73,15 +74,7 @@ const Header = ({ username }) => {
               </div>
             </div>
           )}  
-          <Tooltip title="Des problèmes techniques empêchent les nouvelles nominations">
-            <Button className="header-nomination-button" 
-            variant="outlined" 
-            color="secondary" 
-            target="_blank" 
-            rel="noopener noreferrer">
-              Demande de nomination
-            </Button>
-          </Tooltip>
+          <NouvelleNomination />
           <UserMenu username={username} />
           <Sidebar tab={value} />
     </header>
