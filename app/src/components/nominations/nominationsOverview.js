@@ -129,7 +129,7 @@ const NominationsOverview = () => {
                 // })
 
                 }}
-                onRowClick={(event, rowData) => navigate("/app/membre/"+rowData._id)}
+                onRowClick={(event, rowData) => navigate("/app/membre/"+rowData.user)}
                 />
             }
         </div>
