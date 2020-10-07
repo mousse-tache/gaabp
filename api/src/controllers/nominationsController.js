@@ -6,11 +6,11 @@ exports.getByCompletion = async (req, reply) => {
     const completion = req.params.completion;
 
     if (completion == "pending") {
-        const nomination = await DemandeNomination.findOne({complete: {$ne: true}}).sort({_id: -1})
+        const nomination = await DemandeNomination.find({complete: {$ne: true}}).sort({_id: -1})
         return nomination
     }
     else {
-        const nomination = await DemandeNomination.findOne({complete: true}).sort({_id: -1})
+        const nomination = await DemandeNomination.find({complete: true}).sort({_id: -1})
         return nomination
     }
     
