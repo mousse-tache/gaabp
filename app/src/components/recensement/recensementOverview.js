@@ -6,6 +6,7 @@ import MaterialTable from "material-table";
 import RecensementClient from "../../clients/recensementClient";
 import UnitClient from "../../clients/unitClient";
 import { Checkbox } from "@material-ui/core";
+import { navigate } from "gatsby";
 
 const RecensementOverview = () => {
     const [recensements, setRecensements] = useState([]);
@@ -93,6 +94,7 @@ const RecensementOverview = () => {
                             disabled: rowData.paiementComplet === true || !Permissions(authedUser, PermissionTypes.ViewRecensementSummary) 
                           })
                     ]}
+                    onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}
                     columns={cols}
                     data={recensements}     
                 />
