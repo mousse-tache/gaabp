@@ -6,11 +6,12 @@ import MaterialTable from "material-table";
 import UserContext from "../../context/userContext";
 import { navigate } from "gatsby";
 import PermissionTypes from "../../auth/permissionTypes";
-import CheckIcon from '@material-ui/icons/Check';
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
 import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
+import NominationRowDetail from "./components/nominationRowDetail";
+import "./nominations.css";
 
 const dateFromObjectId = (objectId) => {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
@@ -129,6 +130,9 @@ const NominationsOverview = () => {
                 // })
 
                 }}
+
+                detailPanel={rowData => <NominationRowDetail nomination={rowData} />}
+
                 onRowClick={(event, rowData) => navigate("/app/membre/"+rowData.user)}
                 />
             }
