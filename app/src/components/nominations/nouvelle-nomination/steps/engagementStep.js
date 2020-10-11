@@ -31,7 +31,7 @@ const EngagementStep = () => {
                 Engagement comme {nomination.role.includes("Assistant") ? "assistant(e)" : "chef(taine)"}
             </p>
             {
-            nomination.role.includes("Assistant") ? (
+            !nomination.role.includes("Assistant") ? (
                 <div className="nomination-flex-container">                
                     <FormControl component="fieldset">
                         <FormLabel component="legend">
