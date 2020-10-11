@@ -31,7 +31,7 @@ const ImageCarousel = () => {
         interval={6000}
         timeout={1000} >
             {
-                items.map( item => <img src={item.src} alt={item.description} loading="lazy" key={item.key} /> )
+                items.map( item => <img className="full-bleed" src={item.src} alt={item.description} loading="lazy" key={item.key} /> )
             }
         </Carousel>
     )
