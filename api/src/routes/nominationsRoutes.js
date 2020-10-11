@@ -8,6 +8,11 @@ const NominationsRoutes = [
     handler: nominationsController.getByCompletion
   },
   {
+    method: 'GET',
+    url: '/api/demandenomination/approval/:userId',
+    handler: nominationsController.getByApprover
+  },
+  {
     method: 'POST',
     url: '/api/demandenomination',
     handler: nominationsController.addOne

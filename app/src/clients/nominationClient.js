@@ -20,6 +20,10 @@ export class NominationClient {
     updateDemandeNomination = (nomination) => {
         return this._apiClient.put(`demandenomination`, nomination );
     }
+
+    getPendingRecommendationForUser = (userId) => {
+        return this._apiClient.get(`demandenomination/approval/${userId}`);
+    }
 }    
 
 export default NominationClient;

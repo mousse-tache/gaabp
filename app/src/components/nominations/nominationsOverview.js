@@ -12,6 +12,7 @@ import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
 import NominationRowDetail from "./components/nominationRowDetail";
 import "./nominations.css";
+import WriteRecommendation from "./writeRecommendation";
 
 const dateFromObjectId = (objectId) => {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
@@ -99,6 +100,7 @@ const NominationsOverview = () => {
 
     return (
         <div>
+            <WriteRecommendation />
             <h3>Demandes de nomination</h3>
             {
                 <MaterialTable

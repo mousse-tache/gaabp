@@ -19,6 +19,17 @@ exports.getByCompletion = async (req, reply) => {
   }
 }
 
+exports.getByApprover = async (req, reply) => {
+  try {
+    const { userId } = req.params;
+
+    const nominations = await DemandeNomination.find({"approvers._id": userId}).sort({_id: -1})
+    return nominations    
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 exports.updateOne = async (req, reply) => {
     try {
         const nomination = req.body
