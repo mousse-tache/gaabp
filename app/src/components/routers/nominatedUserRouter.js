@@ -35,7 +35,7 @@ const NominatedUserRouter = () => {
         {Permissions(authedUser, PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
         <AccueilRessources path="/ressources" />
         {Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
-        {Permissions(authedUser, PermissionTypes.AddNomination) && <NominationsOverview path="/nominations" />}
+        <NominationsOverview path="/nominations" />
         <Profile default />
     </Router> 
     )

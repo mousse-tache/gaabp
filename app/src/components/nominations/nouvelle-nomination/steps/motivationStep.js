@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { TextField, TextareaAutosize } from "@material-ui/core";
+import { TextField, TextareaAutosize, Input } from "@material-ui/core";
 import NominationContext from "../../../../context/nominationContext";
 import UserClient from "../../../../clients/userClient";
 import { Autocomplete } from "@material-ui/lab";
@@ -31,11 +31,6 @@ const MotivationStep = () => {
         }
     }
 
-    const handleChangeFirstUser = (user) => {
-        console.log(user);
-
-    };
-
     return (
         <div className="step-main-container">
             <h2>
@@ -44,9 +39,9 @@ const MotivationStep = () => {
             <p className="nomination-flex-container">
             Expliquez en quelques mots les raisons pour lesquelles vous voulez être nommé(e) à cette fonction *:</p>
             <div className="nomination-flex-container">
-                <TextareaAutosize
+                <Input
                 style={{minWidth:"30rem"}}
-                rowsMin={5}
+                multiline
                 placeholder="Je désire être nommé parce que..." 
                 value={nomination.motivation}
                 onChange={(e) => setNomination({...nomination, motivation: e.target.value})}

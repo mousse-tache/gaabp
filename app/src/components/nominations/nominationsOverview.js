@@ -5,6 +5,7 @@ import { useSnackbar } from 'notistack';
 import MaterialTable from "material-table";
 import UserContext from "../../context/userContext";
 import { navigate } from "gatsby";
+import Permissions from "../../auth/permissions"
 import PermissionTypes from "../../auth/permissionTypes";
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
@@ -12,7 +13,6 @@ import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
 import NominationRowDetail from "./components/nominationRowDetail";
 import "./nominations.css";
-import WriteRecommendation from "./writeRecommendation";
 
 const dateFromObjectId = (objectId) => {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
@@ -44,9 +44,16 @@ const NominationsOverview = () => {
     }, [nominations, groups, units, users])
 
     const FetchNominations = async() => {
+
         try {
-            const demandesNomination = await nominationClient.getPending();
-            setNominations(demandesNomination);
+            if(Permissions(authedUser, PermissionTypes.AddNomination)) {
+                const demandesNomination = await nominationClient.getPending();
+                setNominations(demandesNomination);
+            }
+            else {
+                const demandesNomination = await nominationClient.getPendingRecommendationForUser(authedUser._id);
+                setNominations(demandesNomination);
+            }
         } catch (error) {
             enqueueSnackbar(error.toString());
         }
@@ -100,8 +107,8 @@ const NominationsOverview = () => {
 
     return (
         <div>
-            <WriteRecommendation />
             <h3>Demandes de nomination</h3>
+            <h4>Ces demandes de nomination demandent votre attention</h4>
             {
                 <MaterialTable
                 title=""

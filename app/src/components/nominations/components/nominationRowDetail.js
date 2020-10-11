@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { Link } from "gatsby";
+import NominationRecommendation from "./nominationRecommendation";
 
 const NominationRowDetail = ({nomination}) => {
 
@@ -60,7 +60,7 @@ const NominationRowDetail = ({nomination}) => {
                 <b>Références</b>
             </Grid>
             <Grid divider item xs>
-                {nomination.approvers.map(x => <p><Link to={`/app/membre/${x._id}`}>{x.nom}</Link></p>)}
+                {nomination.approvers.map((x, index) => <NominationRecommendation approver={x} index={index} complete={nomination.complete} nomination={nomination} />)}
             </Grid>
         </Grid>
     )
