@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
 import UserContext from "../../context/userContext";
+import AnneesService from "./anneesService";
 
 const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
     const { authedUser } = useContext(UserContext);
@@ -100,7 +101,8 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
                     label="Nom de totem" 
                     variant="outlined"
                     type="text"
-                />     
+                />                 
+                <AnneesService nominations={member.nominations} />    
 
                 </div>
 
