@@ -1,6 +1,6 @@
 const sortNominations = (nominations) => {
     return (
-        nominations.filter(x => x.sd).map(x => {return {sd: new Date(x.sd), ed: x.ed ? new Date(x.ed) : new Date()}}).sort((previous, current) => {
+        nominations.filter(x => x.sd && x.type !== "Membre").map(x => {return {sd: new Date(x.sd), ed: x.ed ? new Date(x.ed) : new Date()}}).sort((previous, current) => {
   
             var previousTime = previous.sd.getTime();
             var currentTime = current.sd.getTime();
