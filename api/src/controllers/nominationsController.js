@@ -1,5 +1,6 @@
-const boom = require('boom')
+const boom = require('boom');
 const DemandeNomination = require('../models/DemandeNomination')
+const User = require('../models/User')
 
 exports.getByCompletion = async (req, reply) => {
   try {
@@ -53,4 +54,21 @@ exports.addOne = async (req, reply) => {
       } catch (err) {
         throw boom.boomify(err)
       }
+}
+
+exports.confirmNomination = async (req, reply) => {
+  try {
+      const { nominationId, confirmerId } = req.body
+      
+      const nomination = await DemandeNomination.findOne({_id: nominationId})
+      nomination.update({$set: {confirmerId: confirmerId, complete: true}})
+
+      var groupId = nomination.group !== "" ? nomination.group : null;
+      var unitId = nomination.unit !== "" ? nomination.unit : null;
+      var newNomination = {_id: nomination._id, groupId: groupId, unitId: unitId, type: nomination.role, sd: new Date(), approvedBy: confirmerId}
+
+      return await User.updateOne({_id: nomination.user}, {$addToSet: { nominations: newNomination}})      
+    } catch (err) {
+      throw boom.boomify(err)
+    }
 }

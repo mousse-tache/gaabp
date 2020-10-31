@@ -21,6 +21,11 @@ const NominationsRoutes = [
     method: 'PUT',
     url: '/api/demandenomination',
     handler: nominationsController.updateOne
+  },
+  {
+    method: 'POST',
+    url: '/api/demandenomination/confirm',
+    handler: nominationsController.confirmNomination
   }
 ]
 
