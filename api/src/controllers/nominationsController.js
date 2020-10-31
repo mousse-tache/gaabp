@@ -61,12 +61,19 @@ exports.confirmNomination = async (req, reply) => {
       const { nominationId, confirmerId } = req.body
       
       const nomination = await DemandeNomination.findOne({_id: nominationId})
-      nomination.update({$set: {confirmerId: confirmerId, complete: true}})
 
       var groupId = nomination.group !== "" ? nomination.group : null;
       var unitId = nomination.unit !== "" ? nomination.unit : null;
-      var newNomination = {_id: nomination._id, groupId: groupId, unitId: unitId, type: nomination.role, sd: new Date(), approvedBy: confirmerId}
+      var newNomination = { _id: nomination._id, 
+        groupId: groupId, 
+        unitId: unitId, 
+        type: nomination.role, 
+        sd: new Date(), 
+        approvedBy: confirmerId, 
+        approved:true
+      }
 
+      await DemandeNomination.updateOne({_id: nominationId}, {$set: {confirmerId: confirmerId, complete: true}})
       return await User.updateOne({_id: nomination.user}, {$addToSet: { nominations: newNomination}})      
     } catch (err) {
       throw boom.boomify(err)

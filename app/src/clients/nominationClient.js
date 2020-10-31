@@ -24,6 +24,11 @@ export class NominationClient {
     getPendingRecommendationForUser = (userId) => {
         return this._apiClient.get(`demandenomination/approval/${userId}`);
     }
+
+    confirmNomination = (nominationId, confirmerId) => {
+        return this._apiClient.post(`demandenomination/confirm`, { nominationId, confirmerId });
+    }
+    
 }    
 
 export default NominationClient;

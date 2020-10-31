@@ -45,6 +45,7 @@ function Permissions(user, permission) {
         case PermissionTypes.UpdateGroup:
             return (user.isAdmin || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.AddNomination:
+        case PermissionTypes.ValidateNomination:
         case PermissionTypes.RemoveNomination:
         case PermissionTypes.ViewRecensementSummary:
             return (user.isAdmin || isGeneralCommissionner());

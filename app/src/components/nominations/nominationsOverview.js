@@ -95,6 +95,15 @@ const NominationsOverview = () => {
         }
     }
 
+    const ConfirmNomination = async(nomination) => { 
+        try {            
+            await nominationClient.confirmNomination(nomination._id, authedUser._id)
+            enqueueSnackbar("Nomination complétée");
+        } catch (e) {
+            enqueueSnackbar(e);
+        }        
+    }
+
     useEffect(() => {
         FetchMemberUnits();
         FetchGroups();
@@ -124,21 +133,17 @@ const NominationsOverview = () => {
                 editable={{
                     isEditable: rowData => Permissions(authedUser, PermissionTypes.RemoveNomination),
                     isEditHidden: rowData => !Permissions(authedUser, PermissionTypes.RemoveNomination),
-                    onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
-                //     onRowUpdate: (newData, oldData) =>
-                //     new Promise((resolve, reject) => {
-                //         setTimeout(() => {
-                //             const index = oldData.tableData.id;
-                //             let nominations = member?.nominations;
-                //             nominations[index] = newData;
-                //             nominations[index].approvedBy = authedUser._id;
-                //             setMember({...member, nominations: nominations})
-                //             saveUser();
-                //             resolve();
-                //     }, 1000);
-                // })
-
+                    onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée")
                 }}
+
+                actions={[
+                    rowData => ({
+                        icon: 'check',
+                        tooltip: "Compléter la nomination (ajoute la nomination en date du jour au dossier du membre, avec toutes les permissions reliées)",
+                        onClick: (event, rowData) => ConfirmNomination(rowData),
+                        disabled: !Permissions(authedUser, PermissionTypes.ValidateNomination) 
+                      })
+                ]}
 
                 detailPanel={rowData => <NominationRowDetail nomination={rowData} />}
 
