@@ -34,12 +34,12 @@ const NouvelleNomination = () => {
 
     return (      
         <NominationContext.Provider value={{nomination, setNomination}}>
-            <Tooltip title={authedUser ? "Pour soumettre une demande de nomination" : "Complétez votre profil en premier lieu" }>
+            <Tooltip title={"Pour soumettre une demande de nomination"}>
                 <Button className="header-nomination-button" 
                 variant="contained" 
                 color="secondary" 
                 rel="noopener noreferrer"
-                onClick={() => authedUser && setOpen(true)}>
+                onClick={() => setOpen(true)}>
                     Demande de nomination
                 </Button>
             </Tooltip>
