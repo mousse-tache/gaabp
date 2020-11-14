@@ -18,6 +18,7 @@ const App = () => {
     const [user, setUser] = useState(false);
     const [authedUser, setAuthedUser] = useState(false);
     const userClient = new UserClient("");
+    const [init, setInit] = useState(false);
 
     const isAuthenticated = () => {
         if (typeof window !== 'undefined') {
@@ -42,7 +43,7 @@ const App = () => {
         if(!authedUser && user.email) {
             try {               
                 var data = await userClient.getByEmail(user.email);
-                if(data !== null)
+                if(data !== null && data.length > 0)
                 {
                     setAuthedUser(data[0]);
                 }            
@@ -69,6 +70,7 @@ const App = () => {
                     if(data !== null)
                     {
                         setAuthedUser(data[0]);
+                        setInit(true);
                     }            
                 } catch (e) {
                     console.log(e.message);   
@@ -91,7 +93,7 @@ const App = () => {
     }
     
     return (        
-        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser}}> 
+        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser, init}}> 
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>AABP | Scoutisme traditionnel</title>

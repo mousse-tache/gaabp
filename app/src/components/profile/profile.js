@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Loading from "../loading/loading"
 import UserContext from "../../context/userContext"
 import UserClient from "../../clients/userClient"
@@ -6,11 +6,10 @@ import { Paper } from '@material-ui/core';
 import MemberDetails from "../membres/memberDetails";
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
+import { Alert } from "@material-ui/lab";
 
 const Profile = () => {
-    const userContext = useContext(UserContext);
-    const authedUser = userContext.authedUser;
-
+    const { authedUser, claims, init } = useContext(UserContext);
     const [member, setMember] = useState(authedUser);
     
     const userClient = new UserClient();
@@ -18,9 +17,9 @@ const Profile = () => {
 
     async function AddUser() { 
         try {
-            await userClient.addUser(member);
+            await userClient.addUsers([member]);
             enqueueSnackbar(`${member?.prenom} ${member?.nom}, votre inscription a été complétée`, { variant: "success" });
-            navigate("/")
+            navigate("/app/profile");
         }
         catch(e) {
             enqueueSnackbar(e.message, {variant: "error"});
@@ -37,12 +36,25 @@ const Profile = () => {
         }
     }
 
-    if(!member) {
+    useEffect(() => {
+        if (!authedUser) {
+            console.log(authedUser)
+            setMember({
+                courriel: claims.email
+            })
+        }
+        else {
+            setMember(authedUser);
+        }
+    }, [authedUser]);
+
+    if(!init) {
         return <Loading />
     }
 
     return  (
-    <Paper className="profile">        
+    <Paper className="profile">    
+        {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
         <MemberDetails member={member} isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
     </Paper>
     )

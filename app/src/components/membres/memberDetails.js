@@ -8,13 +8,12 @@ import AnneesService from "./anneesService";
 const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
     const { authedUser } = useContext(UserContext);
 
-
     return (
         <form onSubmit={saveUser} className="form"> 
             <div>
                 <h3>Informations de base</h3>
                 
-                <TextField fullWidth label="Courriel" type="email" disabled={!(canEdit || isPersonalProfile)} value={member?.courriel} placeholder="robert@badenpowell.ca" onChange={event => setMember({...member, courriel: event.target.value})} />
+                <TextField fullWidth label="Courriel" type="email" disabled={(!canEdit || isPersonalProfile)} value={member?.courriel} placeholder="robert@badenpowell.ca" onChange={event => setMember({...member, courriel: event.target.value})} />
                 
                 <TextField 
 
@@ -102,24 +101,30 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
                     variant="outlined"
                     type="text"
                 />                 
-                <AnneesService nominations={member.nominations} />    
+                <AnneesService nominations={member?.nominations ?? []} />    
 
                 </div>
 
-                <h3>Permissions</h3>
-                <FormControlLabel
-                    disabled={!authedUser.isAdmin}
-                    control={
-                    <Switch
-                        disabled={!authedUser.isAdmin}
-                        checked={member?.isAdmin}
-                        onChange={() => setMember({...member, isAdmin: !member?.isAdmin})}
-                        name="checkedB"
-                        className="switch"
-                    />
-                    }
-                    label="Administrateur de la base de donnée"
-                />
+                {authedUser && 
+                    (
+                    <div>
+                        <h3>Permissions</h3>
+                        <FormControlLabel
+                            disabled={!authedUser?.isAdmin}
+                            control={
+                            <Switch
+                                disabled={!authedUser?.isAdmin}
+                                checked={member?.isAdmin}
+                                onChange={() => setMember({...member, isAdmin: !member?.isAdmin})}
+                                name="checkedB"
+                                className="switch"
+                            />
+                            }
+                            label="Administrateur de la base de donnée"
+                        />
+                    </div>
+                    )
+                }
                 <div className="submit-button">
                     <Button variant="contained" color="secondary" 
                         disabled={!(canEdit || isPersonalProfile)}

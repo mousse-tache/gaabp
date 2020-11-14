@@ -3,7 +3,7 @@ import NominationContext from "../../../context/nominationContext";
 import { Tooltip, Button, Dialog } from "@material-ui/core";
 import NominationStepper from "./nominationStepper";
 import "./nomination.css";
-import Help from "../../header/help";
+import UserContext from "../../../context/userContext";
 
 const DefaultNomination = 
 {role:"",
@@ -22,6 +22,7 @@ deonto: "nonselectionner"
 const NouvelleNomination = () => {
     const [open, setOpen] = useState(false);
     const [nomination, setNomination] = useState(DefaultNomination);
+    const { authedUser } = useState(UserContext);
 
     useEffect(() => {
         if(nomination.done) {
@@ -33,12 +34,12 @@ const NouvelleNomination = () => {
 
     return (      
         <NominationContext.Provider value={{nomination, setNomination}}>
-            <Tooltip title="Pour soumettre une demande de nomination">
+            <Tooltip title={authedUser ? "Pour soumettre une demande de nomination" : "Complétez votre profil en premier lieu" }>
                 <Button className="header-nomination-button" 
                 variant="contained" 
                 color="secondary" 
                 rel="noopener noreferrer"
-                onClick={() => setOpen(true)}>
+                onClick={() => authedUser && setOpen(true)}>
                     Demande de nomination
                 </Button>
             </Tooltip>
