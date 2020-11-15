@@ -123,10 +123,11 @@ const NominationsOverview = () => {
             {
                 <MaterialTable
                 title={
-                    <div>
+                    Permissions(authedUser, PermissionTypes.ValidateNomination) &&
+                    (<div>
                         Voir demandes complétées
                         <Checkbox checked={past} onChange={() => setPast(!past)} />
-                    </div>
+                    </div>)
             }
                 columns={state.columns}
                 data={state.data}
