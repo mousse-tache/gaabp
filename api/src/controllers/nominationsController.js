@@ -23,7 +23,7 @@ exports.getByCompletion = async (req, reply) => {
 exports.getByApprover = async (req, reply) => {
   try {
     const { userId } = req.params;
-    const nominations = await DemandeNomination.find({"approvers._id": userId}).sort({_id: -1})
+    const nominations = await DemandeNomination.find({"approvers": {$elemMatch: {_id: userId}}}).sort({_id: -1})
     return nominations    
   } catch (err) {
     throw boom.boomify(err)

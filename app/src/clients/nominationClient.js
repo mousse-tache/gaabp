@@ -5,13 +5,9 @@ export class NominationClient {
         this._apiClient = new ApiClient({ baseURL: process.env.GATSBY_API_URL });
     }
 
-    getPending = () => {
-         return this._apiClient.get(`demandenomination/pending`);
+    getNominations = (state) => {
+         return this._apiClient.get(`demandenomination/${state}`);
     }
-
-    getComplete = () => {
-        return this._apiClient.get(`demandenomination/complete`);
-   }
 
     addDemandeNomination = (nomination) => {
         return this._apiClient.post("demandenomination", nomination );

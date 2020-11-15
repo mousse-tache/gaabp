@@ -13,6 +13,7 @@ import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
 import NominationRowDetail from "./components/nominationRowDetail";
 import "./nominations.css";
+import { Checkbox } from "@material-ui/core";
 
 const dateFromObjectId = (objectId) => {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
@@ -30,6 +31,7 @@ const NominationsOverview = () => {
     const [groups, setGroups] = useState([]);
     const [units, setUnits] = useState([]);
     const [users, setUsers] = useState([]);
+    const [past, setPast] = useState(false);
 
     useEffect(() => {
         setState({
@@ -47,7 +49,7 @@ const NominationsOverview = () => {
 
         try {
             if(Permissions(authedUser, PermissionTypes.AddNomination)) {
-                const demandesNomination = await nominationClient.getPending();
+                const demandesNomination = await nominationClient.getNominations(past ? "complete" : "pending");
                 setNominations(demandesNomination);
             }
             else {
@@ -112,7 +114,7 @@ const NominationsOverview = () => {
 
     useEffect(() => {
         FetchNominations();
-    }, [])
+    }, [past])
 
     return (
         <div>
@@ -120,7 +122,12 @@ const NominationsOverview = () => {
             <h4>Ces demandes de nomination demandent votre attention</h4>
             {
                 <MaterialTable
-                title=""
+                title={
+                    <div>
+                        Voir demandes complétées
+                        <Checkbox checked={past} onChange={() => setPast(!past)} />
+                    </div>
+            }
                 columns={state.columns}
                 data={state.data}
                 options={
@@ -141,7 +148,7 @@ const NominationsOverview = () => {
                         icon: 'check',
                         tooltip: "Compléter la nomination (ajoute la nomination en date du jour au dossier du membre, avec toutes les permissions reliées)",
                         onClick: (event, rowData) => ConfirmNomination(rowData),
-                        disabled: !Permissions(authedUser, PermissionTypes.ValidateNomination) 
+                        disabled: !Permissions(authedUser, PermissionTypes.ValidateNomination) || rowData.complete
                       })
                 ]}
 
