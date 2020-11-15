@@ -1,7 +1,7 @@
 {
   "name": "AABP-API",
   "version": "1.0.0",
-  "description": "A blazing fast REST APIs with Node.js, MongoDB and Fastify.",
+  "description": "API for AABP management",
   "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js ./src/index.js",
@@ -10,14 +10,14 @@
   "author": "@msieurmoustache",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.691.0",
+    "@okta/okta-sdk-nodejs": "^4.2.0",
     "boom": "^7.3.0",
     "dotenv": "^8.2.0",
-    "fastify": "^3.1.1",
-    "fastify-bearer-auth": "^5.0.1",
+    "fastify": "^3.8.0",
+    "fastify-bearer-auth": "^5.0.2",
     "fastify-cors": "^3.0.3",
-    "fastify-mongodb": "^2.0.0",
-    "mongoose": "^5.9.18",
-    "nodemon": "^2.0.4"
+    "fastify-mongodb": "^2.0.1",
+    "mongoose": "^5.10.14",
+    "nodemon": "^2.0.6"
   }
 }

@@ -19,6 +19,7 @@ const App = () => {
     const [authedUser, setAuthedUser] = useState(false);
     const userClient = new UserClient("");
     const [init, setInit] = useState(false);
+    const [idToken, setIdToken] = useState(null);
 
     const isAuthenticated = () => {
         if (typeof window !== 'undefined') {
@@ -32,8 +33,8 @@ const App = () => {
         const token = await signIn.authClient.tokenManager.get('idToken');
         if (token) {
           await setUser(token.claims);
+          await setIdToken(token.idToken);
         } else {
-          // Token has expired
           setUser(false);
           localStorage.setItem('isAuthenticated', 'false');
         }
@@ -42,7 +43,8 @@ const App = () => {
     async function FetchUser() {
         if(!authedUser && user.email) {
             try {               
-                var data = await userClient.getByEmail(user.email);
+                var data = await userClient.inializeSession(idToken);
+                
                 if(data !== null && data.length > 0)
                 {
                     setAuthedUser(data[0]);

@@ -6,6 +6,7 @@ const unitController = require('../controllers/unitController')
 
 const RecensementRoutes = require('./recensementRoutes')
 const NominationsRoutes = require('./nominationsRoutes')
+const IdentityRoutes = require('./identityRoutes')
 
 const otherRoutes = [
   {
@@ -201,6 +202,6 @@ const otherRoutes = [
   }
 ]
 
-var routes = otherRoutes.concat(RecensementRoutes).concat(NominationsRoutes)
+var routes = otherRoutes.concat(RecensementRoutes).concat(NominationsRoutes).concat(IdentityRoutes)
 
 module.exports = routes

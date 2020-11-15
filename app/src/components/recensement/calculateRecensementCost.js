@@ -19,7 +19,7 @@ function CalculateCost(unitMembers, isUniteCadette = true) {
     }
 
     if(totalCount == 0) {
-        return {details: {formedUsers:0, adultUsers:0, others:0, totalCount}, basePrice: null, totalPrice: "0$"}
+        return {details: {formedUsers:0, adultUsers:0, others:0, totalCount}, basePrice: null, totalPrice: 0}
     }
 
     var formedUsers = unitMembers.filter(x => x.formations?.filter(y => y.dateConfirme).length > 0).length

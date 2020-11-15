@@ -1,7 +1,5 @@
-// External Dependancies
 const boom = require('boom')
 const mongoose = require('mongoose');
-// Get Data Models
 const User = require('../models/User')
 
 // Get all users

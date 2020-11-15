@@ -25,6 +25,10 @@ export class UserClient {
         return this._apiClient.get(`/user/email/${email}`);
     }
 
+    inializeSession = (token) => {
+        return this._apiClient.post("identity", {token});
+    }
+
     getUsers = () => {
         return this._apiClient.get("users");
     }

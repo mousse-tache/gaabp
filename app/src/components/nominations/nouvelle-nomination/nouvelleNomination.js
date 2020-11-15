@@ -22,7 +22,6 @@ deonto: "nonselectionner"
 const NouvelleNomination = () => {
     const [open, setOpen] = useState(false);
     const [nomination, setNomination] = useState(DefaultNomination);
-    const { authedUser } = useState(UserContext);
 
     useEffect(() => {
         if(nomination.done) {
