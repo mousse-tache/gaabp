@@ -10,7 +10,7 @@
   "author": "@msieurmoustache",
   "license": "ISC",
   "dependencies": {
-    "@okta/okta-sdk-nodejs": "^4.2.0",
+    "axios": "^0.21.0",
     "boom": "^7.3.0",
     "dotenv": "^8.2.0",
     "fastify": "^3.8.0",
