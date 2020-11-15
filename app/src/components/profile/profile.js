@@ -38,7 +38,6 @@ const Profile = () => {
 
     useEffect(() => {
         if (!authedUser) {
-            console.log(authedUser)
             setMember({
                 courriel: claims.email
             })
