@@ -7,7 +7,7 @@ const Unit = require('../models/Unit')
 // Get all units
 exports.getUnits = async (req, reply) => {
   try {
-    const units = await Unit.find()
+    const units = await Unit.find().sort({nom:1})
     return units
   } catch (err) {
     throw boom.boomify(err)

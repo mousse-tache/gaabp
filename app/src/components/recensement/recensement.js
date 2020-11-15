@@ -26,7 +26,7 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
 
     useEffect(() => {
         FetchLatestRecensement();
-    }, [])
+    }, [unitId])
 
     if (latestRecensement == 1) {
         return <Loading />

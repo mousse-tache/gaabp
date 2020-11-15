@@ -7,7 +7,7 @@ const Group = require('../models/Group')
 // Get all groups
 exports.getGroups = async (req, reply) => {
   try {
-    const groups = await Group.find()
+    const groups = await Group.find().sort({numero:1})
     return groups
   } catch (err) {
     throw boom.boomify(err)

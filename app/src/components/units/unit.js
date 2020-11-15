@@ -74,7 +74,7 @@ const Unit = () => {
         } 
         FetchUnits();
         FetchGroups();
-    }, [unitList, unitClient, groupClient])
+    }, [])
 
     async function AddUnit(e) {           
         e.preventDefault();

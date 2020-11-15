@@ -42,7 +42,7 @@ const PosteStep = () => {
         else {
             FetchGroups();
         }
-    }, [unitList, unitClient, groupClient])
+    }, [nomination.groupOnly])
 
     return (
         <div className="step-main-container" >
