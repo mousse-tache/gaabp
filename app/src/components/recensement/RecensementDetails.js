@@ -1,11 +1,11 @@
 import React from 'react'
 import Loading from '../loading/loading'
-import { AccordionDetails, Grid, Typography, Divider } from '@material-ui/core'
+import { AccordionDetails, Grid, Typography, Divider, List, ListItem } from '@material-ui/core'
 import BlockIcon from '@material-ui/icons/Block';
 import CheckIcon from '@material-ui/icons/Check';
+import { navigate } from 'gatsby';
 
-const RecensementDetails = ({recensement}) => {
-
+const RecensementDetails = ({recensement, users, usersNonRecenses}) => {
     var details = recensement?.details?.cost?.details;
 
     if(!recensement) {
@@ -94,10 +94,28 @@ const RecensementDetails = ({recensement}) => {
                 <Grid item xs={3}>                
                     {details.others * recensement.details.cost.basePrice}
                 </Grid>
+                <Grid item xs={12}>
+                    <Divider />   
+                </Grid>  
+                <Grid item xs={6}>
+                    
+                    <List>
+                        <ListItem>
+                            <b>Membres recensés</b>
+                        </ListItem>
+                        {users && users.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
+                    </List>  
+                </Grid>    
+                <Grid item xs={6}>
+                    
+                    <List>
+                        <ListItem>
+                            <b>Membres non recensés</b>
+                        </ListItem>
+                        {usersNonRecenses && usersNonRecenses.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
+                    </List>  
+                </Grid>       
             </Grid>
-            {/* <ul>
-                {recensement?.details?.unitMembers && recensement.details.unitMembers.map(x => <li>{x}</li>)}
-            </ul> */}
         </AccordionDetails>
     )
 }

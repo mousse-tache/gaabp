@@ -1,11 +1,14 @@
 const boom = require('boom')
 const Recensement = require('../models/Recensement')
+const User = require('../models/User')
 
 exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
     const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
-    return recensement
+    const users = await User.find({_id: {$in: recensement.details.unitMembers}},{ prenom:1, nom:1 })
+    const usersNonRecenses = await User.find({_id: {$nin: recensement.details.unitMembers}, nominations: {$elemMatch: {unitId: unit, ed: null}}},{ prenom:1, nom:1 })
+    return {recensement, users, usersNonRecenses}
   } catch (err) {
     throw boom.boomify(err)
   }

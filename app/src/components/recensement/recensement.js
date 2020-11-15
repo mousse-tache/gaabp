@@ -40,7 +40,7 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
             </div>
             <Divider />
             {latestRecensement !== null && 
-            <RecensementDetails recensement={latestRecensement} />}
+            <RecensementDetails recensement={latestRecensement.recensement} users={latestRecensement.users} usersNonRecenses={latestRecensement.usersNonRecenses} />}
         </div>
     )
 };
