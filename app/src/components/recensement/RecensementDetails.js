@@ -95,9 +95,9 @@ const RecensementDetails = ({recensement}) => {
                     {details.others * recensement.details.cost.basePrice}
                 </Grid>
             </Grid>
-            <ul>
+            {/* <ul>
                 {recensement?.details?.unitMembers && recensement.details.unitMembers.map(x => <li>{x}</li>)}
-            </ul>
+            </ul> */}
         </AccordionDetails>
     )
 }
