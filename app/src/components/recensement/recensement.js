@@ -39,7 +39,7 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
                 <SoumettreRecensement cost={cost} unitId={unitId} unitMembers={unitMembers} />
             </div>
             <Divider />
-            {latestRecensement !== null && 
+            {latestRecensement.recensement !== null && 
             <RecensementDetails recensement={latestRecensement.recensement} users={latestRecensement.users} usersNonRecenses={latestRecensement.usersNonRecenses} />}
         </div>
     )
