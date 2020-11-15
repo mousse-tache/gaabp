@@ -6,9 +6,14 @@ exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
     const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
-    const users = await User.find({_id: {$in: recensement.details.unitMembers}},{ prenom:1, nom:1 }).sort({nom:1})
-    const usersNonRecenses = await User.find({_id: {$nin: recensement.details.unitMembers}, nominations: {$elemMatch: {unitId: unit, ed: null}}},{ prenom:1, nom:1 }).sort({nom:1})
-    return {recensement, users, usersNonRecenses}
+
+    if (recensement) {
+      const users = await User.find({_id: {$in: recensement.details.unitMembers}},{ prenom:1, nom:1 }).sort({nom:1})
+      const usersNonRecenses = await User.find({_id: {$nin: recensement.details.unitMembers}, nominations: {$elemMatch: {unitId: unit, ed: null}}},{ prenom:1, nom:1 }).sort({nom:1})
+      return {recensement, users, usersNonRecenses}
+    }
+    
+    return {recensement}
   } catch (err) {
     throw boom.boomify(err)
   }
