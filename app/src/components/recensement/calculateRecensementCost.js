@@ -22,7 +22,7 @@ function CalculateCost(unitMembers, isUniteCadette = true) {
         return {details: {formedUsers:0, adultUsers:0, others:0, totalCount}, basePrice: null, totalPrice: 0}
     }
 
-    var formedUsers = unitMembers.filter(x => x.formations?.filter(y => y.dateConfirme).length > 0).length
+    var formedUsers = unitMembers.filter(x => x.formations?.filter(y => y.dateConfirme && y.niveau?.name?.includes("BC")).length > 0).length
     var adultUsers = unitMembers.filter(x => x.formations?.filter(y => y.dateConfirme).length == 0 && x.nominations?.filter(y => y.type !== NominationTypes.Membre).length > 0).length
 
     return { details: {formedUsers, adultUsers, others: totalCount-formedUsers-adultUsers, totalCount}, basePrice, totalPrice:(formedUsers)+((adultUsers)*25)+((totalCount-formedUsers-adultUsers)*basePrice)}
