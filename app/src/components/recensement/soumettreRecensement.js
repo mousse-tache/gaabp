@@ -37,7 +37,7 @@ date: Date,
     return (
         <div>
             <Button variant="contained" color="secondary" onClick={SubmitRecensement} >
-                Soumettre son recensement
+                Soumettre un nouveau recensement
             </Button>
         </div>
     )

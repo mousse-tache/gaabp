@@ -101,7 +101,7 @@ const RecensementDetails = ({recensement, users, usersNonRecenses}) => {
                     
                     <List>
                         <ListItem>
-                            <b>Membres recensés</b>
+                            <b>Membres inclus dans le dernier recensement</b>
                         </ListItem>
                         {users && users.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
                     </List>  
@@ -110,7 +110,7 @@ const RecensementDetails = ({recensement, users, usersNonRecenses}) => {
                     
                     <List>
                         <ListItem>
-                            <b>Membres non recensés</b>
+                            <b>Membres non inclus dans le dernier recensement</b>
                         </ListItem>
                         {usersNonRecenses && usersNonRecenses.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
                     </List>  
