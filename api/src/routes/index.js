@@ -117,6 +117,12 @@ const otherRoutes = [
   },  
   {
     method: 'GET',
+    url: '/api/users/exportcontacts',
+    handler: userController.getContacts
+  },  
+  
+  {
+    method: 'GET',
     url: '/api/users/formateurs',
     handler: userController.getFormateurs
   },  

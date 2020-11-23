@@ -61,6 +61,10 @@ export class UserClient {
         return this._apiClient.get(`users/paged?page=${page}&pageSize=${pageSize}&query=${query}`);
     }
 
+    getEmailContact = () => {
+        return this._apiClient.get(`users/exportcontacts`);
+    }
+
     addUsers = (users) => {
         return this._apiClient.post("users", users );
     }

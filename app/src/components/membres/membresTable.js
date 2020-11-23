@@ -4,6 +4,7 @@ import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 import UserClient from '../../clients/userClient';
 import { useSnackbar } from 'notistack';
+import { CsvBuilder } from 'filefy';
 
 const MembresTable = ({canEdit}) => {
   const columns = [
@@ -23,17 +24,32 @@ const MembresTable = ({canEdit}) => {
       }
   }
 
+  const exportCsv = async () => {
+    const allData = await userClient.getEmailContact();
+
+    const exportedData = allData.map(rowData => columns.map(columnDef => rowData[columnDef.field]));
+    new CsvBuilder('membres')
+      .setDelimeter(';')
+      .setColumns(columns.map(columnDef => columnDef.title))
+      .addRows(exportedData)
+      .exportFile();
+  };
+
   return (
     <MaterialTable
       title=""
       localization={{
         toolbar: {
-            searchPlaceholder: "Chercher"
+            searchPlaceholder: "Chercher",
+            exportName: "Exporter les contacts"
         }
       }}
       options={
         {
-          pageSize: 10
+          pageSize: 10,
+          exportButton: canEdit,
+          exportCsv: exportCsv,
+          exportFileName : "membres"
         }
       }
 

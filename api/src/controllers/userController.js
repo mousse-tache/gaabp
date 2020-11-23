@@ -22,6 +22,16 @@ exports.getPendingNominationUsers = async (req, reply) => {
   }
 }
 
+// Get all contactable users
+exports.getContacts = async (req, reply) => {
+  try {
+    const users = await User.find({nominations: {$elemMatch: { type: {$ne: "Membre"}, "ed": null }}},{_id:1, courriel:1, nom:1, prenom:1})
+    return users.map(x => {return { nom: `${x.prenom} ${x.nom}`, courriel: x.courriel}})
+  } catch (err) {
+    throw boom.boomify(err)
+  }
+}
+
 // Get all users
 exports.getBasicUsers = async (req, reply) => {
   try {
