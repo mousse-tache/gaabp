@@ -1,5 +1,5 @@
 ---
-path: /blog
+path: /blog/scoutisme
 date: 2020-11-24T01:54:04.060Z
 title: Qu'est-ce que le scoutisme?
 ---
