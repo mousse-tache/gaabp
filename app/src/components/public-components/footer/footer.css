@@ -11,8 +11,8 @@
         vertical-align:middle;
   }
 
-  footer div {
-      padding: 1em;
+  footer > div {
+      padding: 1rem;
   }
 
   footer {

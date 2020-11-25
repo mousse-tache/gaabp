@@ -23,6 +23,11 @@ const Footer = () => (
                     Règlements
                 </Link>
             </Grid>
+            <Grid item xs={12}>  
+                  <Link to="/blog">
+                      Blog
+                  </Link>
+              </Grid>
           </Grid>
         </div>
         <div>    
@@ -30,10 +35,6 @@ const Footer = () => (
               <Grid item xs={12}>
                  <a href="https://carrickquebec.com/" target="_blank" rel="noopener noreferrer">Carrick (boutique)</a>
               </Grid>
-            </Grid>
-        </div>
-        <div>
-          <Grid container spacing={3}>
               <Grid item xs={12}>          
                 <a href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
               </Grid>
