@@ -17,7 +17,7 @@ const Profile = () => {
 
     async function AddUser() { 
         try {
-            await userClient.addUsers([member]);
+            await userClient.completeSignup([member]);
             enqueueSnackbar(`${member?.prenom} ${member?.nom}, votre inscription a été complétée`, { variant: "success" });
             navigate("/app/profile");
         }

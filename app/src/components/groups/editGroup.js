@@ -43,10 +43,6 @@ const EditGroup = ({id}) => {
         canEdit = Permissions(authedUser, PermissionTypes.UpdateGroup);
     }, [authedUser])
 
-    if (!authedUser) {
-        userContext.FetchUser();  
-    }
-
     useEffect(() => {
         FetchGroup();
         FetchUnits();

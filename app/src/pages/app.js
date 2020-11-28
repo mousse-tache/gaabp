@@ -18,8 +18,9 @@ const App = () => {
     const [user, setUser] = useState(false);
     const [authedUser, setAuthedUser] = useState(false);
     const userClient = new UserClient("");
-    const [init, setInit] = useState(false);
     const [idToken, setIdToken] = useState(null);
+    const [jwtToken, setJwtToken] = useState("");
+    const [init, setInit] = useState(false);
 
     const isAuthenticated = () => {
         if (typeof window !== 'undefined') {
@@ -41,14 +42,20 @@ const App = () => {
     }
 
     async function FetchUser() {
-        if(!authedUser && user.email) {
+        if(!authedUser && idToken) {
             try {               
-                var data = await userClient.inializeSession(idToken);
-                
-                if(data !== null && data.length > 0)
+                var { user, jwttoken } = await userClient.inializeSession(idToken);
+
+                if(user)
                 {
-                    setAuthedUser(data[0]);
+                    setAuthedUser(user);
                 }            
+
+                if (jwttoken) {
+                    setJwtToken(jwttoken);
+                }
+
+                setInit(true);
             } catch (e) {
                 console.log(e.message);   
             }
@@ -65,22 +72,8 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        async function fetch() {
-            if(!authedUser && user.email) {
-                try {               
-                    var data = await userClient.getByEmail(user.email);
-                    if(data !== null)
-                    {
-                        setAuthedUser(data[0]);
-                        setInit(true);
-                    }            
-                } catch (e) {
-                    console.log(e.message);   
-                }
-            }
-        }
-        fetch();
-    }, [user, authedUser])
+        FetchUser();
+    }, [idToken])
 
     if (!isAuthenticated()) {
         return (
@@ -88,14 +81,14 @@ const App = () => {
         );
     }
   
-    if(!user)  {
+    if(!(user || init))  {
         return (
             <Loading />
         )        
     }
     
     return (        
-        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser, init}}> 
+        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser, jwtToken, init}}> 
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>AABP | Scoutisme traditionnel</title>

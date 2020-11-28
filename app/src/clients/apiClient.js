@@ -1,17 +1,20 @@
 import axios from "axios";
-
-const axiosDefaultConfiguration = {
-    timeout: 0,
-    headers: { 
-        "X-Requested-With": "XMLHttpRequest", 
-        Authorization: `Bearer ${process.env.GATSBY_API_TOKEN}`
-        }
-};
+import { useContext } from "react";
+import UserContext from "../context/userContext";
 
 let onSendingRequest = null;
 
 export class ApiClient {
     constructor(defaultConfiguration = {}) {
+        const { jwtToken } = useContext(UserContext);
+        const axiosDefaultConfiguration = {
+            timeout: 0,
+            headers: { 
+                "X-Requested-With": "XMLHttpRequest", 
+                Authorization: jwtToken
+                }
+        };
+
         this._client = axios.create({
             ...axios.defaults,
             ...axiosDefaultConfiguration,

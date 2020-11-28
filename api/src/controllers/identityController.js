@@ -2,6 +2,8 @@ const boom = require('boom')
 const mongoose = require('mongoose')
 const User = require('../models/User')
 const axios = require("axios")
+require('dotenv').config()
+const jwt = require('jsonwebtoken');
 
 // This should probably only be used if all JSON elements are strings
 function xwwwfurlenc(srcjson){
@@ -57,7 +59,14 @@ exports.initializeSession = async (req, reply) => {
       });
 
     var user = await getIdentityFromToken(response)
-    return user
+
+    if (user) {
+      const jwttoken = jwt.sign({ identity: user.courriel }, process.env.signingsecret);
+
+      return { user, jwttoken }
+    }
+
+    return { user: null }
   } catch (err) {
     throw boom.boomify(err)
   }

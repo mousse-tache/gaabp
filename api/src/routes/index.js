@@ -6,7 +6,6 @@ const unitController = require('../controllers/unitController')
 
 const RecensementRoutes = require('./recensementRoutes')
 const NominationsRoutes = require('./nominationsRoutes')
-const IdentityRoutes = require('./identityRoutes')
 
 const otherRoutes = [
   {
@@ -117,12 +116,6 @@ const otherRoutes = [
   },  
   {
     method: 'GET',
-    url: '/api/users/exportcontacts',
-    handler: userController.getContacts
-  },  
-  
-  {
-    method: 'GET',
     url: '/api/users/formateurs',
     handler: userController.getFormateurs
   },  
@@ -208,6 +201,6 @@ const otherRoutes = [
   }
 ]
 
-var routes = otherRoutes.concat(RecensementRoutes).concat(NominationsRoutes).concat(IdentityRoutes)
+var routes = otherRoutes.concat(RecensementRoutes).concat(NominationsRoutes)
 
 module.exports = routes

@@ -22,10 +22,6 @@ const Membres = () => {
     
     const userClient = new UserClient();
 
-    if (!authedUser) {
-        authedUserContext.FetchUser();  
-    }
-
     const handleOpen = () => {
         setOpen(true);
       };

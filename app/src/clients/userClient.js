@@ -69,6 +69,10 @@ export class UserClient {
         return this._apiClient.post("users", users );
     }
 
+    completeSignup = (users) => {
+        return this._apiClient.post("completeSignup", users);
+    }
+
     updateUser = (user) => {
         return this._apiClient.put(`user/${user.id}`, user );
     }

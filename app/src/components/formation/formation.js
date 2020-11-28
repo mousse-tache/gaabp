@@ -18,7 +18,7 @@ const Formation = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Formation à distance 2020</h3></div>
         </div>
-        <div className="formation-main-container" container spacing={3} > 
+        <div className="formation-main-container" > 
             <div className="formation-disponibles">
                 <Card className="formation-card preformatted">
                     <b>Formations disponibles</b>

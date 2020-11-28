@@ -1,21 +1,46 @@
 require('dotenv').config()
 
+const jwt = require('jsonwebtoken');
 const fastify = require('fastify')({
   logger: true
 })
 
 const mongoose = require('mongoose')
-
-// Import Routes
 const routes = require('./routes')
+const IdentityRoutes = require('./routes/identityRoutes')
+const User = require('./models/User')
+
 fastify.register(require('fastify-cors'), { 
   origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
 })
 
-const bearerAuthPlugin = require('fastify-bearer-auth')
-const keys = new Set([process.env.api_token])
+const validateAsync = async (token) => {
+  var userEmail = jwt.verify(token, process.env.signingsecret).identity
+  var user = await User.find({courriel: userEmail})
 
-fastify.register(bearerAuthPlugin, {keys})
+  console.log(user)
+}
+
+fastify
+  .decorate('verifyJwt', async function (request, reply, done) {
+    await validateAsync(request.headers.authorization)   
+
+    done() // pass an error if the authentication fails
+  })
+.register(require('fastify-auth'))
+.after(() => {
+  IdentityRoutes.forEach((route, index) => {
+    fastify.route(route)
+  })
+  
+  routes.forEach((route, index) => {
+    fastify.route({...route, 
+      preHandler: fastify.auth([
+        fastify.verifyJwt
+      ])
+    })
+  })
+})
 
 mongoose.connect(process.env.mlab, {
   useNewUrlParser: true,
@@ -23,10 +48,6 @@ mongoose.connect(process.env.mlab, {
 })
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err))
-
-routes.forEach((route, index) => {
-  fastify.route(route)
-})
 
 const start = async () => {
   try {
