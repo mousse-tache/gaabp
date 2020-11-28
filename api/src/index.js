@@ -7,7 +7,7 @@ const fastify = require('fastify')({
 
 const mongoose = require('mongoose')
 const routes = require('./routes')
-const IdentityRoutes = require('./routes/identityRoutes')
+const PublicRoutes = require('./routes/PublicRoutes')
 const User = require('./models/User')
 
 fastify.register(require('fastify-cors'), { 
@@ -29,7 +29,7 @@ fastify
   })
 .register(require('fastify-auth'))
 .after(() => {
-  IdentityRoutes.forEach((route, index) => {
+  PublicRoutes.forEach((route, index) => {
     fastify.route(route)
   })
   

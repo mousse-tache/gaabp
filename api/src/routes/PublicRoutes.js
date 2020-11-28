@@ -1,8 +1,9 @@
 // Import our Controllers
 const identityController = require('../controllers/identityController')
 const userController = require('../controllers/userController')
+const groupController = require('../controllers/groupController')
 
-const NominationsRoutes = [
+const PublicRoutes = [
   {
     method: 'POST',
     url: '/api/identity',
@@ -12,7 +13,12 @@ const NominationsRoutes = [
     method: 'POST',
     url: '/api/completeSignup',
     handler: userController.addUsers
+  },
+  {
+    method: 'GET',
+    url: '/api/groups/public',
+    handler: groupController.getPublicGroups
   }
 ]
 
-module.exports = NominationsRoutes;
+module.exports = PublicRoutes;
