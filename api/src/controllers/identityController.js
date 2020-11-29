@@ -61,7 +61,7 @@ exports.initializeSession = async (req, reply) => {
     var user = await getIdentityFromToken(response)
 
     if (user) {
-      const jwttoken = jwt.sign({ identity: user.courriel }, process.env.signingsecret);
+      const jwttoken = jwt.sign({ identity: user.courriel, permissions: { _id: user._id, isAdmin: user.isAdmin, formations: user.formations, nominations: user.nominations} }, process.env.signingsecret);
 
       return { user, jwttoken }
     }

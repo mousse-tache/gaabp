@@ -101,10 +101,14 @@ const EditMembre = ({id}) => {
     }
 
     async function saveUser() {       
-        if(member?._id) {
-            await userClient.updateUser({...member, id: member._id});
+        try {
+            if(member?._id) {
+                await userClient.updateUser({...member, id: member._id});
+            }
+            enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
+        } catch (error) {
+            enqueueSnackbar(error?.error?.response?.data, { variant: "error"})
         }
-        enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
     }
 
     if(isFecthingUser || !member ) {

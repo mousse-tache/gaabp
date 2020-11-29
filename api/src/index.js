@@ -8,22 +8,22 @@ const fastify = require('fastify')({
 const mongoose = require('mongoose')
 const routes = require('./routes')
 const PublicRoutes = require('./routes/PublicRoutes')
-const User = require('./models/User')
 
 fastify.register(require('fastify-cors'), { 
   origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
 })
 
 const validateAsync = async (token) => {
-  var userEmail = jwt.verify(token, process.env.signingsecret).identity
-  var user = await User.find({courriel: userEmail})
-
-  console.log(user)
+  jwt.verify(token, process.env.signingsecret).identity
 }
 
 fastify
   .decorate('verifyJwt', async function (request, reply, done) {
-    await validateAsync(request.headers.authorization)   
+    try {    
+      await validateAsync(request.headers.authorization) 
+    } catch (error) {
+      reply.code(401)
+    }  
 
     done() // pass an error if the authentication fails
   })

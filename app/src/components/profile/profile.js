@@ -26,13 +26,17 @@ const Profile = () => {
         }
     }
 
-    async function saveUser() {       
-        if(member?._id) {
-            await userClient.updateUser({...member, id: member._id});
-            enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
-        }
-        else {
-            await AddUser();
+    async function saveUser() {      
+        try {
+            if(member?._id) {
+                await userClient.updateUser({...member, id: member._id});
+                enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
+            }
+            else {
+                await AddUser();
+            }
+        } catch (error) {            
+            enqueueSnackbar(error?.error?.response?.data, { variant: "error"})
         }
     }
 

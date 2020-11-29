@@ -1,6 +1,10 @@
 const boom = require('boom')
 const mongoose = require('mongoose');
-const User = require('../models/User')
+const User = require('../models/User');
+const { PermissionTypes } = require('../security/permissionTypes');
+const { Permissions } = require('../security/permissions');
+require('dotenv').config()
+const jwt = require('jsonwebtoken');
 
 // Get all users
 exports.getUsers = async (req, reply) => {
@@ -208,15 +212,46 @@ exports.addUsers = async (req, reply) => {
 }
 
 // Update an existing user
+exports.updateProfile = async (req, reply) => {
+
+
+  if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser)) {
+    try {
+      const user = req.body
+      const id = user.id
+      const { ...updateData } = user
+      const update = await User.findByIdAndUpdate(id, updateData, { new: true })
+      return update
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de faire la mise à jour de ce membre"
+  }
+}
+
+// Update an existing user
 exports.updateUser = async (req, reply) => {
-  try {
-    const user = req.body
-    const id = user.id
-    const { ...updateData } = user
-    const update = await User.findByIdAndUpdate(id, updateData, { new: true })
-    return update
-  } catch (err) {
-    throw boom.boomify(err)
+  var userId = jwt.verify(req.headers.authorization, process.env.signingsecret).permissions._id; 
+  const user = req.body
+  const id = user.id
+  console.log(userId)
+  console.log(id)
+
+  if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser) || userId == id) {
+    try {
+      const { ...updateData } = user
+      const update = await User.findByIdAndUpdate(id, updateData, { new: true })
+      return update
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de faire la mise à jour de ce membre"
   }
 }
 
