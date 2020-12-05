@@ -157,7 +157,6 @@ const EditUnit = ({id}) => {
             </AccordionSummary>
             <AccordionDetails>
                 <div className="add-user-search">  
-                    <Tooltip title="Entrer un nom pour rechercher parmi les membres existants">
                     <Autocomplete                        
                         fullWidth={true}
                         disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
@@ -173,8 +172,7 @@ const EditUnit = ({id}) => {
                         getOptionLabel={(option) => option.prenom + " " + option.nom}
                         style={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} onChange={(event) => setQuery(event.target.value)} label="Cherchez un membre" variant="outlined" />}
-                    />
-                    </Tooltip>           
+                    />       
 
                     <TextField
                         label="Rôle"

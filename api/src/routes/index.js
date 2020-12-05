@@ -22,7 +22,6 @@ const otherRoutes = [
     method: 'POST',
     url: '/api/inscription',
     handler: inscriptionController.addInscription,
-    // schema: documentation.addInscriptionSchema
   },
   {
     method: 'PUT',
@@ -43,6 +42,11 @@ const otherRoutes = [
     method: 'GET',
     url: '/api/pendingNominations',
     handler: userController.getPendingNominationUsers
+  },
+  {
+    method: 'GET',
+    url: '/api/users/exportcontacts',
+    handler: userController.getContacts
   },
   {
     method: 'GET',

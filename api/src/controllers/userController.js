@@ -53,19 +53,22 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 
     var users;
     var count;
+
     if(query && query !== "") {
+      var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
+
       users = await User.find({$or: 
         [
-          {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-          {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-          {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+          {courriel: {$regex: regex}}, 
+          {prenom: {$regex: regex}}, 
+          {nom: {$regex: regex}}
         ]     
       },{_id:1, courriel:1, nom:1, prenom:1}).sort({prenom:1}).skip(skip).limit(parseInt(pageSize))
       count = await User.find({$or: 
         [
-          {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-          {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-          {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+          {courriel: {$regex: regex}}, 
+          {prenom: {$regex: regex}}, 
+          {nom: {$regex: regex}}
         ]     
       },{_id:1, courriel:1, nom:1, prenom:1}).countDocuments()
     }
