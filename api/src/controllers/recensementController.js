@@ -1,6 +1,11 @@
-const boom = require('boom')
-const Recensement = require('../models/Recensement')
-const User = require('../models/User')
+const boom = require('boom');
+const Recensement = require('../models/Recensement');
+const User = require('../models/User');
+const { PermissionTypes } = require('../security/permissionTypes');
+const { Permissions } = require('../security/permissions');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+
 
 exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
@@ -49,6 +54,7 @@ exports.getbyPayment = async (req, reply) => {
 }
 
 exports.updateOne = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
         const recensement = req.body
         const id = recensement._id
@@ -58,18 +64,31 @@ exports.updateOne = async (req, reply) => {
       } catch (err) {
         throw boom.boomify(err)
       }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de modifier un recensement"
+  }
 }
 
 exports.addOne = async (req, reply) => {
+
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
-        const recensementModel = req.body
+      const recensementModel = req.body
+  
+      const recensement = new Recensement(
+      {
+        ...recensementModel
+      })
+      return recensement.save()
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de soumettre un recensement"
+  }
     
-        const recensement = new Recensement(
-        {
-          ...recensementModel
-        })
-        return recensement.save()
-      } catch (err) {
-        throw boom.boomify(err)
-      }
 }

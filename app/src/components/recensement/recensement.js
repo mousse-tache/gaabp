@@ -7,10 +7,11 @@ import RecensementDetails from "./RecensementDetails";
 import Loading from "../loading/loading";
 import { Divider } from "@material-ui/core";
 import "./recensement.css"
+import RecensementContext from "../../context/recensementContext";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
     const [latestRecensement, setLatestRecensement] = useState(1)
-    const cost = CalculateCost(unitMembers, uniteCadette)
+    const cost = CalculateCost(unitMembers, uniteCadette);
 
     const recensementClient = new RecensementClient();
 
@@ -33,15 +34,17 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
     }
 
     return (
-        <div className="recensement-overview-container">
-            <div>
-                <PreviewCost cost={cost} previousRecensement={latestRecensement !== null} />
-                <SoumettreRecensement cost={cost} unitId={unitId} unitMembers={unitMembers} />
+        <RecensementContext.Provider value={latestRecensement}>
+            <div className="recensement-overview-container">
+                <div>
+                    <PreviewCost cost={cost} previousRecensement={latestRecensement !== null} />
+                    <SoumettreRecensement cost={cost} unitId={unitId} unitMembers={unitMembers} />
+                </div>
+                <Divider />
+                {latestRecensement.recensement !== null && 
+                <RecensementDetails />}
             </div>
-            <Divider />
-            {latestRecensement.recensement !== null && 
-            <RecensementDetails recensement={latestRecensement.recensement} users={latestRecensement.users} usersNonRecenses={latestRecensement.usersNonRecenses} />}
-        </div>
+        </RecensementContext.Provider>
     )
 };
 

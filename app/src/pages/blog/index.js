@@ -30,7 +30,7 @@ const NotFoundPage = () => {
     return (
     <Layout>
       <Helmet>
-          <meta name="description" content="Blog de l'Association des aventurier de baden-powell"/>
+          <meta name="description" content="Blog de l'Association des aventuriers de Baden-Powell"/>
           <meta name="keywords" content="scout, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
           <title>AABP | Blog sur le scoutisme traditionnel</title>
           <html lang="fr" />

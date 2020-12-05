@@ -15,6 +15,10 @@ exports.Permissions = (userJwt, permission) => {
         return user.nominations.filter(x => x.type.includes("VPScout") && !x.ed).length > 0;
     };
 
+    const isManagementVicepResident = () => {
+        return user.nominations.filter(x => x.type.includes("VPGestion") && !x.ed).length > 0;
+    };
+
     const isCommissionner = () => {
         return user.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
@@ -41,6 +45,7 @@ exports.Permissions = (userJwt, permission) => {
         case PermissionTypes.UpdateUnit:
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
+        case PermissionTypes.SubmitRecensement:
             return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
@@ -57,6 +62,8 @@ exports.Permissions = (userJwt, permission) => {
             return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
+        case PermissionTypes.PayRecensement:
+            return (user.isAdmin || isManagementVicepResident());
         default:
           return false;
       } 

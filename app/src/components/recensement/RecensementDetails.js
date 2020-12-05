@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Loading from '../loading/loading'
 import { AccordionDetails, Grid, Typography, Divider, List, ListItem } from '@material-ui/core'
 import BlockIcon from '@material-ui/icons/Block';
 import CheckIcon from '@material-ui/icons/Check';
 import { navigate } from 'gatsby';
+import RecensementContext from '../../context/recensementContext';
 
-const RecensementDetails = ({recensement, users, usersNonRecenses}) => {
+const RecensementDetails = () => {
+    const { recensement, users, usersNonRecenses } = useContext(RecensementContext);
     var details = recensement?.details?.cost?.details;
 
     if(!recensement) {

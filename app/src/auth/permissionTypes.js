@@ -10,6 +10,8 @@ const PermissionTypes = {
     CreateUnit: "createUnit",
     UpdateUnit: "updateUnit",
     DeactivateUnit: "deactivateUnit",
+    SubmitRecensement: "submitRecensement",
+    PayRecensement: "payRecensement",
 
     // groups
     CreateGroup: "createGroup",
