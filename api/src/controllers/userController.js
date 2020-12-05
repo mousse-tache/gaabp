@@ -86,11 +86,12 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 exports.searchUsers = async (req, reply) => {
   try {
     const { query } = req.body
+    var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
     const users = await User.find({$or: 
       [
-        {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-        {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-        {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+        {courriel: {$regex: regex}}, 
+        {prenom: {$regex: regex}}, 
+        {nom: {$regex: regex}}
       ]},{details:0, formations:0})
     return users
   } catch (err) {
@@ -102,11 +103,12 @@ exports.searchUsers = async (req, reply) => {
 exports.searchUsersWithFormations = async (req, reply) => {
   try {
     const { query } = req.body
+    var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
     const users = await User.find({$or: 
       [
-        {courriel: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-        {prenom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}, 
-        {nom: {$regex: new RegExp("^" + query.toLowerCase(), "i")}}
+        {courriel: {$regex: regex}}, 
+        {prenom: {$regex: regex}}, 
+        {nom: {$regex: regex}}
       ]},{details:0, nominations:0})
     return users
   } catch (err) {
