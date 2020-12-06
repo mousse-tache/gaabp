@@ -12,7 +12,7 @@ const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
     const shouldSubmitNew = shouldSubmitNewRecensement();
 
     function shouldSubmitNewRecensement() {
-        var y = moment().format("YYYY");
+        var y = moment().year();
         var nextRecensementPeriod = moment(`${y}-09-01`);
 
         if(moment().isAfter(nextRecensementPeriod)) {

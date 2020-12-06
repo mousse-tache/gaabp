@@ -34,7 +34,7 @@ async function getIdentityFromToken(response) {
 exports.initializeSession = async (req, reply) => {
   try {
     const { token } = req.body
-    const url = `${"https://dev-132704.okta.com"}/oauth2/v1/introspect`
+    const url = `${"https://dev-132704.okta.com"}/oauth2/default/v1/introspect`
     const client = axios.create({
         baseURL: url,
         timeout: 1000,

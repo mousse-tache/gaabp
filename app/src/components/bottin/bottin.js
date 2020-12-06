@@ -92,7 +92,7 @@ const Bottin = () => {
                     Le site web
                 </AccordionSummary>
                 <AccordionDetails>
-                f.brobillard@gmail.com
+                informatique@badenpowell.ca
                 </AccordionDetails>
             </Accordion>
             <Accordion>
