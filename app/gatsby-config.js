@@ -27,7 +27,7 @@ module.exports = {
         background_color: `#A3233A`,
         theme_color: `#A3233A`,
         display: `minimal-ui`,
-        icon: `src/images/Logo_AABP.gif`, // This path is relative to the root of the site.
+        icon: `src/images/Logo_AABP.png`, // This path is relative to the root of the site.
       },
     },
     {
