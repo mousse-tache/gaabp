@@ -22,7 +22,7 @@
     "gatsby-plugin-offline": "^3.2.9",
     "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-react-native-web": "^3.1.0",
-    "gatsby-plugin-sharp": "^2.6.11",
+    "gatsby-plugin-sharp": "^2.10.0",
     "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-remark-embed-video": "^3.0.10",
     "gatsby-remark-images-native-lazy-load": "^1.0.0",
