@@ -8,15 +8,20 @@ import { CsvBuilder } from 'filefy';
 
 const MembresTable = ({canEdit}) => {
   const columns = [
-      { title:"", field:'nom'},
-      { title: 'Courriel', field: 'courriel' },
+      { title:'', field:'nom', filtering: false },
+      { title: 'Courriel', field: 'courriel', filtering: false },
+      { title: 'Statut', 
+        field: 'statut', lookup: {0: 'Inactif', 1: 'Actif'},
+        filtering: true,
+        tooltip: 'Un membre est actif s\'il a au moins une nomination courante'
+      }
     ];
 
     const { enqueueSnackbar } = useSnackbar();
     const userClient = new UserClient();
 
     async function FetchUsers(page, pageSize, query) {
-      try {               
+      try {
           var data = await userClient.getPagedUsers(page, pageSize, query);
           return data;         
       } catch (e) {
@@ -55,11 +60,17 @@ const MembresTable = ({canEdit}) => {
 
       data={query =>
         new Promise(async(resolve, reject) => {
+          console.log(query);
           var { users, count, page } = await FetchUsers(query.page+1, query.pageSize, query.search);
           var filteredUsers = [];
           if(users.length > 0) {
             users.forEach(x => {
-              filteredUsers.push({"_id": x._id, courriel: x.courriel, nom: `${x.prenom} ${x.nom}`})
+              filteredUsers.push(
+                {"_id": x._id, 
+                courriel: x.courriel, 
+                nom: `${x.prenom} ${x.nom}`, 
+                statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0
+              })
             })
           }
             resolve({
