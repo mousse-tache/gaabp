@@ -73,7 +73,7 @@ const EngagementStep = () => {
             <div className="nomination-flex-container">
                 <FormControl required component="fieldset">
                     <FormLabel component="legend">
-                    J'ai lu et pris connaissance du <a target="_blank" href={r7}>code d'éthique et de déontologie</a> de l'AABP et j'accepte de m'y conformer. 
+                    J'ai lu et pris connaissance du <a target="_blank" rel="noreferral noopener" href={r7}>code d'éthique et de déontologie</a> de l'AABP et j'accepte de m'y conformer. 
                     
                     </FormLabel>
                     <RadioGroup 

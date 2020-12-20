@@ -1,14 +1,17 @@
 import React from "react";
-import Layout from "../components/public-components/layout";
-import About from "../components/public-components/about";
-import Inscrire from "../components/public-components/inscrire";
-import Impliquer from "../components/public-components/impliquer";
-import Contact from "../components/public-components/contact";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import ImageCarousel from  "../components/public-components/imageCarousel";
-import { Typography } from "@material-ui/core";
 import { Helmet } from "react-helmet";
-import Logo from "../images/Logo_AABP.png"
+
+import { Typography } from "@material-ui/core";
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import Layout from "@aabp/components/public-components/layout";
+import About from "@aabp/components/public-components/about";
+import Inscrire from "@aabp/components/public-components/inscrire";
+import Impliquer from "@aabp/components/public-components/impliquer";
+import Contact from "@aabp/components/public-components/contact";
+import ImageCarousel from  "@aabp/components/public-components/imageCarousel";
+
+import Logo from "@aabp/images/Logo_AABP.png"
 
 const IndexPage = () => (
   <div>

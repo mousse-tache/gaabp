@@ -24,9 +24,18 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             use: loaders.null(),
           }
         ],
-      },
-    })
+      }
+    });
   }
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@components": path.resolve(__dirname, "src/components"),
+        "@aabp": path.resolve(__dirname, "src")
+      }
+    }
+  });
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
