@@ -1,42 +1,47 @@
-import React, { useContext } from 'react';
-import { Link } from "gatsby"
+import React, { useContext, useState } from 'react';
+import { navigate } from "gatsby"
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 
-import Logo from "../../images/Logo_AABP.png"
-import UserContext from '../../context/userContext';
-import Permissions from '../../auth/permissions';
-import PermissionTypes from '../../auth/permissionTypes';
+import Logo from "@aabp/images/Logo_AABP.png"
+import UserContext from '@aabp/context/userContext';
+import Permissions from '@aabp/auth/permissions';
+import PermissionTypes from '@aabp/auth/permissionTypes';
 import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
+import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 
-function Sidebar({tab}) {
+function Sidebar() {
   const { authedUser } = useContext(UserContext); 
   const canAccessMemberSection = Permissions(authedUser, PermissionTypes.ViewUsers);
+  const [open, setOpen] = useState(true);
 
   return (
     <Drawer
-
     anchor="left"
-    open
+    open={true}
     variant="persistent"
     className="sidebar"    
     >
 
-      <Link
+      <Button
       style={{
         minWidth:"7rem"
       }}      
-      className="logo" to="/" partiallyActive={true} activeClassName="active">
+      className="logo" onClick={() => setOpen(!open)} partiallyActive={true} activeClassName="active">
             <img src={Logo} alt="Logo"/>
-      </Link>   
+      </Button>
 
       {
-        canAccessMemberSection && tab == 0 && <MembresSidebar />
-      }   
-
+        canAccessMemberSection && <ProgressionSidebar />
+      }
+      <List>
+        <ListItem divider button disableRipple onClick={() => navigate("/app/ressources")}>             
+          <ListItemText primary="Ressources" />
+        </ListItem>
+      </List>
       {
-        canAccessMemberSection && tab == 1 && <ProgressionSidebar />
+        canAccessMemberSection && <MembresSidebar />
       }
     </Drawer>
   );

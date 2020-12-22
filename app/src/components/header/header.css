@@ -105,6 +105,13 @@ a:active {
     visibility: collapse;
 }
 
+.sidebar > div {
+    word-wrap: break-word;
+    max-width: 9rem;
+    overflow-wrap: break-word;
+    text-align: left;
+}
+
 
 .header-nomination-button:hover { 
     color:whitesmoke;

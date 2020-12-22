@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link, navigate } from "gatsby"
 import Loading from "../loading/loading"
-import UserContext from "../../context/userContext"
-import UnitContext from "../../context/unit/unitContext"
-import UnitClient from "../../clients/unitClient"
-import UserClient from "../../clients/userClient"
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
+import UserContext from "@aabp/context/userContext"
+import UnitContext from "@aabp/context/unit/unitContext"
+import UnitClient from "@aabp/clients/unitClient"
+import UserClient from "@aabp/clients/userClient"
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
 import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, Divider, Tooltip } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import { useSnackbar } from 'notistack';
-import NominationTypes from "../../utils/nominationTypes";
+import NominationTypes from "@aabp/utils/nominationTypes";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"

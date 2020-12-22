@@ -1,54 +1,20 @@
-import { Link, navigate } from "gatsby"
+import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import "./header.css"
 import Sidebar from "./sidebar"
-import { Tabs, Tab, Button, Tooltip } from "@material-ui/core"; 
 import UserMenu from "./accountMenu";
 import UserContext from "../../context/userContext";
 import NouvelleNomination from "../nominations/nouvelle-nomination/nouvelleNomination"
 
 const Header = ({ username }) => {
-  const [value, setValue] = React.useState(0);
-  const tabValue = ["/app/membres", "/app/formation", "/app/ressources"];
   const userContext = useContext(UserContext);
   const authedUser = userContext.authedUser;
-
-  const defineBaseTab = () => {
-    for (let index = 0; index < tabValue.length; index++) {
-      
-      if(window?.location?.href.includes(tabValue[index])) {
-        setValue(index);
-      }
-    }
-  }
-
-  useEffect(() => {
-    defineBaseTab();
-  }, [])
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    navigate(tabValue[newValue]);
-  };
 
   const canAccessMemberSection = authedUser?.nominations?.length > 0 || authedUser?.isAdmin;
 
   return (
-    <header className="header sticky">
-          <Tabs
-            value={value}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={handleChange}
-            aria-label="mainnav"
-            className="tabnav"
-          >
-            <Tab disableRipple disabled={!canAccessMemberSection} component="a" label="Membres" />
-            <Tab disableRipple disabled={!canAccessMemberSection}  component="a" label="Progression" />
-            <Tab disableRipple component="a" label="Ressources" />
-            
-          </Tabs>
+    <header className="header sticky">          
           {canAccessMemberSection && 
           (
             <div className="morelinks">
@@ -76,7 +42,7 @@ const Header = ({ username }) => {
           )}  
           <NouvelleNomination />
           <UserMenu username={username} />
-          <Sidebar tab={value} />
+          <Sidebar />
     </header>
   )  
 }
