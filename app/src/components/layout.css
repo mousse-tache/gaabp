@@ -180,6 +180,10 @@ form {
   grid-column: 1 / 4;
 }
 
+.mobile-only {
+  display: hidden;
+}
+
 @media only screen and (max-width: 1100px) {
   html {
     margin-left:0%;
@@ -218,5 +222,4 @@ form {
   .formation-recommender-card div {
     margin-top: .5rem;
   }
-
 }

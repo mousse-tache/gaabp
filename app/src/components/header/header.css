@@ -13,20 +13,29 @@
     max-height: 15%;
     box-sizing: border-box;
     font-size:16px;
-    z-index: 10em;
     position:absolute;
     top:0;
     width:100%;
     text-align:center;
     margin:auto;
     transition-property: text-shadow, color;
+    transition: all;
     min-height: 3em;
     background-color: white;
     border-bottom: 4px dotted var(--light);
+    z-index: 10000;
+}
+
+.header-nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    z-index: 10;
+    justify-content: space-between;
+    width: 80%;
+    padding:.3rem;
+}
+
+.header-nav > div {
+    padding: 1rem;
 }
 
 .header img {
@@ -75,7 +84,7 @@ a:hover {
 
 .logo {
     transition-property: border-style;
-    max-width: 3em;
+    max-width: 3rem;
 
 }
 
@@ -100,25 +109,20 @@ a:active {
     padding-top: 7em;
   }
 
-  .morelinks {
-    display: none;
-    visibility: collapse;
-}
-
 .sidebar > div {
     word-wrap: break-word;
     max-width: 9rem;
     overflow-wrap: break-word;
     text-align: left;
+    text-overflow: ellipsis;
 }
-
 
 .header-nomination-button:hover { 
     color:whitesmoke;
 }
 
 .quick-units {
-    max-width: 6rem;
+    max-width: 9rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -128,17 +132,14 @@ a:active {
     padding-left: .5rem;
 }
 
+.sidebar-logo {
+    padding: .3rem;
+}
+
 @media only screen and (max-width: 1100px) {
     .navlink {
         font-size: larger;
         margin-left: 0%;
-    }
-    .header {
-        flex-direction: column;
-
-        align-items: center;
-        justify-items: center;
-        min-height: 0em;
     }
 
     .auth {
@@ -152,37 +153,9 @@ a:active {
         display: block;
     }
 
-    .sidebar {
-        display: none;
-    }
-
-    .morelinks {
-        display: flex;
-        flex-direction: column;
-        visibility: visible;
-
-        align-items: center;
-        justify-items: center;
-        
-    }
-
-    .morelinks-items {
-        max-width: 50%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .tabnav, .collapsable {
-        display: none;
-        visibility: collapse;
-    }
-
-    .header-nomination-button { 
-        max-width: 10em;
-    }
 
     .main-header {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-items: center;
       }
@@ -194,4 +167,16 @@ a:active {
     .sticky + div {
         padding-top: 0em;
       }
+    
+
+    .header-nav { 
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: end;
+    }
+
+    .headerpublic > div {
+        flex-direction: column;
+    }
 }
