@@ -34,8 +34,7 @@ function Sidebar() {
         anchor="left"
         open
         variant="permanent"
-        className="sidebar" 
-        tran   
+        className="sidebar"    
         >
 
           <Button

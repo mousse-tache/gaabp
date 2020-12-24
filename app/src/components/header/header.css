@@ -30,12 +30,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    vertical-align: top;
+    align-items: center;
     width: 80%;
     padding:.3rem;
 }
 
 .header-nav > div {
-    padding: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    max-height: 4rem;
 }
 
 .header img {
@@ -167,13 +171,15 @@ a:active {
     .sticky + div {
         padding-top: 0em;
       }
-    
+
+    .sidebar {
+        width: 100%;
+    }    
 
     .header-nav { 
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
-        justify-content: end;
     }
 
     .headerpublic > div {
