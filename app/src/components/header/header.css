@@ -23,7 +23,7 @@
     min-height: 3em;
     background-color: white;
     border-bottom: 4px dotted var(--light);
-    z-index: 10000;
+    z-index: 49;
 }
 
 .header-nav {
@@ -80,6 +80,7 @@ a:hover {
     position: absolute;
     right: 1%;
     top: 0%;
+    z-index: 50;
 }
 
 .logo {

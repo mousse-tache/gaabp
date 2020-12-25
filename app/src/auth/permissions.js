@@ -3,7 +3,11 @@ import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
 import AppContext from "@aabp/context/appContext";
 
-const Permissions = (permission) => {
+function Permissions(permission) {
+    return <PermissionsUtils permission={permission} />;
+}
+
+const PermissionsUtils = ({permission}) => {
     const { authedUser } = useContext(AppContext);
 
     if (!authedUser) {
