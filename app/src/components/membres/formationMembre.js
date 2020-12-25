@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from 'material-table';
 import CardContent from "@material-ui/core/CardContent";
 import UserClient from "../../clients/userClient"
+import UserContext from "@aabp/context/userContext";
 
-const FormationMembre = ({formations}) => {
+const FormationMembre = () => {
+    const { formations } = useContext(UserContext)?.member;
     formations.sort();
 
     const userClient = new UserClient();
-
     const [formateurs, setFormateurs] = useState({});
 
     // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items

@@ -14,6 +14,7 @@ import FormationMembre from "./formationMembre"
 import MemberDetails from "./memberDetails"
 import GroupClient from "../../clients/groupClient"
 import AppContext from "@aabp/context/appContext"
+import UserContext from "@aabp/context/userContext"
 
 const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
@@ -115,52 +116,52 @@ const EditMembre = ({id}) => {
     }
 
     return  (
-    <Paper className="profile">
-        <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" to="/app/membres">
-                Membres
-            </Link>
-            <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
-        </Breadcrumbs>
-        <MemberDetails member={member} canEdit={canEdit} setMember={setMember} saveUser={saveUser} />
-    
-        <CardContent>
-            <MaterialTable
-            title=""
-            columns={state.columns}
-            data={state.data}
-            options={
-                {
-                pageSize: 10,
-                search: true,
-                grouping: true
-                }
-            }
-            editable={{
-                isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
-                isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
-                onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
-                onRowUpdate: (newData, oldData) =>
-                new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        const index = oldData.tableData.id;
-                        let nominations = member?.nominations;
-                        nominations[index] = newData;
-                        nominations[index].approvedBy = authedUser._id;
-                        setMember({...member, nominations: nominations})
-                        saveUser();
-                        resolve();
-                }, 1000);
-            })
+        <UserContext.Provider value={{member}}>
+            <Paper className="profile">
+                <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+                    <Link color="inherit" to="/app/membres">
+                        Membres
+                    </Link>
+                    <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
+                </Breadcrumbs>
+                <MemberDetails member={member} canEdit={canEdit} setMember={setMember} saveUser={saveUser} />            
+                <CardContent>
+                    <MaterialTable
+                    title=""
+                    columns={state.columns}
+                    data={state.data}
+                    options={
+                        {
+                        pageSize: 10,
+                        search: true,
+                        grouping: true
+                        }
+                    }
+                    editable={{
+                        isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
+                        isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
+                        onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
+                        onRowUpdate: (newData, oldData) =>
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                const index = oldData.tableData.id;
+                                let nominations = member?.nominations;
+                                nominations[index] = newData;
+                                nominations[index].approvedBy = authedUser._id;
+                                setMember({...member, nominations: nominations})
+                                saveUser();
+                                resolve();
+                        }, 1000);
+                    })
 
-            }}
-            onRowClick={(event, rowData) => rowData.unitId ? navigate("/app/unite/"+rowData.unitId) : navigate("/app/groupe/"+rowData.groupId)}
-            />
-        </CardContent>
-        <FormationMembre formations={member.formations} />
-        
-    </Paper>
-    )
+                    }}
+                    onRowClick={(event, rowData) => rowData.unitId ? navigate("/app/unite/"+rowData.unitId) : navigate("/app/groupe/"+rowData.groupId)}
+                    />
+                </CardContent>
+                <FormationMembre />                
+            </Paper>
+        </UserContext.Provider>
+        )
 }
 
 export default EditMembre

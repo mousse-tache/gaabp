@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
 import AnneesService from "./anneesService";
 import AppContext from "@aabp/context/appContext";
+import UserContext from "@aabp/context/userContext";
 
-const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
+const MemberDetails = ({setMember, canEdit, saveUser, isPersonalProfile}) => {
     const { authedUser } = useContext(AppContext);
+    const { member } = useContext(UserContext);
 
     return (
         <form onSubmit={saveUser} className="form"> 
@@ -138,7 +140,6 @@ const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}
 };
 
 MemberDetails.propTypes = {
-    member: PropTypes.object,
     setMember: PropTypes.func,
     canEdit: PropTypes.bool,
     isPersonalProfile: PropTypes.bool

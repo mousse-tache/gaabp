@@ -1,12 +1,19 @@
 import React, { useState, useContext, useEffect } from "react"
-import Loading from "../loading/loading";
-import UserClient from "../../clients/userClient";
-import { Paper } from '@material-ui/core';
-import MemberDetails from "../membres/memberDetails";
+
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
+
 import { Alert } from "@material-ui/lab";
+import { Paper } from '@material-ui/core';
+
 import AppContext from "@aabp/context/appContext";
+import UserContext from "@aabp/context/userContext";
+
+
+import Loading from "../loading/loading";
+import UserClient from "../../clients/userClient";
+import MemberDetails from "../membres/memberDetails";
+import FormationMembre from "../membres/formationMembre";
 
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
@@ -56,10 +63,13 @@ const Profile = () => {
     }
 
     return  (
-    <Paper className="profile">    
-        {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
-        <MemberDetails member={member} isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
-    </Paper>
+        <UserContext.Provider value={{member}}>
+            <Paper className="profile">    
+                {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
+                <MemberDetails isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
+                <FormationMembre />
+            </Paper>
+        </UserContext.Provider>    
     );
 };
 
