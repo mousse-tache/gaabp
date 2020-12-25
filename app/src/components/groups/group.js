@@ -76,7 +76,7 @@ const Group = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Groupes</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateGroup)} onClick={handleOpen}>
+                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -106,7 +106,7 @@ const Group = () => {
                     <InputLabel>Ville</InputLabel>
                     <Input fullWidth type="text" value={ville} placeholder="Glasgow" onChange={event => setVille(event.target.value)} />
 
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser) || (nom === null || numero === null || ville == null)} onClick={AddGroup}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser) || (nom === null || numero === null || ville == null)} onClick={AddGroup}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>

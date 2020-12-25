@@ -6,7 +6,6 @@ import { Paper, Button, Fab, Modal, MenuItem, TextField } from '@material-ui/cor
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import UnitTable from "./unitTable";
-import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import Branches from "../../utils/branches";
@@ -15,9 +14,6 @@ import { useSnackbar } from 'notistack';
 import "./unit.css";
 
 const Unit = () => {
-    const userContext = useContext(UserContext);
-    const authedUser = userContext.authedUser;
-    
     const [unitList, setUnitList] = useState([]);
     const [isFetchingUnitList, setIsFetchingUnitList] = useState(true);
     const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
@@ -101,7 +97,7 @@ const Unit = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Liste des unités</h3></div>
             <div className="membres-title-element">
-                <Fab aria-label="add" size="small" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUnit)} onClick={handleOpen}>
+                <Fab aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateUnit)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -158,12 +154,12 @@ const Unit = () => {
                     {Genre.map(x => <MenuItem key={x.id} value={x.id}>{x.nom}</MenuItem>)}
                     </TextField>
 
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUnit}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser)} onClick={AddUnit}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>
 
-        <UnitTable units={unitList} groups={groupList} canEdit={Permissions(authedUser, PermissionTypes.UpdateUnit)} />
+        <UnitTable units={unitList} groups={groupList} canEdit={Permissions(PermissionTypes.UpdateUnit)} />
     </Paper>
     )
 }

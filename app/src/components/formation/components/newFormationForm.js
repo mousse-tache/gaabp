@@ -23,7 +23,7 @@ const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, 
         <Card className="formation-recommender-card">
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation)}
                 autoComplete
                 autoSelect                     
                 disableClearable
@@ -38,7 +38,7 @@ const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, 
             />
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation)}
                 autoComplete
                 autoSelect                    
                 disableClearable
@@ -53,7 +53,7 @@ const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, 
             />
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation)}
                 autoComplete
                 autoSelect
                 required                      
@@ -72,7 +72,7 @@ const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, 
 
              <TextField
                 fullWidth={true}
-                disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation)}
                 required
                 InputLabelProps={{
                     shrink: true,
@@ -91,8 +91,8 @@ const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, 
                     variant={selectUser?._id !== null ? "contained" : "outlined"} 
                     
                     color={selectUser?._id !== null ? "primary" : "secondary"} 
-                    hidden={!Permissions(authedUser, PermissionTypes.RecommendFormation)}
-                    disabled={!Permissions(authedUser, PermissionTypes.RecommendFormation) || 
+                    hidden={!Permissions(PermissionTypes.RecommendFormation)}
+                    disabled={!Permissions(PermissionTypes.RecommendFormation) || 
                         selectUser._id === 0 || 
                         formation.branche.couleur === "" || 
                         formation.niveau.id === "" ||

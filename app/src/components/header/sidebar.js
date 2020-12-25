@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { navigate } from "gatsby"
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
@@ -8,13 +8,11 @@ import Permissions from '@aabp/auth/permissions';
 import PermissionTypes from '@aabp/auth/permissionTypes';
 import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
-import { Button, Collapse, List, ListItem, ListItemText, Slide } from '@material-ui/core';
+import { Button, List, ListItem, ListItemText, Slide } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import AppContext from '@aabp/context/appContext';
 
 function Sidebar() {
-  const { authedUser } = useContext(AppContext); 
-  const canAccessMemberSection = Permissions(authedUser, PermissionTypes.ViewUsers);
+  const canAccessMemberSection = Permissions(PermissionTypes.ViewUsers);
   const [open, setOpen] = useState(true);
 
   if(!open) {

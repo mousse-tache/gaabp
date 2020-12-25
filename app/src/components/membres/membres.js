@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import "./membres.css"
 import UserClient from "../../clients/userClient"
 import { TextField, Paper, Button, Fab, Modal } from '@material-ui/core';
@@ -8,10 +8,8 @@ import MembresTable from "./membresTable";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { useSnackbar } from 'notistack';
-import AppContext from "@aabp/context/appContext";
 
 const Membres = () => {
-    const { authedUser } = useContext(AppContext);
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
     const [nom, setNom] = useState("");
@@ -47,7 +45,7 @@ const Membres = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Membres</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open || !Permissions(authedUser, PermissionTypes.CreateUser)} onClick={handleOpen}>
+                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open || !Permissions(PermissionTypes.CreateUser)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -74,12 +72,12 @@ const Membres = () => {
 
                     <TextField fullWidth label="Nom de famille" type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
                     
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(authedUser, PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>
-        {!Permissions(authedUser, PermissionTypes.ViewUsers) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
-        {Permissions(authedUser, PermissionTypes.ViewUsers) && <MembresTable canEdit={Permissions(authedUser, PermissionTypes.UpdateUser)} />}
+        {!Permissions(PermissionTypes.ViewUsers) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
+        {Permissions(PermissionTypes.ViewUsers) && <MembresTable canEdit={Permissions(PermissionTypes.UpdateUser)} />}
     </Paper>
     )
 }

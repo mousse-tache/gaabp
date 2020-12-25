@@ -1,38 +1,41 @@
+import { useContext } from "react";
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
+import AppContext from "@aabp/context/appContext";
 
-function Permissions(user, permission) {
+function Permissions(permission) {
+    const { authedUser } = useContext(AppContext);
 
-    if (!user) {
+    if (!authedUser) {
         return false;
     }
 
     const isGeneralCommissionner = () => {
-        return user.nominations.filter(x => x.type.includes("VPScout") && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("VPScout") && !x.ed).length > 0;
     };
 
     const isManagementVicepResident = () => {
-        return user.nominations.filter(x => x.type.includes("VPGestion") && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("VPGestion") && !x.ed).length > 0;
     };
 
     const isCommissionner = () => {
-        return user.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
 
     const isGroupCommissionner = () => {
-        return  user.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("Groupes") && !x.ed).length > 0;
+        return  authedUser.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("Groupes") && !x.ed).length > 0;
     };
 
     const isChief = () => {
-        return user.nominations.filter(x => x.type.includes("Chef") && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("Chef") && !x.ed).length > 0;
     };
     
     const isGroupChief = () => {
-        return user.nominations.filter(x => x.type.includes("Chef") && !x.unitId && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("Chef") && !x.unitId && !x.ed).length > 0;
     };
 
     const isFormateur = () => {
-        return user.formations.filter(x => x.niveau.id === "32" && x.dateConfirmed).length > 0;
+        return authedUser.formations.filter(x => x.niveau.id === "32" && x.dateConfirmed).length > 0;
     };
 
     switch(permission) {
@@ -42,24 +45,24 @@ function Permissions(user, permission) {
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
         case PermissionTypes.SubmitRecensement:
-            return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
+            return (authedUser.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
         case PermissionTypes.CreateUnit:
         case PermissionTypes.CreateGroup:
         case PermissionTypes.UpdateGroup:
-            return (user.isAdmin || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
+            return (authedUser.isAdmin || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.AddNomination:
         case PermissionTypes.ValidateNomination:
         case PermissionTypes.RemoveNomination:
         case PermissionTypes.ViewRecensementSummary:
-            return (user.isAdmin || isGeneralCommissionner());
+            return (authedUser.isAdmin || isGeneralCommissionner());
         case PermissionTypes.RecommendFormation:
-            return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
+            return (authedUser.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
-            return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
+            return (authedUser.isAdmin || isCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
-            return (user.isAdmin || isManagementVicepResident());
+            return (authedUser.isAdmin || isManagementVicepResident());
         default:
           return false;
       } 

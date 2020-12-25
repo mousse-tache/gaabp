@@ -87,7 +87,7 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
           icon: 'delete',
           tooltip: "Retirer du groupe",
           onClick: (event, rowData) => setUserToDelete(rowData),
-          disabled: !Permissions(authedUser, PermissionTypes.UpdateGroup)
+          disabled: !Permissions(PermissionTypes.UpdateGroup)
         }
       ]}
       columns={state.columns}

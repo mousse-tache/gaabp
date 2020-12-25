@@ -15,16 +15,13 @@ import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
 import FormationResume from "../formation/components/formationResume"
-import AppContext from "@aabp/context/appContext"
 
 const NominatedUserRouter = () => {
-    const { authedUser } = useContext(AppContext);
-
     return (
     <Router basepath="/app"> 
         <Profile path="/account" />
         <Membres path="/membres" />
-        {Permissions(authedUser, PermissionTypes.ViewUsers) && <EditMembre path="membre/:id" />}
+        {Permissions(PermissionTypes.ViewUsers) && <EditMembre path="membre/:id" />}
         <Group path="/groupes" />
         <EditGroup path="/groupe/:id" />
         <Unit path="/unites" />
@@ -32,9 +29,9 @@ const NominatedUserRouter = () => {
         <Formation path="/formation" />
         <FormationResume path="/formation/:niveau/" />
         <FormationResume path="/formation/:niveau/:branche" />
-        {Permissions(authedUser, PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
+        {Permissions(PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
         <AccueilRessources path="/ressources" />
-        {Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
+        {Permissions(PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
         <NominationsOverview path="/nominations" />
         <Profile default />
     </Router> 

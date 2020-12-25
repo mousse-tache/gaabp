@@ -168,7 +168,7 @@ const RecommendFormation = () => {
                       icon: 'check',
                       tooltip: "Approuver la recommandation",
                       onClick: (event, rowData) => confirmFormation(rowData),
-                      disabled: !Permissions(authedUser, PermissionTypes.ConfirmFormation)
+                      disabled: !Permissions(PermissionTypes.ConfirmFormation)
                     }
                   ]}
                 columns={[

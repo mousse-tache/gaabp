@@ -19,7 +19,7 @@ const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
 
-    const [canEdit, setCanEdit] = useState(Permissions(authedUser, PermissionTypes.UpdateUser));
+    const [canEdit, setCanEdit] = useState(Permissions(PermissionTypes.UpdateUser));
     const [member, setMember] = useState(false);
     const [memberUnits, setMemberUnits] = useState(false);
     const [groups, setGroups] = useState(false);
@@ -47,7 +47,7 @@ const EditMembre = ({id}) => {
     }, [memberUnits, groups])
 
     useEffect(() => {
-        setCanEdit(Permissions(authedUser, PermissionTypes.UpdateUser))
+        setCanEdit(Permissions(PermissionTypes.UpdateUser))
     }, [authedUser])
 
     useEffect(() => {
@@ -137,8 +137,8 @@ const EditMembre = ({id}) => {
                 }
             }
             editable={{
-                isEditable: rowData => Permissions(authedUser, PermissionTypes.RemoveNomination),
-                isEditHidden: rowData => !Permissions(authedUser, PermissionTypes.RemoveNomination),
+                isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
+                isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
                 onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
                 onRowUpdate: (newData, oldData) =>
                 new Promise((resolve, reject) => {

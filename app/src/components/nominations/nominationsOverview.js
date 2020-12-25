@@ -20,7 +20,7 @@ const dateFromObjectId = (objectId) => {
 };
 	
 const NominationsOverview = () => {
-    const { authedUser} = useContext(AppContext);
+    const { authedUser } = useContext(AppContext);
     const [nominations, setNominations] = useState([]);
     const nominationClient = new NominationClient("");
     const groupClient = new GroupClient("");
@@ -48,7 +48,7 @@ const NominationsOverview = () => {
     const FetchNominations = async() => {
 
         try {
-            if(Permissions(authedUser, PermissionTypes.AddNomination)) {
+            if(Permissions(PermissionTypes.AddNomination)) {
                 const demandesNomination = await nominationClient.getNominations(past ? "complete" : "pending");
                 setNominations(demandesNomination);
             }
@@ -123,7 +123,7 @@ const NominationsOverview = () => {
             {
                 <MaterialTable
                 title={
-                    Permissions(authedUser, PermissionTypes.ValidateNomination) &&
+                    Permissions(PermissionTypes.ValidateNomination) &&
                     (<div>
                         Voir demandes complétées
                         <Checkbox checked={past} onChange={() => setPast(!past)} />
@@ -139,8 +139,8 @@ const NominationsOverview = () => {
                     }
                 }
                 editable={{
-                    isEditable: rowData => Permissions(authedUser, PermissionTypes.RemoveNomination),
-                    isEditHidden: rowData => !Permissions(authedUser, PermissionTypes.RemoveNomination),
+                    isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
+                    isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
                     onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée")
                 }}
 
@@ -149,7 +149,7 @@ const NominationsOverview = () => {
                         icon: 'check',
                         tooltip: "Compléter la nomination (ajoute la nomination en date du jour au dossier du membre, avec toutes les permissions reliées)",
                         onClick: (event, rowData) => ConfirmNomination(rowData),
-                        disabled: !Permissions(authedUser, PermissionTypes.ValidateNomination) || rowData.complete
+                        disabled: !Permissions(PermissionTypes.ValidateNomination) || rowData.complete
                       })
                 ]}
 

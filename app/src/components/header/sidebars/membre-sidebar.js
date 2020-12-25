@@ -45,7 +45,7 @@ function MembresSidebar({}) {
             </Link>  
           </ListItem>
           {
-            Permissions(authedUser, PermissionTypes.ViewRecensementSummary) && (
+            Permissions(PermissionTypes.ViewRecensementSummary) && (
             <ListItem divider button disableRipple onClick={() => navigate("/app/recensements")}>     
               <Link className="" to="/app/recensements" partiallyActive={true} activeClassName="active">
                   Recensements

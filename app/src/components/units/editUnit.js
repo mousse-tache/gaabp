@@ -16,10 +16,8 @@ import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"
 import AddNewUsers from "../recensement/addNewUsers"
 import "./unit.css";
-import AppContext from "@aabp/context/appContext"
 
 const EditUnit = ({id}) => {
-    const { authedUser } = useState(AppContext);
     const unitContext = useContext(UnitContext);
     const {unit, setUnit} = unitContext;
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
@@ -138,7 +136,7 @@ const EditUnit = ({id}) => {
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
-        <UnitDetails disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}/>
+        <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit)}/>
         <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
@@ -158,7 +156,7 @@ const EditUnit = ({id}) => {
                 <div className="add-user-search">  
                     <Autocomplete                        
                         fullWidth={true}
-                        disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit)}
+                        disabled={!Permissions(PermissionTypes.UpdateUnit)}
                         autoSelect
                         blurOnSelect                        
                         disableClearable
@@ -178,20 +176,20 @@ const EditUnit = ({id}) => {
                         select
                         fullWidth
                         value={selectRole}
-                        disabled={!Permissions(authedUser, PermissionTypes.AddNomination)}
+                        disabled={!Permissions(PermissionTypes.AddNomination)}
                         variant="outlined"
                         onChange={x => setSelectRole(x.target.value)}
                         >
                         {Object.keys(NominationTypes).map(x => <MenuItem key={x} value={x}>{NominationTypes[x]}</MenuItem>)}
                     </TextField>
                     <div className="add-user-button">
-                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(authedUser, PermissionTypes.UpdateUnit)} disabled={!Permissions(authedUser, PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(PermissionTypes.UpdateUnit)} disabled={!Permissions(PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
                     </div>
                 </div>
             </AccordionDetails>
         </Accordion>
         {
-            Permissions(authedUser, PermissionTypes.CreateUser) && Permissions(authedUser, PermissionTypes.UpdateUnit) && 
+            Permissions(PermissionTypes.CreateUser) && Permissions(PermissionTypes.UpdateUnit) && 
             <AddNewUsers unitId={id} 
                         uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"}
                         triggerUpdateMembres={FetchMembres}
