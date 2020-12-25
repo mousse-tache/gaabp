@@ -6,11 +6,10 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import FormationMembre from "./formationMembre"
 import MemberDetails from "./memberDetails"
-import NominationsMembre  from "./nominationsMembre"
 import AppContext from "@aabp/context/appContext"
 import UserContext from "@aabp/context/userContext"
+import UserDetailsTabs from "./userDetailsTabs";
 
 const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
@@ -71,8 +70,7 @@ const EditMembre = ({id}) => {
                     <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
                 </Breadcrumbs>
                 <MemberDetails canEdit={canEdit} />            
-                <NominationsMembre />
-                <FormationMembre />                
+                <UserDetailsTabs />           
             </Paper>
         </UserContext.Provider>
         )

@@ -13,9 +13,7 @@ import UserContext from "@aabp/context/userContext";
 import Loading from "../loading/loading";
 import UserClient from "../../clients/userClient";
 import MemberDetails from "../membres/memberDetails";
-import FormationMembre from "../membres/formationMembre";
-import NominationsMembres from "../membres/nominationsMembre";
-
+import UserDetailsTab from "../membres/userDetailsTabs";
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
     const [member, setMember] = useState(authedUser);
@@ -68,8 +66,7 @@ const Profile = () => {
             <Paper className="profile">    
                 {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
                 <MemberDetails isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
-                <NominationsMembres />
-                <FormationMembre />
+                <UserDetailsTab />
             </Paper>
         </UserContext.Provider>    
     );
