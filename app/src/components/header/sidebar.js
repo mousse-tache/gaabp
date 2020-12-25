@@ -10,19 +10,27 @@ import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
 import { Button, List, ListItem, ListItemText, Slide } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import NouvelleNomination from '../nominations/nouvelle-nomination/nouvelleNomination';
 
-function Sidebar() {
+
+const Sidebar = () => {
+  const MenuButton = () => {
+    return (
+      <Button
+      style={{ backgroundColor: 'transparent' }}
+      className="logo sidebar-logo"  onClick={() => setOpen(!open)} partiallyActive={true} activeClassName="active">
+            <img src={Logo} style={{maxWidth: "3rem"}} alt="Logo"/>
+            <MenuIcon className="mobile-only" />
+      </Button>
+    );
+  };
+
   const canAccessMemberSection = Permissions(PermissionTypes.ViewUsers);
   const [open, setOpen] = useState(true);
 
   if(!open) {
     return (
-      <Button
-      style={{ backgroundColor: 'transparent' }}
-      className="logo"  onClick={() => setOpen(!open)} partiallyActive={true} activeClassName="active">
-            <img src={Logo} style={{maxWidth: "3rem"}} alt="Logo"/>
-            <MenuIcon className="mobile-only" />
-      </Button>
+      <MenuButton />
     );
   }
 
@@ -34,15 +42,11 @@ function Sidebar() {
         variant="permanent"
         className="sidebar"    
         >
-
-          <Button
-          style={{
-            maxWidth:"7rem", textAlign: "center", backgroundColor: 'transparent' 
-          }}      
-          className="logo sidebar-logo header-nav" onClick={() => setOpen(!open)} partiallyActive={true} activeClassName="active">
-                <img style={{maxWidth: "3rem"}} src={Logo} alt="Logo"/>
-                <MenuIcon className="mobile-only" />
-          </Button>
+          <List>
+            <ListItem alignItems="center">
+              <MenuButton />
+            </ListItem>
+          </List>
 
           {
             canAccessMemberSection && <ProgressionSidebar />
@@ -55,20 +59,15 @@ function Sidebar() {
           {
             canAccessMemberSection && <MembresSidebar />
           }
+          <List>
+            <ListItem>
+              <NouvelleNomination />
+            </ListItem>
+          </List>
       </Drawer>
     </Slide>
     
   );
 }
-
-Sidebar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-  tab: PropTypes.number,
-  canAccessMemberSection: PropTypes.bool
-};
 
 export default Sidebar;
