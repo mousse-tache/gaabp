@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import { Router } from "@reach/router"
 import Profile from "./../profile/profile"
 import Membres from "./../membres/membres"

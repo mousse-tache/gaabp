@@ -7,7 +7,7 @@ import UserClient from "@aabp/clients/userClient"
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
-import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, Divider, Tooltip } from '@material-ui/core';
+import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
 import { useSnackbar } from 'notistack';
 import NominationTypes from "@aabp/utils/nominationTypes";

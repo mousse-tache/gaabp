@@ -22,7 +22,7 @@ const getFlattenedYears = (arrayYears) => {
     const fy = [];
 
     arrayYears.forEach((years, index) => {
-        if (index == 0) {
+        if (index === 0) {
             fy.push(years);
             return;
         }

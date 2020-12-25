@@ -6,9 +6,9 @@ import AnneesService from "./anneesService";
 import AppContext from "@aabp/context/appContext";
 import UserContext from "@aabp/context/userContext";
 
-const MemberDetails = ({setMember, canEdit, saveUser, isPersonalProfile}) => {
+const MemberDetails = ({canEdit, isPersonalProfile}) => {
     const { authedUser } = useContext(AppContext);
-    const { member } = useContext(UserContext);
+    const { member, setMember, saveUser } = useContext(UserContext);
 
     return (
         <form onSubmit={saveUser} className="form"> 

@@ -14,6 +14,7 @@ import Loading from "../loading/loading";
 import UserClient from "../../clients/userClient";
 import MemberDetails from "../membres/memberDetails";
 import FormationMembre from "../membres/formationMembre";
+import NominationsMembres from "../membres/nominationsMembre";
 
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
@@ -67,6 +68,7 @@ const Profile = () => {
             <Paper className="profile">    
                 {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
                 <MemberDetails isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
+                <NominationsMembres />
                 <FormationMembre />
             </Paper>
         </UserContext.Provider>    

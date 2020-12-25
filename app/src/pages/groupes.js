@@ -29,7 +29,7 @@ const [groupList, setGroupList] = useState(false);
         { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null},
         { title: '', field: 'website', render: rowData => rowData.website ? <a href={rowData.website} target="_blank" rel="noopener noreferrer">Site web</a> : null}
       ],
-      data: groupList.filter(x => x.nom != "Instances nationales"),
+      data: groupList.filter(x => x.nom !== "Instances nationales"),
     });
   }, [groupList])
 

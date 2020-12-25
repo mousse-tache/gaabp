@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import Loading from "../loading/loading"
 import UnitClient from "../../clients/unitClient"
 import GroupClient from "../../clients/groupClient"
