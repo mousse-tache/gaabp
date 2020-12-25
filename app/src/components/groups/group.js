@@ -5,13 +5,13 @@ import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import GroupTable from "./groupTable";
-import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { useSnackbar } from 'notistack';
+import AppContext from "@aabp/context/appContext";
 
 const Group = () => {
-    const authedUser = useContext(UserContext).authedUser;
+    const { authedUser } = useContext(AppContext);
     const [groupList, setGroupList] = useState([]);
     const [numero, setNumero] = useState(null);
     const [ville, setVille] = useState(null);

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Link, navigate } from "gatsby";
-import UserContext from "@aabp/context/userContext";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import Permissions from "@aabp/auth/permissions";
 
@@ -10,9 +9,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import AppContext from "@aabp/context/appContext";
 
 const ProgressionSidebar = () => {
-    const { authedUser } = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
     const [open, setOpen] = useState(false);    
 
     return (

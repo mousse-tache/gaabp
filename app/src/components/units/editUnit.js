@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link, navigate } from "gatsby"
 import Loading from "../loading/loading"
-import UserContext from "@aabp/context/userContext"
 import UnitContext from "@aabp/context/unit/unitContext"
 import UnitClient from "@aabp/clients/unitClient"
 import UserClient from "@aabp/clients/userClient"
@@ -17,10 +16,10 @@ import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"
 import AddNewUsers from "../recensement/addNewUsers"
 import "./unit.css";
+import AppContext from "@aabp/context/appContext"
 
 const EditUnit = ({id}) => {
-    const userContext = useContext(UserContext);
-    const authedUser = userContext.authedUser;
+    const { authedUser } = useState(AppContext);
     const unitContext = useContext(UnitContext);
     const {unit, setUnit} = unitContext;
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);

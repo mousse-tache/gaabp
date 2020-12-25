@@ -1,15 +1,15 @@
 import React, { useState, useContext, useEffect } from "react"
-import Loading from "../loading/loading"
-import UserContext from "../../context/userContext"
-import UserClient from "../../clients/userClient"
+import Loading from "../loading/loading";
+import UserClient from "../../clients/userClient";
 import { Paper } from '@material-ui/core';
 import MemberDetails from "../membres/memberDetails";
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
 import { Alert } from "@material-ui/lab";
+import AppContext from "@aabp/context/appContext";
 
 const Profile = () => {
-    const { authedUser, claims, init } = useContext(UserContext);
+    const { authedUser, claims, init } = useContext(AppContext);
     const [member, setMember] = useState(authedUser);
     
     const userClient = new UserClient();
@@ -30,13 +30,13 @@ const Profile = () => {
         try {
             if(member?._id) {
                 await userClient.updateUser({...member, id: member._id});
-                enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
+                enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`);
             }
             else {
                 await AddUser();
             }
         } catch (error) {            
-            enqueueSnackbar(error?.error?.response?.data, { variant: "error"})
+            enqueueSnackbar(error?.error?.response?.data, { variant: "error"});
         }
     }
 
@@ -52,7 +52,7 @@ const Profile = () => {
     }, [authedUser]);
 
     if(!init) {
-        return <Loading />
+        return <Loading />;
     }
 
     return  (
@@ -60,7 +60,7 @@ const Profile = () => {
         {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
         <MemberDetails member={member} isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
     </Paper>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

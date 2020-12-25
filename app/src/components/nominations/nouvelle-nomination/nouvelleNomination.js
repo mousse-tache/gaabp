@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import NominationContext from "../../../context/nominationContext";
 import { Tooltip, Button, Dialog } from "@material-ui/core";
 import NominationStepper from "./nominationStepper";
 import "./nomination.css";
-import UserContext from "../../../context/userContext";
 
 const DefaultNomination = 
 {role:"",

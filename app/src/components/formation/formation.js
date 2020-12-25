@@ -1,13 +1,13 @@
 import React, { useContext } from "react"
 import Loading from "../loading/loading"
 import { Card, List, ListItem, Button, ListItemIcon } from '@material-ui/core';
-import UserContext from "../../context/userContext";
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import "./formation.css";
 import { navigate } from "gatsby";
+import AppContext from "../../context/appContext";
 
 const Formation = () => {
-    const authedUser = useContext(UserContext).authedUser;
+    const { authedUser } = useContext(AppContext);
     
     if(authedUser?._id == undefined) {
         return <Loading />;

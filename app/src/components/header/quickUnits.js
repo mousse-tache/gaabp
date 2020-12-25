@@ -1,24 +1,24 @@
 import React, {useContext, useState, useEffect} from "react";
 import { Link } from "gatsby"
-import UserContext from "../../context/userContext";
 import { List, ListItem } from "@material-ui/core";
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
+import AppContext from "@aabp/context/appContext";
 
 const QuickUnits = () => {
-    const userContext = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
     const [unitList, setUnitList] = useState([]);
     const [groupList, setGroupList] = useState([]);
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
 
-    const ownUnits = userContext.authedUser?.nominations ? userContext.authedUser.nominations.filter(x => !x.ed).map(x => x.unitId).filter(x => x) : [];
-    const ownGroups = userContext.authedUser?.nominations ? userContext.authedUser.nominations.map(x => x.groupId).filter(x => x) : [];
+    const ownUnits = authedUser?.nominations ? authedUser.nominations.filter(x => !x.ed).map(x => x.unitId).filter(x => x) : [];
+    const ownGroups = authedUser?.nominations ? authedUser.nominations.map(x => x.groupId).filter(x => x) : [];
 
     useEffect(() => {
         FetchUnits();
         FetchGroups();
-    }, [userContext])
+    }, [authedUser])
 
     async function FetchUnits() {
         if(ownUnits.length == 0) {

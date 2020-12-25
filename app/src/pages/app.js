@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Layout from "../components/layout"
-import UserContext from "../context/userContext"
+import Layout from "../components/layout";
 import Loading from '../components/loading/loading'
 import UserClient from "../clients/userClient"
 import Login, { signIn } from './login'
@@ -13,6 +12,7 @@ import AnonymousUserRouter from "../components/routers/anonymousUserRouter";
 
 import "../components/profile/profile.css"
 import '@material/react-material-icon/dist/material-icon.css';
+import AppContext from "@aabp/context/appContext"
 
 const App = () => {
     const [user, setUser] = useState(false);
@@ -88,7 +88,7 @@ const App = () => {
     }
     
     return (        
-        <UserContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser, jwtToken, init}}> 
+        <AppContext.Provider value={{claims: user, authedUser, FetchUser, setAuthedUser, jwtToken, init}}> 
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>AABP | Scoutisme traditionnel</title>
@@ -101,7 +101,7 @@ const App = () => {
                     </SnackbarProvider>
                 </Layout>
             </UnitContextProvider>            
-        </UserContext.Provider>
+        </AppContext.Provider>
           )
 }
 

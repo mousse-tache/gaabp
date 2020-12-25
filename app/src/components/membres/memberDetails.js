@@ -2,11 +2,11 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types";
 
 import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
-import UserContext from "../../context/userContext";
 import AnneesService from "./anneesService";
+import AppContext from "@aabp/context/appContext";
 
 const MemberDetails = ({member, setMember, canEdit, saveUser, isPersonalProfile}) => {
-    const { authedUser } = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
 
     return (
         <form onSubmit={saveUser} className="form"> 

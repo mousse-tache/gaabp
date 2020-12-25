@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Link } from "gatsby";
 import { Input, Button } from "@material-ui/core";
-import UserContext from "../../../context/userContext";
-import NominationClient from "../../../clients/nominationClient";
+import NominationClient from "@aabp/clients/nominationClient";
 import { useSnackbar } from "notistack";
+import AppContext from "@aabp/context/appContext";
 
 const NominationRecommendation = ({approver, index, complete, nomination}) => {
-    const { authedUser } = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
     const [recommandation, setRecommandation] = useState(approver.recommandation ?? "");
     const nominationClient = new NominationClient();
     var { enqueueSnackbar } = useSnackbar();

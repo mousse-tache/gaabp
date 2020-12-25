@@ -5,14 +5,13 @@ import { TextField, Paper, Button, Fab, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import MembresTable from "./membresTable";
-import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { useSnackbar } from 'notistack';
+import AppContext from "@aabp/context/appContext";
 
 const Membres = () => {
-    const authedUserContext = useContext(UserContext);
-    const authedUser = authedUserContext.authedUser;
+    const { authedUser } = useContext(AppContext);
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
     const [nom, setNom] = useState("");

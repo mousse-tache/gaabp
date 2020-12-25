@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import UserContext from "../../context/userContext";
 import MaterialTable from "material-table";
 import RecensementClient from "../../clients/recensementClient";
 import UnitClient from "../../clients/unitClient";
 import { Checkbox } from "@material-ui/core";
 import { navigate } from "gatsby";
+import AppContext from "@aabp/context/appContext";
 
 const RecensementOverview = () => {
     const [recensements, setRecensements] = useState([]);
     const [units, setUnits] = useState([]);
-    const { authedUser } = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
     const recensementClient = new RecensementClient();
     const unitClient = new UnitClient();
     const [paid, setPaid] = useState(false);

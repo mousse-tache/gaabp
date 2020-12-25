@@ -1,16 +1,19 @@
-import React, { useState, useEffect, useContext } from "react"
-import Loading from "../loading/loading"
-import UserClient from "../../clients/userClient"
-import { Paper, Typography, Card } from '@material-ui/core';
-import UserContext from "../../context/userContext";
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
-import MaterialTable from 'material-table';
+import React, { useState, useEffect, useContext } from "react";
 import { useSnackbar } from 'notistack';
+
+import AppContext from "@aabp/context/appContext";
+
+import Loading from "../loading/loading";
+import { Paper, Typography, Card } from '@material-ui/core';
+import MaterialTable from 'material-table';
 import NewFormationForm from "./components/newFormationForm";
 
+import UserClient from "@aabp/clients/userClient";
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+
 const RecommendFormation = () => {
-    const authedUser = useContext(UserContext).authedUser;
+    const { authedUser } = useContext(AppContext);
     const { enqueueSnackbar } = useSnackbar();
     const [formation, setFormation] = useState({branche: {couleur: ""}, niveau: {id: ""}, dateRecommende: new Date(), dateConfirme: null, recommendedBy: authedUser._id});
     const [allPendingFormationMembers, setAllPendingFormationMembers] = useState(false);

@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "gatsby";
 import Loading from "../loading/loading";
-import UserContext from "../../context/userContext";
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
 import Permissions from "../../auth/permissions";
@@ -16,10 +15,10 @@ import GroupMembresTable from "./groupMembersTable";
 import { Autocomplete } from "@material-ui/lab";
 import NominationTypes from "../../utils/nominationTypes";
 import GeoClient from "../../clients/geoClient";
+import AppContext from "../../context/appContext";
 
 const EditGroup = ({id}) => {
-    const userContext = useContext(UserContext);
-    const authedUser = userContext.authedUser;
+    const { authedUser } = useContext(AppContext);
     const [isFetchingGroup, setIsFetchingGroup] = useState(true);
     const [units, setUnits] = useState([]);
     const [isFetchingUnits, setIsFetchingUnits] = useState(true);

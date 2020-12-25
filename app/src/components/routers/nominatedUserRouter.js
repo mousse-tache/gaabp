@@ -9,16 +9,16 @@ import Unit from "./../units/unit"
 import EditUnit from "./../units/editUnit"
 import Formation from "./../formation/formation"
 import AccueilRessources from "../ressources/accueilRessources"
-import UserContext from "../../context/userContext"
 import Permissions from "../../auth/permissions"
 import PermissionTypes from "../../auth/permissionTypes"
 import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
 import FormationResume from "../formation/components/formationResume"
+import AppContext from "@aabp/context/appContext"
 
 const NominatedUserRouter = () => {
-    const { authedUser } = useContext(UserContext);
+    const { authedUser } = useContext(AppContext);
 
     return (
     <Router basepath="/app"> 

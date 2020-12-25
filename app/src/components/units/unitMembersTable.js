@@ -3,14 +3,13 @@ import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
-import UserContext from "../../context/userContext";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import NominationTypes from "../../utils/nominationTypes";
+import AppContext from '@aabp/context/appContext';
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
-  const userContext = useContext(UserContext);
-  const authedUser = userContext.authedUser;
+  const { authedUser } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
   const [userToDelete, setUserToDelete] = useState(false);
 

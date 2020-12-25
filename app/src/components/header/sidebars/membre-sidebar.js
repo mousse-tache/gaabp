@@ -3,7 +3,6 @@ import { Link, navigate } from "gatsby"
 import PropTypes from 'prop-types';
 
 import QuickUnits from '../quickUnits';
-import UserContext from '@aabp/context/userContext';
 import Permissions from '@aabp/auth/permissions';
 import PermissionTypes from '@aabp/auth/permissionTypes';
 
@@ -13,9 +12,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import AppContext from '@aabp/context/appContext';
 
 function MembresSidebar({}) {
-  const { authedUser } = useContext(UserContext); 
+  const { authedUser } = useContext(AppContext); 
 
   const [open, setOpen] = useState(false);
 

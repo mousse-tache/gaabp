@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link, navigate } from "gatsby"
-import Loading from "../loading/loading"
-import UserContext from "../../context/userContext"
+import Loading from "../loading/loading";
 import UserClient from "../../clients/userClient"
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
@@ -14,10 +13,10 @@ import { useSnackbar } from 'notistack';
 import FormationMembre from "./formationMembre"
 import MemberDetails from "./memberDetails"
 import GroupClient from "../../clients/groupClient"
+import AppContext from "@aabp/context/appContext"
 
 const EditMembre = ({id}) => {
-    const userContext = useContext(UserContext);
-    const authedUser = userContext.authedUser;
+    const { authedUser } = useContext(AppContext);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
 
     const [canEdit, setCanEdit] = useState(Permissions(authedUser, PermissionTypes.UpdateUser));

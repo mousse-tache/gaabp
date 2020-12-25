@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext } from "react";
-import UserContext from "../context/userContext";
+import AppContext from "@aabp/context/appContext";
 
 let onSendingRequest = null;
 
 export class ApiClient {
     constructor(defaultConfiguration = {}) {
-        const { jwtToken } = useContext(UserContext);
+        const { jwtToken } = useContext(AppContext);
         const axiosDefaultConfiguration = {
             timeout: 0,
             headers: { 
