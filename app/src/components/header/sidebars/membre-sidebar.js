@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, navigate } from "gatsby"
 import PropTypes from 'prop-types';
 
@@ -12,11 +12,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import AppContext from '@aabp/context/appContext';
 
-function MembresSidebar({}) {
-  const { authedUser } = useContext(AppContext); 
-
+const MembresSidebar = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -65,16 +62,6 @@ function MembresSidebar({}) {
       <QuickUnits />
     </div>
   );
-}
-
-MembresSidebar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-  tab: PropTypes.number,
-  canAccessMemberSection: PropTypes.bool
 };
 
 export default MembresSidebar;
