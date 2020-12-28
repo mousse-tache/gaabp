@@ -28,6 +28,9 @@ exports.PermissionTypes = {
     ConfirmFormation: "confirmFormation",
 
     // recensements
-    ViewRecensementSummary: "viewRecensements"
+    ViewRecensementSummary: "viewRecensements",
+
+    // décorations
+    AddDecoration: "addDecoration"
 
 }

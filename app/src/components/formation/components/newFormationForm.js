@@ -6,7 +6,7 @@ import PermissionTypes from "../../../auth/permissionTypes";
 import Branches from "../../../utils/branches";
 import Formations from "../../../utils/formations";
 
-const NewFormationForm = ({authedUser, setSelectUser, selectUser, queriedUsers, setQuery, formation, setFormation, addFormation}) => {
+const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, formation, setFormation, addFormation}) => {
     const [errorText, setErrorText] = useState(null);
 
     useEffect(() => {

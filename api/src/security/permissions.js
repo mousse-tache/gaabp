@@ -39,6 +39,10 @@ exports.Permissions = (userJwt, permission) => {
         return user.formations.filter(x => x.niveau.id === "32" && x.dateConfirmed).length > 0;
     };
 
+    if (user.isAdmin) {
+        return true;
+    }
+
     switch(permission) {
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:

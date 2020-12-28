@@ -18,7 +18,7 @@ const Sidebar = () => {
     return (
       <Button
       style={{ backgroundColor: 'transparent' }}
-      className="logo sidebar-logo"  onClick={() => setOpen(!open)} partiallyActive={true} activeClassName="active">
+      className="logo sidebar-logo"  onClick={() => setOpen(!open)}>
             <img src={Logo} style={{maxWidth: "3rem"}} alt="Logo"/>
             <MenuIcon className="mobile-only" />
       </Button>
