@@ -19,8 +19,7 @@ const MembresSidebar = () => {
   return (
     <div>
       <List>
-        <ListItem button onClick={() => setOpen(!open)}>
-          
+        <ListItem button onClick={() => setOpen(!open)}>          
           <ListItemText primary="Gestion" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>

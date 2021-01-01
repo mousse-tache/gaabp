@@ -8,6 +8,11 @@ export class DecorationClient {
     getByUser = (id) => {
          return this._apiClient.get(`decorations/${id}`);
     }    
+
+    save = (decoration) => {
+        const data = { decoration };
+        return this._apiClient.put(`decorations`, data);
+   }    
 }    
 
 export default DecorationClient;

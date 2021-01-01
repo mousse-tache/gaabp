@@ -6,6 +6,11 @@ const DecorationsRoutes = [
     method: 'GET',
     url: '/api/decorations/:id',
     handler: decorationsController.getDecorationsForUser
+  },
+  {
+    method: 'PUT',
+    url: '/api/decorations',
+    handler: decorationsController.saveDecoration
   }
 ]
 

@@ -5,6 +5,7 @@ exports.PermissionTypes = {
     DeleteUser: "deleteUser",
     ViewUsers: "viewUsers",
     ViewPersonalInfo: "viewPersonalInfo",
+    UpdateDecorations: "updateDecorations",
 
     // units
     CreateUnit: "createUnit",
