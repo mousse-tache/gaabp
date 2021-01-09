@@ -8,12 +8,12 @@ import Permissions from '@aabp/auth/permissions';
 import PermissionTypes from '@aabp/auth/permissionTypes';
 import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
-import { Button, List, ListItem, ListItemText, Slide } from '@material-ui/core';
+import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NouvelleNomination from '../nominations/nouvelle-nomination/nouvelleNomination';
 
 
-const Sidebar = () => {
+const Sidebar = ({open, setOpen}) => {
   const MenuButton = () => {
     return (
       <Button
@@ -26,20 +26,12 @@ const Sidebar = () => {
   };
 
   const canAccessMemberSection = Permissions(PermissionTypes.ViewUsers);
-  const [open, setOpen] = useState(true);
-
-  if(!open) {
-    return (
-      <MenuButton />
-    );
-  }
-
+  
   return (
-    <Slide direction="right" in={open}>
       <Drawer
         anchor="left"
-        open
-        variant="permanent"
+        open={open}
+        variant="persistent"
         className="sidebar"    
         >
           <List>
@@ -64,10 +56,13 @@ const Sidebar = () => {
               <NouvelleNomination />
             </ListItem>
           </List>
-      </Drawer>
-    </Slide>
-    
+      </Drawer>    
   );
 }
+
+Sidebar.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func
+};
 
 export default Sidebar;

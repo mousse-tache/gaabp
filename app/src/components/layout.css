@@ -116,7 +116,7 @@ section {
 }
 
 .bleu {
-  border: solid 3px var(--tertiary);
+  border: solid 3px blue;
 }
 
 .rouge {
@@ -128,7 +128,11 @@ section {
 }
 
 .vert {
-  border: solid 3px var(--highlight);
+  border: solid 3px green;
+}
+
+.bleu-marine {
+  border: solid 3px var(--tertiary);
 }
 
 .formation-recommender-card {

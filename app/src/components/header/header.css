@@ -26,23 +26,6 @@
     z-index: 49;
 }
 
-.header-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    vertical-align: top;
-    align-items: center;
-    width: 80%;
-    padding:.3rem;
-    min-height: 2rem;
-}
-
-.header-nav > div {
-    padding-right: 1rem;
-    padding-left: 1rem;
-    max-height: 4rem;
-}
-
 .header img {
     vertical-align:middle;
 }
@@ -54,7 +37,6 @@
     color: var(--dark);
     text-decoration: none;
 }
-
 
 .main-header {
     width: 100%;
@@ -141,12 +123,6 @@ a:active {
     .navlink {
         font-size: larger;
         margin-left: 0%;
-    }
-
-    .auth {
-        position: relative;
-        font-size: larger;
-        right: 0;
     }
 
     .sticky {

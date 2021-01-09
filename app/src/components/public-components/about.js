@@ -4,6 +4,7 @@ import CastorCard from "./branches/castor/castorCard"
 import LouveteauxCard from "./branches/louveteaux/louveteauxCard"
 import VerteCard from "./branches/verte/verteCard"
 import RougeCard from "./branches/rouge/rougeCard"
+import MarinCard from "./branches/marin/marinCard"
 
 const About = () => (
   <section className="wrapper">
@@ -30,6 +31,7 @@ const About = () => (
       <LouveteauxCard />
       <VerteCard />
       <RougeCard />
+      <MarinCard />
     </div>
   </section>
 )

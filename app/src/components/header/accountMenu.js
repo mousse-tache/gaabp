@@ -25,8 +25,8 @@ const UserMenu = ({username}) => {
     return (
         <div className="auth">
             <span>{username}</span>
-            <IconButton onClick={handleClick}>
-                <AccountCircleIcon fontSize="large" color="primary" />
+            <IconButton onClick={handleClick} color="inherit">
+                <AccountCircleIcon fontSize="large" color="inherit" />
             </IconButton>
             <Menu
             id="simple-menu"
