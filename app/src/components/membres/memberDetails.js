@@ -107,7 +107,7 @@ const MemberDetails = ({canEdit, isPersonalProfile}) => {
 
                 </div>
 
-                {authedUser && 
+                {authedUser?.isAdmin && 
                     (
                     <div>
                         <h3>Permissions</h3>
@@ -127,13 +127,14 @@ const MemberDetails = ({canEdit, isPersonalProfile}) => {
                     </div>
                     )
                 }
+                {(canEdit || isPersonalProfile) && 
                 <div className="submit-button">
                     <Button variant="contained" color="secondary" 
-                        disabled={!(canEdit || isPersonalProfile)}
                         onClick={saveUser}>
                             {member?._id ? "Sauvegarder" : "Compléter l'inscription"}
                     </Button>
-                </div>        
+                </div>}
+                      
             </div>            
         </form>
     )

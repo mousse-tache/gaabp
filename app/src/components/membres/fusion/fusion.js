@@ -6,6 +6,7 @@ import UserContext from '@aabp/context/userContext';
 
 import { Dialog, Button, Grid, TextField } from "@material-ui/core";
 import { Alert, Autocomplete } from "@material-ui/lab";
+import MemberDetails from "@aabp/components/membres/memberDetails";
 
 import UserClient from '@aabp/clients/userClient';
 
@@ -49,9 +50,7 @@ const Fusion = () => {
                 enqueueSnackbar("Fusion complétée!", { variant: "success"});
             }
             setOpen(false);
-            navigate(`/app/membre/${selectedUser._id}`);
-            window.location.reload();
-            
+            navigate(`/app/membre/${selectedUser._id}`);            
         } catch (e) {
             console.log(e.message);  
             enqueueSnackbar(e?.error?.response?.data, { variant: "error"});
@@ -113,10 +112,14 @@ const Fusion = () => {
                             <b>Membre fusionné: </b>
 
                             {`${member.prenom} ${member.nom}`}
+                            <MemberDetails />
                         </Grid>
                         <Grid item xs={6}>
                             <b>Membre destinataire: </b>
                             {selectedUser ?`${selectedUser?.prenom} ${selectedUser?.nom}` : "à sélectionner"}
+                            <UserContext.Provider value={{member: selectedUser}}>
+                                    <MemberDetails />
+                            </UserContext.Provider>
                         </Grid>
                         <Grid item xs={12}>
                             <Alert severity="warning">Attention, cette opération est irréversible!</Alert>                            
