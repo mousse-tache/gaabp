@@ -29,7 +29,7 @@ const Header = ({ username }) => {
       <Sidebar open={open} setOpen={setOpen} />
       <AppBar
         position="fixed"
-        color="default">
+        color="inherit">
           <Toolbar>
             {!open && <MenuButton /> }
             <UserMenu username={username} />

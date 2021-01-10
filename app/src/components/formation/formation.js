@@ -4,7 +4,7 @@ import { Card, List, ListItem, Button, ListItemIcon } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import "./formation.css";
 import { navigate } from "gatsby";
-import AppContext from "../../context/appContext";
+import AppContext from "@aabp/context/appContext";
 
 const Formation = () => {
     const { authedUser } = useContext(AppContext);

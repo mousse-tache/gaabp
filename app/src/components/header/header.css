@@ -26,6 +26,11 @@
     z-index: 49;
 }
 
+header {
+    background-color: white;
+    z-index: 49;
+}
+
 .header img {
     vertical-align:middle;
 }
@@ -148,12 +153,6 @@ a:active {
     .sidebar {
         width: 100%;
     }    
-
-    .header-nav { 
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
 
     .headerpublic > div {
         flex-direction: column;

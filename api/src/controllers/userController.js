@@ -1,6 +1,8 @@
 const boom = require('boom')
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const Decoration = require('../models/Decoration');
+const DemandeNomination = require('../models/DemandeNomination')
 const { PermissionTypes } = require('../security/permissionTypes');
 const { Permissions } = require('../security/permissions');
 require('dotenv').config()
@@ -218,8 +220,6 @@ exports.addUsers = async (req, reply) => {
 
 // Update an existing user
 exports.updateProfile = async (req, reply) => {
-
-
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser)) {
     try {
       const user = req.body
@@ -242,8 +242,6 @@ exports.updateUser = async (req, reply) => {
   var userId = jwt.verify(req.headers.authorization, process.env.signingsecret).permissions._id; 
   const user = req.body
   const id = user.id
-  console.log(userId)
-  console.log(id)
 
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser) || userId == id) {
     try {
@@ -268,5 +266,36 @@ exports.deleteUser = async (req, reply) => {
     return user
   } catch (err) {
     throw boom.boomify(err)
+  }
+}
+
+exports.FuseUsers = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.FuseUsers)) {
+    try {
+      const { memberToFuse, targetMember } = req.body
+
+      const toFuse = await User.findOne({_id: memberToFuse._id})
+
+      const target = await User.findOne({_id: targetMember._id})
+
+      const updateData = { 
+        nominations: [...toFuse.nominations, ...target.nominations],
+        formations: [...toFuse.formations, ...target.formations]
+      }
+      
+      const userUpdate = await User.findByIdAndUpdate(targetMember._id, updateData, { new: true });
+      const decorationUpdate = await Decoration.updateMany({membre: memberToFuse._id}, {$set: {membre:targetMember._id}});
+      const nominationUpdate = await DemandeNomination.updateMany({user: memberToFuse._id}, {$set: {user:targetMember._id}});
+
+      const del = await User.findByIdAndDelete(toFuse._id)
+
+      return { userUpdate, decorationUpdate, nominationUpdate};
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de fusionner des dossiers"
   }
 }

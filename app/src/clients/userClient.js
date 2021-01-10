@@ -33,16 +33,8 @@ export class UserClient {
         return this._apiClient.get("users");
     }
 
-    searchUsersWithPendingNominations = () => {
-        return this._apiClient.get("pendingNominations");
-    }
-
     searchUsersWithPendingFormations = () => {
         return this._apiClient.get("users/pendingFormations");
-    }
-
-    getFormateurs = () => {
-        return this._apiClient.get("users/formateurs");
     }
 
     searchUsers = (query) => {
@@ -77,9 +69,11 @@ export class UserClient {
         return this._apiClient.put(`user/${user.id}`, user );
     }
 
-    deleteUser = (id) => {
-        return this._apiClient.delete("user", { id });
+    fuseUsers = (memberToFuse, targetMember) => {
+        return this._apiClient.post("user/fusion", { memberToFuse, targetMember });
     }
+
+
 
 }    
 

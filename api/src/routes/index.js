@@ -125,6 +125,11 @@ const otherRoutes = [
     handler: userController.getFormateurs
   },  
   {
+    method: 'POST',
+    url: '/api/user/fusion',
+    handler: userController.FuseUsers
+  },    
+  {
     method: 'GET',
     url: '/api/groups',
     handler: groupController.getGroups

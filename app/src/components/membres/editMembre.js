@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link } from "gatsby"
 import Loading from "../loading/loading";
-import UserClient from "../../clients/userClient"
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
+import UserClient from "@aabp/clients/userClient"
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
 import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import MemberDetails from "./memberDetails"
 import AppContext from "@aabp/context/appContext"
 import UserContext from "@aabp/context/userContext"
 import UserDetailsTabs from "./userDetailsTabs";
+import Fusion from "./fusion/fusion";
 
 const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
@@ -63,12 +64,17 @@ const EditMembre = ({id}) => {
     return  (
         <UserContext.Provider value={{member, setMember, saveUser}}>
             <Paper className="profile">
-                <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-                    <Link color="inherit" to="/app/membres">
-                        Membres
-                    </Link>
-                    <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
-                </Breadcrumbs>
+                <h2 style={{display:"flex", justifyContent:"space-between"}}>
+                    <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+                        <Link color="inherit" to="/app/membres">
+                            Membres
+                        </Link>
+                        <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
+                    </Breadcrumbs>
+                    {authedUser.isAdmin && <div>
+                        <Fusion />
+                    </div>}
+                </h2>
                 <MemberDetails canEdit={canEdit} />            
                 <UserDetailsTabs />           
             </Paper>

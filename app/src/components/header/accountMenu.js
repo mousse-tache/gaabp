@@ -25,7 +25,7 @@ const UserMenu = ({username}) => {
     return (
         <div className="auth">
             <span>{username}</span>
-            <IconButton onClick={handleClick} color="inherit">
+            <IconButton onClick={handleClick} color="primary">
                 <AccountCircleIcon fontSize="large" color="inherit" />
             </IconButton>
             <Menu
