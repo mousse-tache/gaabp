@@ -29,8 +29,7 @@ const EditMembre = ({id}) => {
 
     useEffect(() => {
         FetchUser();
-    }, [])
-
+    }, [id])
 
     async function FetchUser() {
         try {               
