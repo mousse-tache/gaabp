@@ -4,8 +4,8 @@ import PosteStep from "./steps/posteStep";
 import VajStep from "./steps/vajStep";
 import EngagementStep from "./steps/engagementStep";
 import MotivationStep from "./steps/motivationStep";
-import NominationContext from "../../../context/nominationContext";
-import { NominationClient } from "../../../clients/nominationClient";
+import NominationContext from "@aabp/context/nominationContext";
+import { NominationClient } from "@aabp/clients/nominationClient";
 import FinalStep from "./steps/finalStep";
 import AppContext from "@aabp/context/appContext";
 
@@ -88,7 +88,7 @@ const NominationStepper = () => {
                         <Button 
                         variant="contained" 
                         disabled={!canSubmit} 
-                        onClick={SubmitNomination}>
+                        onClick={() => SubmitNomination()}>
                             {canSubmit ? "Soumettre la nomination" : "Certaines étapes n'ont pas été complétées"}
                         </Button>
                     )

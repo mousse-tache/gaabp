@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-import NominationContext from "../../../../context/nominationContext";
+
+import NominationContext from "@aabp/context/nominationContext";
 
 const FinalStep = () => {
     const { nomination, setNomination } = useContext(NominationContext);

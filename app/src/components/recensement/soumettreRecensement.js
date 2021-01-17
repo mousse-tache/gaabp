@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Button } from "@material-ui/core";
-import RecensementClient from "../../clients/recensementClient";
-import { useSnackbar } from 'notistack';
-import RecensementContext from "../../context/recensementContext";
 import moment from "moment";
+import { Button } from "@material-ui/core";
+import { useSnackbar } from 'notistack';
+
+import RecensementContext from "@aabp/context/recensementContext";
+
+import RecensementClient from "@aabp/clients/recensementClient";
 
 const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
     const recensementClient = new RecensementClient();
@@ -72,14 +74,14 @@ date: Date,
         <div>
             {
                 latestRecensement && !shouldSubmitNew && (
-                    <Button variant="contained" color="secondary" onClick={UpdateLatest} >
+                    <Button variant="contained" color="secondary" onClick={() => UpdateLatest()} >
                         Mettre à jour le dernier recensement
                     </Button>
                 )
             }
             {
                 (!latestRecensement || shouldSubmitNew) && (
-                    <Button variant="contained" color="secondary" onClick={SubmitRecensement} >
+                    <Button variant="contained" color="secondary" onClick={() => SubmitRecensement()} >
                         Soumettre un nouveau recensement
                     </Button>
                 )
