@@ -15,6 +15,7 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
+      - { name: thumbnail, label: Thumbnail, widget: image }
   - name: formation
     label: Formation
     folder: app/src/markdown-pages/formation

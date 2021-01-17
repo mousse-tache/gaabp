@@ -1,3 +1,18 @@
 .blog-card {
     margin: 1rem;
 }
+
+.thumbnail {
+    display: block;
+    width: 50px;
+    margin-right: 0.5rem;
+}
+
+.thumbnail img {
+    width: inherit;
+    border-radius: 50%;
+}
+
+.blog-card-link {
+    display: flex;    
+}

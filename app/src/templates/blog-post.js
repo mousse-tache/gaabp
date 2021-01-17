@@ -1,10 +1,15 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../components/public-components/layout"
 import { Helmet } from "react-helmet"
+import { Breadcrumbs } from "@material-ui/core"
+import Default from "@aabp/images/default-blog-image.png"
+import "./blogpost.css"
 
 export default function BlogPost({ data }) {
     const post = data?.markdownRemark
+    const blogImage = post.frontmatter.thumbnail ? post.frontmatter.thumbnail : Default
+
     return (
       <Layout>
         <Helmet>
@@ -13,15 +18,23 @@ export default function BlogPost({ data }) {
             <title>AABP | {post.frontmatter.title}</title>
             <html lang="fr" />
         </Helmet>
-        <section className="wrapper">
-          <h1>{post.frontmatter.title}</h1>
+        <section className="wrapper blog-post">
+          <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+            <Link color="inherit" to="/blog">
+                Blog
+            </Link>
+            <div>{post.frontmatter.title}</div>
+          </Breadcrumbs>          
+          <img className="full-bleed" style={{maxWidth:"800px", borderRadius:"20px"}} src={blogImage} />
           <div>
-              <div className="full-bleed" dangerouslySetInnerHTML={{ __html: post.html }} />
+              <div  dangerouslySetInnerHTML={{ __html: post.html }} />
           </div>
+
         </section>
       </Layout>
     )
   }
+
   export const query = graphql`
     query($slug: String!) {
       markdownRemark(frontmatter: { path: { eq: $slug } }) {
