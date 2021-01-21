@@ -260,12 +260,19 @@ exports.updateUser = async (req, reply) => {
 
 // Delete a user
 exports.deleteUser = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const user = await User.findByIdAndRemove(id)
-    return user
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.DeleteUser))
+  {
+    try {
+      const id = req.params.id
+      const user = await User.findByIdAndRemove(id)
+      return user
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "La suppression n'est pas permise"
   }
 }
 

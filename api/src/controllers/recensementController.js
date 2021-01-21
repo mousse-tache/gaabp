@@ -72,16 +72,13 @@ exports.updateOne = async (req, reply) => {
 }
 
 exports.addOne = async (req, reply) => {
-
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
       const recensementModel = req.body
   
-      const recensement = new Recensement(
-      {
-        ...recensementModel
-      })
-      return recensement.save()
+      const recensement = await Recensement.collection.insertOne(recensementModel)
+
+      return recensement
     } catch (err) {
       throw boom.boomify(err)
     }
@@ -89,6 +86,5 @@ exports.addOne = async (req, reply) => {
   else {
     reply.code(401)
     return "Vous n'avez pas le droit de soumettre un recensement"
-  }
-    
+  }    
 }

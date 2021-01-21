@@ -10,8 +10,8 @@ import "./recensement.css"
 import RecensementContext from "../../context/recensementContext";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
-    const [latestRecensement, setLatestRecensement] = useState(1)
-    const cost = CalculateCost(unitMembers, uniteCadette);
+    const [latestRecensement, setLatestRecensement] = useState(1);
+    const [cost, setCost] = useState(CalculateCost(unitMembers, uniteCadette));
 
     const recensementClient = new RecensementClient();
 
@@ -27,7 +27,11 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
 
     useEffect(() => {
         FetchLatestRecensement();
-    }, [unitId])
+    }, [unitId]);
+
+    useEffect(() => {
+        setCost(CalculateCost(unitMembers, uniteCadette));
+    }, [unitMembers]);
 
     if (latestRecensement == 1) {
         return <Loading />

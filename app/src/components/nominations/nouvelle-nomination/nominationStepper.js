@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { DialogContent, Stepper, Step, StepLabel, Button } from "@material-ui/core";
+import { DialogContent, Stepper, Step, StepLabel, Button, CircularProgress } from "@material-ui/core";
 import PosteStep from "./steps/posteStep";
 import VajStep from "./steps/vajStep";
 import EngagementStep from "./steps/engagementStep";
@@ -17,6 +17,7 @@ const NominationStepper = () => {
     const { nomination } = useContext(NominationContext);
     const { authedUser } = useContext(AppContext);
     const [activeStep, setActiveStep] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const nominationClient = new NominationClient();
 
     const canSubmit = (nomination.group !== "" || nomination.unit !== "") && 
@@ -29,12 +30,13 @@ const NominationStepper = () => {
                         nomination.approvers[1]._id !== undefined;
 
     const SubmitNomination = async() => {
+        setIsSubmitting(true);
         await nominationClient.addDemandeNomination(
             {...nomination, user: authedUser._id,
             approvers: nomination.approvers.map(x => { return {_id: x._id, nom: `${x.prenom} ${x.nom}`}})
         })
-
         setActiveStep(activeStep+1);
+        setIsSubmitting(false);
     };
 
     return (
@@ -87,8 +89,10 @@ const NominationStepper = () => {
                     (
                         <Button 
                         variant="contained" 
-                        disabled={!canSubmit} 
+                        loa1
+                        disabled={!canSubmit || isSubmitting} 
                         onClick={() => SubmitNomination()}>
+                            {isSubmitting && <CircularProgress />}
                             {canSubmit ? "Soumettre la nomination" : "Certaines étapes n'ont pas été complétées"}
                         </Button>
                     )

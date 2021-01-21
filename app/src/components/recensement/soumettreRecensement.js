@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { Button } from "@material-ui/core";
 import { useSnackbar } from 'notistack';
@@ -11,7 +11,7 @@ const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
     const recensementClient = new RecensementClient();
     const latestRecensement = useContext(RecensementContext).recensement;
     const { enqueueSnackbar } = useSnackbar();
-    const shouldSubmitNew = shouldSubmitNewRecensement();
+    const [shouldSubmitNew, setShouldSubmitNew] = useState(shouldSubmitNewRecensement());
 
     function shouldSubmitNewRecensement() {
         var y = moment().year();
@@ -25,6 +25,10 @@ const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
 
         return latestRecensement ? moment(latestRecensement.date).isBefore(lastRecensementPeriod) || latestRecensement.paiementComplet : true;
     }; 
+
+    useEffect(() => {
+        setShouldSubmitNew(shouldSubmitNewRecensement());
+    }, [unitId, unitMembers, latestRecensement])
 
 /*
 date: Date,

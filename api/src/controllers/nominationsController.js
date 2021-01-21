@@ -46,11 +46,9 @@ exports.addOne = async (req, reply) => {
     try {
         const model = req.body
     
-        const nomination = new DemandeNomination(
-        {
-          ...model
-        })
-        return nomination.save()
+        const nomination = await DemandeNomination.collection.insertOne(model)
+
+        return nomination
       } catch (err) {
         throw boom.boomify(err)
       }
