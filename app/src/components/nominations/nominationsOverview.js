@@ -106,6 +106,16 @@ const NominationsOverview = () => {
         }        
     }
 
+    const RefuseNomination = async(nomination) => { 
+        try {            
+            await nominationClient.refuseNomination(nomination._id, authedUser._id)
+            setNominations(nominations.filter(x => x._id !== nomination._id))
+            enqueueSnackbar("Nomination retirée");
+        } catch (e) {
+            enqueueSnackbar(e);
+        }        
+    }
+
     useEffect(() => {
         FetchMemberUnits();
         FetchGroups();
@@ -149,6 +159,12 @@ const NominationsOverview = () => {
                         icon: 'check',
                         tooltip: "Compléter la nomination (ajoute la nomination en date du jour au dossier du membre, avec toutes les permissions reliées)",
                         onClick: (event, rowData) => ConfirmNomination(rowData),
+                        disabled: !Permissions(PermissionTypes.ValidateNomination) || rowData.complete
+                      }),
+                      rowData => ({
+                        icon: 'delete',
+                        tooltip: "Marque la nomination comme complétée, sans l'ajouter au dossier du membre",
+                        onClick: (event, rowData) => RefuseNomination(rowData),
                         disabled: !Permissions(PermissionTypes.ValidateNomination) || rowData.complete
                       })
                 ]}

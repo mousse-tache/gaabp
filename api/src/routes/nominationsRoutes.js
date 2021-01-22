@@ -26,6 +26,11 @@ const NominationsRoutes = [
     method: 'POST',
     url: '/api/demandenomination/confirm',
     handler: nominationsController.confirmNomination
+  },
+  {
+    method: 'POST',
+    url: '/api/demandenomination/refuse',
+    handler: nominationsController.refuseNomination
   }
 ]
 

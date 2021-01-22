@@ -4,7 +4,6 @@ const Decoration = require('../models/Decoration');
 const { PermissionTypes } = require('../security/permissionTypes');
 const { Permissions } = require('../security/permissions');
 require('dotenv').config()
-const jwt = require('jsonwebtoken');
 
 exports.getDecorationsForUser = async (req, reply) => {
     try {
@@ -37,5 +36,4 @@ exports.saveDecoration = async (req, reply) => {
     reply.code(401)
     return "Vous n'avez pas le droit de faire modifier les décorations"
   }
-
 }

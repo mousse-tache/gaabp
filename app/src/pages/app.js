@@ -42,7 +42,7 @@ const App = () => {
     }
 
     async function FetchUser() {
-        if(!authedUser && idToken) {
+        if(idToken) {
             try {               
                 var { user, jwttoken } = await userClient.inializeSession(idToken);
 
@@ -54,11 +54,11 @@ const App = () => {
                 if (jwttoken) {
                     setJwtToken(jwttoken);
                 }
-
-                setInit(true);
             } catch (e) {
                 console.log(e.message);   
             }
+
+            setInit(true);
         }
     }
 

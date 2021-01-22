@@ -25,6 +25,9 @@ export class NominationClient {
         return this._apiClient.post(`demandenomination/confirm`, { nominationId, confirmerId });
     }
     
+    refuseNomination = (nominationId, confirmerId) => {
+        return this._apiClient.post(`demandenomination/refuse`, { nominationId, confirmerId });
+    }
 }    
 
 export default NominationClient;
