@@ -23,6 +23,11 @@ const RecensementRoutes = [
     handler: recensementController.addOne
   },
   {
+    method: 'POST',
+    url: '/api/recensement/remove',
+    handler: recensementController.deleteOne
+  },
+  {
     method: 'PUT',
     url: '/api/recensement',
     handler: recensementController.updateOne

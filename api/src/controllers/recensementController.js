@@ -88,3 +88,21 @@ exports.addOne = async (req, reply) => {
     return "Vous n'avez pas le droit de soumettre un recensement"
   }    
 }
+
+exports.deleteOne = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
+    try {
+      const recensementModel = req.body
+  
+      const recensement = await Recensement.findByIdAndDelete(recensementModel._id)
+
+      return recensement
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de soumettre un recensement"
+  }    
+}

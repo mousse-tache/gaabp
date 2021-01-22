@@ -21,6 +21,10 @@ export class RecensementClient {
         return this._apiClient.post("recensement", recensement );
     }
 
+    removeRecensement = (recensement) => {
+        return this._apiClient.post("recensement/remove", recensement );
+    }
+
     updateRecensement = (recensement) => {
         return this._apiClient.put(`recensement`, recensement );
     }
