@@ -1,23 +1,29 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link, navigate } from "gatsby"
-import Loading from "../loading/loading"
+import { useSnackbar } from 'notistack';
+
+import AppContext from "@aabp/context/appContext";
 import UnitContext from "@aabp/context/unit/unitContext"
-import UnitClient from "@aabp/clients/unitClient"
-import UserClient from "@aabp/clients/userClient"
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import UnitMembersTable from "./unitMembersTable";
 import { Paper, Button, Breadcrumbs, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { Autocomplete } from "@material-ui/lab";
-import { useSnackbar } from 'notistack';
 import NominationTypes from "@aabp/utils/nominationTypes";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import UnitDetails from "./unitDetails";
 import Recensement from "../recensement/recensement"
 import AddNewUsers from "../recensement/addNewUsers"
+import Loading from "../loading/loading"
+
+
+import UnitClient from "@aabp/clients/unitClient"
+import UserClient from "@aabp/clients/userClient"
+
 import "./unit.css";
 
 const EditUnit = ({id}) => {
+    const { authedUser } = useContext(AppContext);
     const unitContext = useContext(UnitContext);
     const {unit, setUnit} = unitContext;
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
@@ -136,7 +142,7 @@ const EditUnit = ({id}) => {
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
-        <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit)}/>
+        <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser)}/>
         <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
@@ -156,7 +162,7 @@ const EditUnit = ({id}) => {
                 <div className="add-user-search">  
                     <Autocomplete                        
                         fullWidth={true}
-                        disabled={!Permissions(PermissionTypes.UpdateUnit)}
+                        disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser)}
                         autoSelect
                         blurOnSelect                        
                         disableClearable
@@ -176,20 +182,23 @@ const EditUnit = ({id}) => {
                         select
                         fullWidth
                         value={selectRole}
-                        disabled={!Permissions(PermissionTypes.AddNomination)}
+                        disabled={!Permissions(PermissionTypes.AddNomination, authedUser)}
                         variant="outlined"
                         onChange={x => setSelectRole(x.target.value)}
                         >
                         {Object.keys(NominationTypes).map(x => <MenuItem key={x} value={x}>{NominationTypes[x]}</MenuItem>)}
                     </TextField>
                     <div className="add-user-button">
-                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} hidden={!Permissions(PermissionTypes.UpdateUnit)} disabled={!Permissions(PermissionTypes.UpdateUnit) || selectUser._id === 0} onClick={addToUnit}>Ajouter à l'unité</Button>
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} 
+                        hidden={!Permissions(PermissionTypes.UpdateUnit, authedUser)} 
+                        disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser) || selectUser._id === 0} 
+                        onClick={addToUnit}>Ajouter à l'unité</Button>
                     </div>
                 </div>
             </AccordionDetails>
         </Accordion>
         {
-            Permissions(PermissionTypes.CreateUser) && Permissions(PermissionTypes.UpdateUnit) && 
+            Permissions(PermissionTypes.CreateUser, authedUser) && Permissions(PermissionTypes.UpdateUnit, authedUser) && 
             <AddNewUsers unitId={id} 
                         uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"}
                         triggerUpdateMembres={FetchMembres}

@@ -46,7 +46,7 @@ const MembresTable = ({canEdit}) => {
       localization={{
         toolbar: {
             searchPlaceholder: "Chercher",
-            exportName: "Exporter les contacts"
+            exportCSVName: "Exporter les contacts"
         }
       }}
       options={

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, navigate } from "gatsby";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import Permissions from "@aabp/auth/permissions";
@@ -9,8 +9,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import AppContext from "@aabp/context/appContext";
 
 const ProgressionSidebar = () => {
+    const { authedUser } = useContext(AppContext);
     const [open, setOpen] = useState(false);    
 
     return (
@@ -28,7 +30,7 @@ const ProgressionSidebar = () => {
                                 </Link>  
                         </ListItem>
                         {
-                            Permissions(PermissionTypes.RecommendFormation) &&
+                            Permissions(PermissionTypes.RecommendFormation, authedUser) &&
                             (<ListItem divider button disableRipple onClick={() => navigate("/app/formation/recommandations")}>     
                                 <Link className="" to="/app/formation/recommandations" partiallyActive={true} activeClassName="active">
                                     Recommandations

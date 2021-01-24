@@ -78,7 +78,8 @@ const FormationMembre = () => {
                 {
                 pageSize: 10,
                 search: true,
-                grouping: true
+                grouping: true,
+                exportButton: true
                 }
             }
             />

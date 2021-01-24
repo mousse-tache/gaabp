@@ -1,15 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
-import AppContext from "@aabp/context/appContext";
 
-function Permissions(permission) {
-    return <PermissionsUtils permission={permission} />;
-}
 
-const PermissionsUtils = ({permission}) => {
-    const { authedUser } = useContext(AppContext);
-
+const Permissions = (permission, authedUser = null) => {
     if (!authedUser) {
         return false;
     }

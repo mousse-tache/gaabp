@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Router } from "@reach/router"
 import Profile from "./../profile/profile"
 import Membres from "./../membres/membres"
@@ -10,18 +10,21 @@ import EditUnit from "./../units/editUnit"
 import Formation from "./../formation/formation"
 import AccueilRessources from "../ressources/accueilRessources"
 import Permissions from "../../auth/permissions"
-import PermissionTypes from "../../auth/permissionTypes"
+import PermissionTypes from "@aabp/auth/permissionTypes"
 import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
 import FormationResume from "../formation/components/formationResume"
+import AppContext from "@aabp/context/appContext"
 
 const NominatedUserRouter = () => {
+    const { authedUser } = useContext(AppContext);
+
     return (
     <Router basepath="/app"> 
         <Profile path="/account" />
         <Membres path="/membres" />
-        {Permissions(PermissionTypes.ViewUsers) && <EditMembre path="membre/:id" />}
+        {Permissions(PermissionTypes.ViewUsers, authedUser) && <EditMembre path="membre/:id" />}
         <Group path="/groupes" />
         <EditGroup path="/groupe/:id" />
         <Unit path="/unites" />
@@ -29,9 +32,9 @@ const NominatedUserRouter = () => {
         <Formation path="/formation" />
         <FormationResume path="/formation/:niveau/" />
         <FormationResume path="/formation/:niveau/:branche" />
-        {Permissions(PermissionTypes.RecommendFormation) && <RecommendFormation path="/formation/recommandations" />}
+        {Permissions(PermissionTypes.RecommendFormation, authedUser) && <RecommendFormation path="/formation/recommandations" />}
         <AccueilRessources path="/ressources" />
-        {Permissions(PermissionTypes.ViewRecensementSummary) && <RecensementOverview path="/recensements" />}
+        {Permissions(PermissionTypes.ViewRecensementSummary, authedUser) && <RecensementOverview path="/recensements" />}
         <NominationsOverview path="/nominations" />
         <Profile default />
     </Router> 

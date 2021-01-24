@@ -16,7 +16,7 @@ const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
 
-    const [canEdit, setCanEdit] = useState(Permissions(PermissionTypes.UpdateUser));
+    const [canEdit, setCanEdit] = useState(Permissions(PermissionTypes.UpdateUser, authedUser));
     const [member, setMember] = useState(false);
     
     const userClient = new UserClient();
@@ -24,7 +24,7 @@ const EditMembre = ({id}) => {
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
-        setCanEdit(Permissions(PermissionTypes.UpdateUser))
+        setCanEdit(Permissions(PermissionTypes.UpdateUser, authedUser));
     }, [authedUser])
 
     useEffect(() => {

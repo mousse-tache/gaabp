@@ -1,15 +1,24 @@
-import React, { useState } from "react"
-import "./membres.css"
-import UserClient from "../../clients/userClient"
+import React, { useContext, useState } from "react"
+import { useSnackbar } from 'notistack';
+
+
 import { TextField, Paper, Button, Fab, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
+
+
+import AppContext from "@aabp/context/appContext";
+
+import UserClient from "@aabp/clients/userClient"
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+
 import MembresTable from "./membresTable";
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
-import { useSnackbar } from 'notistack';
+
+import "./membres.css"
 
 const Membres = () => {
+    const { authedUser } = useContext(AppContext);
     const [courriel, setCourriel] = useState("");
     const [prenom, setPrenom] = useState("")
     const [nom, setNom] = useState("");
@@ -45,7 +54,12 @@ const Membres = () => {
         <div className="membres-title">
             <div className="membres-title-element"><h3>Membres</h3></div>
             <div className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={open || !Permissions(PermissionTypes.CreateUser)} onClick={handleOpen}>
+                <Fab color="primary" 
+                aria-label="add" 
+                size="small" 
+                color="secondary" 
+                disabled={open || !Permissions(PermissionTypes.CreateUser, authedUser)} 
+                onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -72,12 +86,12 @@ const Membres = () => {
 
                     <TextField fullWidth label="Nom de famille" type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
                     
-                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser)} onClick={AddUser}>Ajouter</Button>
+                    <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser, authedUser)} onClick={AddUser}>Ajouter</Button>
                 </form>
             </Paper>
         </Modal>
-        {!Permissions(PermissionTypes.ViewUsers) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
-        {Permissions(PermissionTypes.ViewUsers) && <MembresTable canEdit={Permissions(PermissionTypes.UpdateUser)} />}
+        {!Permissions(PermissionTypes.ViewUsers, authedUser) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
+        {Permissions(PermissionTypes.ViewUsers, authedUser) && <MembresTable canEdit={Permissions(PermissionTypes.UpdateUser, authedUser)} />}
     </Paper>
     )
 }

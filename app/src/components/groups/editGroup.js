@@ -36,10 +36,10 @@ const EditGroup = ({id}) => {
     const userClient = new UserClient();
     const geoClient = new GeoClient();
 
-    var canEdit = Permissions(PermissionTypes.UpdateGroup);
+    var canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
 
     useEffect(() => {
-        canEdit = Permissions(PermissionTypes.UpdateGroup);
+        canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
     }, [authedUser])
 
     useEffect(() => {
@@ -212,7 +212,7 @@ const EditGroup = ({id}) => {
 
             </CardContent>
 
-            { Permissions(PermissionTypes.UpdateGroup) &&
+            { Permissions(PermissionTypes.UpdateGroup, authedUser) &&
             (<CardContent>
                 <div className="add-user-search">
                     
@@ -243,7 +243,7 @@ const EditGroup = ({id}) => {
                         </TextField>
                     
                     <div className="add-user-button">
-                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} disabled={!Permissions(PermissionTypes.UpdateGroup) || selectUser._id === 0 || !selectRole} onClick={addToGroup}>Ajouter au groupe</Button>
+                        <Button variant={selectUser?._id !== null ? "contained" : "outlined"} color={selectUser?._id !== null ? "primary" : "secondary"} disabled={!Permissions(PermissionTypes.UpdateGroup, authedUser) || selectUser._id === 0 || !selectRole} onClick={addToGroup}>Ajouter au groupe</Button>
                     </div>
                 </div>
             </CardContent>)}

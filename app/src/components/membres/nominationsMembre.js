@@ -86,12 +86,13 @@ const NominationsMembres = () => {
                 {
                 pageSize: 10,
                 search: true,
-                grouping: true
+                grouping: true,
+                exportButton: true
                 }
             }
             editable={{
-                isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
-                isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
+                isEditable: rowData => Permissions(PermissionTypes.RemoveNomination, authedUser),
+                isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination, authedUser),
                 onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
                 onRowUpdate: (newData, oldData) =>
                 new Promise((resolve, reject) => {

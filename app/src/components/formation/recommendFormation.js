@@ -160,7 +160,8 @@ const RecommendFormation = () => {
                     pageSize: 10,
                     headerStyle: {
                         zIndex: 8
-                        }
+                    },
+                    exportButton: true
                     }
                 }
                 actions={[
@@ -168,7 +169,7 @@ const RecommendFormation = () => {
                       icon: 'check',
                       tooltip: "Approuver la recommandation",
                       onClick: (event, rowData) => confirmFormation(rowData),
-                      disabled: !Permissions(PermissionTypes.ConfirmFormation)
+                      disabled: !Permissions(PermissionTypes.ConfirmFormation, authedUser)
                     }
                   ]}
                 columns={[

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { navigate } from "gatsby";
+
+import AppContext from "@aabp/context/appContext";
 
 import { Checkbox } from "@material-ui/core";
 import MaterialTable from "material-table";
@@ -11,6 +13,7 @@ import RecensementClient from "@aabp/clients/recensementClient";
 import UnitClient from "@aabp/clients/unitClient";
 
 const RecensementOverview = () => {
+    const { authedUser } = useContext(AppContext);
     const [recensements, setRecensements] = useState([]);
     const [units, setUnits] = useState([]);
     const recensementClient = new RecensementClient();
@@ -89,7 +92,8 @@ const RecensementOverview = () => {
                         pageSize: 10,
                         headerStyle: {
                             zIndex: 8
-                            }
+                        },
+                        exportButton: true
                         }
                     }
                     actions={[
@@ -97,13 +101,13 @@ const RecensementOverview = () => {
                             icon: 'payment',
                             tooltip: "Confirmer le paiement",
                             onClick: (event, rowData) => confirmPaiement(rowData),
-                            disabled: rowData.paiementComplet === true || !Permissions(PermissionTypes.ViewRecensementSummary) 
+                            disabled: rowData.paiementComplet === true || !Permissions(PermissionTypes.ViewRecensementSummary, authedUser) 
                         }),
                         rowData => ({
                             icon: 'delete',
                             tooltip: "Supprimer le recensement",
                             onClick: (event, rowData) => removeRecensement(rowData),
-                            disabled: rowData.paiementComplet === true || !Permissions(PermissionTypes.ViewRecensementSummary) 
+                            disabled: rowData.paiementComplet === true || !Permissions(PermissionTypes.ViewRecensementSummary, authedUser) 
                         })
                     ]}
                     onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unitId)}

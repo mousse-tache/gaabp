@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { navigate } from "gatsby"
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
@@ -10,10 +10,13 @@ import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
 import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import NouvelleNomination from '../nominations/nouvelle-nomination/nouvelleNomination';
+import NouvelleNomination from '@aabp/components/nominations/nouvelle-nomination/nouvelleNomination';
+import AppContext from '@aabp/context/appContext';
 
 
 const Sidebar = ({open, setOpen}) => {
+  const { authedUser } = useContext(AppContext);
+
   const MenuButton = () => {
     return (
       <Button
@@ -25,7 +28,7 @@ const Sidebar = ({open, setOpen}) => {
     );
   };
 
-  const canAccessMemberSection = Permissions(PermissionTypes.ViewUsers);
+  const canAccessMemberSection = Permissions(PermissionTypes.ViewUsers, authedUser);
   
   return (
       <Drawer

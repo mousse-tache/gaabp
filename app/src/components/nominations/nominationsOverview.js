@@ -48,7 +48,7 @@ const NominationsOverview = () => {
     const FetchNominations = async() => {
 
         try {
-            if(Permissions(PermissionTypes.AddNomination)) {
+            if(Permissions(PermissionTypes.AddNomination, authedUser)) {
                 const demandesNomination = await nominationClient.getNominations(past ? "complete" : "pending");
                 setNominations(demandesNomination);
             }
@@ -133,7 +133,7 @@ const NominationsOverview = () => {
             {
                 <MaterialTable
                 title={
-                    Permissions(PermissionTypes.ValidateNomination) &&
+                    Permissions(PermissionTypes.ValidateNomination, authedUser) &&
                     (<div>
                         Voir demandes complétées
                         <Checkbox checked={past} onChange={() => setPast(!past)} />
@@ -145,12 +145,13 @@ const NominationsOverview = () => {
                     {
                     pageSize: 10,
                     search: true,
-                    grouping: true
+                    grouping: true,
+                    exportButton: true
                     }
                 }
                 editable={{
-                    isEditable: rowData => Permissions(PermissionTypes.RemoveNomination),
-                    isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination),
+                    isEditable: rowData => Permissions(PermissionTypes.RemoveNomination, authedUser),
+                    isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination, authedUser),
                     onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée")
                 }}
 
@@ -159,13 +160,13 @@ const NominationsOverview = () => {
                         icon: 'check',
                         tooltip: "Compléter la nomination (ajoute la nomination en date du jour au dossier du membre, avec toutes les permissions reliées)",
                         onClick: (event, rowData) => ConfirmNomination(rowData),
-                        disabled: !Permissions(PermissionTypes.ValidateNomination) || rowData.complete
+                        disabled: !Permissions(PermissionTypes.ValidateNomination, authedUser) || rowData.complete
                       }),
                       rowData => ({
                         icon: 'delete',
                         tooltip: "Marque la nomination comme complétée, sans l'ajouter au dossier du membre",
                         onClick: (event, rowData) => RefuseNomination(rowData),
-                        disabled: !Permissions(PermissionTypes.ValidateNomination) || rowData.complete
+                        disabled: !Permissions(PermissionTypes.ValidateNomination, authedUser) || rowData.complete
                       })
                 ]}
 

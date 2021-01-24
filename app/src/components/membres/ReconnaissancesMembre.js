@@ -73,6 +73,9 @@ const ReconnaissancesMembre = () => {
                         }, 1000);
                     })
                 }}
+                options={{
+                    exportButton: true
+                }}
                 columns={columns}
                 data={decorations}
             />

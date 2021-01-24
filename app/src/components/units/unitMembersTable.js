@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
+
+import AppContext from '@aabp/context/appContext';
+
 import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
-import NominationTypes from "../../utils/nominationTypes";
+
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import NominationTypes from "@aabp/utils/nominationTypes";
+
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
+  const { authedUser } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
   const [userToDelete, setUserToDelete] = useState(false);
 
@@ -77,7 +83,8 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       }}
       options={
         {
-          pageSize: 10
+          pageSize: 10,
+          exportButton: true
         }
       }
       actions={[
@@ -85,7 +92,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
           icon: 'delete',
           tooltip: "Retirer de l'unité",
           onClick: (event, rowData) => setUserToDelete(rowData),
-          disabled: !Permissions(PermissionTypes.UpdateUnit)
+          disabled: !Permissions(PermissionTypes.UpdateUnit, authedUser)
         }
       ]}
       columns={state.columns}

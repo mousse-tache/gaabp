@@ -79,7 +79,8 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
       }}
       options={
         {
-          pageSize: 10
+          pageSize: 10,
+          exportButton: true
         }
       }
       actions={[
@@ -87,7 +88,7 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
           icon: 'delete',
           tooltip: "Retirer du groupe",
           onClick: (event, rowData) => setUserToDelete(rowData),
-          disabled: !Permissions(PermissionTypes.UpdateGroup)
+          disabled: !Permissions(PermissionTypes.UpdateGroup, authedUser)
         }
       ]}
       columns={state.columns}

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import Permissions from "../../../auth/permissions";
 import PermissionTypes from "../../../auth/permissionTypes";
 import Branches from "../../../utils/branches";
 import Formations from "../../../utils/formations";
+import AppContext from "@aabp/context/appContext"
 
 const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, formation, setFormation, addFormation}) => {
+    const { authedUser } = useContext(AppContext);
     const [errorText, setErrorText] = useState(null);
 
     useEffect(() => {
@@ -23,7 +25,7 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
         <Card className="formation-recommender-card">
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation, authedUser)}
                 autoComplete
                 autoSelect                     
                 disableClearable
@@ -38,7 +40,7 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
             />
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation, authedUser)}
                 autoComplete
                 autoSelect                    
                 disableClearable
@@ -53,7 +55,7 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
             />
             <Autocomplete
                 fullWidth={true}
-                disabled={!Permissions(PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation, authedUser)}
                 autoComplete
                 autoSelect
                 required                      
@@ -72,7 +74,7 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
 
              <TextField
                 fullWidth={true}
-                disabled={!Permissions(PermissionTypes.RecommendFormation)}
+                disabled={!Permissions(PermissionTypes.RecommendFormation, authedUser)}
                 required
                 InputLabelProps={{
                     shrink: true,
@@ -91,8 +93,8 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
                     variant={selectUser?._id !== null ? "contained" : "outlined"} 
                     
                     color={selectUser?._id !== null ? "primary" : "secondary"} 
-                    hidden={!Permissions(PermissionTypes.RecommendFormation)}
-                    disabled={!Permissions(PermissionTypes.RecommendFormation) || 
+                    hidden={!Permissions(PermissionTypes.RecommendFormation, authedUser)}
+                    disabled={!Permissions(PermissionTypes.RecommendFormation, authedUser) || 
                         selectUser._id === 0 || 
                         formation.branche.couleur === "" || 
                         formation.niveau.id === "" ||

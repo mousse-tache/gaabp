@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, navigate } from "gatsby"
-import PropTypes from 'prop-types';
 
 import QuickUnits from '../quickUnits';
 import Permissions from '@aabp/auth/permissions';
@@ -12,8 +11,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import AppContext from '@aabp/context/appContext';
 
 const MembresSidebar = () => {
+  const { authedUser } = useContext(AppContext);
   const [open, setOpen] = useState(false);
 
   return (
@@ -41,7 +42,7 @@ const MembresSidebar = () => {
             </Link>  
           </ListItem>
           {
-            Permissions(PermissionTypes.ViewRecensementSummary) && (
+            Permissions(PermissionTypes.ViewRecensementSummary, authedUser) && (
             <ListItem divider button disableRipple onClick={() => navigate("/app/recensements")}>     
               <Link className="" to="/app/recensements" partiallyActive={true} activeClassName="active">
                   Recensements
