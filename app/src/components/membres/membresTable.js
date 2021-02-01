@@ -14,7 +14,8 @@ const MembresTable = ({canEdit}) => {
         field: 'statut', lookup: {0: 'Inactif', 1: 'Actif'},
         filtering: true,
         tooltip: 'Un membre est actif s\'il a au moins une nomination courante'
-      }
+      },
+      //{title:'', field:'formations', filtering:false}
     ];
 
     const { enqueueSnackbar } = useSnackbar();
@@ -64,13 +65,14 @@ const MembresTable = ({canEdit}) => {
           console.log(query);
           var { users, count, page } = await FetchUsers(query.page+1, query.pageSize, query.search);
           var filteredUsers = [];
-          if(users.length > 0) {
+          if(users && users.length > 0) {
             users.forEach(x => {
               filteredUsers.push(
                 {"_id": x._id, 
                 courriel: x.courriel, 
                 nom: `${x.prenom} ${x.nom}`, 
-                statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0
+                statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
+                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau.id)
               })
             })
           }

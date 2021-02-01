@@ -48,11 +48,11 @@ const App = () => {
 
                 if(user)
                 {
-                    setAuthedUser(user);
+                    await setAuthedUser(user);
                 }            
 
                 if (jwttoken) {
-                    setJwtToken(jwttoken);
+                    await setJwtToken(jwttoken);
                 }
             } catch (e) {
                 console.log(e.message);   
@@ -81,7 +81,7 @@ const App = () => {
         );
     }
   
-    if(!(user || init))  {
+    if(!(user || init) || (!jwtToken && authedUser))  {
         return (
             <Loading />
         )        
