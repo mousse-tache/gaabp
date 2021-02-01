@@ -74,7 +74,8 @@ const ReconnaissancesMembre = () => {
                     })
                 }}
                 options={{
-                    exportButton: true
+                    exportButton: true,
+                    exportAllData: true
                 }}
                 columns={columns}
                 data={decorations}

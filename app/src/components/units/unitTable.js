@@ -37,7 +37,8 @@ const UnitTable = ({units, canEdit, groups}) => {
       options={
         {
           pageSize: 10,
-          exportButton: true
+          exportButton: true,
+          exportAllData: true
         }
       }
       columns={state.columns}

@@ -84,7 +84,8 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       options={
         {
           pageSize: 10,
-          exportButton: true
+          exportButton: true,
+          exportAllData: true
         }
       }
       actions={[

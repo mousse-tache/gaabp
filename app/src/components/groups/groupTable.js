@@ -45,7 +45,8 @@ const GroupTable = ({groups, canSee}) => {
       options={
         {
           pageSize: 10,
-          exportButton: true
+          exportButton: true,
+          exportAllData: true
         }
       }
       columns={state?.columns}

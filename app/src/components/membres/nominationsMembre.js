@@ -87,7 +87,8 @@ const NominationsMembres = () => {
                 pageSize: 10,
                 search: true,
                 grouping: true,
-                exportButton: true
+                exportButton: true,
+                exportAllData: true
                 }
             }
             editable={{

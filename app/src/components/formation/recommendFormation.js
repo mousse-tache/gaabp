@@ -161,7 +161,8 @@ const RecommendFormation = () => {
                     headerStyle: {
                         zIndex: 8
                     },
-                    exportButton: true
+                    exportButton: true,
+                    exportAllData: true
                     }
                 }
                 actions={[

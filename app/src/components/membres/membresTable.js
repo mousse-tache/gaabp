@@ -54,7 +54,8 @@ const MembresTable = ({canEdit}) => {
           pageSize: 10,
           exportButton: canEdit,
           exportCsv: exportCsv,
-          exportFileName : "membres"
+          exportFileName : "membres",
+          exportAllData: true
         }
       }
 
