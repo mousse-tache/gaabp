@@ -50,7 +50,7 @@ exports.Permissions = (userJwt, permission) => {
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
         case PermissionTypes.SubmitRecensement:
-            return (user.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
+            return (user.isAdmin || isChief() || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
         case PermissionTypes.CreateUnit:
