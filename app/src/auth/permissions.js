@@ -43,7 +43,7 @@ const Permissions = (permission, authedUser = null) => {
         case PermissionTypes.ViewPersonalInfo:
         case PermissionTypes.ViewUsers:
         case PermissionTypes.SubmitRecensement:
-            return (authedUser.isAdmin || isChief() || isGroupChief() || isGeneralCommissionner());
+            return (authedUser.isAdmin || isChief() || isGroupChief() || isGroupCommissionner() || isGeneralCommissionner());
         case PermissionTypes.DeleteUser:
         case PermissionTypes.DeactivateUnit:
         case PermissionTypes.CreateUnit:
