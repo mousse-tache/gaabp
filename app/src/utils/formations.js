@@ -30,7 +30,8 @@ const Formations = [
     {"id":"36","alias":"Autres","name":"Autres"},
     {"id":"37","alias":"","name":"-"},
     {"id":"38","alias":"Formation-Harfang-1","name":"Formation Harfang 1"},
-    {"id":"39","alias":"bc0","name":"BC0"}
+    {"id":"39","alias":"bc0","name":"BC0"},
+    {"id":"40","alias":"fr0","name":"FR0"}
 ]
 
 export default Formations
