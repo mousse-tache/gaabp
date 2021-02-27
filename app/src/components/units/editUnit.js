@@ -54,7 +54,7 @@ const EditUnit = ({id}) => {
         if(membres.length == 0) {
             return;
         }
-        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id).length !== 0))
+        setActiveMembers(membres)
     }, [membres])
 
     async function FetchUnit() {
@@ -117,8 +117,7 @@ const EditUnit = ({id}) => {
 
     const RemoveFromUnit = async(user) => { 
         try {            
-            user.nominations.filter(x => !x.ed && x.unitId === unit._id)[0].ed = new Date();
-            await userClient.updateUser({...user, id: user._id})
+            await userClient.removeFromUnit(user._id, unit._id, user.nominations.type);
             setMembres(membres?.filter(x => x._id !== user._id))
             enqueueSnackbar("Membre retiré en date d'aujourd'hui");
         } catch (e) {
@@ -216,10 +215,10 @@ const EditUnit = ({id}) => {
                         {activeMembers.length} membre(s) actif(s)
                     </li>  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type === NominationTypes.Membre).length > 0).length} membre(s) régulier(s)
+                        {activeMembers.filter(user => user.nominations.type === NominationTypes.Membre).length} membre(s) régulier(s)
                     </li>                  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type !== NominationTypes.Membre).length > 0).length} membre(s) de maîtrise
+                        {activeMembers.filter(user => user.nominations.type !== NominationTypes.Membre).length} membre(s) de maîtrise
                     </li>
                 </ul>
             </AccordionDetails>

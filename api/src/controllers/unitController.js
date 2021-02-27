@@ -7,7 +7,20 @@ const Unit = require('../models/Unit')
 // Get all units
 exports.getUnits = async (req, reply) => {
   try {
-    const units = await Unit.find().sort({nom:1})
+    const units = await Unit.aggregate([
+      {$lookup:
+        {
+          from: "groups",
+          localField: "group",
+          foreignField: "_id",
+          as: "g"
+        }
+      },
+      {$unwind: "$g"},
+      {$project: {nom:1, genre:1, branche:1, "g.nom":1, "g.numero":1}},
+      {$sort: {nom:1}}
+    ]);
+
     return units
   } catch (err) {
     throw boom.boomify(err)

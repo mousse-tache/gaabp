@@ -80,6 +80,11 @@ const otherRoutes = [
     handler: userController.getMultipleUsers
   },
   {
+    method: 'POST',
+    url: '/api/user/removefromunit',
+    handler: userController.removeFromUnit
+  },
+  {
     method: 'GET',
     url: '/api/users/unit/:id',
     handler: userController.getUsersByUnit

@@ -173,7 +173,7 @@ const Unit = () => {
             </Paper>
         </Modal>
 
-        <UnitTable units={unitList} groups={groupList} canEdit={Permissions(PermissionTypes.UpdateUnit, authedUser)} />
+        <UnitTable units={unitList} canEdit={Permissions(PermissionTypes.UpdateUnit, authedUser)} />
     </Paper>
     )
 }
