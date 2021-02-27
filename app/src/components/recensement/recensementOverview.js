@@ -10,21 +10,18 @@ import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
 import RecensementClient from "@aabp/clients/recensementClient";
-import UnitClient from "@aabp/clients/unitClient";
 
 const RecensementOverview = () => {
     const { authedUser } = useContext(AppContext);
     const [recensements, setRecensements] = useState([]);
-    const [units, setUnits] = useState([]);
     const recensementClient = new RecensementClient();
-    const unitClient = new UnitClient();
     const [paid, setPaid] = useState(false);
 
     const cols = [
-        { title:"Unité", field:'unitId', render: row => units.filter(x => x._id === row.unitId)[0]?.nom},
+        { title:"Unité", field:'unit.nom'},
         { title: 'Date de soumission du recensement', field: 'date' },
         { title: 'Coût total', field: 'details.cost.totalPrice', render: row => `${row.details.cost.totalPrice}$`},
-        { title: 'Paiement complété', field: 'paiementComplet', render: row => row.paiementComplet ? "Oui" : "Non"}
+        { title: 'Paiement complété', field: 'paiementComplet' }
       ];
 
     const confirmPaiement = async(recensement) => {
@@ -40,31 +37,17 @@ const RecensementOverview = () => {
     const FetchRecensements = async() => {
         try {
             var data = await recensementClient.getByPayment(paid);
-            setRecensements(data);
+            setRecensements(data.map(x => {
+                return {...x, paiementComplet: paid ? "Oui" : "Non"};
+            }));
         } catch (error) {
             console.log(error);
-        }
-    };
-
-    const FetchUnits = async() => {
-        try {               
-            var data = await unitClient.getMultipleById(recensements.map(x => x.unitId));
-            if(data !== null)
-            {
-                setUnits(data);
-            }            
-        } catch (e) {
-            console.log(e.message);   
         }
     };
 
     useEffect(() => {
         FetchRecensements();
     },[paid]);
-
-    useEffect(() => {
-        FetchUnits();
-    }, [recensements])
 
     return (
             <div>

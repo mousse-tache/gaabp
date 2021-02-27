@@ -40,11 +40,37 @@ exports.getbyPayment = async (req, reply) => {
     var isPaid = paid === "true" ? true : false
 
     if(isPaid) {
-      const recensements = await Recensement.find({paiementComplet: true}).sort({_id: -1})
+      const recensements = await Recensement.aggregate([
+        {$match: {paiementComplet:true}},
+        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
+        {$lookup:
+          {
+            from: "units",
+            localField: "unitId",
+            foreignField: "_id",
+            as: "unit"
+          }
+        },
+        {$unwind: "$unit"}
+      ]);
+
       return recensements
     }
     else {
-      const recensements = await Recensement.find({paiementComplet: {$ne: true}}).sort({_id: -1})
+      const recensements = await Recensement.aggregate([
+        {$match: {paiementComplet: {$ne: true}}},
+        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
+        {$lookup:
+          {
+            from: "units",
+            localField: "unitId",
+            foreignField: "_id",
+            as: "unit"
+          }
+        },
+        {$unwind: "$unit"}
+      ]);
+
       return recensements
     }
 
