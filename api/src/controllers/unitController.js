@@ -17,7 +17,15 @@ exports.getUnits = async (req, reply) => {
         }
       },
       {$unwind: "$g"},
-      {$project: {nom:1, genre:1, branche:1, "g.nom":1, "g.numero":1}},
+      {$lookup:
+        {
+          from: "recensements",
+          localField: "_id",
+          foreignField: "unitId",
+          as: "recensements"
+        }
+      },
+      {$project: {nom:1, genre:1, branche:1, "g.nom":1, "g.numero":1, recensements: { $arrayElemAt: [ "$recensements", -1 ] }}},
       {$sort: {nom:1}}
     ]);
 

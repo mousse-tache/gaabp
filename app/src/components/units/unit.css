@@ -7,6 +7,18 @@
     margin: auto;
   }
 
+.recensement-paid-cell {
+    font-weight: bolder;
+}
+
+.recensement-Oui {
+    color: green;
+}
+
+.recensement-Non {
+    color:red;
+}
+
 
 .unit-modal-content {
     display: flex;
