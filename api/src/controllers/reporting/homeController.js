@@ -63,13 +63,13 @@ exports.getGlobalReport = async (req, reply) => {
 
         const totalCashForYear = await Recensement.aggregate([
             {$match: {paiementComplet: true}},
-            {$group: {_id: {$sum: "$details.cost.totalPrice"}}}
+            {$group: {_id: "money", n: {$sum: "$details.cost.totalPrice"}}}
         ]);
   
         return {nbOfUsers: nbOfUsers[0].nbOfUsers, 
             uniteRecenses: uniteRecenses[0].uniteRecenses, 
             unitsPaye: unitsPaye[0].unitsPaye,
-            totalCashForYear: totalCashForYear[0]._id};
+            totalCashForYear: totalCashForYear[0].n};
       } catch (err) {
         throw boom.boomify(err)
       }
