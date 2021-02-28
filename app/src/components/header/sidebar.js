@@ -10,9 +10,9 @@ import MembresSidebar from './sidebars/membre-sidebar';
 import ProgressionSidebar from './sidebars/progression-sidebar';
 import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import NouvelleNomination from '@aabp/components/nominations/nouvelle-nomination/nouvelleNomination';
 import AppContext from '@aabp/context/appContext';
-
 
 const Sidebar = ({open, setOpen}) => {
   const { authedUser } = useContext(AppContext);
@@ -43,6 +43,12 @@ const Sidebar = ({open, setOpen}) => {
             </ListItem>
           </List>
 
+          <List>
+            <ListItem button disableRipple onClick={() => navigate("/app")}>  
+              <HomeIcon />           
+              <ListItemText primary="Accueil" />
+            </ListItem>
+          </List>
           {
             canAccessMemberSection && <ProgressionSidebar />
           }
