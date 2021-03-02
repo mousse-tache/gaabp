@@ -25,7 +25,6 @@ const NotFoundPage = () => {
   `)
 
     const articles = data?.allMarkdownRemark?.edges;
-    console.log(articles);
 
     return (
     <Layout>

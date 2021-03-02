@@ -37,9 +37,7 @@ const RecommendFormation = () => {
     }
 
     const confirmFormation = async(user) => {
-        console.log(user);
         var userFormations = [...allPendingFormationMembers.filter(x => x._id == user._id)[0].formations];
-        console.log(userFormations)
 
         var formationToUpdate = user.formation;
 
@@ -48,7 +46,6 @@ const RecommendFormation = () => {
             {
                 userFormations.filter(x => !x.dateConfirme && formationToUpdate.niveau == x.niveau && formationToUpdate.branche == x.branche)[0].confirmedBy = authedUser._id;
                 userFormations.filter(x => !x.dateConfirme && formationToUpdate.niveau == x.niveau && formationToUpdate.branche == x.branche)[0].dateConfirme = new Date();
-                console.log(userFormations);
             }
             await userClient.updateUser({...user, id: user._id, formations: userFormations});
             enqueueSnackbar(`La formation de ${user.prenom} a bien été reconnue par toi, ${authedUser.prenom}`);

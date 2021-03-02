@@ -14,7 +14,6 @@ const GlobalReport = () => {
     useEffect(() => {
         const fetchReport = async() => {
             const data = await reportClient.getGlobalReport();
-            console.log(data)
             setReport(data);
         };
 
