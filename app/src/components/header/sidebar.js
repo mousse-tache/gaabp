@@ -49,9 +49,7 @@ const Sidebar = ({open, setOpen}) => {
               <ListItemText primary="Accueil" />
             </ListItem>
           </List>
-          {
-            canAccessMemberSection && <ProgressionSidebar />
-          }
+          <ProgressionSidebar />
           <List>
             <ListItem divider button disableRipple onClick={() => navigate("/app/ressources")}>             
               <ListItemText primary="Ressources" />
