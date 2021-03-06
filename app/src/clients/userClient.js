@@ -73,6 +73,10 @@ export class UserClient {
         return this._apiClient.post("user/fusion", { memberToFuse, targetMember });
     }
 
+    removeFromUnit = (userId, unitId, type) => {
+        return this._apiClient.post("user/removefromunit", { userId, unitId, type });
+    }
+
 
 
 }    

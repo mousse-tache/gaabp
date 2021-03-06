@@ -4,7 +4,7 @@ import { Link, navigate } from "gatsby"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Help from "./help";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
-import { logout } from "../../pages/login";
+import { logout } from "@aabp/login/login";
 
 const UserMenu = ({username}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);

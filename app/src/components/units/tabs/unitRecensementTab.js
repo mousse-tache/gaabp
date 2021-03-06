@@ -49,7 +49,7 @@ const UnitRecensementTab = () => {
         if(membres.length == 0) {
             return;
         }
-        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id).length !== 0))
+        setActiveMembers(membres);
     }, [membres])
 
     async function FetchAllUsers() {
@@ -86,9 +86,9 @@ const UnitRecensementTab = () => {
 
     const addToUnit = async() => { 
         try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date("")}]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date()}]})
             FetchMembres();
-            setSelectUser({_id: 0, prenom: "", nom: ""})
+            setSelectUser({_id: 0, prenom: "", nom: ""});
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
@@ -97,9 +97,8 @@ const UnitRecensementTab = () => {
 
     const RemoveFromUnit = async(user) => { 
         try {            
-            user.nominations.filter(x => !x.ed && x.unitId === unit._id)[0].ed = new Date();
-            await userClient.updateUser({...user, id: user._id})
-            setMembres(membres?.filter(x => x._id !== user._id))
+            await userClient.removeFromUnit(user._id, unit._id, user.nominations.type);
+            setMembres(membres?.filter(x => x._id !== user._id));
             enqueueSnackbar("Membre retiré en date d'aujourd'hui");
         } catch (e) {
             enqueueSnackbar(e);
@@ -111,7 +110,7 @@ const UnitRecensementTab = () => {
     }
 
     if(!membres) {
-        return (<Loading />)
+        return <Loading />;
     }
 
     return  (
@@ -189,10 +188,10 @@ const UnitRecensementTab = () => {
                         {activeMembers.length} membre(s) actif(s)
                     </li>  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type === NominationTypes.Membre).length > 0).length} membre(s) régulier(s)
+                        {activeMembers.filter(user => user.nominations.type === NominationTypes.Membre).length} membre(s) régulier(s)
                     </li>                  
                     <li>
-                        {activeMembers.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id && x.type !== NominationTypes.Membre).length > 0).length} membre(s) de maîtrise
+                        {activeMembers.filter(user => user.nominations.type !== NominationTypes.Membre).length} membre(s) de maîtrise
                     </li>
                 </ul>
             </AccordionDetails>

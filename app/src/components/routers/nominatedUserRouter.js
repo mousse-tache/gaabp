@@ -15,6 +15,7 @@ import RecensementOverview from "../recensement/recensementOverview"
 import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
 import FormationResume from "../formation/components/formationResume"
+import Home from "../home/home"
 import AppContext from "@aabp/context/appContext"
 
 const NominatedUserRouter = () => {
@@ -36,7 +37,7 @@ const NominatedUserRouter = () => {
         <AccueilRessources path="/ressources" />
         {Permissions(PermissionTypes.ViewRecensementSummary, authedUser) && <RecensementOverview path="/recensements" />}
         <NominationsOverview path="/nominations" />
-        <Profile default />
+        <Home default />
     </Router> 
     )
 };

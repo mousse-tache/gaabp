@@ -7,6 +7,7 @@ const unitController = require('../controllers/unitController')
 const RecensementRoutes = require('./recensementRoutes')
 const NominationsRoutes = require('./nominationsRoutes')
 const DecorationsRoutes = require('./decorationsRoutes')
+const ReportingRoutes = require('./reportingRoutes')
 
 const otherRoutes = [
   {
@@ -78,6 +79,11 @@ const otherRoutes = [
     method: 'POST',
     url: '/api/users/ids',
     handler: userController.getMultipleUsers
+  },
+  {
+    method: 'POST',
+    url: '/api/user/removefromunit',
+    handler: userController.removeFromUnit
   },
   {
     method: 'GET',
@@ -206,6 +212,9 @@ const otherRoutes = [
   }
 ]
 
-var routes = otherRoutes.concat(RecensementRoutes).concat(NominationsRoutes).concat(DecorationsRoutes)
+var routes = otherRoutes.concat(RecensementRoutes)
+              .concat(NominationsRoutes)
+              .concat(DecorationsRoutes)
+              .concat(ReportingRoutes)
 
 module.exports = routes

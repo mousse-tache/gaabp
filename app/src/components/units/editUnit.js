@@ -10,14 +10,12 @@ import UnitContext from "@aabp/context/unit/unitContext";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import NominationTypes from "@aabp/utils/nominationTypes";
 
 import UnitDetails from "./unitDetails";
 import Loading from "../loading/loading";
 import UnitRecensementTab from "./tabs/unitRecensementTab";
 
 import UnitClient from "@aabp/clients/unitClient";
-import UserClient from "@aabp/clients/userClient";
 
 import "./unit.css";
 
@@ -26,36 +24,13 @@ const EditUnit = ({id}) => {
     const unitContext = useContext(UnitContext);
     const {unit, setUnit} = unitContext;
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
-    const [allMembers, setAllMembers] = useState([]);
-    const [selectUser, setSelectUser] = useState({_id: 0, prenom: "", nom: ""});
-    const [selectRole, setSelectRole] = useState(NominationTypes.Membre);
-    const [membres, setMembres] = useState([]);
-    const [activeMembers, setActiveMembers] = useState([]);
     const { enqueueSnackbar } = useSnackbar();
     const unitClient = new UnitClient();
-    const userClient = new UserClient();
-    const [query, setQuery] = useState("");
     const [tab, setTab] = useState(0);
    
     useEffect(() => {
-        FetchAllUsers();
-    }, [query])
-
-    useEffect(() => {
-        FetchUnit();        
-        FetchMembres();
-    }, [id])
-
-    useEffect(() => {
-        FetchMembres();
-    }, [unit, selectUser])
-
-    useEffect(() => {
-        if(membres.length == 0) {
-            return;
-        }
-        setActiveMembers(membres.filter(user => user.nominations.filter(x => !x.ed && x.unitId === unit?._id).length !== 0))
-    }, [membres])
+        FetchUnit();      
+    }, [id]);
 
     async function FetchUnit() {
         try {               
@@ -76,62 +51,8 @@ const EditUnit = ({id}) => {
         setIsFetchingUnit(false);
     }
 
-    async function FetchAllUsers() {
-        if(query.length < 3) {
-            return;
-        }
-
-        try {               
-            var data = await userClient.searchUsers(query);
-            if(data !== null)
-            {
-                setAllMembers(data);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
-    }
-
-    async function FetchMembres() {
-        try {               
-            var data = await userClient.getByUnitId(id);
-            if(data !== null)
-            {
-                setMembres(data);
-            }            
-        } catch (e) {
-            console.log(e.message);
-        }
-    }
-
-    const addToUnit = async() => { 
-        try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date("")}]})
-            FetchMembres();
-            setSelectUser({_id: 0, prenom: "", nom: ""})
-            enqueueSnackbar("Membre ajouté");
-        } catch (e) {
-            enqueueSnackbar(e);
-        }        
-    }
-
-    const RemoveFromUnit = async(user) => { 
-        try {            
-            user.nominations.filter(x => !x.ed && x.unitId === unit._id)[0].ed = new Date();
-            await userClient.updateUser({...user, id: user._id})
-            setMembres(membres?.filter(x => x._id !== user._id))
-            enqueueSnackbar("Membre retiré en date d'aujourd'hui");
-        } catch (e) {
-            enqueueSnackbar(e);
-        }        
-    }
-
-    function handleChangeAutoUser(x) {
-        setSelectUser(x);
-    }
-
-    if(isFetchingUnit || !membres) {
-        return (<Loading />)
+    if(isFetchingUnit) {
+        return <Loading />;
     }
 
     return  (
@@ -142,7 +63,6 @@ const EditUnit = ({id}) => {
             </Link>
             <Typography color="textPrimary">{`${unit.nom}`}</Typography>
         </Breadcrumbs>
-
         <div>
             <Tabs 
             value={tab}
@@ -158,7 +78,7 @@ const EditUnit = ({id}) => {
             {tab === 2 && <div />}
         </div>
     </Paper>
-    )
-}
+    );
+};
 
 export default EditUnit;

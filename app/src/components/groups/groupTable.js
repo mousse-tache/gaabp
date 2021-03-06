@@ -15,17 +15,17 @@ const GroupTable = ({groups, canSee}) => {
     data: groups,
   });
 
-
-
   useEffect(() => {
     setState({
       columns: [
         { title: 'Numéro', field: 'numero' },
         { title: 'Nom', field: 'nom', defaultSort: "asc" },
         { title: 'Ville', field: 'ville' },
-        { title: 'Région', field: 'region', render: rowData => rowData.region ? Regions[rowData.region].nom : null}
+        { title: 'Région', field: 'region'}
       ],
-      data: groups,
+      data: groups.map(x => {
+        return {...x, region: x.region ? Regions[x.region].nom : null}
+      }),
     });
   }, [groups])
 

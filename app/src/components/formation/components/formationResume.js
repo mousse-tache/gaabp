@@ -36,7 +36,6 @@ const FormationResume = ({niveau, branche}) => {
     }
     
     const { frontmatter, html } = article;
-    console.log(frontmatter.externalLink)
     
     return (
         <div>        

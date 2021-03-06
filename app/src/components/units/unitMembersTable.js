@@ -11,7 +11,6 @@ import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import NominationTypes from "@aabp/utils/nominationTypes";
 
-
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   const { authedUser } = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
@@ -29,7 +28,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       { title: 'Courriel', field: 'courriel' },
       { title: "Début", field:"sd", type:"date"},
       { title: "Fin", field:"ed", type:"date"},
-      { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.unitId === unitId)[0]?.type }
+      { title: "Rôle", field: 'nominations.type' }
       
     ],
     data: users,
@@ -42,8 +41,8 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
         { title: "Nom", field:'prenom' },
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
-        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.unitId === unitId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
-        { title: "Rôle", field: 'nominations', render: row => NominationTypes[row.nominations.filter(x => x.unitId === unitId && !x.ed)[0]?.type]}
+        { title: "Début", field:"nominations.sd", type:"date"},
+        { title: "Rôle", field: 'nominations.type'}
       ],
       data: users,
     });

@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react"
-import Layout from "../components/layout";
-import Loading from '../components/loading/loading'
-import UserClient from "../clients/userClient"
-import Login, { signIn } from './login'
-import UnitContextProvider from "../context/unit/unitContextProvider"
+import React, { useState, useEffect } from "react";
 import { SnackbarProvider } from 'notistack';
 import { Helmet } from "react-helmet";
 
-import NominatedUserRouter from "../components/routers/nominatedUserRouter";
-import AnonymousUserRouter from "../components/routers/anonymousUserRouter";
+import AppContext from "@aabp/context/appContext";
+import UnitContextProvider from "@aabp/context/unit/unitContextProvider"
 
-import "../components/profile/profile.css"
-import '@material/react-material-icon/dist/material-icon.css';
-import AppContext from "@aabp/context/appContext"
+import Layout from "@aabp/components/layout";
+import Loading from '@aabp/components/loading/loading';
+import NominatedUserRouter from "@aabp/components/routers/nominatedUserRouter";
+import AnonymousUserRouter from "@aabp/components/routers/anonymousUserRouter";
+
+import UserClient from "@aabp/clients/userClient";
+
+import Login, { signIn } from '@aabp/login/login';
+
 
 const App = () => {
     const [user, setUser] = useState(false);
@@ -76,9 +77,7 @@ const App = () => {
     }, [idToken])
 
     if (!isAuthenticated()) {
-        return (
-          <Login/>
-        );
+        return <Login  />;
     }
   
     if(!(user || init) || (!jwtToken && authedUser))  {

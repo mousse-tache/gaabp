@@ -1,0 +1,20 @@
+.globalreport-tile-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.globalreport-tile-item {
+    display: block;
+    margin: auto;
+}
+
+.globalreport .icon-align {
+    vertical-align: text-bottom;
+ }
+
+ .report-number {
+     font-weight: bold;
+     font-size: 20px;
+ }
