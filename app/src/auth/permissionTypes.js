@@ -13,6 +13,8 @@ const PermissionTypes = {
     DeactivateUnit: "deactivateUnit",
     SubmitRecensement: "submitRecensement",
     PayRecensement: "payRecensement",
+    SubmitCamp: "submitCamp",
+    ApproveCamp: "approveCamp",
 
     // groups
     CreateGroup: "createGroup",

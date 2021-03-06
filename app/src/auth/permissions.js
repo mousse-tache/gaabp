@@ -2,7 +2,6 @@ import React from "react";
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
 
-
 const Permissions = (permission, authedUser = null) => {
     if (!authedUser) {
         return false;
@@ -37,6 +36,8 @@ const Permissions = (permission, authedUser = null) => {
     };
 
     switch(permission) {
+        case PermissionTypes.SubmitCamp:
+            return (authedUser.isAdmin || isChief());
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:
         case PermissionTypes.UpdateUnit:
@@ -58,6 +59,7 @@ const Permissions = (permission, authedUser = null) => {
         case PermissionTypes.RecommendFormation:
             return (authedUser.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
+        case PermissionTypes.ApproveCamp:
             return (authedUser.isAdmin || isCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (authedUser.isAdmin || isManagementVicepResident());

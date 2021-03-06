@@ -44,6 +44,8 @@ exports.Permissions = (userJwt, permission) => {
     }
 
     switch(permission) {
+        case PermissionTypes.SubmitCamp:
+            return (authedUser.isAdmin || isChief());
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:
         case PermissionTypes.UpdateUnit:
@@ -65,6 +67,7 @@ exports.Permissions = (userJwt, permission) => {
         case PermissionTypes.RecommendFormation:
             return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
+        case PermissionTypes.ApproveCamp:
             return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (user.isAdmin || isManagementVicepResident());
