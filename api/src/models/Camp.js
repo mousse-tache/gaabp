@@ -5,6 +5,8 @@ const Camp = new mongoose.Schema({
   dateSoumission: Date,
   debutDuCamp: Date,
   finDuCamp: Date,
+  lieuDuCamp: String,
+  chefUnite: mongoose.Types.ObjectId,
   comments: String
 });
 

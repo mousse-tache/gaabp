@@ -14,6 +14,7 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import UnitDetails from "./unitDetails";
 import Loading from "../loading/loading";
 import UnitRecensementTab from "./tabs/unitRecensementTab";
+import CampTab from "./tabs/campTab";
 
 import UnitClient from "@aabp/clients/unitClient";
 
@@ -71,11 +72,11 @@ const EditUnit = ({id}) => {
             onChange={(event, newValue) => setTab(newValue)} aria-label="simple tabs for user details">
                 <Tab label="Informations" />
                 <Tab label="Recensement" />
-                <Tab disabled label="Camps" />
+                <Tab label="Camps" disabled={true || !Permissions(PermissionTypes.SubmitCamp, authedUser)} />
             </Tabs>
             {tab === 0 && <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser)}/>}
             {tab === 1 && <UnitRecensementTab />}  
-            {tab === 2 && <div />}
+            {tab === 2 && <CampTab />}
         </div>
     </Paper>
     );

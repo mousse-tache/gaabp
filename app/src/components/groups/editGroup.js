@@ -189,7 +189,6 @@ const EditGroup = ({id}) => {
                     value={group.adresse}
                     disabled={!canEdit}
                     onChange={x => setGroup({...group, adresse: x.target.value})}
-                    on
                     >
                 </TextField>
                 <FormControlLabel 
