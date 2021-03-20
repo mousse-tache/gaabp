@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import MaterialTable from "material-table";
 
-import AppContext from "@aabp/context/appContext";
 import UnitContext from "@aabp/context/unit/unitContext";
 import CampContext from "@aabp/context/campContext";
 
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Stepper, Step, StepLabel, StepContent, TextField, Button } from "@material-ui/core";
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Stepper, Step, StepLabel, StepContent } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Alert } from "@material-ui/lab";
 
@@ -13,37 +11,36 @@ import r4 from "@aabp/docs/Réglement spécifique 04 - Normes de campement.pdf";
 
 import UserClient from "@aabp/clients/userClient";
 import DateStep from "./steps/dateStep";
-import StepAction from "./steps/stepAction";
 import ParticipantsSteps from "./steps/participantsSteps";
 import LieuStep from "./steps/lieuStep";
+import ChefStep from "./steps/chefStep";
+import CahierCampStep from "./steps/cahierCampStep";
+import Revision from "./steps/revisionStep";
+
+const DefaultCamp = {  
+    unit: "",
+    dateSoumission: "",
+    debutDuCamp: "",
+    finDuCamp: "",
+    lieuDuCamp: {
+        adresse: "",
+        codePostal: "",
+        proprio: "",
+        telephone: ""
+    },
+    comments: "",
+    chefUnite: null,
+    chefCamp: {}
+};
 
 const DemandePermisCamper = () => {
-    const { authedUser } = useContext(AppContext);
     const { unit } = useContext(UnitContext);
 
-    const [camp, setCamp] = useState({  
-        unit: unit._id,
-        dateSoumission: "",
-        debutDuCamp: "",
-        finDuCamp: "",
-        lieuDuCamp: {
-            adresse: "",
-            codePostal: "",
-            proprio: "",
-            telephone: ""
-        },
-        comments: "",
-        chefUnite: null,
-        chefCamp: {}
-    });
+    const [camp, setCamp] = useState({...DefaultCamp, unit: unit?._id});
     const [activeStep, setActiveStep] = useState(0);
     const [membres, setMembres] = useState([]);
 
     const userClient = new UserClient();
-
-    /*
-    On va vouloir ajouter une gestion des aides de camp vu que eux n'auront pas toujours de dossiers
-    */
 
     async function FetchMembres() {
         if(!unit?._id) {
@@ -63,16 +60,9 @@ const DemandePermisCamper = () => {
 
     useEffect(() => {
         FetchMembres();
+        setActiveStep(0);
+        setCamp({...DefaultCamp, unit: unit?._id});
     }, [unit]);
-
-    useEffect(() => {
-        const chef = membres.find(x => x.nominations.type === "Chef");
-        
-        if (chef) {
-            setCamp({...camp, chefUnite: chef, chefCamp: chef});
-        }
-
-    }, [membres]);
 
     return  (     
         <CampContext.Provider value={{camp, setCamp, activeStep, setActiveStep, membres, setMembres}}>
@@ -117,23 +107,7 @@ const DemandePermisCamper = () => {
                                 Chef du camp
                             </StepLabel>
                             <StepContent>
-                                <p>
-                                    Chef d'unité:
-                                    {
-                                        camp.chefUnite &&
-                                        <span>{camp.chefUnite.prenom} {camp.chefUnite.nom}</span>
-                                    }
-                                </p>      
-                                <p>
-                                    Chef de camp: 
-                                    {
-                                        camp.chefCamp &&
-                                        <span>{camp.chefCamp.prenom} {camp.chefCamp.nom}</span>
-                                    }                          
-                                </p>                   
-                            </StepContent>
-                            <StepContent>                        
-                                <StepAction disabled={!camp.chefUnite} activeStep={activeStep} setActiveStep={setActiveStep} />
+                                <ChefStep />                  
                             </StepContent>
                         </Step>
                         <Step key="Participants">
@@ -149,10 +123,13 @@ const DemandePermisCamper = () => {
                                 Cahier de camp
                             </StepLabel>
                             <StepContent>
-                                Téléverser le cahier de camp
+                                <CahierCampStep />
                             </StepContent>
-                            <StepContent>                        
-                                <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />
+                        </Step>
+                        <Step key="revision">
+                            <StepLabel>Révision</StepLabel>
+                            <StepContent>
+                                <Revision />
                             </StepContent>
                         </Step>
                     </Stepper>             

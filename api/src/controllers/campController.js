@@ -8,7 +8,17 @@ require('dotenv').config()
 exports.createNewCamp = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitCamp)) { 
     try {
-      return "";
+        const { camp } = req.body
+  
+        if(camp._id) {
+          const update = await Camp.findByIdAndUpdate(camp._id, camp, { new: true });
+  
+          return update;
+        }
+  
+        const insert =  await Camp.collection.insertOne(camp);
+  
+        return insert;
     } catch (err) {
       throw boom.boomify(err)
     }

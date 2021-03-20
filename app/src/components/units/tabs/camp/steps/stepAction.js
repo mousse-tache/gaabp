@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 
 import "./stepAction.css";
 
-const StepAction = ({activeStep, setActiveStep, disabled}) => {
+const StepAction = ({activeStep, setActiveStep, disabled, submit}) => {
     return (
         <div className="step-action">
             <div>
@@ -14,14 +14,28 @@ const StepAction = ({activeStep, setActiveStep, disabled}) => {
             >
                 Étape précédente
             </Button>
+            {
+                activeStep !== 5 &&
             <Button
                 variant="contained"
                 color="primary"
                 disabled={disabled}
                 onClick={() => setActiveStep(activeStep+1)}
             >
-                {activeStep === 4 ? 'Soumettre' : 'Prochaine étape'}
+                {activeStep === 5 ? 'Soumettre' : 'Prochaine étape'}
             </Button>
+            }
+            {
+                activeStep === 5 &&
+            <Button
+                variant="contained"
+                color="primary"
+                disabled={disabled}
+                onClick={() => submit()}
+            >
+                Soumettre
+            </Button>
+            }
             </div>
         </div>
     );
