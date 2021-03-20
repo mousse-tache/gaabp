@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import moment from "moment";
 
 import {  Typography, Step, StepLabel, StepContent, TextField } from "@material-ui/core";
 
@@ -30,7 +31,7 @@ const DateStep = () => {
                     }} />
                 </div>
                 <div>                        
-                    <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />
+                    <StepAction disabled={!camp.debutDuCamp || !camp.finDuCamp || camp.finDuCamp < camp.debutDuCamp} activeStep={activeStep} setActiveStep={setActiveStep} />
                 </div>
             </div>
         

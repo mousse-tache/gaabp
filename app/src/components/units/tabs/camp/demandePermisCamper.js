@@ -15,6 +15,7 @@ import UserClient from "@aabp/clients/userClient";
 import DateStep from "./steps/dateStep";
 import StepAction from "./steps/stepAction";
 import ParticipantsSteps from "./steps/participantsSteps";
+import LieuStep from "./steps/lieuStep";
 
 const DemandePermisCamper = () => {
     const { authedUser } = useContext(AppContext);
@@ -25,7 +26,12 @@ const DemandePermisCamper = () => {
         dateSoumission: "",
         debutDuCamp: "",
         finDuCamp: "",
-        lieuDuCamp: "",
+        lieuDuCamp: {
+            adresse: "",
+            codePostal: "",
+            proprio: "",
+            telephone: ""
+        },
         comments: "",
         chefUnite: null,
         chefCamp: {}
@@ -103,23 +109,7 @@ const DemandePermisCamper = () => {
                                 Lieu du camp
                             </StepLabel>
                             <StepContent>
-                                <div>
-                                    Adresse du lieu et coordonnées du propriétaire
-                                </div>
-                                <TextField 
-                                label="Lieu" 
-                                type="text"   
-                                multiline                          
-                                rows="4"
-                                placeholder='Numero, rue, ville, code postal;Nom du propriétaire, numéro de téléphone'
-                                value={camp.lieuDuCamp}
-                                onChange={(e) => setCamp({...camp, lieuDuCamp: e.target.value})}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }} />
-                            </StepContent>
-                            <StepContent>                        
-                                <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />
+                                <LieuStep />
                             </StepContent>
                         </Step>
                         <Step key="chef du camp">
@@ -140,11 +130,10 @@ const DemandePermisCamper = () => {
                                         camp.chefCamp &&
                                         <span>{camp.chefCamp.prenom} {camp.chefCamp.nom}</span>
                                     }                          
-                                </p>                    
-        
+                                </p>                   
                             </StepContent>
                             <StepContent>                        
-                                <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />
+                                <StepAction disabled={!camp.chefUnite} activeStep={activeStep} setActiveStep={setActiveStep} />
                             </StepContent>
                         </Step>
                         <Step key="Participants">

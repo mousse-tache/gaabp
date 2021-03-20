@@ -14,7 +14,6 @@ import UserClient from "@aabp/clients/userClient";
 
 import Login, { signIn } from '@aabp/login/login';
 
-
 const App = () => {
     const [user, setUser] = useState(false);
     const [authedUser, setAuthedUser] = useState(false);
@@ -39,7 +38,8 @@ const App = () => {
         } else {
           setUser(false);
           localStorage.setItem('isAuthenticated', 'false');
-        }
+          setInit(true);
+        }       
     }
 
     async function FetchUser() {
@@ -58,7 +58,7 @@ const App = () => {
             } catch (e) {
                 console.log(e.message);   
             }
-
+            
             setInit(true);
         }
     }
@@ -74,7 +74,7 @@ const App = () => {
 
     useEffect(() => {
         FetchUser();
-    }, [idToken])
+    }, [idToken]);
 
     if (!isAuthenticated()) {
         return <Login  />;

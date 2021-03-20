@@ -3,14 +3,12 @@ import React, { useState, useContext, useEffect } from "react"
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
 
-import { Alert } from "@material-ui/lab";
+import { Alert, Skeleton } from "@material-ui/lab";
 import { Paper } from '@material-ui/core';
 
 import AppContext from "@aabp/context/appContext";
 import UserContext from "@aabp/context/userContext";
 
-
-import Loading from "../loading/loading";
 import UserClient from "../../clients/userClient";
 import MemberDetails from "../membres/memberDetails";
 import UserDetailsTab from "../membres/userDetailsTabs";
@@ -58,7 +56,7 @@ const Profile = () => {
     }, [authedUser]);
 
     if(!init) {
-        return <Loading />;
+        return <Skeleton />;
     }
 
     return  (

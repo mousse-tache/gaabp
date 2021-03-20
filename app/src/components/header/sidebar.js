@@ -34,9 +34,11 @@ const Sidebar = ({open, setOpen}) => {
       <Drawer
         anchor="left"
         open={open}
-        variant="persistent"
-        className="sidebar"    
+        variant="persistent"    
         >
+          <div 
+        className="sidebar">
+            
           <List>
             <ListItem alignItems="center">
               <MenuButton />
@@ -63,6 +65,8 @@ const Sidebar = ({open, setOpen}) => {
               <NouvelleNomination />
             </ListItem>
           </List>
+          
+          </div>
       </Drawer>    
   );
 }

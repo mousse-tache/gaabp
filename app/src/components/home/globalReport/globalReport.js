@@ -6,21 +6,29 @@ import HelpOutline from "@material-ui/icons/HelpOutline";
 import ReportingClient from "@aabp/clients/reportingClient";
 
 import "./globalReport.css";
+import { Skeleton } from "@material-ui/lab";
 
 const GlobalReport = () => {
     const [report, setReport] = useState({})
+    const [init, setInit] = useState(false);
     const reportClient = new ReportingClient();
 
     useEffect(() => {
         const fetchReport = async() => {
             const data = await reportClient.getGlobalReport();
-            setReport(data);
+            await setReport(data);
+
+            await setInit(true);
         };
 
         fetchReport();
     }, []);
 
     const { nbOfUsers, uniteRecenses, unitsPaye, totalCashForYear } = report;
+
+    if (!init) {
+        return <Skeleton />;
+    }
 
     return (
         <Card className="globalreport">

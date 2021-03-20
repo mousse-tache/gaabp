@@ -12,7 +12,7 @@ html {
   font-family: Roboto, sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  font-size:18px;
+  font-size:16px;
   scroll-behavior: smooth;
   line-height: 20px;
 
@@ -221,10 +221,6 @@ form {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  h1 {
-    font-size: 25px;
   }
 
   .formation-recommender-card {

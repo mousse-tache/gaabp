@@ -72,7 +72,7 @@ const EditUnit = ({id}) => {
             onChange={(event, newValue) => setTab(newValue)} aria-label="simple tabs for user details">
                 <Tab label="Informations" />
                 <Tab label="Recensement" />
-                <Tab label="Camps" disabled={true || !Permissions(PermissionTypes.SubmitCamp, authedUser)} />
+                <Tab label="Camps" disabled={!Permissions(PermissionTypes.SubmitCamp, authedUser)} />
             </Tabs>
             {tab === 0 && <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser)}/>}
             {tab === 1 && <UnitRecensementTab />}  
