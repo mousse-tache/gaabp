@@ -13,7 +13,7 @@ const Revision = () => {
     const campClient = new CampClient();
 
     const SaveCamp = async() => {
-        await campClient.save({...camp, dateSoumission: new Date()});
+        await campClient.save({...camp, membres, dateSoumission: new Date()});
         window.location.reload();
     };
 
@@ -25,7 +25,7 @@ const Revision = () => {
             <div>
                 <div>
                     <p>
-                        Révisez l'exactitude des informations suivantes avant de soumettre votre demande.
+                        {activeStep && <h3>Révisez l'exactitude des informations suivantes avant de soumettre votre demande.</h3>}
                         <List>
                             <ListItem>
                                 Se déroulera du {moment(camp.debutDuCamp).format("YYYY-MM-DD")} au {moment(camp.finDuCamp).format("YYYY-MM-DD")}
@@ -57,9 +57,11 @@ const Revision = () => {
                         </List>
                     </p>
                 </div>
+                {activeStep &&
                 <div>                        
                     <StepAction disabled={!camp.debutDuCamp || !camp.finDuCamp || camp.finDuCamp < camp.debutDuCamp} submit={SaveCamp} activeStep={activeStep} setActiveStep={setActiveStep} />
                 </div>
+                }
             </div>
         
     );

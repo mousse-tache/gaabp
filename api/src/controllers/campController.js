@@ -28,3 +28,22 @@ exports.createNewCamp = async (req, reply) => {
     return "Vous n'avez pas le droit d'ajouter un camp à l'unité"
   }
 }
+
+exports.getLast = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitCamp)) { 
+    try {
+        const unitId = req.params.unitId
+  
+        const camp = await Camp.findOne({unit: unitId}, null, { sort: { _id: -1 } });
+
+        return camp;
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit d'effectuer cette action"
+  }
+}
+

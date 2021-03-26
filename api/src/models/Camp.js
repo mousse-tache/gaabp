@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
 const Camp = new mongoose.Schema({
-  unit: mongoose.Types.ObjectId,
+  unit: String,
   dateSoumission: Date,
   debutDuCamp: Date,
   finDuCamp: Date,
   cahierCamp: String,
   lieuDuCamp: Object,
-  chefUnite: mongoose.Types.ObjectId,
-  comments: String
+  chefUnite: Object,
+  chefCamp: Object,
+  comments: String,
+  membres: Array
 });
 
 module.exports = mongoose.model('camp', Camp);

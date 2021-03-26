@@ -48,7 +48,7 @@ const ParticipantsSteps = () => {
                 { title: "Rôle", field: 'nominations.type', editable: false }
             ]}
                 
-            actions={[
+            actions={activeStep && [
                 {
                 icon: 'add',
                 tooltip: 'Ajouter un aide de camp',
@@ -60,7 +60,8 @@ const ParticipantsSteps = () => {
             data={membres}
             
             />
-            <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />
+            {activeStep && 
+            <StepAction activeStep={activeStep} setActiveStep={setActiveStep} />}
         </div>
     );
 };

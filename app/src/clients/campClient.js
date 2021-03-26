@@ -9,6 +9,10 @@ export class CampClient {
         const data = { camp };
         return this._apiClient.post(`camp`, data);
    }    
+
+   getLast = (unitId) => {
+    return this._apiClient.get(`camp/last/${unitId}`);
+   }
 }    
 
 export default CampClient;
