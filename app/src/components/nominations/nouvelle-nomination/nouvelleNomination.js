@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
-import NominationContext from "../../../context/nominationContext";
+import React, { useState, useEffect, useContext } from "react";
+
+import NominationContext from "@aabp/context/nominationContext";
+import AppContext from "@aabp/context/appContext";
+
 import { Tooltip, Button, Dialog } from "@material-ui/core";
 import NominationStepper from "./nominationStepper";
+
 import "./nomination.css";
 
 const DefaultNomination = 
@@ -20,6 +24,7 @@ deonto: "nonselectionner"
 
 const NouvelleNomination = () => {
     const [open, setOpen] = useState(false);
+    const { authedUser } = useContext(AppContext)
     const [nomination, setNomination] = useState(DefaultNomination);
 
     useEffect(() => {
@@ -37,6 +42,7 @@ const NouvelleNomination = () => {
                 variant="contained" 
                 color="secondary" 
                 rel="noopener noreferrer"
+                disabled={!authedUser}
                 onClick={() => setOpen(true)}>
                     Demande de nomination
                 </Button>

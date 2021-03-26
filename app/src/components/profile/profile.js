@@ -14,7 +14,7 @@ import MemberDetails from "../membres/memberDetails";
 import UserDetailsTab from "../membres/userDetailsTabs";
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
-    const [member, setMember] = useState(authedUser);
+    const [member, setMember] = useState({});
     
     const userClient = new UserClient();
     const { enqueueSnackbar } = useSnackbar();
@@ -42,11 +42,13 @@ const Profile = () => {
         } catch (error) {            
             enqueueSnackbar(error?.error?.response?.data, { variant: "error"});
         }
+
+        window.location.reload();
     }
 
     useEffect(() => {
         if (!authedUser) {
-            setMember({
+            setMember({...member,
                 courriel: claims.email
             })
         }
@@ -60,10 +62,10 @@ const Profile = () => {
     }
 
     return  (
-        <UserContext.Provider value={{member}}>
+        <UserContext.Provider value={{member, setMember, saveUser}}>
             <Paper className="profile">    
                 {!authedUser && <Alert severity="warning">Complétez votre inscription en remplissant les informations suivantes</Alert>}    
-                <MemberDetails isPersonalProfile={true} setMember={setMember} saveUser={saveUser} />
+                <MemberDetails isPersonalProfile={true} />
                 <UserDetailsTab />
             </Paper>
         </UserContext.Provider>    
