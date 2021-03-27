@@ -165,9 +165,15 @@ exports.removeFromUnit = async (req, reply) => {
   try {    
     const { userId, unitId, type} = req.body
 
-    const update = await User.updateOne({_id: mongoose.Types.ObjectId(userId), 
-      "nominations.unitId": unitId,
-      "nominations.type": type}, {
+    const update = await User.collection.updateOne({
+      _id: mongoose.Types.ObjectId(userId), 
+      nominations: { 
+        $elemMatch : {
+          "unitId": unitId,
+          "ed": null,
+          "type": type}}
+        }, 
+        {
         $set: {
           "nominations.$.ed": new Date()
         }
