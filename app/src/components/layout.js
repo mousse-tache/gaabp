@@ -52,7 +52,7 @@ const Layout = ({ children, username }) => {
       <Header username={username} siteTitle={"Section membres"} />
       <CssBaseline />
       <div>
-        <main>{children}</main>
+        <main className="main-container">{children}</main>
       </div>
     </ThemeProvider>
   )

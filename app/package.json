@@ -22,6 +22,7 @@
     "gatsby-plugin-offline": "^3.2.9",
     "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-react-native-web": "^3.1.0",
+    "gatsby-plugin-sass": "^4.1.0",
     "gatsby-plugin-sharp": "^2.10.1",
     "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-remark-embed-video": "^3.0.10",
@@ -39,7 +40,8 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-material-ui-carousel": "1.6.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "sass": "^1.32.8"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

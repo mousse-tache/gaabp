@@ -7,7 +7,7 @@ import { AppBar, Toolbar, Button } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Logo from "@aabp/images/Logo_AABP.png";
-import "./header.css"
+import "./header.scss"
 
 const Header = ({ username }) => {
   const MenuButton = () => {
@@ -21,8 +21,7 @@ const Header = ({ username }) => {
       </Button>
     );
   };
-
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(window.innerWidth > 800);
 
   return (
     <header className="sticky"> 

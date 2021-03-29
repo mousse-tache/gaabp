@@ -52,6 +52,10 @@ main h1, h2, h3, h4 {
   height:5rem;
 }
 
+.main-container {
+  margin-left: 160px;
+}
+
 /* fallback */
 @font-face {
   font-family: 'Material Icons';
@@ -197,7 +201,7 @@ form {
   display: hidden;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
   html {
     margin-left:0%;
     text-align: justify;
@@ -205,6 +209,10 @@ form {
 
   main {
     max-width: 95%;
+  }
+
+  .main-container {
+    margin-left: auto;
   }
 
   .break {

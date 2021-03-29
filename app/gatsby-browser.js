@@ -6,6 +6,6 @@
 
 // You can delete this file if you're not using it
 
-require('./src/components/header/header.css')
+require('./src/components/header/header.scss')
 require('./src/components/layout.css')
 require('fontsource-roboto')

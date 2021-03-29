@@ -36,36 +36,33 @@ const Sidebar = ({open, setOpen}) => {
         open={open}
         variant="persistent"    
         >
-          <div 
-        className="sidebar">
-            
-          <List>
-            <ListItem alignItems="center">
-              <MenuButton />
-            </ListItem>
-          </List>
+          <div className="sidebar">            
+            <List>
+              <ListItem alignItems="center">
+                <MenuButton />
+              </ListItem>
+            </List>
 
-          <List>
-            <ListItem button disableRipple onClick={() => navigate("/app")}>  
-              <HomeIcon />           
-              <ListItemText primary="Accueil" />
-            </ListItem>
-          </List>
-          <ProgressionSidebar />
-          <List>
-            <ListItem divider button disableRipple onClick={() => navigate("/app/ressources")}>             
-              <ListItemText primary="Ressources" />
-            </ListItem>
-          </List>
-          {
-            canAccessMemberSection && <MembresSidebar />
-          }
-          <List>
-            <ListItem>
-              <NouvelleNomination />
-            </ListItem>
-          </List>
-          
+            <List>
+              <ListItem button disableRipple onClick={() => navigate("/app")}>  
+                <HomeIcon />           
+                <ListItemText primary="Accueil" />
+              </ListItem>
+            </List>
+            <ProgressionSidebar />
+            <List>
+              <ListItem divider button disableRipple onClick={() => navigate("/app/ressources")}>             
+                <ListItemText primary="Ressources" />
+              </ListItem>
+            </List>
+            {
+              canAccessMemberSection && <MembresSidebar />
+            }
+            <List>
+              <ListItem>
+                <NouvelleNomination />
+              </ListItem>
+            </List>
           </div>
       </Drawer>    
   );
