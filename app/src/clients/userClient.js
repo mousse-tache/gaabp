@@ -76,9 +76,6 @@ export class UserClient {
     removeFromUnit = (userId, unitId, type) => {
         return this._apiClient.post("user/removefromunit", { userId, unitId, type });
     }
-
-
-
 }    
 
 export default UserClient;

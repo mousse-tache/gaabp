@@ -2,7 +2,7 @@ import React from "react";
 import PermissionTypes from "./permissionTypes"
 import NominationTypes from "../utils/nominationTypes"
 
-const Permissions = (permission, authedUser = null) => {
+const Permissions = (permission, authedUser = null, unitId = null, memberId = null) => {
     if (!authedUser) {
         return false;
     }
@@ -24,6 +24,10 @@ const Permissions = (permission, authedUser = null) => {
     };
 
     const isChief = () => {
+        if(unitId) {
+            return authedUser.nominations.filter(x => x.type.includes("Chef") && x.unitId === unitId && !x.ed).length > 0;
+        }
+
         return authedUser.nominations.filter(x => x.type.includes("Chef") && !x.ed).length > 0;
     };
     

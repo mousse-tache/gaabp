@@ -71,10 +71,10 @@ const EditUnit = ({id}) => {
             scrollButtons="auto"
             onChange={(event, newValue) => setTab(newValue)} aria-label="simple tabs for user details">
                 <Tab label="Informations" />
-                <Tab label="Recensement" />
-                <Tab label="Camps" disabled={!Permissions(PermissionTypes.SubmitCamp, authedUser)} />
+                <Tab label="Recensement" disabled={!Permissions(PermissionTypes.SubmitRecensement, authedUser, id)} />
+                <Tab label="Camps" disabled={!Permissions(PermissionTypes.SubmitCamp, authedUser, id)} />
             </Tabs>
-            {tab === 0 && <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser)}/>}
+            {tab === 0 && <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser, id)}/>}
             {tab === 1 && <UnitRecensementTab />}  
             {tab === 2 && <CampTab />}
         </div>
