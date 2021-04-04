@@ -24,10 +24,10 @@ const Footer = () => (
                 </Link>
             </Grid>
             <Grid item xs={12}>  
-                  <Link to="/blog">
-                      Blog
-                  </Link>
-              </Grid>
+                <Link to="/blog">
+                    Blog
+                </Link>
+            </Grid>
           </Grid>
         </div>
         <div>    
@@ -37,6 +37,11 @@ const Footer = () => (
               </Grid>
               <Grid item xs={12}>          
                 <a href="https://www.canadahelps.org/fr/dn/3634" target="_blank" rel="noopener noreferrer">Faire un don</a>
+              </Grid>  
+              <Grid item xs={12}>  
+                <a rel="noopener noreferrer" target="_blank" href="https://suivi.lnk01.com/s/443/15cea7a121968b111f68f436eb99a1be">
+                    Infolettre
+                </a>
               </Grid>
           </Grid>
         </div>
