@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { Card, CardContent, Tooltip } from "@material-ui/core";
 import HelpOutline from "@material-ui/icons/HelpOutline";
+import { Skeleton } from "@material-ui/lab";
 
 import ReportingClient from "@aabp/clients/reportingClient";
 
 import "./globalReport.css";
-import { Skeleton } from "@material-ui/lab";
 
 const GlobalReport = () => {
     const [report, setReport] = useState({})

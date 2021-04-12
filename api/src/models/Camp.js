@@ -10,7 +10,9 @@ const Camp = new mongoose.Schema({
   chefUnite: Object,
   chefCamp: Object,
   comments: String,
-  membres: Array
+  membres: Array,
+  approuve: Boolean,
+  approuvePar: Object
 });
 
 module.exports = mongoose.model('camp', Camp);

@@ -1,12 +1,15 @@
 import React, { useContext } from "react"
 import { Router } from "@reach/router"
+
+import AppContext from "@aabp/context/appContext"
+
 import Profile from "./../profile/profile"
 import Membres from "./../membres/membres"
 import EditMembre from "./../membres/editMembre"
 import Group from "./../groups/group"
 import EditGroup from "./../groups/editGroup"
 import Unit from "./../units/unit"
-import EditUnit from "./../units/editUnit"
+import EditUnit from "../units/editUnit"
 import Formation from "./../formation/formation"
 import AccueilRessources from "../ressources/accueilRessources"
 import Permissions from "../../auth/permissions"
@@ -16,7 +19,6 @@ import RecommendFormation from "../formation/recommendFormation"
 import NominationsOverview from "../nominations/nominationsOverview"
 import FormationResume from "../formation/components/formationResume"
 import Home from "../home/home"
-import AppContext from "@aabp/context/appContext"
 
 const NominatedUserRouter = () => {
     const { authedUser } = useContext(AppContext);

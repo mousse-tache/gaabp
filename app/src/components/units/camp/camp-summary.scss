@@ -1,0 +1,12 @@
+.camp-summary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .camp-item {
+        margin:.5rem;
+        padding: .5rem;
+        text-align: left;
+        box-shadow: 1px 1px 1px 1px grey;
+    }
+}

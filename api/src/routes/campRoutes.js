@@ -11,6 +11,11 @@ const CampRoutes = [
     method: 'GET',
     url: '/api/camp/last/:unitId',
     handler: campController.getLast
+  },
+  {
+    method: 'GET',
+    url: '/api/camps/list',
+    handler: campController.getList
   }
 ]
 

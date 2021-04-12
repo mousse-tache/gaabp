@@ -23,11 +23,19 @@ exports.Permissions = (userJwt, permission) => {
         return user.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
 
+    const isBranchCommissionner = () => {
+        return user.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("branche") && !x.ed).length > 0;
+    };
+
     const isGroupCommissionner = () => {
         return  user.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("Groupes") && !x.ed).length > 0;
     };
 
     const isChief = () => {
+        if(unitId) {
+            return user.nominations.filter(x => x.type.includes("Chef") && x.unitId === unitId && !x.ed).length > 0;
+        }
+
         return user.nominations.filter(x => x.type.includes("Chef") && !x.ed).length > 0;
     };
     
@@ -39,13 +47,9 @@ exports.Permissions = (userJwt, permission) => {
         return user.formations.filter(x => x.niveau.id === "32" && x.dateConfirmed).length > 0;
     };
 
-    if (user.isAdmin) {
-        return true;
-    }
-
     switch(permission) {
         case PermissionTypes.SubmitCamp:
-            return (authedUser.isAdmin || isChief());
+            return (user.isAdmin || isChief());
         case PermissionTypes.CreateUser:
         case PermissionTypes.UpdateUser:
         case PermissionTypes.UpdateUnit:
@@ -68,7 +72,7 @@ exports.Permissions = (userJwt, permission) => {
             return (user.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
         case PermissionTypes.ApproveCamp:
-            return (user.isAdmin || isCommissionner() || isGeneralCommissionner());
+            return (user.isAdmin || isBranchCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (user.isAdmin || isManagementVicepResident());
         default:

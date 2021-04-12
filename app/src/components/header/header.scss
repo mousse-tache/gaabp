@@ -1,11 +1,5 @@
-:root {
-    --primary: #A3233A;
-    --secondary: #EEC72C;
-    --light: #f5e9eb;
-    --medium-light: #d1919c;
-    --dark: #410e17;
-  }
-  
+@import '@aabp/components/sass/theme';
+
 .header {
     max-width: 100%;
     margin: auto;
@@ -22,7 +16,7 @@
     transition: all;
     min-height: 3em;
     background-color: white;
-    border-bottom: 4px dotted var(--light);
+    border-bottom: 4px dotted $light;
     z-index: 49;
 }
 
@@ -39,7 +33,7 @@ header {
     display: inline-block;
     font-style: normal;
     text-align: center;
-    color: var(--dark);
+    color: $dark;
     text-decoration: none;
 }
 
@@ -53,12 +47,12 @@ header {
 
 a, a:visited {
     text-decoration: none;
-    color:var(--dark);
+    color: $dark;
 }
 
 a:hover {
-    text-shadow: 0 0 0 2px var(--primary);
-    color:var(--primary);
+    text-shadow: 0 0 0 2px $primary;
+    color: $primary;
 }
 
 .auth {
@@ -79,8 +73,8 @@ a:hover {
 }
 
 a:active {
-    color: var(--primary);
-    text-shadow: 0 0 0 2px var(--primary);
+    color: $primary;
+    text-shadow: 0 0 0 2px $primary;
 }
 
   /* The sticky class is added to the header with JS when it reaches its scroll position */

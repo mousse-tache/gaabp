@@ -13,6 +13,10 @@ export class CampClient {
    getLast = (unitId) => {
     return this._apiClient.get(`camp/last/${unitId}`);
    }
+
+   getList = () => {
+    return this._apiClient.get(`camps/list`);
+   }
 }    
 
 export default CampClient;

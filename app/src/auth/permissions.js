@@ -19,6 +19,10 @@ const Permissions = (permission, authedUser = null, unitId = null, memberId = nu
         return authedUser.nominations.filter(x => x.type.includes("Commissaire") && !x.ed).length > 0;
     };
 
+    const isBranchCommissionner = () => {
+        return authedUser.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("branche") && !x.ed).length > 0;
+    };
+
     const isGroupCommissionner = () => {
         return  authedUser.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("Groupes") && !x.ed).length > 0;
     };
@@ -64,7 +68,7 @@ const Permissions = (permission, authedUser = null, unitId = null, memberId = nu
             return (authedUser.isAdmin || isFormateur() || isCommissionner() || isGeneralCommissionner());    
         case PermissionTypes.ConfirmFormation:
         case PermissionTypes.ApproveCamp:
-            return (authedUser.isAdmin || isCommissionner() || isGeneralCommissionner());
+            return (authedUser.isAdmin || isBranchCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (authedUser.isAdmin || isManagementVicepResident());
         default:
