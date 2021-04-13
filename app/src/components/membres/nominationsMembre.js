@@ -92,22 +92,32 @@ const NominationsMembres = () => {
                 }
             }
             editable={{
-                isEditable: rowData => Permissions(PermissionTypes.RemoveNomination, authedUser),
-                isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination, authedUser),
-                onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée"),
+                isEditable: () => Permissions(PermissionTypes.RemoveNomination, authedUser),
+                isEditHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
+                isDeletable: () => Permissions(PermissionTypes.RemoveNomination, authedUser),                
+                isDeleteHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
+                onRowDelete: (newData, oldData) =>
+                new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            let nominations = member?.nominations.filter(x => x.tableData.id !== newData.tableData.id );
+                            setMember({...member, nominations: nominations})
+                            saveUser();
+                            resolve();
+                    }, 1000);
+                }),
+                onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
                 onRowUpdate: (newData, oldData) =>
                 new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        const index = oldData.tableData.id;
-                        let nominations = member?.nominations;
-                        nominations[index] = newData;
-                        nominations[index].approvedBy = authedUser._id;
-                        setMember({...member, nominations: nominations})
-                        saveUser();
-                        resolve();
-                }, 1000);
-            })
-
+                        setTimeout(() => {
+                            const index = oldData.tableData.id;
+                            let nominations = member?.nominations;
+                            nominations[index] = newData;
+                            nominations[index].approvedBy = authedUser._id;
+                            setMember({...member, nominations: nominations})
+                            saveUser();
+                            resolve();
+                    }, 1000);                
+                })
             }}
             onRowClick={(event, rowData) => rowData.unitId ? navigate("/app/unite/"+rowData.unitId) : navigate("/app/groupe/"+rowData.groupId)}
             />
