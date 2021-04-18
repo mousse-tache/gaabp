@@ -29,6 +29,7 @@ const ApprobationCamp = () => {
 
     const cols =  [
         { title: "Unité", field:'unitInfo.nom' },
+        { title: "Branche", field: 'unitInfo.branche', lookup: {0: "Bleue", 1: "Jaune", 2: "Verte", 3: "Rouge"}},
         { title:"Début", field:'debutDuCamp'},
         { title: 'Fin', field: 'finDuCamp' },
         { title: 'Approbation', field: "approuve", type: "boolean"},

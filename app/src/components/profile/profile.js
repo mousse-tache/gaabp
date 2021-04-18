@@ -9,7 +9,8 @@ import { Paper } from '@material-ui/core';
 import AppContext from "@aabp/context/appContext";
 import UserContext from "@aabp/context/userContext";
 
-import UserClient from "../../clients/userClient";
+import UserClient from "@aabp/clients/userClient";
+
 import MemberDetails from "../membres/memberDetails";
 import UserDetailsTab from "../membres/userDetailsTabs";
 const Profile = () => {

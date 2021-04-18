@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
-import getAnneeDeService from "../../utils/anneeService";
+import getAnneeDeService from "@aabp/utils/anneeService";
 
 const AnneesService = ({nominations}) => {
     var flatYears = getAnneeDeService(nominations);

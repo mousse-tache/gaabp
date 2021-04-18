@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from 'material-table';
 import CardContent from "@material-ui/core/CardContent";
-import UserClient from "../../clients/userClient"
+import UserClient from "@aabp/clients/userClient";
 import UserContext from "@aabp/context/userContext";
 
 const FormationMembre = () => {
