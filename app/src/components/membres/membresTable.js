@@ -2,7 +2,7 @@ import React from 'react';
 import Proptypes from "prop-types"
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
-import UserClient from '../../clients/userClient';
+import UserClient from '@aabp/clients/userClient';
 import { useSnackbar } from 'notistack';
 import { CsvBuilder } from 'filefy';
 

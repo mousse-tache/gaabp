@@ -34,7 +34,7 @@ const ApprobationCamp = () => {
         { title: 'Fin', field: 'finDuCamp' },
         { title: 'Approbation', field: "approuve", type: "boolean"},
         { title: 'Approuvé par', field: "approuvePar" }      
-      ]
+    ];
 
     if(!camps) {
         return <Skeleton />;
