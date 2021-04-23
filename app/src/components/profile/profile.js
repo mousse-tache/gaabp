@@ -11,8 +11,8 @@ import UserContext from "@aabp/context/userContext";
 
 import UserClient from "@aabp/clients/userClient";
 
-import MemberDetails from "../membres/memberDetails";
-import UserDetailsTab from "../membres/userDetailsTabs";
+import MemberDetails from "@aabp/components/membres/MemberDetails";
+import UserDetailsTab from "@aabp/components/membres/userDetailsTabs";
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
     const [member, setMember] = useState({});

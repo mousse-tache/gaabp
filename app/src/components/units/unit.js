@@ -100,17 +100,17 @@ const Unit = () => {
     }
 
     return  (
-    <Paper className="membres-paper">      
-        <div className="membres-title">
-            <div className="membres-title-element"><h3>Liste des unités</h3></div>
-            <div className="membres-title-element">
+    <Paper className="membres">      
+        <h2 className="membres-title">
+            <span className="membres-title-element">Liste des unités</span>
+            <span className="membres-title-element">
                 <Fab aria-label="add" size="small" color="secondary" 
                 disabled={!Permissions(PermissionTypes.CreateUnit, authedUser)} 
                 onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
-            </div>
-        </div>
+            </span>
+        </h2>
         <Modal 
             className="unit-modal"
             open={open}

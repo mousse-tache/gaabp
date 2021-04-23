@@ -72,15 +72,15 @@ const Group = () => {
 
 
     return  (
-    <Paper className="membres-paper">          
-        <div className="membres-title">
-            <div className="membres-title-element"><h3>Groupes</h3></div>
-            <div className="membres-title-element">
+    <Paper className="membres">          
+        <h2 className="membres-title">
+            <span className="membres-title-element">Groupes</span>
+            <span className="membres-title-element">
                 <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup, authedUser)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
-            </div>
-        </div>
+            </span>
+        </h2>
         <Modal 
             className="unit-modal"
             open={open}

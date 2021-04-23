@@ -1,0 +1,18 @@
+@import '@aabp/components/sass/theme';
+
+.member-formation-uniform {
+    width: 10rem;
+    height: 15rem;
+    border: 2px solid grey;
+    background-color: $uniform;
+    border-radius: 5rem 5rem .2rem .2rem;
+    display: flex;
+    flex-direction: column;
+
+    .badge-formateur, .badge-brevet {
+        img {
+            max-width: 70%;
+            margin: auto;
+        }
+    }
+}

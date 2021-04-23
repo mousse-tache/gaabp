@@ -22,8 +22,7 @@ import "./unit.css";
 
 const EditUnit = ({id}) => {
     const { authedUser } = useContext(AppContext);
-    const unitContext = useContext(UnitContext);
-    const {unit, setUnit} = unitContext;
+    const {unit, setUnit} = useContext(UnitContext);
     const [isFetchingUnit, setIsFetchingUnit] = useState(true);
     const { enqueueSnackbar } = useSnackbar();
     const unitClient = new UnitClient();

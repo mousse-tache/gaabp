@@ -10,9 +10,11 @@ import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import NominationTypes from "@aabp/utils/nominationTypes";
+import UnitContext from '@aabp/context/unit/unitContext';
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   const { authedUser } = useContext(AppContext);
+  const { unit } = useContext(UnitContext);
   const [open, setOpen] = React.useState(false);
   const [userToDelete, setUserToDelete] = useState(false);
 
@@ -28,8 +30,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       { title: 'Courriel', field: 'courriel' },
       { title: "Début", field:"sd", type:"date"},
       { title: "Fin", field:"ed", type:"date"},
-      { title: "Rôle", field: 'nominations.type' }
-      
+      { title: "Rôle", field: 'nominations.type' }      
     ],
     data: users,
   });
@@ -74,7 +75,7 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
           </DialogActions>
       </Dialog>
       <MaterialTable
-      title=""
+      title={unit?.nom}
       localization={{
         toolbar: {
             searchPlaceholder: "Chercher"

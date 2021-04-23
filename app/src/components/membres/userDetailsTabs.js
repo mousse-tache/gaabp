@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import { Tabs, Tab } from '@material-ui/core';
 
-import FormationMembre from "./formationMembre";
+import FormationMembre from "./formation/FormationMembre";
 import NominationsMembres from "./nominationsMembre";
 import ReconnaissancesMembre from "./ReconnaissancesMembre";
 

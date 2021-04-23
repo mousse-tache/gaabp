@@ -6,7 +6,7 @@ import UserContext from '@aabp/context/userContext';
 
 import { Dialog, Button, Grid, TextField } from "@material-ui/core";
 import { Alert, Autocomplete } from "@material-ui/lab";
-import MemberDetails from "@aabp/components/membres/memberDetails";
+import MemberDetails from "@aabp/components/membres/MemberDetails";
 
 import UserClient from '@aabp/clients/userClient';
 

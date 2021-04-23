@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types"
 import { Paper, Tab, Tabs } from '@material-ui/core';
-import Membres from "./membres";
+
+import Membres from "./Membres";
 import NominationsOverview from "../nominations/nominationsOverview";
 
 const SectionMembre = ({defaultValue}) => {

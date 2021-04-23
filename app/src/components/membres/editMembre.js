@@ -1,16 +1,19 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link } from "gatsby"
-import Loading from "../loading/loading";
+import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+
+import AppContext from "@aabp/context/appContext"
+import UserContext from "@aabp/context/userContext"
+
+import Loading from "@aabp/components/loading/loading";
+import MemberDetails from "@aabp/components/membres/MemberDetails";
+import UserDetailsTabs from "@aabp/components/membres/userDetailsTabs";
+import Fusion from "./fusion/fusion";
+
 import UserClient from "@aabp/clients/userClient"
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
-import MemberDetails from "./memberDetails"
-import AppContext from "@aabp/context/appContext"
-import UserContext from "@aabp/context/userContext"
-import UserDetailsTabs from "./userDetailsTabs";
-import Fusion from "./fusion/fusion";
 
 const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);

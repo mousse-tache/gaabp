@@ -5,6 +5,7 @@ import { navigate } from 'gatsby';
 import UserClient from '@aabp/clients/userClient';
 import { useSnackbar } from 'notistack';
 import { CsvBuilder } from 'filefy';
+import MembreListHeader from './MembreListHeader';
 
 const MembresTable = ({canEdit}) => {
   const columns = [
@@ -43,7 +44,7 @@ const MembresTable = ({canEdit}) => {
 
   return (
     <MaterialTable
-      title=""
+      title={<MembreListHeader />}
       localization={{
         toolbar: {
             searchPlaceholder: "Chercher",
