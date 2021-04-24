@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import AppContext from "@aabp/context/appContext";
 
 const useAuthUser = () => {
@@ -7,4 +7,4 @@ const useAuthUser = () => {
     return authedUser;
 }
 
-  export default  useAuthUser;
+export default  useAuthUser;

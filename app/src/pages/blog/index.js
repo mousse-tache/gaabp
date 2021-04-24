@@ -1,8 +1,10 @@
-import React from "react"
-import Layout from "../../components/public-components/layout"
-import { graphql, useStaticQuery } from "gatsby"
-import BlogCard from "../../components/blog/blogCard"
-import { Helmet } from "react-helmet"
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { Helmet } from "react-helmet";
+
+
+import Layout from "@aabp/components/public-components/layout";
+import BlogCard from "@aabp/components/blog/blogCard";
 
 const NotFoundPage = () => {
     const data = useStaticQuery(graphql`

@@ -1,6 +1,4 @@
-import React from "react";
-import PermissionTypes from "./permissionTypes"
-import NominationTypes from "../utils/nominationTypes"
+import PermissionTypes from "./permissionTypes";
 
 const Permissions = (permission, authedUser = null, unitId = null, memberId = null) => {
     if (!authedUser) {
