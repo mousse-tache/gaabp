@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 
@@ -43,7 +43,7 @@ const UnitTable = ({units}) => {
         }
       }
       columns={columns}
-      data={units.map(x => { return {...x, group: x.g ? `${x?.g?.numero} ${x?.g?.nom}` : null, paid: x?.recensements?.paiementComplet ? "Oui" : "Non"}})}
+      data={units.map(x => { return {...x, group: x.g ? `${x?.g?.numero} ${x?.g?.nom}` : null, paid: x?.recensements?.paiementComplet ? "Oui" : "Non"};})}
       onRowClick={(event, rowData) => navigate("/app/unite/"+rowData._id)}
     />
   );

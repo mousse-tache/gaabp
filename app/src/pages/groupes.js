@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import MaterialTable from "material-table";
 
 import Layout from "../components/public-components/Layout";
-import Logo from "../images/Logo_AABP.png"
+import Logo from "../images/Logo_AABP.png";
 import GroupClient from "../clients/groupClient";
 import Regions from "../utils/regions";
 
@@ -13,7 +13,7 @@ const Groupes = () => {
   const [groupList, setGroupList] = useState(false);
   useEffect(() => {
       FetchGroups();
-  }, [])
+  }, []);
 
   const [state, setState] = React.useState(false);
 
@@ -31,7 +31,7 @@ const Groupes = () => {
       ],
       data: groupList.filter(x => x.nom !== "Instances nationales"),
     });
-  }, [groupList])
+  }, [groupList]);
 
   const groupClient = new GroupClient();
 
@@ -99,7 +99,7 @@ const Groupes = () => {
                 </section>
             </Layout>
         </div>
-    )
-}
+    );
+};
 
 export default Groupes;

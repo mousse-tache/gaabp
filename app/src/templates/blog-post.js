@@ -1,14 +1,16 @@
-import React from "react"
-import { graphql, Link } from "gatsby"
-import Layout from "../components/public-components/Layout"
-import { Helmet } from "react-helmet"
-import { Breadcrumbs } from "@material-ui/core"
-import Default from "@aabp/images/default-blog-image.png"
-import "./blogpost.css"
+import React from "react";
+import { graphql, Link } from "gatsby";
+import { Helmet } from "react-helmet";
+import { Breadcrumbs } from "@material-ui/core";
+
+import Layout from "@aabp/components/public-components/Layout";
+import Default from "@aabp/images/default-blog-image.png";
+
+import "./blogpost.css";
 
 export default function BlogPost({ data }) {
-    const post = data?.markdownRemark
-    const blogImage = post.frontmatter.thumbnail ? post.frontmatter.thumbnail : Default
+    const post = data?.markdownRemark;
+    const blogImage = post.frontmatter.thumbnail ? post.frontmatter.thumbnail : Default;
 
     return (
       <Layout>
@@ -32,7 +34,7 @@ export default function BlogPost({ data }) {
 
         </section>
       </Layout>
-    )
+    );
   }
 
   export const query = graphql`
@@ -43,4 +45,4 @@ export default function BlogPost({ data }) {
         }
         html
       }
-    }`
+    }`;

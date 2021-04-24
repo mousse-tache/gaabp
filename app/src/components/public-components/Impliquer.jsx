@@ -30,7 +30,7 @@ const Impliquer = () => {
         </CardContent>
       </div>      
     </section>
-  )
-}
+  );
+};
 
-export default Impliquer
+export default Impliquer;

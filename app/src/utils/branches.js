@@ -4,6 +4,6 @@ const Branches = [
     {id: 2, couleur: "Verte"},
     {id: 3, couleur: "Rouge"},
     {id: 4, couleur: "Multibranche"}
-]
+];
 
-export default Branches
+export default Branches;

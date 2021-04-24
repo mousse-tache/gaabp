@@ -35,7 +35,7 @@ const DernierCamp = () => {
     }, [unit]);
 
     if(!init) {
-        return <Skeleton />
+        return <Skeleton />;
     }
 
     if(!camp) {

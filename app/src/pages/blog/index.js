@@ -24,7 +24,7 @@ const NotFoundPage = () => {
         }
       }
     }
-  `)
+  `);
 
     const articles = data?.allMarkdownRemark?.edges;
 
@@ -41,7 +41,7 @@ const NotFoundPage = () => {
           {articles.map((x, index) => <BlogCard key={index} article={x.node?.frontmatter} />)}
         </div>
     </Layout>
-    )
-}
+    );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

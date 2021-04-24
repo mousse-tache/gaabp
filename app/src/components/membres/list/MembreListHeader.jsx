@@ -9,14 +9,14 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import AppContext from "@aabp/context/appContext";
 
-import UserClient from "@aabp/clients/userClient"
+import UserClient from "@aabp/clients/userClient";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
 const MembreListHeader = () => {
     const { authedUser } = useContext(AppContext);
     const [courriel, setCourriel] = useState("");
-    const [prenom, setPrenom] = useState("")
+    const [prenom, setPrenom] = useState("");
     const [nom, setNom] = useState("");
     const [open, setOpen] = React.useState(false);
 
@@ -87,7 +87,7 @@ const MembreListHeader = () => {
                 </Paper>
             </Modal>
         </div>
-    )
+    );
 };
 
 export default MembreListHeader;

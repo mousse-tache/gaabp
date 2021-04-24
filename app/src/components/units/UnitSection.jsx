@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
 import Unit from "./unit";
@@ -36,7 +36,7 @@ const UnitSection = ({defaultValue}) => {
                 value === 1 && <RecensementOverview />
             }
         </Paper> 
-    )
+    );
 };
 
 UnitSection.propTypes = {

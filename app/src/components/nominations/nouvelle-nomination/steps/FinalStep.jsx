@@ -22,7 +22,7 @@ const FinalStep = () => {
                 </Button>
             </div>
         </div>
-    )
+    );
 };
 
 export default FinalStep;

@@ -13,7 +13,7 @@ const ChefStep = () => {
     const [searchMembres, setSearchMembres] = useState([]);
     const [query, setQuery] = useState("");
 
-    const userClient = new UserClient()
+    const userClient = new UserClient();
 
     const FetchMembres = async() => {
         if(query.length < 3) {

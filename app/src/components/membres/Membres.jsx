@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext } from "react";
 
 import AppContext from "@aabp/context/appContext";
 
@@ -8,7 +8,7 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 
 import MembresTable from "./list/MembresTable";
 
-import "./membres.scss"
+import "./membres.scss";
 
 const Membres = () => {  
     
@@ -19,7 +19,7 @@ const Membres = () => {
         {!Permissions(PermissionTypes.ViewUsers, authedUser) && <div>Vous n'avez pas accès à consulter la liste des membres</div>}
         {Permissions(PermissionTypes.ViewUsers, authedUser) && <MembresTable canEdit={Permissions(PermissionTypes.UpdateUser, authedUser)} />}
     </Paper>
-    )
-}
+    );
+};
 
-export default Membres
+export default Membres;

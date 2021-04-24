@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react"
-import { Link, navigate } from "gatsby"
+import React, { useState, useContext, useEffect } from "react";
+import { Link, navigate } from "gatsby";
 import { useSnackbar } from 'notistack';
 
 import { Tabs, Tab } from '@material-ui/core';

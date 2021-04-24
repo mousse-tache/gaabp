@@ -13,6 +13,6 @@ const Regions = [
     {id: 11, nom: "Outaouais", province: "QC"},
     {id: 12, nom: "Westmorland", province: "NB"},
     {id: 13, nom: "York", province: "ON"}
-]
+];
 
-export default Regions
+export default Regions;

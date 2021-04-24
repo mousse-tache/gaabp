@@ -40,7 +40,7 @@ const NominationRecommendation = ({approver, index, complete, nomination}) => {
             )
             }
         </div>
-    )
+    );
 };
 
 export default NominationRecommendation;

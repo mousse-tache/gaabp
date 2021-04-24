@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react"
-import Loading from "../loading/loading"
-import GroupClient from "../../clients/groupClient"
+import React, { useState, useEffect, useContext } from "react";
+import Loading from "../loading/loading";
+import GroupClient from "../../clients/groupClient";
 import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -33,7 +33,7 @@ const Group = () => {
 
     useEffect(() => {
         FetchGroups();
-    }, [])
+    }, []);
 
     async function FetchGroups() {
         try {               
@@ -67,7 +67,7 @@ const Group = () => {
     }
 
     if(isFetchingGroupList) {
-        return (<Loading />)
+        return (<Loading />);
     }
 
 
@@ -113,7 +113,7 @@ const Group = () => {
 
         <GroupTable groups={groupList} canSee={true} />
     </Paper>
-    )
-}
+    );
+};
 
-export default Group
+export default Group;

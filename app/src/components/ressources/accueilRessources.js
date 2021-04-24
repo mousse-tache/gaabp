@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Paper, Tabs, Tab } from "@material-ui/core";
-import "./ressources.css"
+import "./ressources.css";
 import Cotisation from "./cotisation";
 import Reglements from "./reglements/reglements";
 

@@ -20,11 +20,11 @@ fidelite: "nonselectionner",
 engagementChef: "nonselectionner",
 engagementAssistant: "nonselectionner",
 deonto: "nonselectionner" 
-}
+};
 
 const NouvelleNomination = () => {
     const [open, setOpen] = useState(false);
-    const { authedUser } = useContext(AppContext)
+    const { authedUser } = useContext(AppContext);
     const [nomination, setNomination] = useState(DefaultNomination);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ const NouvelleNomination = () => {
                 <NominationStepper />
             </Dialog>
         </NominationContext.Provider>  
-    )
+    );
 };
 
 export default NouvelleNomination;

@@ -10,15 +10,11 @@ const BadgeFormateur = ({filteredFormations}) => {
         setBadge(filteredFormations?.formateurConseiller ? Conseiller : (filteredFormations?.formateurBrevete? Brevete : (filteredFormations?.formateurApprenti ? Apprenti : false)));
     }, [filteredFormations]);
 
-    if(!badge) {
-        return null;
-    }
-
     return (
         <div className="badge-formateur">
-            <img src={badge} aria-label="badge-de-formateur" />
+            {badge && <img src={badge} aria-label="badge-de-formateur" />}
         </div>
     );
-};
+}; 
 
 export default BadgeFormateur;

@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import Loading from "../loading/loading"
+import React, { useContext } from "react";
+import Loading from "../loading/loading";
 import { Card, List, ListItem, Button, ListItemIcon } from '@material-ui/core';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import "./formation.css";
@@ -86,7 +86,7 @@ const Formation = () => {
             </div>
         </div>
     </div>
-    )
-}
+    );
+};
 
-export default Formation
+export default Formation;

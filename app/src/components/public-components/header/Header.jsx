@@ -1,8 +1,8 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import "@aabp/components/header/header.scss"
-import Logo from "@aabp/images/Logo_AABP.png"
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+import "@aabp/components/header/header.scss";
+import Logo from "@aabp/images/Logo_AABP.png";
 
 const Header = () => (
   <header className="header headerpublic sticky">
@@ -24,14 +24,14 @@ const Header = () => (
     </div>        
         <Link to="/app" className="auth collapsable" >Membres</Link>
   </header>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;

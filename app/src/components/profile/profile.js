@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react";
 
 import { useSnackbar } from 'notistack';
 import { navigate } from "gatsby";
@@ -51,7 +51,7 @@ const Profile = () => {
         if (!authedUser) {
             setMember({...member,
                 courriel: claims.email
-            })
+            });
         }
         else {
             setMember(authedUser);

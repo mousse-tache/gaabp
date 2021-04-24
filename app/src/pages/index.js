@@ -11,7 +11,7 @@ import Impliquer from "@aabp/components/public-components/Impliquer";
 import Contact from "@aabp/components/public-components/Contact";
 import ImageCarousel from  "@aabp/components/public-components/ImageCarousel";
 
-import Logo from "@aabp/images/Logo_AABP.png"
+import Logo from "@aabp/images/Logo_AABP.png";
 
 const IndexPage = () => (
   <div>
@@ -37,8 +37,8 @@ const IndexPage = () => (
       <Contact />    
     </Layout>
   </div>
-)
+);
  
 
 
-export default IndexPage
+export default IndexPage;

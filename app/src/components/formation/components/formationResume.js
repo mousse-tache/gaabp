@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby";
 import { Breadcrumbs, Button, Card, List, ListItem, Typography, ListItemIcon } from "@material-ui/core";
 import LibraryBooksRoundedIcon from '@material-ui/icons/LibraryBooksRounded';
 
@@ -23,7 +23,7 @@ const FormationResume = ({niveau, branche}) => {
             }
           }
       }
-  `)
+  `);
 
     const article = data?.allMarkdownRemark?.edges.filter(x => x?.node?.frontmatter?.niveau.toLowerCase() == niveau.toLowerCase() && x.node.frontmatter.branche.toLowerCase().includes(branche.toLowerCase()))[0]?.node;
 
@@ -32,7 +32,7 @@ const FormationResume = ({niveau, branche}) => {
             <div>
                 Article introuvé
             </div>
-        )
+        );
     }
     
     const { frontmatter, html } = article;

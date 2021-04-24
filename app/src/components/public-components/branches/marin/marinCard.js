@@ -20,7 +20,7 @@ const MarinCard = () => {
         </CardContent>
         <MarinModal open={openModal} handleClose={handleCloseModal} />
       </Card>
-    )
-}
+    );
+};
 
 export default MarinCard;

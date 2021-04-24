@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import NominationContext from "../../../../context/nominationContext";
+import NominationContext from "@aabp/context/nominationContext";
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 
 const VajStep = () => {
@@ -27,7 +27,7 @@ const VajStep = () => {
                 </FormControl>
             </div>
         </div>
-    )
+    );
 };
 
 export default VajStep;

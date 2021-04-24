@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react"
-import Proptypes from "prop-types"
-import Loading from "../loading/loading"
-import UnitContext from "../../context/unit/unitContext"
-import UnitClient from "../../clients/unitClient"
-import GroupClient from "../../clients/groupClient"
+import React, { useState, useContext, useEffect } from "react";
+import Proptypes from "prop-types";
+import Loading from "../loading/loading";
+import UnitContext from "../../context/unit/unitContext";
+import UnitClient from "../../clients/unitClient";
+import GroupClient from "../../clients/groupClient";
 import { Input, InputLabel, TextField, Typography, MenuItem, Select, Button, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
@@ -58,7 +58,7 @@ const UnitDetails = ({disabled}) => {
         }
 
         FetchGroup(unit?.group);
-    }, [unit])
+    }, [unit]);
 
     async function SaveUnit(e) {           
         e.preventDefault();
@@ -73,7 +73,7 @@ const UnitDetails = ({disabled}) => {
     }
 
     if(isFetchingGroup) {
-        return (<Loading />)
+        return (<Loading />);
     }
 
     return (

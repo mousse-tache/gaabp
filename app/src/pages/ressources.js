@@ -3,7 +3,7 @@ import Layout from "../components/public-components/Layout";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Typography, Paper, Box, Grid, Link } from "@material-ui/core";
 import { Helmet } from "react-helmet";
-import Logo from "../images/Logo_AABP.png"
+import Logo from "../images/Logo_AABP.png";
 import Reglements from "../components/ressources/reglements/reglements";
 
 const ReglementsPage = () => (
@@ -45,7 +45,7 @@ const ReglementsPage = () => (
       </Paper>
     </Layout>
   </div>
-)
+);
  
 
 

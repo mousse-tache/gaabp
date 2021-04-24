@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, navigate } from "gatsby"
+import { Link, navigate } from "gatsby";
 
 import QuickUnits from '../quickUnits';
 import Permissions from '@aabp/auth/permissions';

@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react';
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
-import NominationTypes from "../../utils/nominationTypes";
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import NominationTypes from "@aabp/utils/nominationTypes";
 import AppContext from '@aabp/context/appContext';
 
 const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
@@ -38,18 +38,18 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
         { title: "Nom", field:'prenom' },
         { title:"", field:'nom'},
         { title: 'Courriel', field: 'courriel' },
-        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.groupId === groupId).sort(function(a, b){return a.sd > b.sd})[0]?.sd},
+        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.groupId === groupId).sort(function(a, b){return a.sd > b.sd;})[0]?.sd},
         { title: "Rôle", field: 'nominations', render: row => NominationTypes[row.nominations.filter(x => x.groupId === groupId && !x.ed)[0]?.type]}
       ],
       data: users,
     });
-  }, [users])
+  }, [users]);
 
   useEffect(() => {
     if(userToDelete) {
       setOpen(true);
     }
-  }, [userToDelete])
+  }, [userToDelete]);
 
   return (
     <div>

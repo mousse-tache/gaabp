@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import UserClient from "../../clients/userClient"
+import UserClient from "../../clients/userClient";
 import { List, Button, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails, AccordionActions, ListItem } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import NominationTypes from "../../utils/nominationTypes";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CloseIcon from '@material-ui/icons/Close';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const AddNewUsers = ({unitId, triggerUpdateMembres}) => {
     const defaultUserState= {prenom:"", nom:"", courriel:"", details: {}, nominations:[{type: NominationTypes.Membre, unitId: unitId, sd: new Date()}]};
@@ -19,23 +19,23 @@ const AddNewUsers = ({unitId, triggerUpdateMembres}) => {
     const addUsers = async() => { 
         try {            
             await userClient.addUsers(usersToCreate);
-            setUsersToCreate([])
-            setNextUserToCreate(defaultUserState)
+            setUsersToCreate([]);
+            setNextUserToCreate(defaultUserState);
             triggerUpdateMembres();
             enqueueSnackbar("Membres créés");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     const addPreviewUser = () => {
         setUsersToCreate([...usersToCreate, nextUserToCreate]);
         setNextUserToCreate(defaultUserState);
-    }
+    };
 
     const removeRow = (userRow) => {
-        setUsersToCreate(usersToCreate.filter(x => x !== userRow))
-    }
+        setUsersToCreate(usersToCreate.filter(x => x !== userRow));
+    };
 
     return (
 
@@ -123,7 +123,7 @@ const AddNewUsers = ({unitId, triggerUpdateMembres}) => {
             </AccordionActions>}
         </Accordion>
         
-    )
+    );
 };
 
 export default AddNewUsers;

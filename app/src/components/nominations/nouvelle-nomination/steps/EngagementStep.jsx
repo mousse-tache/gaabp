@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import NominationContext from "@aabp/context/nominationContext";
-import r7 from "@aabp/docs/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf"
+import r7 from "@aabp/docs/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf";
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 
 const EngagementStep = () => {
@@ -87,7 +87,7 @@ const EngagementStep = () => {
                 </FormControl>
             </div>
         </div>
-    )
+    );
 };
 
 export default EngagementStep;

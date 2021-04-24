@@ -32,11 +32,11 @@ const ReconnaissancesMembre = () => {
         render: rowData => rowData && Decorations.filter(x => x.id == rowData.type)[0]?.name },
         { title: "Obtention", field: 'dateObtention', type:"date"},
         { title: "Commentaires", field:"comments"}
-    ]
+    ];
     const decorationClient = new DecorationClient();
 
     const init = async() => {
-        const data = await decorationClient.getByUser(member?._id)
+        const data = await decorationClient.getByUser(member?._id);
         if(data) {
             setDecorations(data);
         }
@@ -44,7 +44,7 @@ const ReconnaissancesMembre = () => {
 
     useEffect(() => {        
         init();
-    }, [member])
+    }, [member]);
 
     async function saveDecoration(decoration) {
         let dec = {...decoration, membre: member._id};

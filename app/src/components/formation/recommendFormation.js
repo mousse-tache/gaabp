@@ -27,14 +27,14 @@ const RecommendFormation = () => {
 
     const addFormation = async() => { 
         try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, formations: [...selectUser.formations, formation]});
             setSelectUser({_id: 0, prenom: "", nom: "", formations:[]});
             enqueueSnackbar("Formation recommandée");
             FetchAllUsers();
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     const confirmFormation = async(user) => {
         var userFormations = [...allPendingFormationMembers.filter(x => x._id == user._id)[0].formations];
@@ -54,11 +54,11 @@ const RecommendFormation = () => {
         catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     useEffect(() => {
         FetchAllUsers();  
-    }, [])
+    }, []);
 
     useEffect(() => {
         if(allPendingFormationMembers) {
@@ -66,21 +66,21 @@ const RecommendFormation = () => {
             var formations = [];
             allPendingFormationMembersToConfirm.forEach(user => {
                 user.formations.filter(y => !y.dateConfirme && y.dateRecommende).forEach(formation => {
-                    formations.push({prenom: user.prenom, nom: user.nom, _id: user._id, formation: formation})
-                })
+                    formations.push({prenom: user.prenom, nom: user.nom, _id: user._id, formation: formation});
+                });
             });
 
             setAllFormation(formations);
         }
-    },[allPendingFormationMembers])
+    },[allPendingFormationMembers]);
 
     useEffect(() => {
         FetchFormateurs();
-    }, [allFormation])
+    }, [allFormation]);
 
     useEffect(() => {
         FetchQueriedUsers();
-    }, [query])
+    }, [query]);
 
     const FetchFormateurs = async() => {
         try {               
@@ -124,7 +124,7 @@ const RecommendFormation = () => {
     }
     
     if (!allPendingFormationMembers) {
-        return <Loading />
+        return <Loading />;
     }
 
     return  (
@@ -181,7 +181,7 @@ const RecommendFormation = () => {
             />
         </Card>
     </Paper>
-    )
-}
+    );
+};
 
 export default RecommendFormation;

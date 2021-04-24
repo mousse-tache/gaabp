@@ -1,5 +1,5 @@
 import React from 'react';
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 import UserClient from '@aabp/clients/userClient';
@@ -73,8 +73,8 @@ const MembresTable = ({canEdit}) => {
                 nom: `${x.prenom} ${x.nom}`, 
                 statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
                 formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau.id)
-              })
-            })
+              });
+            });
           }
             resolve({
                 data: filteredUsers,

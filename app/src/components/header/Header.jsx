@@ -1,13 +1,13 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-import Sidebar from "./Sidebar"
+import Sidebar from "./Sidebar";
 import UserMenu from "./AccountMenu";
 import { AppBar, Toolbar, Button } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Logo from "@aabp/images/Logo_AABP.png";
-import "./header.scss"
+import "./header.scss";
 
 const Header = ({ username }) => {
   const MenuButton = () => {
@@ -35,11 +35,11 @@ const Header = ({ username }) => {
           </Toolbar>
       </AppBar>
     </header>
-  )  
-}
+  );  
+};
 
 Header.propTypes = {
   username: PropTypes.string,
-}
+};
 
-export default Header
+export default Header;

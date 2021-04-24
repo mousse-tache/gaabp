@@ -1,0 +1,17 @@
+.base-badge {
+    border-style: ridge;
+    border-width: 3px;
+    border-color: #52332c;
+    width: 100%;
+    background-color: beige;
+}
+
+.badge-style {
+    &--rounded {
+        border-radius: 100%;
+    }
+
+    &--squared {
+        border-radius: 1rem;
+    }
+}

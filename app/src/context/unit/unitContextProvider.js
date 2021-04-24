@@ -9,11 +9,11 @@ const UnitContextProvider = ({children}) => {
         <UnitContext.Provider value={{unit, setUnit}} >
             {children}
         </UnitContext.Provider>
-    )
-}
+    );
+};
 
 UnitContextProvider.propTypes = {
     children: PropTypes.node
-}
+};
 
-export default UnitContextProvider
+export default UnitContextProvider;

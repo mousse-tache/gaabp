@@ -1,5 +1,5 @@
-import React from "react"
-import { Card, CardContent, Typography } from "@material-ui/core"
+import React from "react";
+import { Card, CardContent, Typography } from "@material-ui/core";
 const Contact = () => (
   <section>
     <div className="break" id="contact"></div>
@@ -36,6 +36,6 @@ const Contact = () => (
       </CardContent>
     </Card>
   </section>
-)
+);
 
-export default Contact
+export default Contact;

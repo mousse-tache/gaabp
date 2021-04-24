@@ -49,12 +49,12 @@ const MarinModal = ({open, handleClose}) => {
                 </Card>
             </Paper>
         </Dialog>
-    )
-}
+    );
+};
 
 MarinModal.propTypes = {
     open: PropTypes.bool,
     handleClose: PropTypes.func
-}
+};
 
 export default MarinModal;

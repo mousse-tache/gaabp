@@ -43,12 +43,12 @@ const VerteModal = ({open, handleClose}) => {
                 </Card>
             </Paper>
         </Dialog>
-    )
-}
+    );
+};
 
 VerteModal.propTypes = {
     open: PropTypes.bool,
     handleClose: PropTypes.func
-}
+};
 
 export default VerteModal;

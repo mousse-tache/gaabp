@@ -1,17 +1,10 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
 
-import Header from "./header/Header"
-import "./layout.css"
+import Header from "./header/Header";
+import "./layout.css";
 
 const Layout = ({ children, username }) => {
 
@@ -55,12 +48,12 @@ const Layout = ({ children, username }) => {
         <main className="main-container">{children}</main>
       </div>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   username: PropTypes.string
-}
+};
 
-export default Layout
+export default Layout;

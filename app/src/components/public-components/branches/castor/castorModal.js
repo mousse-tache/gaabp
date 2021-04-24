@@ -47,12 +47,12 @@ const CastorModal = ({open, handleClose}) => {
                 </Card>
             </Paper>
         </Dialog>
-    )
-}
+    );
+};
 
 CastorModal.propTypes = {
     open: PropTypes.bool,
     handleClose: PropTypes.func
-}
+};
 
 export default CastorModal;

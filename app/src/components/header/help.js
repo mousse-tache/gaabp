@@ -13,15 +13,15 @@ const Help = () => {
                     <HelpOutlineIcon fontSize="large" color="primary" />
                 </IconButton>
             </div>
-            <Dialog open={open} onClose={() => {setOpen(false)}}>
+            <Dialog open={open} onClose={() => {setOpen(false);}}>
                 <DialogTitle>
                     <HelpOutlineIcon fontSize="large" color="primary" label="bottin"/>
                 </DialogTitle>
                 <Bottin />
             </Dialog>
         </div>
-    )
+    );
 
-}
+};
 
 export default Help;

@@ -20,7 +20,7 @@ const CastorCard = () => {
         </CardContent>
         <CastorModal open={openModal} handleClose={handleCloseModal} />
       </Card>
-    )
-}
+    );
+};
 
 export default CastorCard;

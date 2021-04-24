@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 import { Tabs, Tab } from '@material-ui/core';
 

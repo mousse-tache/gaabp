@@ -11,7 +11,7 @@ import AppContext from "@aabp/context/appContext";
 
 const steps = [
     "Choisir une nomination", "Antécédents judiciaires", "Serment des chefs", "Motivations et recommandations"
-]
+];
 
 const NominationStepper = () => {
     const { nomination } = useContext(NominationContext);
@@ -33,8 +33,8 @@ const NominationStepper = () => {
         setIsSubmitting(true);
         await nominationClient.addDemandeNomination(
             {...nomination, user: authedUser._id,
-            approvers: nomination.approvers.map(x => { return {_id: x._id, nom: `${x.prenom} ${x.nom}`}})
-        })
+            approvers: nomination.approvers.map(x => { return {_id: x._id, nom: `${x.prenom} ${x.nom}`};})
+        });
         setActiveStep(activeStep+1);
         setIsSubmitting(false);
     };
@@ -101,7 +101,7 @@ const NominationStepper = () => {
             <div className="nomination-flex-container" >
             </div>
         </DialogContent>
-    )
+    );
 };
 
 export default NominationStepper;

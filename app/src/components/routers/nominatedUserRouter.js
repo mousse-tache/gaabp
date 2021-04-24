@@ -1,23 +1,23 @@
-import React, { useContext } from "react"
-import { Router } from "@reach/router"
+import React, { useContext } from "react";
+import { Router } from "@reach/router";
 
-import AppContext from "@aabp/context/appContext"
+import AppContext from "@aabp/context/appContext";
 
-import Profile from "@aabp/components/profile/profile"
-import EditMembre from "@aabp/components/membres/editMembre"
-import Group from "@aabp/components/groups/Group"
-import EditGroup from "@aabp/components/groups/editGroup"
-import UnitSection from "@aabp/components/units/UnitSection"
-import EditUnit from "@aabp/components/units/EditUnit"
-import Formation from "@aabp/components/formation/formation"
-import AccueilRessources from "@aabp/components/ressources/accueilRessources"
-import RecommendFormation from "@aabp/components/formation/recommendFormation"
-import FormationResume from "@aabp/components/formation/components/formationResume"
-import Home from "@aabp/components/home/Home"
-import SectionMembre from "@aabp/components/membres/SectionMembre"
+import Profile from "@aabp/components/profile/profile";
+import EditMembre from "@aabp/components/membres/editMembre";
+import Group from "@aabp/components/groups/Group";
+import EditGroup from "@aabp/components/groups/editGroup";
+import UnitSection from "@aabp/components/units/UnitSection";
+import EditUnit from "@aabp/components/units/EditUnit";
+import Formation from "@aabp/components/formation/formation";
+import AccueilRessources from "@aabp/components/ressources/accueilRessources";
+import RecommendFormation from "@aabp/components/formation/recommendFormation";
+import FormationResume from "@aabp/components/formation/components/formationResume";
+import Home from "@aabp/components/home/Home";
+import SectionMembre from "@aabp/components/membres/SectionMembre";
 
-import Permissions from "@aabp/auth/permissions"
-import PermissionTypes from "@aabp/auth/permissionTypes"
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
 
 const NominatedUserRouter = () => {
     const { authedUser } = useContext(AppContext);
@@ -40,7 +40,7 @@ const NominatedUserRouter = () => {
         <SectionMembre defaultValue={1} path="/nominations" />
         <Home default />
     </Router> 
-    )
+    );
 };
 
 export default NominatedUserRouter;

@@ -59,9 +59,9 @@ const NominationsMembres = () => {
     useEffect(() => {
         if(member?.nominations) {
             FetchMemberUnits();
-            FetchGroups()
+            FetchGroups();
         }
-    }, [member?.nominations])
+    }, [member?.nominations]);
       
     useEffect(() => {
         setState({
@@ -74,7 +74,7 @@ const NominationsMembres = () => {
             ],
             data: member.nominations,
           });
-    }, [memberUnits, groups])
+    }, [memberUnits, groups]);
 
     return (
         <CardContent>
@@ -100,7 +100,7 @@ const NominationsMembres = () => {
                 new Promise((resolve) => {
                         setTimeout(() => {
                             let nominations = member?.nominations.filter(x => x.tableData.id !== newData.tableData.id );
-                            setMember({...member, nominations: nominations})
+                            setMember({...member, nominations: nominations});
                             saveUser();
                             resolve();
                     }, 1000);
@@ -113,7 +113,7 @@ const NominationsMembres = () => {
                             let nominations = member?.nominations;
                             nominations[index] = newData;
                             nominations[index].approvedBy = authedUser._id;
-                            setMember({...member, nominations: nominations})
+                            setMember({...member, nominations: nominations});
                             saveUser();
                             resolve();
                     }, 1000);                

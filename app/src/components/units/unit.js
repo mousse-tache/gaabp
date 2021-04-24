@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react";
 import { useSnackbar } from 'notistack';
 
 import { Paper, Button, Fab, Modal, MenuItem, TextField } from '@material-ui/core';
@@ -7,15 +7,15 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import AppContext from "@aabp/context/appContext";
 
-import Loading from "../loading/loading"
+import Loading from "../loading/loading";
 import UnitTable from "./unitTable";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import Branches from "@aabp/utils/branches";
 import Genre from "@aabp/utils/genre";
-import UnitClient from "@aabp/clients/unitClient"
-import GroupClient from "@aabp/clients/groupClient"
+import UnitClient from "@aabp/clients/unitClient";
+import GroupClient from "@aabp/clients/groupClient";
 
 import "./unit.scss";
 
@@ -77,14 +77,14 @@ const Unit = () => {
         } 
         FetchUnits();
         FetchGroups();
-    }, [])
+    }, []);
 
     async function AddUnit(e) {           
         e.preventDefault();
         e.stopPropagation();    
         try {
 
-            setUnitList([...unitList, unit])
+            setUnitList([...unitList, unit]);
             await unitClient.addUnit(unit);
             setOpen(false);
             enqueueSnackbar("L'unité " + unit.nom + " a été créée");
@@ -175,7 +175,7 @@ const Unit = () => {
 
         <UnitTable units={unitList} canEdit={Permissions(PermissionTypes.UpdateUnit, authedUser)} />
     </Paper>
-    )
-}
+    );
+};
 
-export default Unit
+export default Unit;

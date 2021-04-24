@@ -1,6 +1,6 @@
 const sortNominations = (nominations) => {
     return (
-        nominations.filter(x => x.sd && x.type !== "Membre").map(x => {return {sd: new Date(x.sd), ed: x.ed ? new Date(x.ed) : new Date()}}).sort((previous, current) => {
+        nominations.filter(x => x.sd && x.type !== "Membre").map(x => {return {sd: new Date(x.sd), ed: x.ed ? new Date(x.ed) : new Date()};}).sort((previous, current) => {
   
             var previousTime = previous.sd.getTime();
             var currentTime = current.sd.getTime();
@@ -15,8 +15,8 @@ const sortNominations = (nominations) => {
           
             return 1;
         })
-    )
-}
+    );
+};
 
 const getFlattenedYears = (arrayYears) => {
     const fy = [];
@@ -40,24 +40,24 @@ const getFlattenedYears = (arrayYears) => {
     });
 
     return fy;
-}
+};
 
 const getYearsElapsed = (arrayYears) => {
     var yearsElapsed = 0;
 
     arrayYears.forEach(y => {
         var diff = new Date(y.ed - y.sd);
-        yearsElapsed+= Math.abs(diff.getUTCFullYear() - 1970)
+        yearsElapsed+= Math.abs(diff.getUTCFullYear() - 1970);
     });
 
     return yearsElapsed;
-}
+};
 
 const getAnneeDeService = (nominations) => {
     var sorted = sortNominations(nominations);
     var fy = getFlattenedYears(sorted);
 
     return getYearsElapsed(fy);
-}
+};
 
 export default getAnneeDeService;

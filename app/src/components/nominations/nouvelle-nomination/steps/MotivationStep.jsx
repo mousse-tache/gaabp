@@ -9,11 +9,11 @@ const MotivationStep = () => {
     const userClient = new UserClient();
 
     const [allMembers, setAllMembers] = useState([]);
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useState("");
 
     useEffect(() => {
         FetchAllUsers();
-    }, [query])
+    }, [query]);
 
     async function FetchAllUsers() {
         if(query.length < 3) {
@@ -58,7 +58,7 @@ const MotivationStep = () => {
                     blurOnSelect                        
                     disableClearable
                     onChange={(event, newValue) => {
-                        setNomination({...nomination, approvers: [newValue, nomination.approvers[1]]})
+                        setNomination({...nomination, approvers: [newValue, nomination.approvers[1]]});
                     }}
                     value={nomination?.approvers[0]}
                     defaultValue={{prenom: "", nom: ""}}
@@ -76,7 +76,7 @@ const MotivationStep = () => {
                     blurOnSelect                        
                     disableClearable
                     onChange={(event, newValue) => {
-                        setNomination({...nomination, approvers: [nomination.approvers[0], newValue]})
+                        setNomination({...nomination, approvers: [nomination.approvers[0], newValue]});
                     }}
                     value={nomination?.approvers[1]}
                     defaultValue={{prenom: "", nom: ""}}

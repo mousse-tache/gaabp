@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react";
 import { useSnackbar } from 'notistack';
 
 import { Button, Typography, MenuItem, TextField, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
@@ -6,7 +6,7 @@ import { Autocomplete } from "@material-ui/lab";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import AppContext from "@aabp/context/appContext";
-import UnitContext from "@aabp/context/unit/unitContext"
+import UnitContext from "@aabp/context/unit/unitContext";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
@@ -35,22 +35,22 @@ const UnitRecensementTab = () => {
    
     useEffect(() => {
         FetchAllUsers();
-    }, [query])
+    }, [query]);
 
     useEffect(() => {      
         FetchMembres();
-    }, [unit])
+    }, [unit]);
 
     useEffect(() => {
         FetchMembres();
-    }, [unit, selectUser])
+    }, [unit, selectUser]);
 
     useEffect(() => {
         if(membres.length == 0) {
             return;
         }
         setActiveMembers(membres);
-    }, [membres])
+    }, [membres]);
 
     async function FetchAllUsers() {
         if(query.length < 3) {
@@ -86,14 +86,14 @@ const UnitRecensementTab = () => {
 
     const addToUnit = async() => { 
         try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date()}]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {unitId: unit._id, type:selectRole, sd: new Date()}]});
             FetchMembres();
             setSelectUser({_id: 0, prenom: "", nom: ""});
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     const RemoveFromUnit = async(user) => { 
         try {            
@@ -103,7 +103,7 @@ const UnitRecensementTab = () => {
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     function handleChangeAutoUser(x) {
         setSelectUser(x);

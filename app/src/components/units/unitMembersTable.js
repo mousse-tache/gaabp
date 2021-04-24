@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 
@@ -46,13 +46,13 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
       ],
       data: users,
     });
-  }, [users, unitId])
+  }, [users, unitId]);
 
   useEffect(() => {
     if(userToDelete) {
       setOpen(true);
     }
-  }, [userToDelete])
+  }, [userToDelete]);
 
   return (
     <div className="unit-member-table-container">

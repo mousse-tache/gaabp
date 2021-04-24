@@ -20,7 +20,7 @@ const RougeCard = () => {
         </CardContent>
         <RougeModal open={openModal} handleClose={handleCloseModal} />
       </Card>
-    )
-}
+    );
+};
 
 export default RougeCard;

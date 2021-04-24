@@ -1,8 +1,8 @@
-import React from "react"
-import { Link } from "gatsby"
-import "./footer.css"
-import Logo from "../../../images/Logo_AABP.png"
-import { Grid } from "@material-ui/core"
+import React from "react";
+import { Link } from "gatsby";
+import "./footer.css";
+import Logo from "../../../images/Logo_AABP.png";
+import { Grid } from "@material-ui/core";
 
 const Footer = () => (
   <footer> 
@@ -51,6 +51,6 @@ const Footer = () => (
           </a>       
         </div>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

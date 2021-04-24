@@ -66,12 +66,12 @@ const LouveteauxModal = ({open, handleClose}) => {
                 </Card>
             </Paper>
         </Dialog>
-    )
-}
+    );
+};
 
 LouveteauxModal.propTypes = {
     open: PropTypes.bool,
     handleClose: PropTypes.func
-}
+};
 
 export default LouveteauxModal;

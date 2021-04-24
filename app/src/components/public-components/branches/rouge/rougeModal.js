@@ -43,12 +43,12 @@ const RougeModal = ({open, handleClose}) => {
                 </Card>
             </Paper>
         </Dialog>
-    )
-}
+    );
+};
 
 RougeModal.propTypes = {
     open: PropTypes.bool,
     handleClose: PropTypes.func
-}
+};
 
 export default RougeModal;

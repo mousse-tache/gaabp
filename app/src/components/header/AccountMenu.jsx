@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types"
-import { Link, navigate } from "gatsby"
+import PropTypes from "prop-types";
+import { Link, navigate } from "gatsby";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Help from "./help";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
@@ -44,11 +44,11 @@ const UserMenu = ({username}) => {
                 <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
         </div>
-    )
+    );
 };
 
 UserMenu.propTypes = {
     username: PropTypes.string
-}
+};
 
 export default UserMenu;

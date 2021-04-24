@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Card, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import Permissions from "../../../auth/permissions";
-import PermissionTypes from "../../../auth/permissionTypes";
-import Branches from "../../../utils/branches";
-import Formations from "../../../utils/formations";
-import AppContext from "@aabp/context/appContext"
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import Branches from "@aabp/utils/branches";
+import Formations from "@aabp/utils/formations";
+import AppContext from "@aabp/context/appContext";
 
 const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, formation, setFormation, addFormation}) => {
     const { authedUser } = useContext(AppContext);
@@ -107,7 +107,7 @@ const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, fo
                 </Button>
             </div>            
         </Card>        
-    )
-}
+    );
+};
 
 export default NewFormationForm;

@@ -33,6 +33,6 @@ const PermissionTypes = {
     // recensements
     ViewRecensementSummary: "viewRecensements"
 
-}
+};
 
 export default PermissionTypes;

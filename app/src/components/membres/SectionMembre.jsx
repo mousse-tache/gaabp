@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
 import Membres from "./Membres";
@@ -32,7 +32,7 @@ const SectionMembre = ({defaultValue}) => {
                 value === 1 && <NominationsOverview />
             }
         </Paper> 
-    )
+    );
 };
 
 SectionMembre.propTypes = {

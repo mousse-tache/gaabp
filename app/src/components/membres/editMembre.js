@@ -1,17 +1,17 @@
-import React, { useState, useContext, useEffect } from "react"
-import { Link } from "gatsby"
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "gatsby";
 import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
-import AppContext from "@aabp/context/appContext"
-import UserContext from "@aabp/context/userContext"
+import AppContext from "@aabp/context/appContext";
+import UserContext from "@aabp/context/userContext";
 
 import Loading from "@aabp/components/loading/loading";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 import UserDetailsTabs from "@aabp/components/membres/userDetailsTabs";
 import Fusion from "./fusion/fusion";
 
-import UserClient from "@aabp/clients/userClient"
+import UserClient from "@aabp/clients/userClient";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
@@ -28,11 +28,11 @@ const EditMembre = ({id}) => {
 
     useEffect(() => {
         setCanEdit(Permissions(PermissionTypes.UpdateUser, authedUser));
-    }, [authedUser])
+    }, [authedUser]);
 
     useEffect(() => {
         FetchUser();
-    }, [id])
+    }, [id]);
 
     async function FetchUser() {
         try {               
@@ -53,14 +53,14 @@ const EditMembre = ({id}) => {
             if(member?._id) {
                 await userClient.updateUser({...member, id: member._id});
             }
-            enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`)
+            enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`);
         } catch (error) {
-            enqueueSnackbar(error?.error?.response?.data, { variant: "error"})
+            enqueueSnackbar(error?.error?.response?.data, { variant: "error"});
         }
     }
 
     if(isFecthingUser || !member ) {
-        return (<Loading />)
+        return (<Loading />);
     }
 
     return  (
@@ -81,7 +81,7 @@ const EditMembre = ({id}) => {
                 <UserDetailsTabs />           
             </Paper>
         </UserContext.Provider>
-        )
-}
+        );
+};
 
-export default EditMembre
+export default EditMembre;

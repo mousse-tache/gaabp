@@ -1,8 +1,9 @@
 import React, {useContext, useState, useEffect} from "react";
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 import { List, ListItem } from "@material-ui/core";
-import GroupClient from "../../clients/groupClient";
-import UnitClient from "../../clients/unitClient";
+
+import GroupClient from "@aabp/clients/groupClient";
+import UnitClient from "@aabp/clients/unitClient";
 import AppContext from "@aabp/context/appContext";
 
 const QuickUnits = () => {
@@ -18,7 +19,7 @@ const QuickUnits = () => {
     useEffect(() => {
         FetchUnits();
         FetchGroups();
-    }, [authedUser])
+    }, [authedUser]);
 
     async function FetchUnits() {
         if(ownUnits.length == 0) {

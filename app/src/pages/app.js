@@ -3,7 +3,7 @@ import { SnackbarProvider } from 'notistack';
 import { Helmet } from "react-helmet";
 
 import AppContext from "@aabp/context/appContext";
-import UnitContextProvider from "@aabp/context/unit/unitContextProvider"
+import UnitContextProvider from "@aabp/context/unit/unitContextProvider";
 
 import Layout from "@aabp/components/layout";
 import Loading from '@aabp/components/loading/loading';
@@ -40,7 +40,7 @@ const App = () => {
           localStorage.setItem('isAuthenticated', 'false');
           setInit(true);
         }       
-    }
+    };
 
     async function FetchUser() {
         if(idToken) {
@@ -70,7 +70,7 @@ const App = () => {
         catch(e) {
             console.log(e.message);
         }
-    }, []);
+    }, [UserClient]);
 
     useEffect(() => {
         FetchUser();
@@ -83,7 +83,7 @@ const App = () => {
     if(!(user || init) || (!jwtToken && authedUser))  {
         return (
             <Loading />
-        )        
+        );        
     }
     
     return (        
@@ -101,7 +101,7 @@ const App = () => {
                 </Layout>
             </UnitContextProvider>            
         </AppContext.Provider>
-          )
-}
+          );
+};
 
-export default App
+export default App;

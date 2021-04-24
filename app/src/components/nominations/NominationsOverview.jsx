@@ -4,7 +4,7 @@ import NominationTypes from "../../utils/nominationTypes";
 import { useSnackbar } from 'notistack';
 import MaterialTable from "material-table";
 import { navigate } from "gatsby";
-import Permissions from "../../auth/permissions"
+import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
@@ -26,7 +26,7 @@ const NominationsOverview = () => {
     const groupClient = new GroupClient("");
     const unitClient = new UnitClient("");
     const userClient = new UserClient("");
-    const [state, setState] = useState({columns: [], data: []})
+    const [state, setState] = useState({columns: [], data: []});
     const { enqueueSnackbar } = useSnackbar();
     const [groups, setGroups] = useState([]);
     const [units, setUnits] = useState([]);
@@ -43,7 +43,7 @@ const NominationsOverview = () => {
             ],
             data: nominations,
           });
-    }, [nominations, groups, units, users])
+    }, [nominations, groups, units, users]);
 
     const FetchNominations = async() => {
 
@@ -99,22 +99,22 @@ const NominationsOverview = () => {
 
     const ConfirmNomination = async(nomination) => { 
         try {            
-            await nominationClient.confirmNomination(nomination._id, authedUser._id)
+            await nominationClient.confirmNomination(nomination._id, authedUser._id);
             enqueueSnackbar("Nomination complétée");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     const RefuseNomination = async(nomination) => { 
         try {            
-            await nominationClient.refuseNomination(nomination._id, authedUser._id)
-            setNominations(nominations.filter(x => x._id !== nomination._id))
+            await nominationClient.refuseNomination(nomination._id, authedUser._id);
+            setNominations(nominations.filter(x => x._id !== nomination._id));
             enqueueSnackbar("Nomination retirée");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     useEffect(() => {
         FetchMemberUnits();
@@ -124,7 +124,7 @@ const NominationsOverview = () => {
 
     useEffect(() => {
         FetchNominations();
-    }, [past])
+    }, [past]);
 
     return (
         <div>

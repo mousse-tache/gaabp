@@ -105,7 +105,7 @@ const Bottin = () => {
             </Accordion>
         </div>
 
-    )
-}
+    );
+};
 
 export default Bottin;

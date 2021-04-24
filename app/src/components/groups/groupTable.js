@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Proptypes from "prop-types"
+import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
-import Regions from "../../utils/regions";
+import Regions from "@aabp/utils/regions";
 import { navigate } from 'gatsby';
 
 const GroupTable = ({groups, canSee}) => {
@@ -24,10 +24,10 @@ const GroupTable = ({groups, canSee}) => {
         { title: 'Région', field: 'region'}
       ],
       data: groups.map(x => {
-        return {...x, region: x.region ? Regions[x.region].nom : null}
+        return {...x, region: x.region ? Regions[x.region].nom : null};
       }),
     });
-  }, [groups])
+  }, [groups]);
 
   return (
     <MaterialTable

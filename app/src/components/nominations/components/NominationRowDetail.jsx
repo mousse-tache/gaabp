@@ -63,7 +63,7 @@ const NominationRowDetail = ({nomination}) => {
                 {nomination.approvers.map((x, index) => <NominationRecommendation approver={x} key={index} index={index} complete={nomination.complete} nomination={nomination} />)}
             </Grid>
         </Grid>
-    )
+    );
 };
 
 export default NominationRowDetail;

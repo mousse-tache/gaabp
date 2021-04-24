@@ -34,22 +34,22 @@ const FormationMembre = () => {
                 return;
             }
 
-            var formateurArray = []
+            var formateurArray = [];
             const reducedFormateurs = {};
             var data = await userClient.getByIds(ids);
 
             data.forEach(formateur => {
                 if(formateurArray.filter(x => x._id === formateur._id).length < 1) {
                     formateurArray.push(formateur);
-                    const id = formateur._id
-                    const nom = `${formateur.prenom} ${formateur.nom}`
+                    const id = formateur._id;
+                    const nom = `${formateur.prenom} ${formateur.nom}`;
                     reducedFormateurs[ id ] = nom;
                 }                   
             });
                       
             setFormateurs(reducedFormateurs);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     };
 
@@ -57,7 +57,7 @@ const FormationMembre = () => {
         if (!formateurs) {
             FetchFormateurs();
         }
-    }, [formations])
+    }, [formations]);
 
     return (
         <CardContent>
@@ -85,10 +85,10 @@ const FormationMembre = () => {
             />
         </CardContent>
     );
-}
+};
 
 FormationMembre.propTypes = {
     formations: PropTypes.array
-}
+};
 
 export default FormationMembre;

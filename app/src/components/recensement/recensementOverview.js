@@ -25,7 +25,7 @@ const RecensementOverview = () => {
       ];
 
     const confirmPaiement = async(recensement) => {
-        await recensementClient.updateRecensement({...recensement, paiementComplet: true, datePaiement: new Date()})
+        await recensementClient.updateRecensement({...recensement, paiementComplet: true, datePaiement: new Date()});
         window.location.reload();
     };
 
@@ -99,7 +99,7 @@ const RecensementOverview = () => {
                     data={recensements}     
                 />
             </div>
-    )
+    );
 };
 
 export default RecensementOverview;

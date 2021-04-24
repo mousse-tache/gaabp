@@ -6,7 +6,7 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 
 import "./blogCard.css";
 
-import Img from "gatsby-image"
+import Img from "gatsby-image";
 
 const DefaultThumbnail = () => {
   const data = useStaticQuery(graphql`
@@ -19,9 +19,9 @@ const DefaultThumbnail = () => {
         }
       }
     }
-  `)
+  `);
 
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />;
 };
 
 const BlogCard = ({article}) => {
@@ -47,7 +47,7 @@ const BlogCard = ({article}) => {
             </CardContent>
             
         </Card>
-    )
+    );
 };
 
 export default BlogCard;

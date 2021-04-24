@@ -28,7 +28,7 @@ const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
 
     useEffect(() => {
         setShouldSubmitNew(shouldSubmitNewRecensement());
-    }, [unitId, unitMembers, latestRecensement])
+    }, [unitId, unitMembers, latestRecensement]);
 
 /*
 date: Date,
@@ -48,13 +48,13 @@ date: Date,
                 },
                 unitId,
                 cost: cost.totalPrice
-            })
+            });
 
             enqueueSnackbar("Un recensement a été soumis avec les membres actuels");
         } catch (e) {
-            enqueueSnackbar(e?.error?.response?.data, { variant: "error"})
+            enqueueSnackbar(e?.error?.response?.data, { variant: "error"});
         }
-    }
+    };
 
     const UpdateLatest = async() => {
         try {
@@ -66,13 +66,13 @@ date: Date,
                 },
                 unitId,
                 cost: cost.totalPrice
-            })
+            });
 
             enqueueSnackbar("Le dernier recensement a été mis à jour");
         } catch (e) {
-            enqueueSnackbar(e?.error?.response?.data, { variant: "error"})
+            enqueueSnackbar(e?.error?.response?.data, { variant: "error"});
         }
-    }
+    };
 
     return (
         <div>
@@ -91,7 +91,7 @@ date: Date,
                 )
             }
         </div>
-    )
+    );
 };
 
 export default SoumettreRecensement;

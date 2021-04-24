@@ -5,6 +5,6 @@ const useAuthUser = () => {
     const { authedUser } = useContext(AppContext);
     
     return authedUser;
-}
+};
 
 export default  useAuthUser;

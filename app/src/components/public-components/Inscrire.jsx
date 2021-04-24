@@ -1,5 +1,5 @@
-import React from "react"
-import { Typography, Box, Button } from "@material-ui/core"
+import React from "react";
+import { Typography, Box, Button } from "@material-ui/core";
 
 const Inscrire = () => (
   <section>
@@ -29,6 +29,6 @@ const Inscrire = () => (
       </div>
     </div>
   </section>
-)
+);
 
-export default Inscrire
+export default Inscrire;

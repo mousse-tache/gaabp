@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const PreviewCost = ({cost, previousRecensement}) => {
 
@@ -22,7 +22,7 @@ const PreviewCost = ({cost, previousRecensement}) => {
                 ) : null} 
             </ul>
         </div>        
-    )
-}
+    );
+};
 
 export default PreviewCost;

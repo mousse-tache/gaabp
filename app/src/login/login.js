@@ -25,13 +25,13 @@ export const signIn = typeof window !== 'undefined' && new OktaSignIn(config);
 
 export const logout = () => {
   signIn.authClient.signOut().catch((error) => {
-    console.error('Sign out error: ' + error)
+    console.error('Sign out error: ' + error);
   }).then(() => {
     localStorage.setItem('isAuthenticated', 'false');
     this.setState({user: false});
     navigate('/');
   });
-}
+};
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -84,6 +84,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <div id="osw-container"/>
-    )
+    );
   }
 }

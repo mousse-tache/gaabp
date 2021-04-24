@@ -20,7 +20,7 @@ const VerteCard = () => {
         </CardContent>
         <VerteModal open={openModal} handleClose={handleCloseModal} />
       </Card>
-    )
-}
+    );
+};
 
 export default VerteCard;

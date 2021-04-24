@@ -22,6 +22,6 @@ const NominationTypes = {
     Administrateur: "Administrateur/Administratrice",
     ConseillerSpiri: "Conseiller spirituel",
     DCC: "Deputy Camp Chief"
-}
+};
 
 export default NominationTypes;

@@ -1,6 +1,6 @@
-import React from "react"
-import { Router } from "@reach/router"
-import Profile from "./../profile/profile"
+import React from "react";
+import { Router } from "@reach/router";
+import Profile from "./../profile/profile";
 
 const AnonymousUserRouter = () => {
     return (
@@ -8,7 +8,7 @@ const AnonymousUserRouter = () => {
         <Profile path="/account" />
         <Profile default />
     </Router> 
-    )
+    );
 };
 
 export default AnonymousUserRouter;

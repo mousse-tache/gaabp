@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TextField, MenuItem, FormControlLabel, Switch } from "@material-ui/core";
-import NominationTypes from "../../../../utils/nominationTypes";
-import NominationContext from "../../../../context/nominationContext";
-import UnitClient from "../../../../clients/unitClient";
-import GroupClient from "../../../../clients/groupClient";
+import NominationTypes from "@aabp/utils/nominationTypes";
+import NominationContext from "@aabp/context/nominationContext";
+import UnitClient from "@aabp/clients/unitClient";
+import GroupClient from "@aabp/clients/groupClient";
 
 const PosteStep = () => {
     const {nomination, setNomination} = useContext(NominationContext);
@@ -42,7 +42,7 @@ const PosteStep = () => {
         else {
             FetchGroups();
         }
-    }, [nomination.groupOnly])
+    }, [nomination.groupOnly]);
 
     return (
         <div className="step-main-container" >
@@ -100,7 +100,7 @@ const PosteStep = () => {
                 </div>  
             </div>
         </div>
-    )
+    );
 };
 
 export default PosteStep;

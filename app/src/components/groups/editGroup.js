@@ -1,21 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "gatsby";
-import Loading from "../loading/loading";
-import GroupClient from "../../clients/groupClient";
-import UnitClient from "../../clients/unitClient";
-import Permissions from "../../auth/permissions";
-import PermissionTypes from "../../auth/permissionTypes";
 import { Paper, Button, Card, Breadcrumbs, Typography, CardContent, MenuItem, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
-import Regions from "../../utils/regions";
-
 import { useSnackbar } from 'notistack';
-import UnitTable from "../units/unitTable";
-import UserClient from "../../clients/userClient";
-import GroupMembresTable from "./groupMembersTable";
 import { Autocomplete } from "@material-ui/lab";
-import NominationTypes from "../../utils/nominationTypes";
-//import GeoClient from "../../clients/geoClient";
-import AppContext from "../../context/appContext";
+
+import Loading from "../loading/loading";
+import GroupClient from "@aabp/clients/groupClient";
+import UnitClient from "@aabp/clients/unitClient";
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import Regions from "@aabp/utils/regions";
+
+import UnitTable from "../units/unitTable";
+import UserClient from "@aabp/clients/userClient";
+import GroupMembresTable from "./groupMembersTable";
+import NominationTypes from "@aabp/utils/nominationTypes";
+//import GeoClient from "@aabp/clients/geoClient";
+import AppContext from "@aabp/context/appContext";
 
 const EditGroup = ({id}) => {
     const { authedUser } = useContext(AppContext);
@@ -40,17 +41,17 @@ const EditGroup = ({id}) => {
 
     useEffect(() => {
         canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
-    }, [authedUser])
+    }, [authedUser]);
 
     useEffect(() => {
         FetchGroup();
         FetchUnits();
         FetchMembres();
-    }, [id])
+    }, [id]);
 
     useEffect(() => {
         FetchAllUsers();
-    }, [query])
+    }, [query]);
 
     // async function FetchGeoLocalisation() {
     //     if(group.adresse !== undefined && group.adresse.length > 5) {
@@ -118,13 +119,13 @@ const EditGroup = ({id}) => {
     const RemoveFromGroup = async(user) => { 
         try {            
             user.nominations.filter(x => x.ed === undefined && x.groupId === group._id)[0].ed = new Date();
-            await userClient.updateUser({...user, id: user._id})
-            setMembres(membres?.filter(x => x._id !== user._id))
+            await userClient.updateUser({...user, id: user._id});
+            setMembres(membres?.filter(x => x._id !== user._id));
             enqueueSnackbar("Membre retiré en date d'aujourd'hui");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     async function SaveGroup(e) {           
         e.preventDefault();
@@ -141,17 +142,17 @@ const EditGroup = ({id}) => {
 
     const addToGroup = async() => { 
         try {            
-            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {groupId: group._id, type:selectRole}]})
+            await userClient.updateUser({...selectUser, id: selectUser._id, nominations: [...selectUser.nominations, {groupId: group._id, type:selectRole}]});
             FetchMembres();
-            setSelectUser({_id: 0, prenom: "", nom: ""})
+            setSelectUser({_id: 0, prenom: "", nom: ""});
             enqueueSnackbar("Membre ajouté");
         } catch (e) {
             enqueueSnackbar(e);
         }        
-    }
+    };
 
     if(isFetchingGroup) {
-        return (<Loading />)
+        return (<Loading />);
     }
 
     return  (
@@ -263,7 +264,7 @@ const EditGroup = ({id}) => {
         
         </Card>
     </Paper>
-    )
-}
+    );
+};
 
 export default EditGroup;

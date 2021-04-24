@@ -9,7 +9,7 @@ import ReportingClient from "@aabp/clients/reportingClient";
 import "./globalReport.css";
 
 const GlobalReport = () => {
-    const [report, setReport] = useState({})
+    const [report, setReport] = useState({});
     const [init, setInit] = useState(false);
     const reportClient = new ReportingClient();
 
@@ -68,7 +68,7 @@ const GlobalReport = () => {
                 </div>
             </CardContent>
         </Card>
-    )
+    );
 };
 
 export default GlobalReport;

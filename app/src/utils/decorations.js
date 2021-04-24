@@ -16,6 +16,6 @@ const Decorations = [
     {"id":"37","name":"Service nationale m\u00e9ritoire"},
     {"id":"38","name":"Mention \u00e9logieuse du commissaire g\u00e9n\u00e9ral"},
     {"id":"39","name":"Sola Virtus Invicta" }
-]
+];
 
 export default Decorations;

@@ -6,7 +6,7 @@ import PreviewCost from "./previewCost";
 import RecensementDetails from "./RecensementDetails";
 import Loading from "../loading/loading";
 import { Divider } from "@material-ui/core";
-import "./recensement.css"
+import "./recensement.css";
 import RecensementContext from "../../context/recensementContext";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
@@ -34,7 +34,7 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
     }, [unitMembers]);
 
     if (latestRecensement == 1) {
-        return <Loading />
+        return <Loading />;
     }
 
     return (
@@ -49,7 +49,7 @@ const Recensement = ({unitId, unitMembers, uniteCadette}) => {
                 <RecensementDetails />}
             </div>
         </RecensementContext.Provider>
-    )
+    );
 };
 
 export default Recensement;
