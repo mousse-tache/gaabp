@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LouveteauxModal from "./louveteauxModal";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const VerteCard = () => {
     const [openModal, setOpenModal] = useState(false);

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../components/public-components/layout";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Typography, Paper, Box } from "@material-ui/core";
 import { Helmet } from "react-helmet";
+import MaterialTable from "material-table";
+
+import Layout from "../components/public-components/Layout";
 import Logo from "../images/Logo_AABP.png"
 import GroupClient from "../clients/groupClient";
-import MaterialTable from "material-table";
 import Regions from "../utils/regions";
 
-const ReglementsPage = () => {
-const [groupList, setGroupList] = useState(false);
-
+const Groupes = () => {
+  const [groupList, setGroupList] = useState(false);
   useEffect(() => {
       FetchGroups();
   }, [])
@@ -102,4 +102,4 @@ const [groupList, setGroupList] = useState(false);
     )
 }
 
-export default ReglementsPage;
+export default Groupes;

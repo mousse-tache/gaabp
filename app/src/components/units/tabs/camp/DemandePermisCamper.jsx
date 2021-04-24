@@ -11,7 +11,7 @@ import r4 from "@aabp/docs/Réglement spécifique 04 - Normes de campement.pdf";
 
 import UserClient from "@aabp/clients/userClient";
 import DateStep from "./steps/dateStep";
-import ParticipantsSteps from "./steps/participantsSteps";
+import ParticipantsSteps from "./steps/ParticipantsSteps";
 import LieuStep from "./steps/lieuStep";
 import ChefStep from "./steps/chefStep";
 import CahierCampStep from "./steps/cahierCampStep";

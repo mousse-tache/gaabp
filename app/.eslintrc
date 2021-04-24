@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint", // uses babel-eslint transforms
+  "settings": {
+    "react": {
+      "version": "detect" // detect react version
+    }
+  },
+  "env": {
+    "node": true // defines things like process.env when generating through node
+  },
+  "extends": [
+    "eslint:recommended", // use recommended configs
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-undef": 0,
+    "no-useless-escape": 0,
+    "react/prop-types": 0,
+    "react/no-unescaped-entities": 0,
+    "react/display-name": 0,
+    "no-async-promise-executor": 0
+  }
+}

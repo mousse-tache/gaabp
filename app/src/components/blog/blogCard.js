@@ -25,7 +25,7 @@ const DefaultThumbnail = () => {
 };
 
 const BlogCard = ({article}) => {
-    const { html, title, path, date, thumbnail } = article;
+    const { title, path, date, thumbnail } = article;
     const formattedDate = moment(date).format("YYYY-MM-DD");
 
     return (

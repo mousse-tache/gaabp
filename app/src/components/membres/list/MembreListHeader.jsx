@@ -50,7 +50,7 @@ const MembreListHeader = () => {
             <h2 className="membres-title">
                 <span className="membres-title-element">Liste des membres</span>
                 <span className="membres-title-element">
-                    <Fab color="primary" 
+                    <Fab 
                     aria-label="add" 
                     size="small" 
                     color="secondary" 
@@ -68,7 +68,7 @@ const MembreListHeader = () => {
                 aria-describedby="simple-modal-description">
                 <Paper>
                     <div className="close-icon">    
-                            <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
+                            <Fab aria-label="add" size="small" color="secondary" onClick={handleClose}>
                                 <CloseIcon />
                             </Fab> 
                     </div>  

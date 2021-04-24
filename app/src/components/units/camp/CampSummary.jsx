@@ -30,7 +30,7 @@ const CampSummary = ({camp}) => {
             <div className="camp-item">
                 <h3>Cahier de camp</h3>
                 <Button>
-                    <a target="_blank" rel="noreferer" href={camp.cahierCamp}>cliquer ici</a>
+                    <a target="_blank" rel="noreferrer" href={camp.cahierCamp}>cliquer ici</a>
                 </Button>
             </div>
         </div>

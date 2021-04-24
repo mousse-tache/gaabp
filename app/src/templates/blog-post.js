@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Layout from "../components/public-components/layout"
+import Layout from "../components/public-components/Layout"
 import { Helmet } from "react-helmet"
 import { Breadcrumbs } from "@material-ui/core"
 import Default from "@aabp/images/default-blog-image.png"
@@ -25,7 +25,7 @@ export default function BlogPost({ data }) {
             </Link>
             <div>{post.frontmatter.title}</div>
           </Breadcrumbs>          
-          <img className="full-bleed" style={{maxWidth:"800px", borderRadius:"20px"}} src={blogImage} />
+          <img className="full-bleed" style={{maxWidth:"800px", borderRadius:"20px"}} alt="blog-thumbnail" src={blogImage} />
           <div>
               <div  dangerouslySetInnerHTML={{ __html: post.html }} />
           </div>

@@ -3,7 +3,7 @@ import Proptypes from "prop-types"
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
 import Membres from "./Membres";
-import NominationsOverview from "../nominations/nominationsOverview";
+import NominationsOverview from "../nominations/NominationsOverview";
 
 const SectionMembre = ({defaultValue}) => {
     const [value, setValue] = useState(defaultValue);

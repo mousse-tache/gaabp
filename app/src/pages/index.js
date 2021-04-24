@@ -4,12 +4,12 @@ import { Helmet } from "react-helmet";
 import { Typography } from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Layout from "@aabp/components/public-components/layout";
-import About from "@aabp/components/public-components/about";
-import Inscrire from "@aabp/components/public-components/inscrire";
-import Impliquer from "@aabp/components/public-components/impliquer";
-import Contact from "@aabp/components/public-components/contact";
-import ImageCarousel from  "@aabp/components/public-components/imageCarousel";
+import Layout from "@aabp/components/public-components/Layout";
+import About from "@aabp/components/public-components/About";
+import Inscrire from "@aabp/components/public-components/Inscrire";
+import Impliquer from "@aabp/components/public-components/Impliquer";
+import Contact from "@aabp/components/public-components/Contact";
+import ImageCarousel from  "@aabp/components/public-components/ImageCarousel";
 
 import Logo from "@aabp/images/Logo_AABP.png"
 

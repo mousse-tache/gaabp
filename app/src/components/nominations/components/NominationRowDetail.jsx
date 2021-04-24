@@ -60,7 +60,7 @@ const NominationRowDetail = ({nomination}) => {
                 <b>Références</b>
             </Grid>
             <Grid divider item xs>
-                {nomination.approvers.map((x, index) => <NominationRecommendation approver={x} index={index} complete={nomination.complete} nomination={nomination} />)}
+                {nomination.approvers.map((x, index) => <NominationRecommendation approver={x} key={index} index={index} complete={nomination.complete} nomination={nomination} />)}
             </Grid>
         </Grid>
     )

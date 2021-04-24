@@ -10,7 +10,7 @@ import GroupClient from "../../clients/groupClient";
 import UnitClient from "../../clients/unitClient";
 import NominationClient from "../../clients/nominationClient";
 import UserClient from "../../clients/userClient";
-import NominationRowDetail from "./components/nominationRowDetail";
+import NominationRowDetail from "./components/NominationRowDetail";
 import "./nominations.css";
 import { Checkbox } from "@material-ui/core";
 import AppContext from "@aabp/context/appContext";
@@ -151,9 +151,9 @@ const NominationsOverview = () => {
                     }
                 }
                 editable={{
-                    isEditable: rowData => Permissions(PermissionTypes.RemoveNomination, authedUser),
-                    isEditHidden: rowData => !Permissions(PermissionTypes.RemoveNomination, authedUser),
-                    onRowUpdateCancelled: rowData => enqueueSnackbar("Aucune modification apportée")
+                    isEditable: () => Permissions(PermissionTypes.RemoveNomination, authedUser),
+                    isEditHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
+                    onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée")
                 }}
 
                 actions={[

@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 
-import Sidebar from "./sidebar"
-import UserMenu from "./accountMenu";
+import Sidebar from "./Sidebar"
+import UserMenu from "./AccountMenu";
 import { AppBar, Toolbar, Button } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 

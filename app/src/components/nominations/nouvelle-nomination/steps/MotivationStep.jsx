@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { TextField, TextareaAutosize, Input } from "@material-ui/core";
-import NominationContext from "../../../../context/nominationContext";
-import UserClient from "../../../../clients/userClient";
+import { TextField, Input } from "@material-ui/core";
+import NominationContext from "@aabp/context/nominationContext";
+import UserClient from "@aabp/clients/userClient";
 import { Autocomplete } from "@material-ui/lab";
 
 const MotivationStep = () => {

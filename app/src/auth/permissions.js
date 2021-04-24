@@ -1,6 +1,6 @@
 import PermissionTypes from "./permissionTypes";
 
-const Permissions = (permission, authedUser = null, unitId = null, memberId = null) => {
+const Permissions = (permission, authedUser = null, unitId = null) => {
     if (!authedUser) {
         return false;
     }

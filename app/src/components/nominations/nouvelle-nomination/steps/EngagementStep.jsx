@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import NominationContext from "../../../../context/nominationContext";
-import r7 from "../../../../docs/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf"
+import NominationContext from "@aabp/context/nominationContext";
+import r7 from "@aabp/docs/Règlement spécifique 07 - Code d'éthique et de déontologie de l'AABP.pdf"
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 
 const EngagementStep = () => {
@@ -73,7 +73,7 @@ const EngagementStep = () => {
             <div className="nomination-flex-container">
                 <FormControl required component="fieldset">
                     <FormLabel component="legend">
-                    J'ai lu et pris connaissance du <a target="_blank" rel="noreferral noopener" href={r7}>code d'éthique et de déontologie</a> de l'AABP et j'accepte de m'y conformer. 
+                    J'ai lu et pris connaissance du <a target="_blank" rel="noreferrer noopener" href={r7}>code d'éthique et de déontologie</a> de l'AABP et j'accepte de m'y conformer. 
                     
                     </FormLabel>
                     <RadioGroup 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecensementClient from "../../clients/recensementClient";
 import CalculateCost from "./calculateRecensementCost";
-import SoumettreRecensement from "./soumettreRecensement";
+import SoumettreRecensement from "./SoumettreRecensement";
 import PreviewCost from "./previewCost";
 import RecensementDetails from "./RecensementDetails";
 import Loading from "../loading/loading";

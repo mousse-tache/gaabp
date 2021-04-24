@@ -6,7 +6,7 @@ import AppContext from "@aabp/context/appContext";
 
 import Profile from "@aabp/components/profile/profile";
 import GlobalReport from "@aabp/components/home/globalReport/globalReport";
-import ApprobationCamp from "@aabp/components/units/camp/approbationCamp";
+import ApprobationCamp from "@aabp/components/units/camp/ApprobationCamp";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";

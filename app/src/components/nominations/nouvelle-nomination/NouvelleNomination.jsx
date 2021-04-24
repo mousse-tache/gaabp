@@ -4,9 +4,9 @@ import NominationContext from "@aabp/context/nominationContext";
 import AppContext from "@aabp/context/appContext";
 
 import { Tooltip, Button, Dialog } from "@material-ui/core";
-import NominationStepper from "./nominationStepper";
+import NominationStepper from "./NominationStepper";
 
-import "./nomination.css";
+import "./nomination.scss";
 
 const DefaultNomination = 
 {role:"",

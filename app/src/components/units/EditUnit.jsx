@@ -14,11 +14,11 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import UnitDetails from "./unitDetails";
 import Loading from "../loading/loading";
 import UnitRecensementTab from "./tabs/unitRecensementTab";
-import CampTab from "./tabs/campTab";
+import CampTab from "./tabs/CampTab";
 
 import UnitClient from "@aabp/clients/unitClient";
 
-import "./unit.css";
+import "./unit.scss";
 
 const EditUnit = ({id}) => {
     const { authedUser } = useContext(AppContext);

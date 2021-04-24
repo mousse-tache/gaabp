@@ -5,7 +5,7 @@ import MaterialTable from "material-table";
 import { Skeleton } from "@material-ui/lab";
 
 import CampClient from "@aabp/clients/campClient";
-import CampSummary from "./campSummary";
+import CampSummary from "./CampSummary";
 
 const ApprobationCamp = () => {    
     const [camps, setCamps] = useState(null);

@@ -7,7 +7,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
+const AddNewUsers = ({unitId, triggerUpdateMembres}) => {
     const defaultUserState= {prenom:"", nom:"", courriel:"", details: {}, nominations:[{type: NominationTypes.Membre, unitId: unitId, sd: new Date()}]};
     const [usersToCreate, setUsersToCreate] = useState([]);
     const [nextUserToCreate, setNextUserToCreate] = useState(defaultUserState);
@@ -85,8 +85,8 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                                 Membres qui seront ajoutés:
                             </Typography>
                         </ListItem>}
-                        {usersToCreate.map(x => 
-                        <ListItem className="add-new-users-recensement-item" divider>
+                        {usersToCreate.map((x, index) => 
+                        <ListItem key={index} className="add-new-users-recensement-item" divider>
                             <TextField fullWidth 
                             value={x.prenom}  
                             label="Prénom" />
@@ -103,7 +103,7 @@ const AddNewUsers = ({unitId, triggerUpdateMembres, uniteCadette}) => {
                                     fullWidth
                                     value={x.nominations[0].type}
                                     >
-                                    {Object.keys(NominationTypes).map(y => <MenuItem value={y}>{NominationTypes[y]}</MenuItem>)}
+                                    {Object.keys(NominationTypes).map((y,index) => <MenuItem key={index} value={y}>{NominationTypes[y]}</MenuItem>)}
                             </TextField>
                             <Button onClick={() => removeRow(x)} >
                                 <CloseIcon size="large" color="primary" />

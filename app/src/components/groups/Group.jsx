@@ -76,7 +76,7 @@ const Group = () => {
         <h2 className="membres-title">
             <span className="membres-title-element">Groupes</span>
             <span className="membres-title-element">
-                <Fab color="primary" aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup, authedUser)} onClick={handleOpen}>
+                <Fab aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup, authedUser)} onClick={handleOpen}>
                     <AddIcon />
                 </Fab>
             </span>
@@ -90,7 +90,7 @@ const Group = () => {
             <Paper>
                 <form className="unit-modal-content">
                     <div className="close-icon">    
-                        <Fab color="primary" aria-label="add" size="small" color="secondary" onClick={handleClose}>
+                        <Fab aria-label="add" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
                         </Fab> 
                     </div>   

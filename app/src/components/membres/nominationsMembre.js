@@ -96,8 +96,8 @@ const NominationsMembres = () => {
                 isEditHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
                 isDeletable: () => Permissions(PermissionTypes.RemoveNomination, authedUser),                
                 isDeleteHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
-                onRowDelete: (newData, oldData) =>
-                new Promise((resolve, reject) => {
+                onRowDelete: (newData) =>
+                new Promise((resolve) => {
                         setTimeout(() => {
                             let nominations = member?.nominations.filter(x => x.tableData.id !== newData.tableData.id );
                             setMember({...member, nominations: nominations})
@@ -107,7 +107,7 @@ const NominationsMembres = () => {
                 }),
                 onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
                 onRowUpdate: (newData, oldData) =>
-                new Promise((resolve, reject) => {
+                new Promise((resolve) => {
                         setTimeout(() => {
                             const index = oldData.tableData.id;
                             let nominations = member?.nominations;

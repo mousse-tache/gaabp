@@ -17,7 +17,7 @@ import Genre from "@aabp/utils/genre";
 import UnitClient from "@aabp/clients/unitClient"
 import GroupClient from "@aabp/clients/groupClient"
 
-import "./unit.css";
+import "./unit.scss";
 
 const Unit = () => {
     const { authedUser } = useContext(AppContext);

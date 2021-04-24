@@ -13,13 +13,13 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import NominationTypes from "@aabp/utils/nominationTypes";
 
 import Recensement from "@aabp/components/recensement/recensement";
-import AddNewUsers from "@aabp/components/recensement/addNewUsers";
+import AddNewUsers from "@aabp/components/recensement/AddNewUsers";
 import Loading from "@aabp/components/loading/loading";
 import UnitMembersTable from "@aabp/components/units/unitMembersTable";
 
 import UserClient from "@aabp/clients/userClient";
 
-import "../unit.css";
+import "../unit.scss";
 
 const UnitRecensementTab = () => {
     const { authedUser } = useContext(AppContext);

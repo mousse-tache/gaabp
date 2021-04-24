@@ -71,7 +71,7 @@ const ChefStep = () => {
                     {
                         camp.chefUnite &&
                         <Button>
-                            <a href={`/app/membre/${camp.chefUnite._id}`} target="_blank">
+                            <a href={`/app/membre/${camp.chefUnite._id}`} rel="noreferrer" target="_blank">
                                 <span> {camp.chefUnite.prenom} {camp.chefUnite.nom}</span>
                             </a>
                         </Button>
@@ -99,7 +99,7 @@ const ChefStep = () => {
                     {
                         camp.chefCamp &&
                         <Button>
-                            <a href={`/app/membre/${camp.chefCamp._id}`} target="_blank">
+                            <a href={`/app/membre/${camp.chefCamp._id}`} rel="noreferrer" target="_blank">
                                 <span>Voir son profil</span>
                             </a>
                         </Button>

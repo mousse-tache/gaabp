@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BC1 from "@aabp/images/BC1.jpg";
-import BC2 from "@aabp/images/BC2.jpg";
+//import BC2 from "@aabp/images/BC2.jpg";
 import BC3 from "@aabp/images/BC3.jpg";
 
 const BadgeBrevetCompetence = ({filteredFormations}) => {

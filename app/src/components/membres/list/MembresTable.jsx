@@ -62,7 +62,7 @@ const MembresTable = ({canEdit}) => {
       }
 
       data={query =>
-        new Promise(async(resolve, reject) => {
+        new Promise(async(resolve) => {
           var { users, count, page } = await FetchUsers(query.page+1, query.pageSize, query.search);
           var filteredUsers = [];
           if(users && users.length > 0) {

@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import CampClient from "@aabp/clients/campClient";
 
-import ParticipantsSteps from "./steps/participantsSteps";
+import ParticipantsSteps from "./steps/ParticipantsSteps";
 import Revision from "./steps/revisionStep";
 
 const DernierCamp = () => {

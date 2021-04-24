@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
 
 
-import Layout from "@aabp/components/public-components/layout";
+import Layout from "@aabp/components/public-components/Layout";
 import BlogCard from "@aabp/components/blog/blogCard";
 
 const NotFoundPage = () => {
@@ -38,7 +38,7 @@ const NotFoundPage = () => {
       </Helmet>
         <h1>Blog</h1>
         <div className="wrapper" >
-          {articles.map(x => <BlogCard article={x.node?.frontmatter} />)}
+          {articles.map((x, index) => <BlogCard key={index} article={x.node?.frontmatter} />)}
         </div>
     </Layout>
     )

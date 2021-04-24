@@ -9,7 +9,6 @@ import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import NominationTypes from "@aabp/utils/nominationTypes";
 import UnitContext from '@aabp/context/unit/unitContext';
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {

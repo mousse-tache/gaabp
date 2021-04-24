@@ -24,7 +24,7 @@ const SoumettreRecensement = ({cost, unitId, unitMembers}) => {
         var lastRecensementPeriod = moment(nextRecensementPeriod).add(-1, 'y');
 
         return latestRecensement ? moment(latestRecensement.date).isBefore(lastRecensementPeriod) || latestRecensement.paiementComplet : true;
-    }; 
+    } 
 
     useEffect(() => {
         setShouldSubmitNew(shouldSubmitNewRecensement());

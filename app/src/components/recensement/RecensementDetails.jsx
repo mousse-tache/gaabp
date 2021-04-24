@@ -105,7 +105,7 @@ const RecensementDetails = () => {
                         <ListItem>
                             <b>Membres inclus dans le dernier recensement</b>
                         </ListItem>
-                        {users && users.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
+                        {users && users.map((x, index) => <ListItem button key={index} onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
                     </List>  
                 </Grid>    
                 <Grid item xs={6}>
@@ -114,7 +114,7 @@ const RecensementDetails = () => {
                         <ListItem>
                             <b>Membres non inclus dans le dernier recensement</b>
                         </ListItem>
-                        {usersNonRecenses && usersNonRecenses.map(x => <ListItem button onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
+                        {usersNonRecenses && usersNonRecenses.map((x, index) => <ListItem button key={index} onClick={() => navigate("/app/membre/"+x._id)}>{x.prenom} {x.nom}</ListItem>)}
                     </List>  
                 </Grid>       
             </Grid>

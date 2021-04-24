@@ -5,7 +5,7 @@ import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
 import AnneesService from "./anneesService";
 import AppContext from "@aabp/context/appContext";
 import UserContext from "@aabp/context/userContext";
-import MemberFormationsUniform from "./formation/MemberFormationsUniform";
+//import MemberFormationsUniform from "./formation/MemberFormationsUniform";
 
 const MemberDetails = ({canEdit, isPersonalProfile}) => {
     const { authedUser } = useContext(AppContext);

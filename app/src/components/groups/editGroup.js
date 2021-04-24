@@ -14,7 +14,7 @@ import UserClient from "../../clients/userClient";
 import GroupMembresTable from "./groupMembersTable";
 import { Autocomplete } from "@material-ui/lab";
 import NominationTypes from "../../utils/nominationTypes";
-import GeoClient from "../../clients/geoClient";
+//import GeoClient from "../../clients/geoClient";
 import AppContext from "../../context/appContext";
 
 const EditGroup = ({id}) => {
@@ -34,7 +34,7 @@ const EditGroup = ({id}) => {
     const groupClient = new GroupClient();
     const unitClient = new UnitClient();
     const userClient = new UserClient();
-    const geoClient = new GeoClient();
+    //const geoClient = new GeoClient();
 
     var canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
 
@@ -52,12 +52,12 @@ const EditGroup = ({id}) => {
         FetchAllUsers();
     }, [query])
 
-    async function FetchGeoLocalisation() {
-        if(group.adresse !== undefined && group.adresse.length > 5) {
-            var data = await geoClient.forward(group.adresse) 
-            console.log(data);
-        }
-    }
+    // async function FetchGeoLocalisation() {
+    //     if(group.adresse !== undefined && group.adresse.length > 5) {
+    //         var data = await geoClient.forward(group.adresse) 
+    //         console.log(data);
+    //     }
+    // }
 
     async function FetchAllUsers() {
         if(query.length < 3) {

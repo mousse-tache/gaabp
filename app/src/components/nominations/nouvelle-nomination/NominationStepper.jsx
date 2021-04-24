@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { DialogContent, Stepper, Step, StepLabel, Button, CircularProgress } from "@material-ui/core";
-import PosteStep from "./steps/posteStep";
-import VajStep from "./steps/vajStep";
-import EngagementStep from "./steps/engagementStep";
-import MotivationStep from "./steps/motivationStep";
+import PosteStep from "./steps/PosteStep";
+import VajStep from "./steps/VajStep";
+import EngagementStep from "./steps/EngagementStep";
+import MotivationStep from "./steps/MotivationStep";
 import NominationContext from "@aabp/context/nominationContext";
 import { NominationClient } from "@aabp/clients/nominationClient";
-import FinalStep from "./steps/finalStep";
+import FinalStep from "./steps/FinalStep";
 import AppContext from "@aabp/context/appContext";
 
 const steps = [
@@ -42,7 +42,7 @@ const NominationStepper = () => {
     return (
         <DialogContent>
             <Stepper activeStep={activeStep}>
-            {steps.map((label, index) => {
+            {steps.map((label) => {
                 
                 return (
                     <Step key={label}>

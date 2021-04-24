@@ -44,6 +44,7 @@
     "sass": "^1.32.8"
   },
   "devDependencies": {
+    "gatsby-plugin-eslint": "^3.0.0",
     "prettier": "^1.19.1"
   },
   "keywords": [

@@ -42,14 +42,13 @@ const ReconnaissancesMembre = () => {
         }
     };
 
-    useEffect(() => {
-        
+    useEffect(() => {        
         init();
     }, [member])
 
     async function saveDecoration(decoration) {
         let dec = {...decoration, membre: member._id};
-        const data = await decorationClient.save(dec);
+        await decorationClient.save(dec);
         init();
     }
 
@@ -59,14 +58,14 @@ const ReconnaissancesMembre = () => {
                 title=""                
                 editable={authedUser.isAdmin && {                    
                     onRowAdd: rowData =>
-                        new Promise((resolve, reject) => {
+                        new Promise((resolve) => {
                             setTimeout(() => {    
                                 saveDecoration(rowData);
                                 resolve();
                             }, 1000);
                         }),
-                    onRowUpdate: (newData, oldData) =>
-                        new Promise((resolve, reject) => {
+                    onRowUpdate: (newData) =>
+                        new Promise((resolve) => {
                             setTimeout(() => {
                                 saveDecoration(newData);
                                 resolve();
