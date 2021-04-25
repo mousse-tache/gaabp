@@ -60,7 +60,7 @@ function useAuthentication() {
         catch(e) {
             console.log(e.message);
         }
-    }, [UserClient]);
+    }, []);
 
     useEffect(() => {
         FetchUser();

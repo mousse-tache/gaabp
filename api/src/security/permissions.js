@@ -75,6 +75,8 @@ exports.Permissions = (userJwt, permission) => {
             return (user.isAdmin || isBranchCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (user.isAdmin || isManagementVicepResident());
+        case PermissionTypes.FuseUsers:
+            return user.isAdmin;
         default:
           return false;
       } 
