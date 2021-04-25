@@ -46,7 +46,9 @@ const CampSummary = ({camp}) => {
                     <a target="_blank" rel="noreferrer" href={camp.cahierCamp}>cliquer ici</a>
                 </Button>
             </div>
-            <AddToCalendarButton event={event} />
+            <div className="camp-item">            
+                <AddToCalendarButton event={event} />
+            </div>
         </div>
     );
 };

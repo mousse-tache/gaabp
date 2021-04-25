@@ -30,8 +30,8 @@ const ApprobationCamp = () => {
     const cols =  [
         { title: "Unité", field:'unitInfo.nom' },
         { title: "Branche", field: 'unitInfo.branche', lookup: {0: "Bleue", 1: "Jaune", 2: "Verte", 3: "Rouge"}},
-        { title:"Début", field:'debutDuCamp'},
-        { title: 'Fin', field: 'finDuCamp' },
+        { title:"Début", field:'debutDuCamp', type: "date"},
+        { title: 'Fin', field: 'finDuCamp', type: "date"},
         { title: 'Approbation', field: "approuve", type: "boolean"},
         { title: 'Approuvé par', field: "approuvePar" }      
     ];
@@ -53,13 +53,36 @@ const ApprobationCamp = () => {
             {
             pageSize: 10,
             exportButton: true,
-            exportAllData: true
+            exportAllData: true,
+            filtering: true
             }
         } 
         columns={cols}
         data={camps} 
         
-        detailPanel={rowData => <CampSummary camp={rowData} />}    
+        detailPanel={
+            [
+                {
+                    tooltip: 'Sommaire',
+                    icon: 'list',
+                    render: rowData => {
+                      return (
+                        <CampSummary camp={rowData} />
+                      );
+                    },
+                  },
+                  {
+                    tooltip: 'Approbatiom',
+                    icon: 'check_circle',
+                    render: () => {
+                      return (
+                        <div>
+                            Heya
+                        </div>
+                      );
+                    },
+                  },
+            ]}
         
         onRowClick={(event, rowData) => navigate("/app/unite/"+rowData.unit)}   
         />

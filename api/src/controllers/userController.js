@@ -169,7 +169,14 @@ exports.removeFromUnit = async (req, reply) => {
       _id: mongoose.Types.ObjectId(userId), 
       nominations: { 
         $elemMatch : {
-          "unitId": unitId,
+          $or: [
+            {
+              "unitId": unitId
+            },
+            {
+            "unitId": mongoose.Types.ObjectId(unitId)
+            }
+          ],
           "ed": null,
           "type": type}}
         }, 
