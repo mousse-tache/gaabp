@@ -11,7 +11,7 @@ exports.createNewCamp = async (req, reply) => {
         const { camp } = req.body
   
         if(camp._id) {
-          const update = await Camp.findByIdAndUpdate(camp._id, camp, { new: true });
+          const update = await Camp.updateOne({_id: mongoose.Types.ObjectId(camp._id)}, camp, { new: true });
   
           return update;
         }
@@ -63,6 +63,7 @@ exports.getList = async (req, reply) => {
               membres: 1,
               approuve: 1,
               approuvePar: 1, 
+              evaluation:1,
               unit : { "$toObjectId": "$unit" }
           }},
           {$lookup:

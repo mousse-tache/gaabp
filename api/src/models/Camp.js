@@ -12,7 +12,8 @@ const Camp = new mongoose.Schema({
   comments: String,
   membres: Array,
   approuve: Boolean,
-  approuvePar: Object
+  approuvePar: Object,
+  evaluation: String
 });
 
 module.exports = mongoose.model('camp', Camp);
