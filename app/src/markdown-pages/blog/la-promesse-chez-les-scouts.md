@@ -1,5 +1,5 @@
 ---
-path: la-promesse-chez-les-scouts
+path: /blog/la-promesse-chez-les-scouts
 date: 2021-04-27T21:44:53.535Z
 title: La promesse chez les scouts
 thumbnail: /assets/promesse.gif
