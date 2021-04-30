@@ -4,6 +4,7 @@ import { Paper, Tab, Tabs } from '@material-ui/core';
 
 import Membres from "./Membres";
 import NominationsOverview from "../nominations/NominationsOverview";
+import SuspenseNoSSR from "../lazy-load/SuspenseNoSSR";
 
 const SectionMembre = ({defaultValue}) => {
     const [value, setValue] = useState(defaultValue);
@@ -25,12 +26,14 @@ const SectionMembre = ({defaultValue}) => {
                 <Tab disableRipple component="a" label="Liste des membres" />
                 <Tab disableRipple component="a" label="Nominations" />
             </Tabs>
-            {
-                value === 0 && <Membres />
-            }
-            {
-                value === 1 && <NominationsOverview />
-            }
+            <SuspenseNoSSR>
+                {
+                    value === 0 && <Membres />
+                }
+                {
+                    value === 1 && <NominationsOverview />
+                }
+            </SuspenseNoSSR>
         </Paper> 
     );
 };
@@ -43,4 +46,4 @@ SectionMembre.defaultProps = {
     defaultValue: 0
 };
 
-export default SectionMembre;
+export default React.memo(SectionMembre);

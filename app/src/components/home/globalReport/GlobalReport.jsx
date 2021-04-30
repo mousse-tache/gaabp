@@ -6,7 +6,7 @@ import { Skeleton } from "@material-ui/lab";
 
 import ReportingClient from "@aabp/clients/reportingClient";
 
-import "./globalReport.css";
+import "./global-report.scss";
 
 const GlobalReport = () => {
     const [report, setReport] = useState({});
