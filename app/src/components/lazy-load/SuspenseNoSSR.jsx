@@ -1,3 +1,4 @@
+import { Skeleton } from "@material-ui/lab";
 import React from "react";
 
 const SuspenseNoSSR = ({fallback, children}) => {
@@ -5,7 +6,7 @@ const SuspenseNoSSR = ({fallback, children}) => {
     return (
         <>
         {!isSSR && (
-            <React.Suspense fallback={fallback ?? <div></div>}>
+            <React.Suspense fallback={fallback ?? <Skeleton />}>
                 {children}
             </React.Suspense>
         )}
