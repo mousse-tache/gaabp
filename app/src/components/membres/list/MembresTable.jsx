@@ -92,7 +92,7 @@ const MembresTable = ({canEdit}) => {
                 courriel: x.courriel, 
                 nom: `${x.prenom} ${x.nom}`, 
                 statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
-                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau.id)
+                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau?.id ?? x.niveau)
               });
             });
           }
