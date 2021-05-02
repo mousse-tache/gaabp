@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from "react";
 import BC1 from "@aabp/images/BC1.png";
-//import BC2 from "@aabp/images/BC2.jpg";
+import BC2 from "@aabp/images/BC2.png";
 import BC3 from "@aabp/images/BC3.png";
 
 import BaseBadge, { BadgeStyles } from "@aabp/components/badge/BaseBadge";
 
+import "./badge-competence.scss";
 
-const BadgeBrevetCompetence = ({filteredFormations}) => {
+const BadgeBrevetCompetence = ({formation}) => {
     const [badge, setBadge] = useState(false);
     const [badgeClass, setBadgeClass] = useState("");
-    const {bc1, bc2, bc3} = filteredFormations;
 
     useEffect(() => {
-        setBadgeClass(bc3 ? "bc3" : (bc2? "bc1" : (bc1? "bc1" : false)));
-        setBadge(bc3 ? BC3 : (bc2? BC1 : (bc1? BC1 : false)));
-    }, [filteredFormations]);
+        setBadgeClass(formation);
+        switch(formation) {
+            case "bc1":
+                setBadge(BC1);
+                break;
+            case "bc2":
+                setBadge(BC2);
+                break;
+            case "bc3":
+                setBadge(BC3);
+                break;
+            default:
+                setBadge(null);
+                break;
+
+        }
+    }, [formation]);
 
     if(!badge) {
         return null;

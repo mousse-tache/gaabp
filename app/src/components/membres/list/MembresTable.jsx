@@ -5,18 +5,38 @@ import { navigate } from 'gatsby';
 import UserClient from '@aabp/clients/userClient';
 import { useSnackbar } from 'notistack';
 import { CsvBuilder } from 'filefy';
+
 import MembreListHeader from './MembreListHeader';
+
+import BadgeMapper from "@aabp/components/membres/formation/BadgeMapper";
 
 const MembresTable = ({canEdit}) => {
   const columns = [
       { title:'', field:'nom', filtering: false },
-      { title: 'Courriel', field: 'courriel', filtering: false },
+      { title: 'Courriel', field: 'courriel', filtering: false },      
+      {title:'', 
+      field:'formations', 
+      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"flex-start", flexWrap:"wrap"}}>
+        {
+          row.formations.map((x, i) => {
+            return <BadgeMapper key={i} badgeId={x} />;
+          })
+        }
+      </div>, 
+      filtering:false},
       { title: 'Statut', 
         field: 'statut', lookup: {0: 'Inactif', 1: 'Actif'},
         filtering: true,
-        tooltip: 'Un membre est actif s\'il a au moins une nomination courante'
-      },
-      //{title:'', field:'formations', filtering:false}
+        tooltip: 'Un membre est actif s\'il a au moins une nomination courante',
+        cellStyle: {
+          maxWidth:1,
+          width:1
+         },
+        headerStyle: {
+          maxWidth:1,
+          width:1
+        },
+      }
     ];
 
     const { enqueueSnackbar } = useSnackbar();
