@@ -7,8 +7,9 @@ import { useSnackbar } from 'notistack';
 import { CsvBuilder } from 'filefy';
 
 import MembreListHeader from './MembreListHeader';
-
 import BadgeMapper from "@aabp/components/membres/formation/BadgeMapper";
+
+import getAnneeDeService from "@aabp/utils/anneeService";
 
 const MembresTable = ({canEdit}) => {
   const columns = [
@@ -24,18 +25,12 @@ const MembresTable = ({canEdit}) => {
         }
       </div>, 
       filtering:false},
+      { title: "Années de service", field: "service",  width: "10%" },
       { title: 'Statut', 
         field: 'statut', lookup: {0: 'Inactif', 1: 'Actif'},
         filtering: true,
         tooltip: 'Un membre est actif s\'il a au moins une nomination courante',
-        cellStyle: {
-          maxWidth:1,
-          width:1
-         },
-        headerStyle: {
-          maxWidth:1,
-          width:1
-        },
+        width: "1rem"
       }
     ];
 
@@ -77,7 +72,8 @@ const MembresTable = ({canEdit}) => {
           exportButton: canEdit,
           exportCsv: exportCsv,
           exportFileName : "membres",
-          exportAllData: true
+          exportAllData: true,
+          tableLayout: "fixed"
         }
       }
 
@@ -92,7 +88,8 @@ const MembresTable = ({canEdit}) => {
                 courriel: x.courriel, 
                 nom: `${x.prenom} ${x.nom}`, 
                 statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
-                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau?.id ?? x.niveau)
+                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau?.id ?? x.niveau),
+                service: getAnneeDeService(x.nominations)
               });
             });
           }

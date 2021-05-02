@@ -15,6 +15,10 @@
         flex-direction: column;
         align-self: flex-start;
         align-items: center;
+
+        div {
+            margin: 3rem;
+        }
     }
 
     form {
