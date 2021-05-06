@@ -1,4 +1,5 @@
 const boom = require('boom');
+const mongoose = require('mongoose');
 const Recensement = require('../models/Recensement');
 const User = require('../models/User');
 const { PermissionTypes } = require('../security/permissionTypes');
