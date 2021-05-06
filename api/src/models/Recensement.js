@@ -7,7 +7,7 @@ const Recensement = new mongoose.Schema({
   datePaiement: Date,
   details: Object,
   cost: Number,
-  unitId: mongoose.Types.ObjectId
+  unitId: mongoose.Types.ObjectId || String
 })
 
 module.exports = mongoose.model('Recensement', Recensement)

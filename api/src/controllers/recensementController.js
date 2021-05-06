@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
-    const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
+    const recensement = await Recensement.findOne({$or: [ {unitId: unit}, {unitId: mongoose.Types.ObjectId(unit)}]}).sort({_id: -1})
 
     if (recensement) {
       const users = await User.find({_id: {$in: recensement.details.unitMembers}},{ prenom:1, nom:1 }).sort({nom:1})
@@ -102,7 +102,7 @@ exports.addOne = async (req, reply) => {
     try {
       const recensementModel = req.body
   
-      const recensement = await Recensement.collection.insertOne(recensementModel)
+      const recensement = await Recensement.insertOne(recensementModel)
 
       return recensement
     } catch (err) {
