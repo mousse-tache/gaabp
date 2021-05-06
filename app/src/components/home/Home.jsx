@@ -5,7 +5,7 @@ import { Skeleton } from "@material-ui/lab";
 import AppContext from "@aabp/context/appContext";
 
 import Profile from "@aabp/components/profile/profile";
-import GlobalReport from "@aabp/components/home/globalReport/globalReport";
+import GlobalReport from "@aabp/components/home/globalReport/GlobalReport";
 import ApprobationCamp from "@aabp/components/units/camp/ApprobationCamp";
 
 import Permissions from "@aabp/auth/permissions";

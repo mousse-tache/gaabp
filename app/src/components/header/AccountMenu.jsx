@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, navigate } from "gatsby";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Help from "./help";
+import Help from "./Help";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { logout } from "@aabp/login/login";
 

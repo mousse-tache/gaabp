@@ -5,18 +5,33 @@ import { navigate } from 'gatsby';
 import UserClient from '@aabp/clients/userClient';
 import { useSnackbar } from 'notistack';
 import { CsvBuilder } from 'filefy';
+
 import MembreListHeader from './MembreListHeader';
+import BadgeMapper from "@aabp/components/membres/formation/BadgeMapper";
+
+import getAnneeDeService from "@aabp/utils/anneeService";
 
 const MembresTable = ({canEdit}) => {
   const columns = [
       { title:'', field:'nom', filtering: false },
-      { title: 'Courriel', field: 'courriel', filtering: false },
+      { title: 'Courriel', field: 'courriel', filtering: false },      
+      {title:'', 
+      field:'formations', 
+      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"flex-start", flexWrap:"wrap"}}>
+        {
+          row.formations.map((x, i) => {
+            return <BadgeMapper key={i} badgeId={x} />;
+          })
+        }
+      </div>, 
+      filtering:false},
+      { title: "Années de service", field: "service",  width: "10%" },
       { title: 'Statut', 
         field: 'statut', lookup: {0: 'Inactif', 1: 'Actif'},
         filtering: true,
-        tooltip: 'Un membre est actif s\'il a au moins une nomination courante'
-      },
-      //{title:'', field:'formations', filtering:false}
+        tooltip: 'Un membre est actif s\'il a au moins une nomination courante',
+        width: "1rem"
+      }
     ];
 
     const { enqueueSnackbar } = useSnackbar();
@@ -57,7 +72,8 @@ const MembresTable = ({canEdit}) => {
           exportButton: canEdit,
           exportCsv: exportCsv,
           exportFileName : "membres",
-          exportAllData: true
+          exportAllData: true,
+          tableLayout: "fixed"
         }
       }
 
@@ -72,7 +88,8 @@ const MembresTable = ({canEdit}) => {
                 courriel: x.courriel, 
                 nom: `${x.prenom} ${x.nom}`, 
                 statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
-                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau.id)
+                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau?.id ?? x.niveau),
+                service: getAnneeDeService(x.nominations)
               });
             });
           }

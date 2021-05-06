@@ -34,4 +34,4 @@ Header.defaultProps = {
   siteTitle: ``,
 };
 
-export default Header;
+export default React.memo(Header);

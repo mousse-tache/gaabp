@@ -9,43 +9,4 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column-reverse;
-    
-    .badge-brevet {
-        img {
-            max-width: 50%;
-            margin: auto;
-            padding: .2rem;
-        }
-
-        &--bc1 {
-            background-color: rgb(56, 56, 243);
-            max-width: 60%;
-            margin: auto;
-            img {
-                max-width: 100%;
-                margin: auto;
-                padding: .2rem;
-            }
-        }
-
-        &--bc3 {
-            max-width: 50%;
-            margin: auto;
-            img {
-                max-width: 100%;
-                margin: auto;
-                padding: .2rem;
-            }
-        }
-    }
-
-    .badge-formateur {
-        margin: auto;
-        margin-top: .5rem;
-
-        img {
-            max-width: 70%;
-            margin: auto;
-        }
-    }
 }

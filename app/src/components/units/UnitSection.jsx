@@ -4,6 +4,7 @@ import { Paper, Tab, Tabs } from '@material-ui/core';
 
 import Unit from "./unit";
 import RecensementOverview from "../recensement/recensementOverview";
+import SuspenseNoSSR from "@aabp/components/lazy-load/SuspenseNoSSR";
 
 import Permissions from "@aabp/auth/permissions";
 import useAuthUser from "@aabp/auth/useAuthUser";
@@ -29,12 +30,14 @@ const UnitSection = ({defaultValue}) => {
                 <Tab disableRipple component="a" label="Liste des unités" />
                 {Permissions(PermissionTypes.ViewRecensementSummary, useAuthUser()) && <Tab disableRipple component="a" label="Recensements" />}
             </Tabs>
-            {
-                value === 0 && <Unit />
-            }
-            {
-                value === 1 && <RecensementOverview />
-            }
+            <SuspenseNoSSR>
+                {
+                    value === 0 && <Unit />
+                }
+                {
+                    value === 1 && <RecensementOverview />
+                }
+            </SuspenseNoSSR>
         </Paper> 
     );
 };

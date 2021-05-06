@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 
 import MaterialTable from "material-table";
-import { Skeleton } from "@material-ui/lab";
+import { Alert, Skeleton } from "@material-ui/lab";
+import { Card } from "@material-ui/core";
 
 import CampClient from "@aabp/clients/campClient";
 import CampSummary from "./CampSummary";
@@ -61,60 +62,66 @@ const ApprobationCamp = () => {
     }
 
     return  (
-        <MaterialTable
-        title="Camps"
-        isLoading={!init}
-        localization={{
-            toolbar: {
-                searchPlaceholder: "Chercher"
-            }
-        }}
-        options={
-            {
-            pageSize: 10,
-            exportButton: true,
-            exportAllData: true,
-            filtering: true
-            }
-        } 
-        columns={cols}
-        data={camps} 
-        
-        detailPanel={
-            [
+        <Card>
+            <Alert severity="info">
+                Les évaluations de camp doivent être conduites selon le formulaire officiel d'évaluation.
+            </Alert>
+            <MaterialTable
+            title="Camps"
+            isLoading={!init}
+            localization={{
+                toolbar: {
+                    searchPlaceholder: "Chercher"
+                }
+            }}
+            options={
                 {
-                    tooltip: 'Sommaire',
-                    icon: 'list',
-                    render: rowData => {
-                      return (
-                        <CampSummary camp={rowData} />
-                      );
-                    },
-                  }
-            ]}
+                pageSize: 10,
+                exportButton: true,
+                exportAllData: true,
+                filtering: true
+                }
+            } 
+            columns={cols}
+            data={camps} 
             
-        editable={{
-            isEditable: () => Permissions(PermissionTypes.ApproveCamp, authedUser),
-            isEditHidden: () => !Permissions(PermissionTypes.ApproveCamp, authedUser),
-            onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
-            onRowUpdate: (newData) =>
-                        new Promise((resolve) => {
-                            setTimeout(() => {
-                                SaveCamp(newData);
-                                resolve();
-                        }, 1000);
-            })
-        }} 
+            detailPanel={
+                [
+                    {
+                        tooltip: 'Sommaire',
+                        icon: 'list',
+                        render: rowData => {
+                        return (
+                            <CampSummary camp={rowData} />
+                        );
+                        },
+                    }
+                ]}
+                
+            editable={{
+                isEditable: () => Permissions(PermissionTypes.ApproveCamp, authedUser),
+                isEditHidden: () => !Permissions(PermissionTypes.ApproveCamp, authedUser),
+                onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
+                onRowUpdate: (newData) =>
+                            new Promise((resolve) => {
+                                setTimeout(() => {
+                                    SaveCamp(newData);
+                                    resolve();
+                            }, 1000);
+                })
+            }} 
 
-        actions={[
-            rowData => ({
-                icon: 'check',
-                tooltip: "Autoriser la tenue du camp",
-                onClick: (event, rowData) => AutorizeCamp(rowData),
-                disabled: !Permissions(PermissionTypes.ApproveCamp, authedUser) || rowData.approuve
-            })
-        ]}
-        />
+            actions={[
+                rowData => ({
+                    icon: 'check',
+                    tooltip: "Autoriser la tenue du camp",
+                    onClick: (event, rowData) => AutorizeCamp(rowData),
+                    disabled: !Permissions(PermissionTypes.ApproveCamp, authedUser) || rowData.approuve
+                })
+            ]}
+            />
+        </Card>
+        
     );
 };
 

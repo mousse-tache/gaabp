@@ -3,12 +3,32 @@ import Apprenti from "@aabp/images/formateur-apprenti.png";
 import Brevete from "@aabp/images/formateur-brevete.png";
 import Conseiller from "@aabp/images/formateur-conseiller.png";
 
-const BadgeFormateur = ({filteredFormations}) => {
+import "./badge-formateur.scss";
+
+const BadgeFormateur = ({formation}) => {
     const [badge, setBadge] = useState(false);
 
-    useEffect(() => {
-        setBadge(filteredFormations?.formateurConseiller ? Conseiller : (filteredFormations?.formateurBrevete? Brevete : (filteredFormations?.formateurApprenti ? Apprenti : false)));
-    }, [filteredFormations]);
+    useEffect(() => {   
+        switch(formation) {
+            case "apprenti":
+                setBadge(Apprenti);
+                break;
+            case "brevete":
+                setBadge(Brevete);
+                break;
+            case "conseiller":
+                setBadge(Conseiller);
+                break;
+            default:
+                setBadge(null);
+                break;
+
+        }
+    }, [formation]);
+
+    if(!badge) {
+        return null;
+    }
 
     return (
         <div className="badge-formateur">

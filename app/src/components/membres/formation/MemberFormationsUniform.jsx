@@ -6,6 +6,15 @@ import "./member-formation-uniform.scss";
 
 const MemberFormationsUniform = ({formations}) => {
     const [filteredFormations, setFilteredFormations] = useState({});
+    const [badgeCompetence, setBadgeCompetence] = useState(false);
+    const [badgeFormateur, setBadgeFormateur] = useState(false);
+    const {bc1, bc2, bc3} = filteredFormations;
+
+
+    useEffect(() => {
+        setBadgeCompetence(bc3 ? "bc3" : (bc2? "bc1" : (bc1? "bc1" : false)));
+        setBadgeFormateur(filteredFormations?.formateurConseiller ? "conseiller" : (filteredFormations?.formateurBrevete? "brevete" : (filteredFormations?.formateurApprenti ? "apprenti" : false)));
+    }, [filteredFormations]);
 
     useEffect(() => {
         setFilteredFormations({
@@ -21,8 +30,8 @@ const MemberFormationsUniform = ({formations}) => {
     return (
         <div className="member-formation-uniform">
             <div className="bas-de-manche">
-                <BadgeBrevetCompetence filteredFormations={filteredFormations} />
-                <BadgeFormateur filteredFormations={filteredFormations} />
+                <BadgeBrevetCompetence formation={badgeCompetence} />
+                <BadgeFormateur formation={badgeFormateur} />
             </div>
         </div>
     );
