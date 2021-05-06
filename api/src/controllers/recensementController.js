@@ -1,5 +1,4 @@
 const boom = require('boom');
-const mongoose = require('mongoose');
 const Recensement = require('../models/Recensement');
 const User = require('../models/User');
 const { PermissionTypes } = require('../security/permissionTypes');
@@ -11,7 +10,7 @@ const jwt = require('jsonwebtoken');
 exports.getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
-    const recensement = await Recensement.collection.find({$or: [{unitId: unit}, {unitId: mongoose.Types.ObjectId(unit)}]}).sort({_id: -1}).limit(1)[0];
+    const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
 
     if (recensement) {
       const users = await User.find({_id: {$in: recensement.details.unitMembers}},{ prenom:1, nom:1 }).sort({nom:1})
