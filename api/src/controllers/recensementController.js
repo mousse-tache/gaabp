@@ -101,10 +101,8 @@ exports.addOne = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
       const recensementModel = req.body
-  
-      const rec = await Recensement.insertOne(recensementModel)
-
-      return rec
+      const recensement = new Recensement(recensementModel)
+      return recensement.save()
     } catch (err) {
       throw boom.boomify(err)
     }

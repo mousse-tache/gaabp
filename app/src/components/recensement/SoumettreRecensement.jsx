@@ -85,7 +85,7 @@ date: Date,
             }
             {
                 (!latestRecensement || shouldSubmitNew) && (
-                    <Button variant="contained" color="secondary" onClick={() => SubmitRecensement()} >
+                    <Button variant="contained" color="secondary" onClick={async() => await SubmitRecensement()} >
                         Soumettre un nouveau recensement
                     </Button>
                 )
