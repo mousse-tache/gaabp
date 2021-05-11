@@ -102,9 +102,9 @@ exports.addOne = async (req, reply) => {
     try {
       const recensementModel = req.body
   
-      const recensement = await Recensement.insertOne(recensementModel)
+      const rec = await Recensement.insertOne(recensementModel)
 
-      return recensement
+      return rec
     } catch (err) {
       throw boom.boomify(err)
     }
