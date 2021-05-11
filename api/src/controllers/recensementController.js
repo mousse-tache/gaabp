@@ -104,7 +104,8 @@ exports.addOne = async (req, reply) => {
   
       const recensement = await Recensement.insertOne(recensementModel)
 
-      return recensement
+      const recensement = new Recensement(recensementModel)
+      return recensement.save()
     } catch (err) {
       throw boom.boomify(err)
     }
