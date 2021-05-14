@@ -15,6 +15,8 @@ import UserClient from "@aabp/clients/userClient";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
+import "./membres.scss";
+
 const EditMembre = ({id}) => {
     const { authedUser } = useContext(AppContext);
     const [isFecthingUser, setIsFetchingUser] = useState(true);
