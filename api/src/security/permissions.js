@@ -76,6 +76,7 @@ exports.Permissions = (userJwt, permission) => {
         case PermissionTypes.PayRecensement:
             return (user.isAdmin || isManagementVicepResident());
         case PermissionTypes.FuseUsers:
+        case PermissionTypes.FeatureManagement:
             return user.isAdmin;
         default:
           return false;

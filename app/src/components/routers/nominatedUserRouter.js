@@ -15,6 +15,7 @@ const RecommendFormation = React.lazy(() => import("@aabp/components/formation/r
 const FormationResume = React.lazy(() => import("@aabp/components/formation/components/formationResume"));
 const Home = React.lazy(() => import("@aabp/components/home/Home"));
 const SectionMembre = React.lazy(() => import("@aabp/components/membres/SectionMembre"));
+const Features = React.lazy(() => import("@aabp/components/feature-flagging/Features"));
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
@@ -40,6 +41,7 @@ const NominatedUserRouter = () => {
             <AccueilRessources path="/ressources" />
             {Permissions(PermissionTypes.ViewRecensementSummary, authedUser) && <UnitSection defaultValue={1} path="/recensements" />}
             <SectionMembre defaultValue={1} path="/nominations" />
+            <Features path="/features" />
             <Home default />
         </Router> 
     </SuspenseNoSSR>
