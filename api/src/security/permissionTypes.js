@@ -35,6 +35,9 @@ exports.PermissionTypes = {
     ViewRecensementSummary: "viewRecensements",
 
     // décorations
-    AddDecoration: "addDecoration"
+    AddDecoration: "addDecoration",
+
+    // feature
+    FeatureManagement: "featureManagement"
 
 }

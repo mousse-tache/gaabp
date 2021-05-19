@@ -5,9 +5,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Help from "./Help";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { logout } from "@aabp/login/login";
+import useAuthUser from "@aabp/auth/useAuthUser";
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
 
 const UserMenu = ({username}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const authedUser = useAuthUser();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -38,6 +42,12 @@ const UserMenu = ({username}) => {
                 <MenuItem onClick={handleClose}>
                     <Link to="/app/account">Mon profil</Link>
                 </MenuItem>
+                {
+                    Permissions(PermissionTypes.FeatureManagement, authedUser) && 
+                    <MenuItem onClick={handleClose}>
+                        <Link to="/app/features">Fonctionnalités</Link>
+                    </MenuItem> 
+                }               
                 <MenuItem>
                     <Help />
                 </MenuItem>

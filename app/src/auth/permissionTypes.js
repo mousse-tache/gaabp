@@ -31,7 +31,10 @@ const PermissionTypes = {
     ConfirmFormation: "confirmFormation",
 
     // recensements
-    ViewRecensementSummary: "viewRecensements"
+    ViewRecensementSummary: "viewRecensements",
+
+    // feature
+    FeatureManagement: "featureManagement"
 
 };
 
