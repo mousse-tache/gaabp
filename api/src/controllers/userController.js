@@ -61,7 +61,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
         var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
   
         users = await User.find({$or: 
-          [
+          [          
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
             {nom: {$regex: regex}}
@@ -95,12 +95,10 @@ exports.searchUsers = async (req, reply) => {
   try {
     const { query } = req.body
     var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
-    const users = await User.find({$or: 
-      [
-        {courriel: {$regex: regex}}, 
-        {prenom: {$regex: regex}}, 
-        {nom: {$regex: regex}}
-      ]},{details:0, formations:0})
+    const users = await User.find({ 
+      $text: { $search:  query }
+      },{details:0, formations:0, score: { $meta: "textScore" } })
+      .sort({ score: { $meta: "textScore" } })
     return users
   } catch (err) {
     throw boom.boomify(err)
