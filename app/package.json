@@ -13,6 +13,7 @@
     "@okta/okta-signin-widget": "^5.1.0",
     "core-js": "^3.6.5",
     "d3": "^6.3.0",
+    "eslint": "^7.27.0",
     "eslint-webpack-plugin": "^2.5.4",
     "filefy": "^0.1.10",
     "fontsource-roboto": "^2.1.3",
