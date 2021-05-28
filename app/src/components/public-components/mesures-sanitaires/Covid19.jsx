@@ -36,4 +36,4 @@ const Covid19 = () => (
   </section>
 );
 
-export default Covid19;
+export default React.memo(Covid19);
