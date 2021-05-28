@@ -1,12 +1,12 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
-import getAnneeDeService from "@aabp/utils/anneeService";
+import { getDetailedService } from "@aabp/utils/anneeService";
 
 const AnneesService = ({nominations}) => {
-    var flatYears = getAnneeDeService(nominations);
+    var duration = getDetailedService(nominations);
 
     return (
-        <TextField disabled label="Années de service" variant="outlined" value={flatYears} />
+        <TextField disabled label="Durée du service" variant="outlined" value={duration} />
     );
 };
 
