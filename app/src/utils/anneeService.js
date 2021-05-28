@@ -46,11 +46,40 @@ const getYearsElapsed = (arrayYears) => {
     var yearsElapsed = 0;
 
     arrayYears.forEach(y => {
-        var diff = new Date(y.ed - y.sd);
-        yearsElapsed+= Math.abs(diff.getUTCFullYear() - 1970);
+        var diff = y.ed - y.sd;
+        yearsElapsed+= diff;
     });
 
+    yearsElapsed= Math.abs(new Date(yearsElapsed).getUTCFullYear() - 1970);
     return yearsElapsed;
+};
+
+const getYearsAndDaysElapsed = (arrayYears) => {
+    var yearsElapsed = 0;
+    var daysElapsed = 0;
+
+    arrayYears.forEach(y => {
+        var diff = y.ed - y.sd;
+        yearsElapsed+= diff;
+    });
+
+    yearsElapsed= Math.abs(new Date(yearsElapsed).getUTCFullYear() - 1970);
+
+    arrayYears.forEach(y => {
+        var diff = new Date(y.ed - y.sd);
+        daysElapsed+= Math.abs(diff/(1000*60*60*24));
+    });
+
+    daysElapsed= Math.round(daysElapsed - yearsElapsed*365);
+
+    return `${yearsElapsed} an(s) et ${daysElapsed} jour(s)`;
+};
+
+const getDetailedService = (nominations) => {
+    var sorted = sortNominations(nominations);
+    var fy = getFlattenedYears(sorted);
+
+    return getYearsAndDaysElapsed(fy);
 };
 
 const getAnneeDeService = (nominations) => {
@@ -61,3 +90,7 @@ const getAnneeDeService = (nominations) => {
 };
 
 export default getAnneeDeService;
+
+export {
+    getDetailedService
+};
