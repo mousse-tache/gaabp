@@ -1,0 +1,146 @@
+@import '@aabp/components/sass/theme';
+
+.header {
+    max-width: 100%;
+    margin: auto;
+    padding: .5em;
+    max-height: 15%;
+    box-sizing: border-box;
+    font-size:16px;
+    position:absolute;
+    top:0;
+    width:100%;
+    text-align:center;
+    margin:auto;
+    transition-property: text-shadow, color;
+    transition: all;
+    min-height: 3em;
+    background-color: white;
+    border-bottom: 4px dotted $light;
+    z-index: 49;
+}
+
+header {
+    background-color: white;
+    z-index: 49;
+}
+
+.header img {
+    vertical-align:middle;
+}
+
+.header a {
+    display: inline-block;
+    font-style: normal;
+    text-align: center;
+    color: $dark;
+    text-decoration: none;
+}
+
+.main-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center    
+  }
+
+a, a:visited {
+    text-decoration: none;
+    color: $dark;
+}
+
+a:hover {
+    text-shadow: 0 0 0 2px $primary;
+    color: $primary;
+}
+
+.auth {
+    position: absolute;
+    right: 1%;
+    top: 0%;
+    z-index: 50;
+}
+
+.logo {
+    transition-property: border-style;
+    max-width: 3rem;
+}
+
+.navlink {
+    font-size: larger;
+}
+
+a:active {
+    color: $primary;
+    text-shadow: 0 0 0 2px $primary;
+}
+
+  /* The sticky class is added to the header with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + div {
+    padding-top: 7em;
+  }
+
+.sidebar > div {
+    word-wrap: break-word;
+    max-width: 9rem;
+    overflow-wrap: break-word;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.header-nomination-button:hover { 
+    color:whitesmoke;
+}
+
+.quick-units {
+    max-width: 9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title-list-item {
+    padding-left: .5rem;
+}
+
+.sidebar-logo {
+    padding: .3rem;
+}
+
+.sidebar {
+    width: 9rem;
+}
+
+@media only screen and (max-width: 1100px) {
+    .navlink {
+        font-size: larger;
+        margin-left: 0%;
+    }
+
+    .sticky {
+        position: relative;
+        display: block;
+    }
+
+    .main-header {
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+      }
+
+    .main-header a {
+        max-width: 70%;
+    }
+
+    .headerpublic > div {
+        flex-direction: column;
+    }
+}
