@@ -29,7 +29,7 @@ const ReglementsPage = () => (
           <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Box lineHeight={2}>
-                        <h2 >Règlements de l'Assocation</h2>
+                        <h2 >Règlements de l'Association</h2>
                         <Box lineHeight={2}>
                             <h4>
                             À l'Association des aventuriers de Baden-Powell, les règlements sont soumis au vote à l'Assemblée générale annuelle où tous les membres titulaires sont invités à prendre part.

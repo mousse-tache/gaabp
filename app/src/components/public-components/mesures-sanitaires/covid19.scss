@@ -1,0 +1,9 @@
+@import '@aabp/components/sass/theme';
+
+.covid19 {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    background-color: $light;
+    border: 2px $primary solid;
+    color: $dark;
+}

@@ -1,7 +1,8 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
-import "@aabp/components/header/header.scss";
+
+import "@aabp/components/public-components/header/header.scss";
 import Logo from "@aabp/images/Logo_AABP.png";
 
 const Header = () => (
