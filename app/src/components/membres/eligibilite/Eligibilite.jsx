@@ -1,19 +1,16 @@
-import React, { useContext } from "react";
-
-import AppContext from "@aabp/context/appContext";
+import React from "react";
 
 import {  Paper } from '@material-ui/core';
+import EligibiliteTable from "./EligibiliteTable";
 
 import "./eligibilite.scss";
 
 const Eligibilite = () => {  
-    const { authedUser } = useContext(AppContext);
-
     // select honor / formation, fetch users with matching criterias
     // criteres: annee de service + formations
     return  (
         <Paper>
-            Eligibilité aux honneurs, {authedUser.prenom} 
+            <EligibiliteTable />
         </Paper>
     );
 };
