@@ -51,11 +51,20 @@ exports.getBasicUsers = async (req, reply) => {
 exports.getBasicUsersWithPaging = async (req, reply) => {  
   if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
     try {
-      const {page, pageSize, query} = req.query
+      const {page, pageSize, query, activeOnly} = req.query
       var skip = parseInt(page) > 1 ? parseInt((page-1))*pageSize : 0;
-  
+      var active = activeOnly == "true" ? true : false;
       var users;
       var count;
+
+      var nominationFilter;
+
+      if(active) {
+        nominationFilter = {$elemMatch: {ed: null}};
+      }
+      else {
+        nominationFilter = {$exists: true};
+      }
   
       if(query && query !== "") {
         var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
@@ -65,19 +74,25 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
             {nom: {$regex: regex}}
-          ]     
+          ],
+          "nominations": nominationFilter
         },{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1}).sort({nom:1}).skip(skip).limit(parseInt(pageSize))
         count = await User.find({$or: 
           [
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
             {nom: {$regex: regex}}
-          ]     
+          ],
+          "nominations": nominationFilter
         },{_id:1}).countDocuments()
       }
       else {
-        users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1}).sort({prenom:1}).skip(skip).limit(parseInt(pageSize))
-        count = await User.find({},{_id:1}).countDocuments()
+        users = await User.find({
+          "nominations": nominationFilter
+        },{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1}).sort({prenom:1}).skip(skip).limit(parseInt(pageSize))
+        count = await User.find({
+          "nominations": nominationFilter
+        },{_id:1}).countDocuments()
       }
       return { users, page: parseInt(page), count }
     } catch (err) {

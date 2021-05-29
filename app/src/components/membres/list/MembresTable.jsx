@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
@@ -9,9 +9,15 @@ import { CsvBuilder } from 'filefy';
 import MembreListHeader from './MembreListHeader';
 import BadgeMapper from "@aabp/components/membres/formation/BadgeMapper";
 
+import ToggleOffOutlinedIcon from '@material-ui/icons/ToggleOffOutlined';
+import ToggleOnOutlinedIcon from '@material-ui/icons/ToggleOnOutlined';
+
 import getAnneeDeService from "@aabp/utils/anneeService";
 
 const MembresTable = ({canEdit}) => {
+  const [activeOnly, setActiveOnly] = useState(true);
+  const [init, setInit] = useState(false);
+  const tableRef = useRef();
   const columns = [
       { title:'', field:'nom', filtering: false },
       { title: 'Courriel', field: 'courriel', filtering: false },      
@@ -37,9 +43,9 @@ const MembresTable = ({canEdit}) => {
     const { enqueueSnackbar } = useSnackbar();
     const userClient = new UserClient();
 
-    async function FetchUsers(page, pageSize, query) {
+    async function FetchUsers(page, pageSize, query, status) {
       try {
-          var data = await userClient.getPagedUsers(page, pageSize, query);
+          var data = await userClient.getPagedUsers(page, pageSize, query, status);
           return data;         
       } catch (e) {
           enqueueSnackbar(e.message, {variant: "error"});   
@@ -57,8 +63,18 @@ const MembresTable = ({canEdit}) => {
       .exportFile();
   };
 
+  useEffect(() => {
+    if(init) {
+      tableRef.current.onQueryChange();
+    }
+    else {
+      setInit(true);
+    }
+  }, [activeOnly]);
+
   return (
     <MaterialTable
+      tableRef={tableRef}
       title={<MembreListHeader />}
       localization={{
         toolbar: {
@@ -79,7 +95,7 @@ const MembresTable = ({canEdit}) => {
 
       data={query =>
         new Promise(async(resolve) => {
-          var { users, count, page } = await FetchUsers(query.page+1, query.pageSize, query.search);
+          var { users, count, page } = await FetchUsers(query.page+1, query.pageSize, query.search, activeOnly);
           var filteredUsers = [];
           if(users && users.length > 0) {
             users.forEach(x => {
@@ -100,6 +116,15 @@ const MembresTable = ({canEdit}) => {
             });
         })
       }
+
+      actions={[
+        {
+          icon: activeOnly ? ToggleOnOutlinedIcon : ToggleOffOutlinedIcon,
+          tooltip: 'Filtrer les inactifs',
+          isFreeAction: true,
+          onClick: () => setActiveOnly(!activeOnly) 
+        }
+    ]}
 
       columns={columns}
       onRowClick={(event, rowData) => canEdit ? navigate("/app/membre/"+rowData._id) : null}

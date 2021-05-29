@@ -49,8 +49,8 @@ export class UserClient {
         return this._apiClient.get("users/basic");
     }
 
-    getPagedUsers = (page, pageSize, query) => {
-        return this._apiClient.get(`users/paged?page=${page}&pageSize=${pageSize}&query=${query}`);
+    getPagedUsers = (page, pageSize, query, activeOnly) => {
+        return this._apiClient.get(`users/paged?page=${page}&pageSize=${pageSize}&query=${query}&activeOnly=${activeOnly}`);
     }
 
     getEmailContact = () => {
