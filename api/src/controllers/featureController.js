@@ -10,13 +10,13 @@ exports.getList = async (req, reply) => {
         try {
             var dbFeatures = await Feature.find({})
             var result = Object.keys(Features).map(x => {
-                var f = dbFeatures.find(f => f._id == x)
+                var f = dbFeatures.find(f => f.name == x)
 
-                if(f && f.length > 0) {
-                    return f[0]
+                if(f) {
+                    return f
                 }
 
-              return {_id: x}   
+              return {_id: Features[x], name: x}
             });
 
             return result
@@ -31,13 +31,24 @@ exports.getList = async (req, reply) => {
     }
 }
 
+exports.getActiveFeatures = async (req, reply) => {     
+    try {
+        var dbFeatures = await Feature.find({activated:true})
+
+        return dbFeatures
+    } 
+    catch (err) {
+        throw boom.boomify(err)
+    }
+}
+
 exports.updateFeature = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.FeatureManagement)) { 
     try {
         const { feature } = req.body
 
         if (feature._id) {
-            const update = await Feature.findByIdAndUpdate(feature._id, feature, { new: true });
+            const update = await Feature.findByIdAndUpdate(feature._id, feature, { new: true , upsert: true});
     
             return update;  
         }    
