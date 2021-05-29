@@ -8,6 +8,7 @@ import AppContext from "@aabp/context/appContext";
 import FeatureClient from "@aabp/clients/featureClient";
 
 import "./features.scss";
+import { Switch } from "@material-ui/core";
 
 const Features = () => {
     const { init } = useContext(AppContext);
@@ -16,18 +17,37 @@ const Features = () => {
 
     const columns = 
     [
-      { title: 'Nom', field: '_id' }
+        { title: 'Nom', field: 'name' },
+        { 
+            title: 'Activée',
+            field: 'activated',
+            type: 'boolean'
+        },
+        { 
+            title: '',
+            field: '',
+            render: rowData => <Switch checked={rowData.activated} onChange={() => HandleChangeVisibility(rowData)}
+            />
+        }
     ];
 
+    const HandleChangeVisibility = async(feature) => {
+        var f = {...feature, activated: !feature.activated};
+        
+        await featureClient.save(f);
+
+        getList();
+    };
+
+    const getList = async() => {
+        var data = await featureClient.getList();
+
+        if (data) {
+            setFeatures(data);
+        }
+    };
+
     useEffect(() => {
-        const getList = async() => {
-            var data = await featureClient.getList();
-
-            if (data) {
-                setFeatures(data);
-            }
-        };
-
         getList();
 
     }, []);

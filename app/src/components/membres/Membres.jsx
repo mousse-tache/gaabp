@@ -11,7 +11,6 @@ import MembresTable from "./list/MembresTable";
 import "./membres.scss";
 
 const Membres = () => {  
-    
     const { authedUser } = useContext(AppContext);
 
     return  (

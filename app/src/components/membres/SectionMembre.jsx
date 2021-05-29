@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
+import { isFeatureActivated } from '@aabp/features/useFeatures';
+import Features from "@aabp/features/features";
+
 const Membres = React.lazy(() => import('./Membres'));
 const NominationsOverview = React.lazy(() => import("@aabp/components/nominations/NominationsOverview"));
 
@@ -9,6 +12,7 @@ import SuspenseNoSSR from "../lazy-load/SuspenseNoSSR";
 
 const SectionMembre = ({defaultValue}) => {
     const [value, setValue] = useState(defaultValue);
+    const eligibiteEnabled = isFeatureActivated(Features.EligibiliteHonneurs);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -26,6 +30,9 @@ const SectionMembre = ({defaultValue}) => {
              >
                 <Tab disableRipple component="a" label="Liste des membres" />
                 <Tab disableRipple component="a" label="Nominations" />
+                {
+                    eligibiteEnabled && <Tab disableRipple component="a" label="Éligibilité" />
+                }
             </Tabs>
             <SuspenseNoSSR>
                 {

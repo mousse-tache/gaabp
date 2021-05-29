@@ -9,6 +9,10 @@ export class FeatureClient {
          return this._apiClient.get(`features`);
     }    
 
+    getActiveFeatures = () => {
+        return this._apiClient.get(`activefeatures`);
+    }        
+
     save = (feature) => {
         const data = { feature };
         return this._apiClient.put(`feature`, data);
