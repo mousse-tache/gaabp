@@ -51,6 +51,7 @@ const NominatedUserRouter = () => {
             <AccueilRessources path="/ressources" />
             {Permissions(PermissionTypes.ViewRecensementSummary, authedUser) && <UnitSection defaultValue={1} path="/recensements" />}
             <SectionMembre defaultValue={1} path="/nominations" />
+            <SectionMembre defaultValue={2} path="/eligibilite"/>
             <Features path="/features" />
             <Home default />
         </Router> 

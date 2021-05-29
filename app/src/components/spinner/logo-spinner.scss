@@ -9,7 +9,14 @@
      /* transform: rotate(0.3rad);/ */
      /* transform: rotate(3grad); */ 
      /* transform: rotate(.03turn);  */
+
+     margin: auto;
   }
+
+.logo-spinner-container {
+    margin-top: 5rem;
+    display: flex;
+}
   
   @keyframes spin {
       from {

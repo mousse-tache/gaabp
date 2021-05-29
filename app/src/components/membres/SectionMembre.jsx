@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
-
 import { isFeatureActivated } from '@aabp/features/useFeatures';
 import Features from "@aabp/features/features";
 
 const Membres = React.lazy(() => import('./Membres'));
 const NominationsOverview = React.lazy(() => import("@aabp/components/nominations/NominationsOverview"));
+const Eligibilite = React.lazy(() => import("@aabp/components/membres/eligibilite/Eligibilite"));
 
 import SuspenseNoSSR from "../lazy-load/SuspenseNoSSR";
 
@@ -40,6 +40,9 @@ const SectionMembre = ({defaultValue}) => {
                 }
                 {
                     value === 1 && <NominationsOverview />
+                }
+                {
+                    value === 2 && <Eligibilite />
                 }
             </SuspenseNoSSR>
         </Paper> 

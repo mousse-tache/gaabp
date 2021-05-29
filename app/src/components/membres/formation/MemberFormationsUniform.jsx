@@ -17,13 +17,15 @@ const MemberFormationsUniform = ({formations}) => {
     }, [filteredFormations]);
 
     useEffect(() => {
+        var f = formations.filter(x => x.dateConfirme); 
+
         setFilteredFormations({
-            "bc1": formations.filter(x => x.niveau?.id === "1" || x.niveau?.id === "7" ).length > 0,
-            "bc2": formations.filter(x => x.niveau?.id === "2" || x.niveau?.id === "8" ).length > 0,
-            "bc3": formations.filter(x => x.niveau?.id === "3" || x.niveau?.id === "9" ).length > 0,
-            "formateurApprenti": formations.filter(x => x.niveau?.id === "30").length > 0,
-            "formateurBrevete": formations.filter(x => x.niveau?.id === "32").length > 0,
-            "formateurConseiller": formations.filter(x => x.niveau?.id === "34").length > 0,
+            "bc1": f.filter(x => x.niveau?.id === "1" || x.niveau?.id === "7" ).length > 0,
+            "bc2": f.filter(x => x.niveau?.id === "2" || x.niveau?.id === "8" ).length > 0,
+            "bc3": f.filter(x => x.niveau?.id === "3" || x.niveau?.id === "9" ).length > 0,
+            "formateurApprenti": f.filter(x => x.niveau?.id === "30").length > 0,
+            "formateurBrevete": f.filter(x => x.niveau?.id === "32").length > 0,
+            "formateurConseiller": f.filter(x => x.niveau?.id === "34").length > 0,
         });
     }, [formations]);
 

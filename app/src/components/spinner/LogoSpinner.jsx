@@ -6,9 +6,9 @@ import "./logo-spinner.scss";
 
 const LogoSpinner = () => {
     return (
-        <>
+        <div className="logo-spinner-container" >
             <img className="logo-spinner" src={Logo} alt="Logo AABP spinner"/> 
-        </>
+        </div>
       );
 };
 
