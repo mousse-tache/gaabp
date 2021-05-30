@@ -66,10 +66,11 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
         nominationFilter = {$exists: true};
       }
   
-      if(query && query !== "") {
+      if(query && query.trim() !== "") {
         var regex = new RegExp(".*" + query.trim().replace(" ","|") + "*.", "i")
   
-        users = await User.find({$or: 
+        users = await User.find({          
+          $or: 
           [          
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
@@ -77,7 +78,10 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
             {"formations.niveau.name": {$regex: regex}}
           ],
           "nominations": nominationFilter
-        },{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1}).sort({nom:1}).skip(skip).limit(parseInt(pageSize))
+        },{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1 })
+          .sort({nom:1})
+          .skip(skip)
+          .limit(parseInt(pageSize))
         count = await User.find({$or: 
           [
             {courriel: {$regex: regex}}, 
@@ -111,7 +115,6 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 exports.searchUsers = async (req, reply) => {
   try {
     const { query } = req.body
-    var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
     const users = await User.find({ 
       $text: { $search:  query }
       },{details:0, formations:0, score: { $meta: "textScore" } })

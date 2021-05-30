@@ -41,7 +41,7 @@ exports.initializeSession = async (req, reply) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${Buffer.from("0oa5i1e8aXo6JNxOx4x6").toString('base64')}`
+            'Authorization': `Basic ${Buffer.from(process.env.okta_identity_token).toString('base64')}`
           },
     });
 
