@@ -67,7 +67,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
       }
   
       if(query && query !== "") {
-        var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
+        var regex = new RegExp(".*" + query.trim().replace(" ","|") + "*.", "i")
   
         users = await User.find({$or: 
           [          
