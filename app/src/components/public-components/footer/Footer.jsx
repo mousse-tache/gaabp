@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import "./footer.css";
+import "./footer.scss";
 import Logo from "../../../images/Logo_AABP.png";
 import { Grid } from "@material-ui/core";
 

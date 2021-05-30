@@ -1,10 +1,4 @@
-:root {
-    --primary: #A3233A;
-    --secondary: #EEC72C;
-    --light: #f5e9eb;
-    --medium-light: #d1919c;
-    --dark: #410e17;
-  }
+@import '@aabp/components/sass/theme';
 
   footer div img {
         margin:auto;
@@ -23,7 +17,8 @@
       min-height: 2em;
       margin-bottom: 5em;
       margin-top: 5em;
-      border: 4px dotted var(--light);
+      border-top: 2px solid $primary;
+      border-bottom: 2px solid $primary;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -39,8 +34,8 @@
   }
 
   footer a:hover {
-      text-shadow: 0 0 0 2px var(--primary);
-      color:var(--primary);
+      text-shadow: 0 0 0 2px $primary;
+      color: $primary;
   }
 
   footer div {

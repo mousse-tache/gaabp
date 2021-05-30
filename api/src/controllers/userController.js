@@ -73,7 +73,8 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
           [          
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
-            {nom: {$regex: regex}}
+            {nom: {$regex: regex}},
+            {"formations.niveau.name": {$regex: regex}}
           ],
           "nominations": nominationFilter
         },{_id:1, courriel:1, nom:1, prenom:1, nominations: 1, formations: 1}).sort({nom:1}).skip(skip).limit(parseInt(pageSize))
@@ -81,7 +82,8 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
           [
             {courriel: {$regex: regex}}, 
             {prenom: {$regex: regex}}, 
-            {nom: {$regex: regex}}
+            {nom: {$regex: regex}},
+            {"formations.niveau.name": {$regex: regex}}
           ],
           "nominations": nominationFilter
         },{_id:1}).countDocuments()

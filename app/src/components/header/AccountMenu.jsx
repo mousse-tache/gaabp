@@ -61,4 +61,4 @@ UserMenu.propTypes = {
     username: PropTypes.string
 };
 
-export default UserMenu;
+export default React.memo(UserMenu);

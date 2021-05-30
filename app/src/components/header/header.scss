@@ -16,12 +16,12 @@
     transition: all;
     min-height: 3em;
     background-color: white;
-    border-bottom: 4px dotted $light;
     z-index: 49;
 }
 
 header {
     background-color: white;
+    border-bottom: 2px solid $primary;
     z-index: 49;
 }
 
