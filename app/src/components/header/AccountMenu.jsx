@@ -9,6 +9,8 @@ import useAuthUser from "@aabp/auth/useAuthUser";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
+import "./account-menu.scss";
+
 const UserMenu = ({username}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const authedUser = useAuthUser();
@@ -27,11 +29,14 @@ const UserMenu = ({username}) => {
     };
     
     return (
-        <div className="auth">
-            <span>{username}</span>
-            <IconButton onClick={handleClick} color="primary">
-                <AccountCircleIcon fontSize="large" color="inherit" />
-            </IconButton>
+        <div className="account-menu">
+            <Help />
+            <div>
+                <span>{username}</span>
+                <IconButton onClick={handleClick} color="primary">
+                    <AccountCircleIcon fontSize="large" color="inherit" />
+                </IconButton>
+            </div>
             <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -47,10 +52,7 @@ const UserMenu = ({username}) => {
                     <MenuItem onClick={handleClose}>
                         <Link to="/app/features">Fonctionnalités</Link>
                     </MenuItem> 
-                }               
-                <MenuItem>
-                    <Help />
-                </MenuItem>
+                }          
                 <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
             </Menu>
         </div>

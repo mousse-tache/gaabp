@@ -23,11 +23,6 @@ const UnitRoutes = [
         handler: unitController.getByGroupId
       },
       {
-        method: 'GET',
-        url: '/api/unit/name/:name',
-        handler: unitController.getUnitsByName
-      },  
-      {
         method: 'POST',
         url: '/api/unit',
         handler: unitController.addUnit

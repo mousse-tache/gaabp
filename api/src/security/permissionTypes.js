@@ -5,7 +5,6 @@ exports.PermissionTypes = {
     DeleteUser: "deleteUser",
     ViewUsers: "viewUsers",
     ViewPersonalInfo: "viewPersonalInfo",
-    UpdateDecorations: "updateDecorations",
     FuseUsers: "fuse",
 
     // units
@@ -36,6 +35,7 @@ exports.PermissionTypes = {
 
     // décorations
     AddDecoration: "addDecoration",
+    UpdateDecorations: "updateDecorations",
 
     // feature
     FeatureManagement: "featureManagement"

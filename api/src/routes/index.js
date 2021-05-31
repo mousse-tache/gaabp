@@ -10,6 +10,7 @@ const DecorationsRoutes = require('./decorationsRoutes')
 const ReportingRoutes = require('./reportingRoutes')
 const CampRoutes = require('./campRoutes')
 const FeatureRoutes = require('./featureRoutes')
+const EligibilityRoutes = require('./eligibilityRoutes')
 
 const otherRoutes = [
   {
@@ -48,5 +49,6 @@ var routes = otherRoutes.concat(RecensementRoutes)
               .concat(UnitRoutes)
               .concat(CampRoutes)
               .concat(FeatureRoutes)
+              .concat(EligibilityRoutes)
 
 module.exports = routes

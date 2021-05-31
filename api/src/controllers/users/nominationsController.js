@@ -1,8 +1,8 @@
 const boom = require('boom');
-const DemandeNomination = require('../models/DemandeNomination')
-const User = require('../models/User')
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
+const DemandeNomination = require('../../models/DemandeNomination')
+const User = require('../../models/User')
+const { PermissionTypes } = require('../../security/permissionTypes');
+const { Permissions } = require('../../security/permissions');
 require('dotenv').config()
 
 exports.getByCompletion = async (req, reply) => {

@@ -1,6 +1,6 @@
 // Import our Controllers
-const identityController = require('../controllers/identityController')
-const userController = require('../controllers/userController')
+const identityController = require('../controllers/users/identityController')
+const userController = require('../controllers/users/userController')
 const groupController = require('../controllers/groupController')
 
 const PublicRoutes = [

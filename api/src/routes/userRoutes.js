@@ -1,5 +1,5 @@
 // Import our Controllers
-const userController = require('../controllers/userController')
+const userController = require('../controllers/users/userController')
 
 const UserRoutes = [
       {
@@ -53,11 +53,6 @@ const UserRoutes = [
         handler: userController.getUsersByGroup
       },
       {
-        method: 'GET',
-        url: '/api/user/email/:email',
-        handler: userController.getSingleUserByEmail
-      },  
-      {
         method: 'POST',
         url: '/api/user',
         handler: userController.addUser
@@ -81,11 +76,6 @@ const UserRoutes = [
         method: 'GET',
         url: '/api/users/pendingFormations',
         handler: userController.searchUsersWithPendingFormations
-      },  
-      {
-        method: 'GET',
-        url: '/api/users/formateurs',
-        handler: userController.getFormateurs
       },  
       {
         method: 'POST',

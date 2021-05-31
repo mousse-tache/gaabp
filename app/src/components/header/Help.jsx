@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import { IconButton, Dialog, DialogTitle } from "@material-ui/core";
+import { IconButton, Dialog, DialogTitle, Tooltip } from "@material-ui/core";
 import Bottin from "../bottin/bottin";
 
 const Help = () => {
@@ -9,9 +9,11 @@ const Help = () => {
     return (
         <div>
             <div onClick={() =>setOpen(true)}>
-                Aide <IconButton>
-                    <HelpOutlineIcon fontSize="large" color="primary" />
-                </IconButton>
+                <Tooltip title="Aide">
+                    <IconButton>
+                        <HelpOutlineIcon fontSize="large" color="primary" />
+                    </IconButton>
+                </Tooltip>
             </div>
             <Dialog open={open} onClose={() => {setOpen(false);}}>
                 <DialogTitle>

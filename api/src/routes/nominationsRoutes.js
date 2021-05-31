@@ -1,5 +1,5 @@
 // Import our Controllers
-const nominationsController = require('../controllers/nominationsController')
+const nominationsController = require('../controllers/users/nominationsController')
 
 const NominationsRoutes = [
   {

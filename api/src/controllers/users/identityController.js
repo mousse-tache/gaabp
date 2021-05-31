@@ -1,6 +1,6 @@
 const boom = require('boom')
 const mongoose = require('mongoose')
-const User = require('../models/User')
+const User = require('../../models/User')
 const axios = require("axios")
 require('dotenv').config()
 const jwt = require('jsonwebtoken');

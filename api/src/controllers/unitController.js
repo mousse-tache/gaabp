@@ -58,17 +58,6 @@ exports.getSingleUnit = async (req, reply) => {
   }
 }
 
-// Get single unit by ID
-exports.getUnitsByName = async (req, reply) => {
-  try {
-    const nom = req.params.nom
-    const unit = await Unit.find({nom: /nom/})
-    return unit
-  } catch (err) {
-    throw boom.boomify(err)
-  }
-}
-
 exports.getUnitsById = async (req, reply) => {
   try {
     const ids = req.body

@@ -13,10 +13,6 @@ export class UnitClient {
         return this._apiClient.post("units/ids", ids );
     }
 
-    getUnitsByName = (name) => {
-        return this._apiClient.get(`user/name/${name}`);
-    }
-
     getUnits = () => {
         return this._apiClient.get("units");
     }

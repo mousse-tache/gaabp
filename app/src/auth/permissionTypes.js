@@ -5,7 +5,7 @@ const PermissionTypes = {
     DeleteUser: "deleteUser",
     ViewUsers: "viewUsers",
     ViewPersonalInfo: "viewPersonalInfo",
-    UpdateDecorations: "updateDecorations",
+    FuseUsers: "fuse",
 
     // units
     CreateUnit: "createUnit",
@@ -33,9 +33,12 @@ const PermissionTypes = {
     // recensements
     ViewRecensementSummary: "viewRecensements",
 
+    // décorations
+    AddDecoration: "addDecoration",
+    UpdateDecorations: "updateDecorations",
+
     // feature
     FeatureManagement: "featureManagement"
-
 };
 
 export default PermissionTypes;

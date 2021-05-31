@@ -1,10 +1,10 @@
 const boom = require('boom')
 const mongoose = require('mongoose');
-const User = require('../models/User');
-const Decoration = require('../models/Decoration');
-const DemandeNomination = require('../models/DemandeNomination')
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
+const User = require('../../models/User');
+const Decoration = require('../../models/Decoration');
+const DemandeNomination = require('../../models/DemandeNomination')
+const { PermissionTypes } = require('../../security/permissionTypes');
+const { Permissions } = require('../../security/permissions');
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
@@ -30,7 +30,7 @@ exports.getContacts = async (req, reply) => {
   }
   else {
     reply.code(403)
-    return "Unauthorized"
+    return "Forbidden"
   }  
 }
 
@@ -113,39 +113,41 @@ exports.searchUsers = async (req, reply) => {
 
 // Search in users
 exports.searchUsersWithFormations = async (req, reply) => {
-  try {
-    const { query } = req.body
-    var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
-    const users = await User.find({$or: 
-      [
-        {courriel: {$regex: regex}}, 
-        {prenom: {$regex: regex}}, 
-        {nom: {$regex: regex}}
-      ]},{details:0, nominations:0})
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation)) {
+    try {
+      const { query } = req.body
+      var regex = new RegExp("^" + query.toLowerCase().replace(" ","|"), "i")
+      const users = await User.find({$or: 
+        [
+          {courriel: {$regex: regex}}, 
+          {prenom: {$regex: regex}}, 
+          {nom: {$regex: regex}}
+        ]},{details:0, nominations:0})
+      return users
+    } catch (err) {
+      throw boom.boomify(err)
+    }
   }
+  else {
+    reply.code(403)
+    return "Forbidden"
+  }  
 }
 
 // Search users by formation
 exports.searchUsersWithPendingFormations = async (req, reply) => {
-  try {
-    const users = await User.find({formations: {$elemMatch: {dateConfirme: null, dateRecommende: {$ne: null}}}},{nominations:0,details:0})
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation)) {
+    try {
+      const users = await User.find({formations: {$elemMatch: {dateConfirme: null, dateRecommende: {$ne: null}}}},{nominations:0,details:0})
+      return users
+    } catch (err) {
+      throw boom.boomify(err)
+    }
   }
-}
-
-// Get formateurs
-exports.getFormateurs = async (req, reply) => {
-  try {
-    const users = await User.find({"formations": { $elemMatch: { "niveau.id": {$in: ["32", "34"]}, dateConfirme: {$ne:null}}}},{nominations:0,details:0})
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
-  }
+  else {
+    reply.code(403)
+    return "Forbidden"
+  }  
 }
 
 exports.getUsersByUnit = async (req, reply) => {
@@ -167,7 +169,7 @@ exports.getUsersByUnit = async (req, reply) => {
   }
   else {
     reply.code(403)
-    return "Unauthorized"
+    return "Forbidden"
   }
 }
 
@@ -204,7 +206,7 @@ exports.removeFromUnit = async (req, reply) => {
   }
   else {
     reply.code(403)
-    return "Unauthorized"
+    return "Forbidden"
   }
 }
 
@@ -220,12 +222,18 @@ exports.getUsersByGroup = async (req, reply) => {
 
 // Get single user by ID
 exports.getSingleUser = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const user = await User.find({_id: id},{"details.ramq":0})
-    return user
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
+    try {
+      const id = req.params.id
+      const user = await User.find({_id: id},{"details.ramq":0})
+      return user
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Forbidden"
   }
 }
 
@@ -233,17 +241,6 @@ exports.getMultipleUsers = async (req, reply) => {
   try {
     const ids = req.body
     const user = await User.find({_id: {$in: ids }},{"details":0})
-    return user
-  } catch (err) {
-    throw boom.boomify(err)
-  }
-}
-
-// Get single user by ID
-exports.getSingleUserByEmail = async (req, reply) => {
-  try {
-    const email = req.params.email
-    const user = await User.find({courriel: email},{"details.ramq":0})
     return user
   } catch (err) {
     throw boom.boomify(err)
@@ -269,12 +266,18 @@ exports.addUser = async (req, reply) => {
 
 // Add a new user
 exports.addUsers = async (req, reply) => {
-  try {
-    const userModels = req.body
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
+    try {
+      const userModels = req.body
 
-    return User.insertMany(userModels)
-  } catch (err) {
-    throw boom.boomify(err)
+      return User.insertMany(userModels)
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Forbidden"
   }
 }
 
