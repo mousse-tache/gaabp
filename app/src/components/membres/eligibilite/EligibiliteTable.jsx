@@ -17,9 +17,9 @@ const EligibiliteTable = ({canEdit}) => {
       field:'formations', 
       render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"flex-start", flexWrap:"wrap"}}>
         {
-          row.formations.map((x, i) => {
+          row.formations ? row.formations.map((x, i) => {
             return <BadgeMapper key={i} badgeId={x} />;
-          })
+          }) : ""
         }
       </div>, 
       filtering:false},
