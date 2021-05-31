@@ -16,7 +16,7 @@ exports.getEligibilityByHonor = async (req, reply) => {
       const users = await User.aggregate([
         {$project: {details: 0, isAdmin: 0}},
         {$match: {
-          "nominations": {$elemMatch: {type: "Membre"}}
+          "nominations": {$elemMatch: {type: {$ne: "membre"}}}
         }}
       ]);
       const filteredUsers = []
@@ -24,7 +24,7 @@ exports.getEligibilityByHonor = async (req, reply) => {
           var u = {"_id": x._id, 
           courriel: x.courriel, 
           nom: `${x.prenom} ${x.nom}`,
-          formations: x.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau.id),
+          formations: x.formations && x.formations.filter(x => Boolean(x.dateConfirme)),
           service: getAnneeDeService(x.nominations)
         }
 

@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import AppContext from "@aabp/context/appContext";
 import UnitContextProvider from "@aabp/context/unit/unitContextProvider";
 
-import Layout from "@aabp/components/layout";
+import Layout from "@aabp/components/Layout";
 import LogoSpinner from '@aabp/components/spinner/LogoSpinner';
 import NominatedUserRouter from "@aabp/components/routers/nominatedUserRouter";
 import AnonymousUserRouter from "@aabp/components/routers/anonymousUserRouter";

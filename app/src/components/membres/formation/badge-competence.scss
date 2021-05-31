@@ -1,6 +1,7 @@
     .badge-brevet {
+
         img {
-            max-width: 50%;
+            max-width: 95%;
             margin: auto;
             padding: .2rem;
             vertical-align: middle;
@@ -8,7 +9,7 @@
 
         &--bc1 {
             background-color: rgb(56, 56, 243);
-            max-width: 60%;
+            max-width: 95%;
             margin: auto;
             img {
                 max-width: 100%;
@@ -19,7 +20,7 @@
         }
 
         &--bc3, &--bc2 {
-            max-width: 50%;
+            max-width: 95%;
             margin: auto;
             img {
                 max-width: 100%;

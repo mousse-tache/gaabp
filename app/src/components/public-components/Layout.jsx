@@ -6,7 +6,8 @@ import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
 
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
-import "../layout.css";
+import "fontsource-roboto";
+import "../layout.scss";
 
 const Layout = ({ children }) => {
 

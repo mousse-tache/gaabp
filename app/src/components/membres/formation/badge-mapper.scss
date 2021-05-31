@@ -1,10 +1,13 @@
+@import '@aabp/components/sass/theme';
+
 .badge-mapper {
-    max-width: 80px;
+    max-width: 65px;
     min-width: 5rem;
+    max-height: 80px;
     margin: .1rem;
 
     .buchettes {
-        max-width: 50%;
+        max-width: 95%;
         margin: auto;
         img {
             max-width: 100%;
@@ -12,4 +15,45 @@
             padding: .2rem;
         }
     }
+
+    .badge-contour {
+        &--jaune {
+            max-width: inherit;
+            max-height: inherit;
+            border: 5px solid $yellow;
+            border-radius: 1rem;
+        }
+
+        &--bleue {
+            max-width: inherit;
+            max-height: inherit;
+            border: 5px solid $blue;
+            border-radius: 1rem;
+        }
+
+        &--verte {
+            max-width: inherit;
+            max-height: inherit;
+            border: 5px solid $green;
+            border-radius: 1rem;
+        }
+
+        &--rouge {
+            max-width: inherit;
+            max-height: inherit;
+            border: 5px solid $red;
+            border-radius: 1rem;
+        }
+
+        &--multibranche {
+            max-width: inherit;
+            max-height: inherit;
+            border-top: 5px solid $red;
+            border-right: 5px solid $blue;
+            border-bottom: 5px solid $yellow;
+            border-left: 5px solid $green;
+            border-radius: 1rem;
+        }
+    }
+
 }

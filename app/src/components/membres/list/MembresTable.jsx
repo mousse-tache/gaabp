@@ -23,10 +23,10 @@ const MembresTable = ({canEdit}) => {
       { title: 'Courriel', field: 'courriel', filtering: false },      
       {title:'', 
       field:'formations', 
-      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"flex-start", flexWrap:"wrap"}}>
+      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent: "center", flexWrap:"wrap"}}>
         {
           row.formations.map((x, i) => {
-            return <BadgeMapper key={i} badgeId={x} />;
+            return <BadgeMapper key={i} badgeId={x.niveau.id} branche={x.branche.couleur} />;
           })
         }
       </div>, 
@@ -104,7 +104,7 @@ const MembresTable = ({canEdit}) => {
                 courriel: x.courriel, 
                 nom: `${x.prenom} ${x.nom}`, 
                 statut: (x?.nominations && x.nominations.filter(x => !x.ed).length > 0) ? 1 : 0,
-                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)).map(x => x.niveau?.id ?? x.niveau),
+                formations: x?.formations && x.formations.filter(x => Boolean(x.dateConfirme)),
                 service: getAnneeDeService(x.nominations)
               });
             });

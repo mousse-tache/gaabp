@@ -15,10 +15,10 @@ const EligibiliteTable = ({canEdit}) => {
       { title: 'Courriel', field: 'courriel', filtering: false },      
       {title:'', 
       field:'formations', 
-      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"flex-start", flexWrap:"wrap"}}>
+      render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent: "center", flexWrap:"wrap"}}>
         {
           row.formations ? row.formations.map((x, i) => {
-            return <BadgeMapper key={i} badgeId={x} />;
+            return <BadgeMapper key={i} badgeId={x.niveau.id} branche={x.branche.couleur} />;
           }) : ""
         }
       </div>, 

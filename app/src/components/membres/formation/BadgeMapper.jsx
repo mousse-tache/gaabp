@@ -7,7 +7,7 @@ import BadgeBrevetCompetence from "./BadgeBrevetCompetence";
 
 import "./badge-mapper.scss";
 
-const BadgeMapper = ({badgeId, ...props}) => {
+const BadgeMapper = ({badgeId, branche, ...props}) => {
     const [badge, setBadge] = useState();
 
     useEffect(() => {
@@ -47,7 +47,9 @@ const BadgeMapper = ({badgeId, ...props}) => {
 
     return (
         <div {...props} className={`badge-mapper`}>
-            {badge}
+            <div className={`badge-contour--${branche.toLowerCase()}`}>
+                {badge}
+            </div>
         </div>
     );
 };
