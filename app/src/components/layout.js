@@ -4,7 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
 
 import Header from "./header/Header";
-import "./layout.css";
+import "@fontsource/roboto";
+import "./layout.scss";
 
 const Layout = ({ children, username }) => {
 
