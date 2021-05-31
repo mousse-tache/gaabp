@@ -2,11 +2,6 @@
 const userController = require('../controllers/userController')
 
 const UserRoutes = [
-    {
-        method: 'GET',
-        url: '/api/users',
-        handler: userController.getUsers
-      },
       {
         method: 'GET',
         url: '/api/pendingNominations',
@@ -16,11 +11,6 @@ const UserRoutes = [
         method: 'GET',
         url: '/api/users/exportcontacts',
         handler: userController.getContacts
-      },
-      {
-        method: 'GET',
-        url: '/api/users/basic',
-        handler: userController.getBasicUsers
       },
       {
         method: 'GET',

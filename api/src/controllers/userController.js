@@ -9,16 +9,6 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
 // Get all users
-exports.getUsers = async (req, reply) => {
-  try {
-    const users = await User.find({},{"details.ramq":0})
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
-  }
-}
-
-// Get all users
 exports.getPendingNominationUsers = async (req, reply) => {
   try {
     const users = await User.find({nominations: {$elemMatch: { $or: [{sd: {$gte: new Date("2020-09-01")}}, {sd: null}, {sd: {$exists:false}}], type: {$ne: "Membre"}, "approved": {$ne: true}, "ed": null}}},{"details":0, formations: 0})
@@ -30,22 +20,18 @@ exports.getPendingNominationUsers = async (req, reply) => {
 
 // Get all contactable users
 exports.getContacts = async (req, reply) => {
-  try {
-    const users = await User.find({nominations: {$elemMatch: { type: {$ne: "Membre"}, "ed": null }}},{_id:1, courriel:1, nom:1, prenom:1})
-    return users.map(x => {return { nom: `${x.prenom} ${x.nom}`, courriel: x.courriel}})
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
+    try {
+      const users = await User.find({nominations: {$elemMatch: { type: {$ne: "Membre"}, "ed": null }}},{_id:1, courriel:1, nom:1, prenom:1})
+      return users.map(x => {return { nom: `${x.prenom} ${x.nom}`, courriel: x.courriel}})
+    } catch (err) {
+      throw boom.boomify(err)
+    }
   }
-}
-
-// Get all users
-exports.getBasicUsers = async (req, reply) => {
-  try {
-    const users = await User.find({},{_id:1, courriel:1, nom:1, prenom:1})
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
-  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
+  }  
 }
 
 exports.getBasicUsersWithPaging = async (req, reply) => {  
@@ -163,57 +149,69 @@ exports.getFormateurs = async (req, reply) => {
 }
 
 exports.getUsersByUnit = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const users = await User.aggregate([
-      {$unwind: "$nominations"},
-      {$match: {
-        $or:[{"nominations.unitId": id}, {"nominations.unitId": mongoose.Types.ObjectId(id)}],
-        "nominations.ed": null
-      }}
-    ]);
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
+    try {
+      const id = req.params.id
+      const users = await User.aggregate([
+        {$unwind: "$nominations"},
+        {$match: {
+          $or:[{"nominations.unitId": id}, {"nominations.unitId": mongoose.Types.ObjectId(id)}],
+          "nominations.ed": null
+        }}
+      ]);
 
-    return users
-  } catch (err) {
-    throw boom.boomify(err)
+      return users
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
   }
 }
 
 exports.removeFromUnit = async (req, reply) => {
-  try {    
-    const { userId, unitId, type} = req.body
+  if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
+    try {    
+      const { userId, unitId, type} = req.body
 
-    const update = await User.collection.updateOne({
-      _id: mongoose.Types.ObjectId(userId), 
-      nominations: { 
-        $elemMatch : {
-          $or: [
-            {
-              "unitId": unitId
-            },
-            {
-            "unitId": mongoose.Types.ObjectId(unitId)
-            }
-          ],
-          "ed": null,
-          "type": type}}
-        }, 
-        {
-        $set: {
-          "nominations.$.ed": new Date()
-        }
-      })
+      const update = await User.collection.updateOne({
+        _id: mongoose.Types.ObjectId(userId), 
+        nominations: { 
+          $elemMatch : {
+            $or: [
+              {
+                "unitId": unitId
+              },
+              {
+              "unitId": mongoose.Types.ObjectId(unitId)
+              }
+            ],
+            "ed": null,
+            "type": type}}
+          }, 
+          {
+          $set: {
+            "nominations.$.ed": new Date()
+          }
+        })
 
-    return update
-  } catch (err) {
-    throw boom.boomify(err)
+      return update
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
   }
 }
 
 exports.getUsersByGroup = async (req, reply) => {
   try {
     const id = req.params.id
-    const users = await User.find({"nominations.groupId": id},{"details.ramq":0})
+    const users = await User.find({"nominations.groupId": id},{"details":0})
     return users
   } catch (err) {
     throw boom.boomify(err)
@@ -234,7 +232,7 @@ exports.getSingleUser = async (req, reply) => {
 exports.getMultipleUsers = async (req, reply) => {
   try {
     const ids = req.body
-    const user = await User.find({_id: {$in: ids }},{"details.ramq":0})
+    const user = await User.find({_id: {$in: ids }},{"details":0})
     return user
   } catch (err) {
     throw boom.boomify(err)

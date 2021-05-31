@@ -29,10 +29,6 @@ export class UserClient {
         return this._apiClient.post("identity", {token});
     }
 
-    getUsers = () => {
-        return this._apiClient.get("users");
-    }
-
     searchUsersWithPendingFormations = () => {
         return this._apiClient.get("users/pendingFormations");
     }
@@ -43,10 +39,6 @@ export class UserClient {
 
     searchUsersWithFormations = (query) => {
         return this._apiClient.post("users/formations/search", {query});
-    }
-
-    getBasicUsers = () => {
-        return this._apiClient.get("users/basic");
     }
 
     getPagedUsers = (page, pageSize, query, activeOnly) => {
