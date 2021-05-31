@@ -14,7 +14,10 @@ exports.getEligibilityByHonor = async (req, reply) => {
     try {
       const id = req.params.id
       const users = await User.aggregate([
-        {$project: {details: 0, isAdmin: 0}}
+        {$project: {details: 0, isAdmin: 0}},
+        {$match: {
+          "nominations": {$elemMatch: {type: "Membre"}}
+        }}
       ]);
       const filteredUsers = []
       users.forEach(x => {
