@@ -9,9 +9,16 @@ const mongoose = require('mongoose')
 const routes = require('./routes')
 const PublicRoutes = require('./routes/PublicRoutes')
 
-fastify.register(require('fastify-cors'), { 
-  origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
-})
+if(process.env.dev_env) {
+  fastify.register(require('fastify-cors'), { 
+    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
+  })
+}
+else {
+  fastify.register(require('fastify-cors'), { 
+    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org"]
+  })
+}
 
 const validateAsync = async (token) => {
   jwt.verify(token, process.env.signingsecret).identity
