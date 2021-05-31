@@ -55,7 +55,7 @@ const EligibiliteTable = ({canEdit}) => {
     var f;
 
     if(buchettes) {
-      f = data.filter(x => x.service >= 5 && x.formations.filter(u => u.niveau.id == "8").length > 0).map(x => {return {...x, honor: "Bûchettes"};});
+      f = data.filter(x => x.service >= 5 && x.formations && x.formations.filter(u => u.niveau.id == "8").length > 0).map(x => {return {...x, honor: "Bûchettes"};});
       users = users.concat(f);
     }
 
