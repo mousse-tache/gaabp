@@ -1,18 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
-import EligibilityClient from '@aabp/clients/eligibilityClient';
 import { useSnackbar } from 'notistack';
+
+import EligibilityClient from '@aabp/clients/eligibilityClient';
+import EligibliteContext from "@aabp/context/eligibiliteContext";
 
 import BadgeMapper from "@aabp/components/membres/formation/BadgeMapper";
 
 const EligibiliteTable = ({canEdit}) => {
+  const honors = useContext(EligibliteContext);
   const [init, setInit] = useState(false);
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const tableRef = useRef();
   const columns = [
       { title:'', field:'nom', filtering: false },
-      { title: 'Courriel', field: 'courriel', filtering: false },      
+      { title: 'Courriel', field: 'courriel', filtering: false },  
+      { title: 'Éligible pour', field: 'honor', filtering: false },      
       {title:'', 
       field:'formations', 
       render: row => <div style={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent: "center", flexWrap:"wrap"}}>
@@ -44,6 +49,30 @@ const EligibiliteTable = ({canEdit}) => {
   }, []);
 
   useEffect(() => {
+    const { buchettes, provalore } = honors;
+
+    var users = [];
+    var f;
+
+    if(buchettes) {
+      f = data.filter(x => x.service >= 5 && x.formations.filter(u => u.niveau.id == "8").length > 0).map(x => {return {...x, honor: "Bûchettes"};});
+      users = users.concat(f);
+    }
+
+    if(provalore) {
+      f = data.filter(x => x.service >= 15);
+      users = users.concat(f);
+    }
+
+    if(!(buchettes || provalore)) {
+      setFilteredData(data);
+    }    
+    else {
+      setFilteredData(users);
+    }
+  }, [honors, data]);
+
+  useEffect(() => {
     if(init) {
       tableRef.current.onQueryChange();
     }
@@ -72,7 +101,7 @@ const EligibiliteTable = ({canEdit}) => {
         }
       }
 
-      data={data}
+      data={filteredData}
 
       columns={columns}
       onRowClick={(event, rowData) => canEdit ? navigate("/app/membre/"+rowData._id) : null}

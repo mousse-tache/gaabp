@@ -7,4 +7,4 @@ const useAuthUser = () => {
     return authedUser;
 };
 
-export default  useAuthUser;
+export default useAuthUser;

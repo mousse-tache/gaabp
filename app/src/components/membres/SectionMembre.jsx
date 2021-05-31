@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
+
 import { isFeatureActivated } from '@aabp/features/useFeatures';
 import Features from "@aabp/features/features";
+
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import useAuthUser from "@aabp/auth/useAuthUser";
 
 const Membres = React.lazy(() => import('./Membres'));
 const NominationsOverview = React.lazy(() => import("@aabp/components/nominations/NominationsOverview"));
@@ -11,6 +16,7 @@ const Eligibilite = React.lazy(() => import("@aabp/components/membres/eligibilit
 import SuspenseNoSSR from "../lazy-load/SuspenseNoSSR";
 
 const SectionMembre = ({defaultValue}) => {
+    const authedUser = useAuthUser();
     const [value, setValue] = useState(defaultValue);
     const eligibiteEnabled = isFeatureActivated(Features.EligibiliteHonneurs);
 
@@ -31,7 +37,7 @@ const SectionMembre = ({defaultValue}) => {
                 <Tab disableRipple component="a" label="Liste des membres" />
                 <Tab disableRipple component="a" label="Nominations" />
                 {
-                    eligibiteEnabled && <Tab disableRipple component="a" label="Éligibilité" />
+                    eligibiteEnabled && Permissions(PermissionTypes.AddDecoration, authedUser) && <Tab disableRipple component="a" label="Éligibilité" />
                 }
             </Tabs>
             <SuspenseNoSSR>

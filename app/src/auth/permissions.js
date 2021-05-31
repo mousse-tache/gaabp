@@ -69,6 +69,8 @@ const Permissions = (permission, authedUser = null, unitId = null) => {
             return (authedUser.isAdmin || isBranchCommissionner() || isGeneralCommissionner());
         case PermissionTypes.PayRecensement:
             return (authedUser.isAdmin || isManagementVicepResident());
+        case PermissionTypes.AddDecoration:
+            return (authedUser.isAdmin || isManagementVicepResident() || isGeneralCommissionner());
         case PermissionTypes.FeatureManagement:
             return authedUser.isAdmin;
         default:
