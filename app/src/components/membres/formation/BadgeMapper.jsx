@@ -16,21 +16,21 @@ const BadgeMapper = ({badgeId, branche, ...props}) => {
             //CEP 1, BC1
             case "1":
             case "7":
-                setBadge(<BadgeBrevetCompetence formation="bc1" />);
+                setBadge(<BadgeBrevetCompetence className={`badge-contour--${branche.toLowerCase()}`} formation="bc1" />);
                 break;
             //CEP 2, BC2
             case "2":
             case "8":
-                setBadge(<BadgeBrevetCompetence formation="bc2" />);
+                setBadge(<BadgeBrevetCompetence className={`badge-contour--${branche.toLowerCase()}`} formation="bc2" />);
                 break;
             //CEP 3, BC3
             case "3":
             case "9":
-                setBadge(<BadgeBrevetCompetence formation="bc3" />);
+                setBadge(<BadgeBrevetCompetence className={`badge-contour--${branche.toLowerCase()}`} formation="bc3" />);
                 break; 
             case "4":
                 setBadge(
-                    <BaseBadge style={BadgeStyles.Squared} className="buchettes">
+                    <BaseBadge style={BadgeStyles.Squared} className={`buchettes badge-contour--${branche.toLowerCase()}`}>
                         <img src={Buchettes} aria-label={`badge-de-competence`} />
                     </BaseBadge>
                 );
@@ -46,10 +46,8 @@ const BadgeMapper = ({badgeId, branche, ...props}) => {
     }
 
     return (
-        <div {...props} className={`badge-mapper`}>
-            <div className={`badge-contour--${branche.toLowerCase()}`}>
-                {badge}
-            </div>
+        <div {...props} className={`badge-mapper`}>    
+            {badge}
         </div>
     );
 };

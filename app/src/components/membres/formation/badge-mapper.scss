@@ -21,28 +21,24 @@
             max-width: inherit;
             max-height: inherit;
             border: 5px solid $yellow;
-            border-radius: 1rem;
         }
 
         &--bleue {
             max-width: inherit;
             max-height: inherit;
             border: 5px solid $blue;
-            border-radius: 1rem;
         }
 
         &--verte {
             max-width: inherit;
             max-height: inherit;
             border: 5px solid $green;
-            border-radius: 1rem;
         }
 
         &--rouge {
             max-width: inherit;
             max-height: inherit;
             border: 5px solid $red;
-            border-radius: 1rem;
         }
 
         &--multibranche {
@@ -52,8 +48,6 @@
             border-right: 5px solid $blue;
             border-bottom: 5px solid $yellow;
             border-left: 5px solid $green;
-            border-radius: 1rem;
         }
     }
-
 }

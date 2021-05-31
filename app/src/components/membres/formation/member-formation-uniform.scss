@@ -9,4 +9,8 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column-reverse;
+
+    .badge-brevet--bc1, .badge-brevet--bc3 {
+        max-width: 100px;
+    }
 }

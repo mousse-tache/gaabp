@@ -7,7 +7,7 @@ import BaseBadge, { BadgeStyles } from "@aabp/components/badge/BaseBadge";
 
 import "./badge-competence.scss";
 
-const BadgeBrevetCompetence = ({formation}) => {
+const BadgeBrevetCompetence = ({formation, className}) => {
     const [badge, setBadge] = useState(false);
     const [badgeClass, setBadgeClass] = useState("");
 
@@ -35,7 +35,7 @@ const BadgeBrevetCompetence = ({formation}) => {
     }
 
     return (
-        <BaseBadge style={BadgeStyles.Rounded} className={`badge-brevet--${badgeClass}`}>
+        <BaseBadge style={BadgeStyles.Rounded} className={`badge-brevet--${badgeClass} ${className}`}>
             <img src={badge} aria-label={`badge-de-competence`} />
         </BaseBadge>
     );
