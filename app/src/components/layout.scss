@@ -1,12 +1,4 @@
-:root {
-  --primary: #A3233A;
-  --secondary: #EEC72C;
-  --tertiary: #262F54;
-  --highlight: #8AD0BD;
-  --light: #f5e9eb;
-  --medium-light: #d1919c;
-  --dark: #410e17;
-}
+@import '@aabp/components/sass/theme';
 
 html {
   font-family: Roboto, sans-serif;
@@ -106,6 +98,7 @@ section {
   margin-top: 1em;
   margin-bottom: 1em;
   padding:1em;
+  transition: width 2s;
 }
 
 .branchecard:hover {
@@ -121,23 +114,23 @@ section {
 }
 
 .bleu {
-  border: solid 3px blue;
+  border: solid 3px $blue;
 }
 
 .rouge {
-  border: solid 3px var(--primary);
+  border: solid 3px $red;
 }
 
 .jaune {
-  border: solid 3px var(--secondary);
+  border: solid 3px $yellow;
 }
 
 .vert {
-  border: solid 3px green;
+  border: solid 3px $green;
 }
 
 .bleu-marine {
-  border: solid 3px var(--tertiary);
+  border: solid 3px $marine-blue;
 }
 
 .formation-recommender-card {
