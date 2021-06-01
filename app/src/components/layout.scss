@@ -166,12 +166,31 @@ form {
 
 .title-container {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 
-.title-container > img {
-  max-width: 100px;
-  margin: auto;
+  .title-asso-logo {
+    margin: 1rem;
+    max-width: 30%;
+  }
+
+  .title-image {
+    border-radius: 5rem;
+    background-color: $primary;
+    padding: 1rem;
+    margin: 1rem;
+    width: 500px;
+
+    img {
+      width: inherit;
+      margin: auto;
+      border-left: 1rem solid $dark;
+      border-top: 1rem solid $secondary;
+      border-radius: .5rem;
+    }
+  }
 }
 
 .wrapper {

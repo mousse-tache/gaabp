@@ -29,12 +29,16 @@ const LandingPage = () => {
     return (
         <>
             <section name="home" className="sitename anchor">
-              <Typography className="title-container" variant="h4" gutterBottom> 
-                <img className="morelinks hidden-logo" src={Logo} alt="Logo AABP"/>
-                <span>Association des aventuriers de Baden-Powell</span>
+              <Typography className="title-container full-bleed" variant="h3" gutterBottom> 
+                <div className="title-asso-logo">
+                    <img className="morelinks hidden-logo" width="80" src={Logo} alt="Logo AABP"/>
+                    <div>
+                        <span>Association des aventuriers de Baden-Powell</span> 
+                    </div>
+                </div>   
+                <ImageCarousel />
               </Typography>
             <Covid19 />
-            <ImageCarousel />
             </section>
             <About/>
             <Inscrire />
