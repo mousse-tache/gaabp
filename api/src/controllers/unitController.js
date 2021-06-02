@@ -4,6 +4,10 @@ const boom = require('boom')
 // Get Data Models
 const Unit = require('../models/Unit')
 
+const { PermissionTypes } = require('../security/permissionTypes');
+const { Permissions } = require('../security/permissions');
+require('dotenv').config();
+
 // Get all units
 exports.getUnits = async (req, reply) => {
   try {
@@ -70,39 +74,57 @@ exports.getUnitsById = async (req, reply) => {
 
 // Add a new unit
 exports.addUnit = async (req, reply) => {
-  try {
-    const unitModel = req.body
+  if(Permissions(req.headers.authorization, PermissionTypes.CreateUnit)) { 
+    try {
+      const unitModel = req.body
 
-    const unit = new Unit(
-    {
-      ...unitModel
-    })
-    return unit.save()
-  } catch (err) {
-    throw boom.boomify(err)
+      const unit = new Unit(
+      {
+        ...unitModel
+      })
+      return unit.save()
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
   }
 }
 
 // Update an existing unit
 exports.updateUnit = async (req, reply) => {
-  try {
-    const unit = req.body
-    const id = unit.id
-    const { ...updateData } = unit
-    const update = await Unit.findByIdAndUpdate(id, updateData, { new: true })
-    return update
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.UpdateUnit)) { 
+    try {
+      const unit = req.body
+      const id = unit.id
+      const { ...updateData } = unit
+      const update = await Unit.findByIdAndUpdate(id, updateData, { new: true })
+      return update
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
   }
 }
 
 // Delete a unit
 exports.deleteUnit = async (req, reply) => {
-  try {
-    const id = req.params.id
-    const unit = await Unit.findByIdAndRemove(id)
-    return unit
-  } catch (err) {
-    throw boom.boomify(err)
+  if(Permissions(req.headers.authorization, PermissionTypes.DeleteUnit)) { 
+    try {
+      const id = req.params.id
+      const unit = await Unit.findByIdAndRemove(id)
+      return unit
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
   }
 }
