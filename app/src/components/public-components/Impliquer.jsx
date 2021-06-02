@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContent, Typography, Box, Button } from "@material-ui/core";
+import { Typography, Box, Button } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 
 const Impliquer = () => {  
@@ -9,7 +9,7 @@ const Impliquer = () => {
       <Helmet><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /></Helmet> 
       <div className="break" id="impliquer"></div>
       <div className="wrapper">
-        <CardContent>
+        <div>
           <Typography variant="h4">S'impliquer</Typography>
           <Typography>
             <Box component="span" lineHeight={2.5}>  
@@ -27,7 +27,7 @@ const Impliquer = () => {
               </a>              
             </Box>
           </Typography>          
-        </CardContent>
+        </div>
       </div>      
     </section>
   );

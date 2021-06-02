@@ -10,7 +10,7 @@ const ImageCarousel = () => {
  
     return (
         <div className="title-image">
-            <img src={item.src} width="600" alt={item.description} loading="lazy" key={item.key} />
+            <img src={item.src} width="600" height="338" alt={item.description} loading="lazy" key={item.key} />
         </div>
     );
 };
