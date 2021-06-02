@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { Skeleton } from "@material-ui/lab";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import Profile from "@aabp/components/profile/profile";
 import GlobalReport from "@aabp/components/home/globalReport/GlobalReport";

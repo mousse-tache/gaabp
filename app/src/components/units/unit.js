@@ -5,7 +5,7 @@ import { Paper, Button, Fab, Modal, MenuItem, TextField } from '@material-ui/cor
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import Loading from "../loading/loading";
 import UnitTable from "./unitTable";

@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import { Tabs, Tab } from '@material-ui/core';
 import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 import UnitContext from "@aabp/context/unit/unitContext";
 
 import Permissions from "@aabp/auth/permissions";

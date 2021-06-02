@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
 import Loading from "@aabp/components/loading/loading";

@@ -5,7 +5,7 @@ import { Button, Typography, MenuItem, TextField, Accordion, AccordionSummary, A
 import { Autocomplete } from "@material-ui/lab";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 import UnitContext from "@aabp/context/unit/unitContext";
 
 import Permissions from "@aabp/auth/permissions";

@@ -5,7 +5,7 @@ import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import Branches from "@aabp/utils/branches";
 import Formations from "@aabp/utils/formations";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const NewFormationForm = ({setSelectUser, selectUser, queriedUsers, setQuery, formation, setFormation, addFormation}) => {
     const { authedUser } = useContext(AppContext);

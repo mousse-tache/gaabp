@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { navigate } from "gatsby";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import { Checkbox } from "@material-ui/core";
 import MaterialTable from "material-table";
+import { useSnackbar } from 'notistack';
+
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
@@ -17,6 +19,8 @@ const RecensementOverview = () => {
     const recensementClient = new RecensementClient();
     const [paid, setPaid] = useState(false);
 
+    const { enqueueSnackbar } = useSnackbar();
+
     const cols = [
         { title:"Unité", field:'unit.nom'},
         { title: 'Date de soumission du recensement', field: 'date' },
@@ -28,6 +32,11 @@ const RecensementOverview = () => {
         await recensementClient.updateRecensement({...recensement, paiementComplet: true, datePaiement: new Date()});
         window.location.reload();
     };
+
+    const updateRecensement = async(recensement) => {
+        await recensementClient.updateRecensement({...recensement, paiementComplet: recensement.paiementComplet == "Oui"});
+        await FetchRecensements();
+    };    
 
     const removeRecensement = async(recensement) => {
         await recensementClient.removeRecensement(recensement);
@@ -80,6 +89,21 @@ const RecensementOverview = () => {
                         exportAllData: true
                         }
                     }
+                    
+                    editable={{
+                        isEditable: () => Permissions(PermissionTypes.ViewRecensementSummary, authedUser),
+                        isEditHidden: () => !Permissions(PermissionTypes.ViewRecensementSummary, authedUser),
+                        onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
+                        onRowUpdate: (newData) =>
+                        new Promise((resolve) => {
+                                setTimeout(() => {
+                                    updateRecensement(newData);
+                                    resolve();
+                            }, 1000);                
+                        })
+                    }}
+
+
                     actions={[
                         rowData => ({
                             icon: 'payment',

@@ -7,7 +7,7 @@ import MotivationStep from "./steps/MotivationStep";
 import NominationContext from "@aabp/context/nominationContext";
 import { NominationClient } from "@aabp/clients/nominationClient";
 import FinalStep from "./steps/FinalStep";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const steps = [
     "Choisir une nomination", "Antécédents judiciaires", "Serment des chefs", "Motivations et recommandations"

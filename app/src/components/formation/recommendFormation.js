@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useSnackbar } from 'notistack';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import Loading from "../loading/loading";
 import { Paper, Typography, Card } from '@material-ui/core';

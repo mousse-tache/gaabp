@@ -11,7 +11,7 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 
 import "./account-menu.scss";
 
-const UserMenu = ({username}) => {
+const UserMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const authedUser = useAuthUser();
 
@@ -32,7 +32,7 @@ const UserMenu = ({username}) => {
         <div className="account-menu">
             <Help />
             <div>
-                <span>{username}</span>
+                <span>{`${authedUser?.prenom}`}</span>
                 <IconButton onClick={handleClick} color="primary">
                     <AccountCircleIcon fontSize="large" color="inherit" />
                 </IconButton>

@@ -4,7 +4,7 @@ import { List, ListItem } from "@material-ui/core";
 
 import GroupClient from "@aabp/clients/groupClient";
 import UnitClient from "@aabp/clients/unitClient";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const QuickUnits = () => {
     const { authedUser } = useContext(AppContext);

@@ -12,7 +12,7 @@ import { Badge, Button, List, ListItem, ListItemText, Typography } from '@materi
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import NouvelleNomination from '@aabp/components/nominations/nouvelle-nomination/NouvelleNomination';
-import AppContext from '@aabp/context/appContext';
+import AppContext from '@aabp/context/app/appContext';
 
 const Sidebar = ({open, setOpen}) => {
   const { authedUser } = useContext(AppContext);

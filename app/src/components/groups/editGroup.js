@@ -16,7 +16,7 @@ import UserClient from "@aabp/clients/userClient";
 import GroupMembresTable from "./groupMembersTable";
 import NominationTypes from "@aabp/utils/nominationTypes";
 //import GeoClient from "@aabp/clients/geoClient";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const EditGroup = ({id}) => {
     const { authedUser } = useContext(AppContext);

@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { Input, Button } from "@material-ui/core";
 import NominationClient from "@aabp/clients/nominationClient";
 import { useSnackbar } from "notistack";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const NominationRecommendation = ({approver, index, complete, nomination}) => {
     const { authedUser } = useContext(AppContext);

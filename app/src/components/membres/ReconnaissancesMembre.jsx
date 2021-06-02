@@ -7,7 +7,7 @@ import Decorations from "@aabp/utils/decorations";
 
 import { CardContent, MenuItem, TextField } from '@material-ui/core';
 import MaterialTable from "material-table";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const ReconnaissancesMembre = () => {
     const { member } = useContext(UserContext);

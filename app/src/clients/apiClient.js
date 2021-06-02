@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 let onSendingRequest = null;
 

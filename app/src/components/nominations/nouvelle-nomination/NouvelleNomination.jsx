@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import NominationContext from "@aabp/context/nominationContext";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import { Tooltip, Button, Dialog } from "@material-ui/core";
 import NominationStepper from "./NominationStepper";

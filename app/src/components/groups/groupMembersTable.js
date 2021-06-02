@@ -6,7 +6,7 @@ import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import NominationTypes from "@aabp/utils/nominationTypes";
-import AppContext from '@aabp/context/appContext';
+import AppContext from '@aabp/context/app/appContext';
 
 const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
   const { authedUser } = useContext(AppContext);

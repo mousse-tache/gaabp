@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Skeleton } from "@material-ui/lab";
 import MaterialTable from "material-table";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import FeatureClient from "@aabp/clients/featureClient";
 

@@ -7,7 +7,7 @@ import Header from "./header/Header";
 import "fontsource-roboto";
 import "./layout.scss";
 
-const Layout = ({ children, username }) => {
+const Layout = ({ children }) => {
 
   const theme = createMuiTheme({
     palette: {
@@ -43,7 +43,7 @@ const Layout = ({ children, username }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header username={username} siteTitle={"Section membres"} />
+      <Header siteTitle={"Section membres"} />
       <CssBaseline />
       <div>
         <main className="main-container">{children}</main>

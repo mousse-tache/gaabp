@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import UserClient from "@aabp/clients/userClient";
 import Permissions from "@aabp/auth/permissions";

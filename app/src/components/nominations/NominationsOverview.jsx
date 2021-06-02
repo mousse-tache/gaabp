@@ -13,7 +13,7 @@ import UserClient from "../../clients/userClient";
 import NominationRowDetail from "./components/NominationRowDetail";
 import "./nominations.css";
 import { Checkbox } from "@material-ui/core";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const dateFromObjectId = (objectId) => {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);

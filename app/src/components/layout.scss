@@ -177,8 +177,6 @@ form {
   }
 
   .title-image {
-    border-radius: 5rem;
-    background-color: $primary;
     padding: 1rem;
     margin: 1rem;
     width: 500px;
@@ -186,7 +184,7 @@ form {
     img {
       width: inherit;
       margin: auto;
-      border-left: 1rem solid $dark;
+      border-left: 1rem solid $primary;
       border-top: 1rem solid $secondary;
       border-radius: .5rem;
     }

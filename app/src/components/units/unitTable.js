@@ -3,7 +3,7 @@ import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import Permissions from '@aabp/auth/permissions';
 import PermissionTypes from '@aabp/auth/permissionTypes';

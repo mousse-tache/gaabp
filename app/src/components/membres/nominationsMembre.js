@@ -6,7 +6,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 
 import UserContext from "@aabp/context/userContext";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import GroupClient from "@aabp/clients/groupClient";

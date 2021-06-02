@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Router } from "@reach/router";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const Profile = React.lazy(() => import("@aabp/components/profile/profile"));
 const EditMembre = React.lazy(() => import("@aabp/components/membres/editMembre"));

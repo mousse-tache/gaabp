@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Logo from "@aabp/images/Logo_AABP.png";
 import "./header.scss";
 
-const Header = ({ username }) => {
+const Header = () => {
   const MenuButton = () => {
     return (
       <Button
@@ -31,7 +31,7 @@ const Header = ({ username }) => {
         color="inherit">
           <Toolbar>
             {!open && <MenuButton /> }
-            <UserMenu username={username} />
+            <UserMenu />
           </Toolbar>
       </AppBar>
     </header>

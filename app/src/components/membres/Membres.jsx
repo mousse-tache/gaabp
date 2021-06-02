@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 import {  Paper } from '@material-ui/core';
 import Permissions from "@aabp/auth/permissions";

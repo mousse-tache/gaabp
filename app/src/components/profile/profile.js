@@ -6,7 +6,7 @@ import { navigate } from "gatsby";
 import { Alert, Skeleton } from "@material-ui/lab";
 import { Paper } from '@material-ui/core';
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
 import UserClient from "@aabp/clients/userClient";

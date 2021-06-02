@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import FeatureClient from "@aabp/clients/featureClient";
 
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const isFeatureActivated = (feature) => {
     var { features } = useContext(AppContext);

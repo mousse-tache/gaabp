@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Switch, FormControlLabel, TextField, Button } from '@material-ui/core';
 import AnneesService from "./anneesService";
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
 import MemberFormationsUniform from "./formation/MemberFormationsUniform";

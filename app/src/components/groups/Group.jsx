@@ -8,7 +8,7 @@ import GroupTable from "./groupTable";
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 import { useSnackbar } from 'notistack';
-import AppContext from "@aabp/context/appContext";
+import AppContext from "@aabp/context/app/appContext";
 
 const Group = () => {
     const { authedUser } = useContext(AppContext);
