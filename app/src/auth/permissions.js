@@ -72,6 +72,7 @@ const Permissions = (permission, authedUser = null, unitId = null) => {
         case PermissionTypes.AddDecoration:
             return (authedUser.isAdmin || isManagementVicepResident() || isGeneralCommissionner());
         case PermissionTypes.FeatureManagement:
+        case PermissionTypes.DeleteUnit:
             return authedUser.isAdmin;
         default:
           return false;

@@ -15,6 +15,7 @@ import UnitDetails from "./unitDetails";
 import Loading from "../loading/loading";
 import UnitRecensementTab from "./tabs/unitRecensementTab";
 import CampTab from "./tabs/CampTab";
+import DeleteUnit from "./delete-unit/DeleteUnit";
 
 import UnitClient from "@aabp/clients/unitClient";
 
@@ -57,12 +58,16 @@ const EditUnit = ({id}) => {
 
     return  (
     <Paper className="unit">
-        <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-            <Link color="inherit" to="/app/unites">
-                Unités
-            </Link>
-            <Typography color="textPrimary">{`${unit.nom}`}</Typography>
-        </Breadcrumbs>
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+            <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+                <Link color="inherit" to="/app/unites">
+                    Unités
+                </Link>
+                <Typography color="textPrimary">{`${unit.nom}`}</Typography>
+            </Breadcrumbs>
+            {Permissions(PermissionTypes.DeleteUnit, authedUser, id) && 
+            <DeleteUnit />}
+        </div>
         <div>
             <Tabs 
             value={tab}

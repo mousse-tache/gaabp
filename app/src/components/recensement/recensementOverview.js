@@ -22,10 +22,10 @@ const RecensementOverview = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const cols = [
-        { title:"Unité", field:'unit.nom'},
-        { title: 'Date de soumission du recensement', field: 'date' },
+        { title:"Unité", field:'unit.nom', editable:false},
+        { title: 'Date de soumission du recensement', field: 'date', editable:false },
         { title: 'Coût total', field: 'details.cost.totalPrice', render: row => `${row.details.cost.totalPrice}$`},
-        { title: 'Paiement complété', field: 'paiementComplet' }
+        { title: 'Paiement complété', field: 'paiementComplet', type: 'boolean' }
       ];
 
     const confirmPaiement = async(recensement) => {
@@ -34,7 +34,7 @@ const RecensementOverview = () => {
     };
 
     const updateRecensement = async(recensement) => {
-        await recensementClient.updateRecensement({...recensement, paiementComplet: recensement.paiementComplet == "Oui"});
+        await recensementClient.updateRecensement({...recensement});
         await FetchRecensements();
     };    
 
@@ -46,9 +46,7 @@ const RecensementOverview = () => {
     const FetchRecensements = async() => {
         try {
             var data = await recensementClient.getByPayment(paid);
-            setRecensements(data.map(x => {
-                return {...x, paiementComplet: paid ? "Oui" : "Non"};
-            }));
+            setRecensements(data);
         } catch (error) {
             console.log(error);
         }
@@ -81,12 +79,12 @@ const RecensementOverview = () => {
                     }}
                     options={
                         {
-                        pageSize: 10,
-                        headerStyle: {
-                            zIndex: 8
-                        },
-                        exportButton: true,
-                        exportAllData: true
+                            pageSize: 10,
+                            headerStyle: {
+                                zIndex: 8
+                            },
+                            exportButton: true,
+                            exportAllData: true
                         }
                     }
                     
@@ -102,7 +100,6 @@ const RecensementOverview = () => {
                             }, 1000);                
                         })
                     }}
-
 
                     actions={[
                         rowData => ({

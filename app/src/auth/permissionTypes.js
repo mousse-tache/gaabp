@@ -11,6 +11,7 @@ const PermissionTypes = {
     CreateUnit: "createUnit",
     UpdateUnit: "updateUnit",
     DeactivateUnit: "deactivateUnit",
+    DeleteUnit: "deleteUnit",
     SubmitRecensement: "submitRecensement",
     PayRecensement: "payRecensement",
     SubmitCamp: "submitCamp",

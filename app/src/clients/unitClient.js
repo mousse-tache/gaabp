@@ -30,7 +30,7 @@ export class UnitClient {
     }
 
     deleteUnit = (id) => {
-        return this._apiClient.delete("unit", { id });
+        return this._apiClient.delete(`unit/${id}`);
     }
 
 }    
