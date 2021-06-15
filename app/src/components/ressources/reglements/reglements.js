@@ -13,9 +13,14 @@ import r9 from "@aabp/docs/Règlement spécifique 09 - Recensement et cotisation
 import r10 from "@aabp/docs/Règlement spécifique 10 - Programme d'aide aux nouvelles unités.pdf";
 import r11 from "@aabp/docs/Règlement spécifique 11 - Code de procédure.pdf";
 
+import camp from "@aabp/docs/Demande-de-permis-de-camp.pdf";
+
 const Reglements = () => {
     return (
         <List>
+            <ListItem>
+                <a href={camp} target="_blank" rel="noopener noreferrer">Demande de permis de camper</a>
+            </ListItem>
             <ListItem>
                 <a href={Rules} target="_blank" rel="noopener noreferrer">Règlements généraux</a>
             </ListItem>
