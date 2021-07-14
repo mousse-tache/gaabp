@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Router } from "@reach/router";
 
 import AppContext from "@aabp/context/app/appContext";
@@ -20,19 +20,9 @@ const Features = React.lazy(() => import("@aabp/components/feature-flagging/Feat
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import SuspenseNoSSR from "@aabp/components/lazy-load/SuspenseNoSSR";
-import { useSnackbar } from "notistack";
 
 const NominatedUserRouter = () => {
     const { authedUser } = useContext(AppContext);
-
-    const { enqueueSnackbar } = useSnackbar();
-
-    useEffect(() => {
-        enqueueSnackbar(
-            "L'assemblée générale annuelle se tiendra le 12 juin à 12h30. Détails dans la section ressource",
-            {variant: "info"}
-        );
-    }, []);
 
     return (
     <SuspenseNoSSR>

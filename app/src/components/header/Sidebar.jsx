@@ -8,7 +8,7 @@ import Permissions from '@aabp/auth/permissions';
 import PermissionTypes from '@aabp/auth/permissionTypes';
 import MembresSidebar from './sidebars/MembresSidebar';
 import ProgressionSidebar from './sidebars/ProgressionSidebar';
-import { Badge, Button, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Button, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import NouvelleNomination from '@aabp/components/nominations/nouvelle-nomination/NouvelleNomination';
@@ -50,17 +50,10 @@ const Sidebar = ({open, setOpen}) => {
               </ListItem>
             </List>
             <ProgressionSidebar />
-            <List> 
-              
-              <Badge color="primary" badgeContent="AGA" 
-                  anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}>
+            <List>           
                 <ListItem divider button disableRipple onClick={() => navigate("/app/ressources")}>  
                     <Typography>Ressources</Typography>            
                 </ListItem>
-              </Badge> 
             </List>
             {
               canAccessMemberSection && <MembresSidebar />
