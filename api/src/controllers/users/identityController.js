@@ -24,6 +24,7 @@ function xwwwfurlenc(srcjson){
 
 async function getIdentityFromToken(response) {
     try {
+        console.log(response)
         return await User.findOne({courriel:response.email})
     }
     catch (err) {

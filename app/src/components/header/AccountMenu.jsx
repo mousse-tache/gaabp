@@ -32,7 +32,7 @@ const UserMenu = () => {
         <div className="account-menu">
             <Help />
             <div>
-                <span>{`${authedUser?.prenom}`}</span>
+                <span>{Boolean(authedUser?.prenom) && authedUser?.prenom}</span>
                 <IconButton onClick={handleClick} color="primary">
                     <AccountCircleIcon fontSize="large" color="inherit" />
                 </IconButton>

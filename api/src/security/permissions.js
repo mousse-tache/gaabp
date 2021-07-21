@@ -4,7 +4,7 @@ const { NominationTypes } = require("./nominationTypes")
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
-exports.Permissions = (userJwt, permission) => {
+exports.Permissions = (userJwt, permission, unitId = null) => {
     const user = jwt.verify(userJwt, process.env.signingsecret).permissions; 
 
     if (!user || !user.nominations) {
@@ -76,6 +76,7 @@ exports.Permissions = (userJwt, permission) => {
         case PermissionTypes.PayRecensement:
             return (user.isAdmin || isManagementVicepResident());
         case PermissionTypes.AddDecoration:
+        case PermissionTypes.UpdateDecorations:
             return (user.isAdmin || isManagementVicepResident() || isGeneralCommissionner());
         case PermissionTypes.FuseUsers:
         case PermissionTypes.FeatureManagement:
