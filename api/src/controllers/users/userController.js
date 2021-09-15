@@ -256,7 +256,8 @@ exports.addUser = async (req, reply) => {
     {
       courriel: userModel.courriel,
       prenom: userModel.prenom,
-      nom: userModel.nom
+      nom: userModel.nom,
+      details: userModel.details
     })
     return user.save()
   } catch (err) {

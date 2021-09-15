@@ -12,7 +12,7 @@ const PublicRoutes = [
   {
     method: 'POST',
     url: '/api/completeSignup',
-    handler: userController.addUsers
+    handler: userController.addUser
   },
   {
     method: 'GET',

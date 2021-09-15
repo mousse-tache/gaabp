@@ -45,6 +45,10 @@ export class UserClient {
         return this._apiClient.get(`users/exportcontacts`);
     }
 
+    addUser = (users) => {
+        return this._apiClient.post("user", users );
+    }
+
     addUsers = (users) => {
         return this._apiClient.post("users", users );
     }
