@@ -66,10 +66,10 @@ exports.getGlobalReport = async (req, reply) => {
             {$group: {_id: "money", n: {$sum: "$details.cost.totalPrice"}}}
         ]);
   
-        return {nbOfUsers: nbOfUsers[0].nbOfUsers, 
-            uniteRecenses: uniteRecenses[0].uniteRecenses, 
-            unitsPaye: unitsPaye[0].unitsPaye,
-            totalCashForYear: totalCashForYear[0].n};
+        return {nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
+            uniteRecenses: uniteRecenses.length > 0 ? uniteRecenses[0].uniteRecenses : 0, 
+            unitsPaye: unitsPaye.length > 0 ? unitsPaye[0].unitsPaye : 0,
+            totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0};
       } catch (err) {
         throw boom.boomify(err)
       }
