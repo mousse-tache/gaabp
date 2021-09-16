@@ -13,6 +13,7 @@ import UserClient from "@aabp/clients/userClient";
 
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 import UserDetailsTab from "@aabp/components/membres/userDetailsTabs";
+
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);
     const [member, setMember] = useState({});
@@ -22,7 +23,7 @@ const Profile = () => {
 
     async function AddUser() { 
         try {
-            await userClient.completeSignup([member]);
+            await userClient.completeSignup(member);
             enqueueSnackbar(`${member?.prenom} ${member?.nom}, votre inscription a été complétée`, { variant: "success" });
             navigate("/app/profile");
         }

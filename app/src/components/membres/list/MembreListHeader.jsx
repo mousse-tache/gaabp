@@ -32,9 +32,7 @@ const MembreListHeader = () => {
         setOpen(false);
     };
 
-    async function AddUser(e) {           
-        e.preventDefault();
-        e.stopPropagation();    
+    async function AddUser() {     
         try {
             await userClient.addUser({courriel: courriel, nom: nom, prenom: prenom});
             setOpen(false);
@@ -82,7 +80,7 @@ const MembreListHeader = () => {
 
                         <TextField fullWidth label="Nom de famille" type="text" value={nom} placeholder="Baden-Powell" onChange={event => setNom(event.target.value)} />
                         
-                        <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser, authedUser)} onClick={AddUser}>Ajouter</Button>
+                        <Button className="submit-button" variant="contained" color="secondary" disabled={!Permissions(PermissionTypes.CreateUser, authedUser)} onClick={async() => await AddUser()}>Ajouter</Button>
                     </form>
                 </Paper>
             </Modal>
