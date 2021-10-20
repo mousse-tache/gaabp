@@ -79,6 +79,16 @@ const UserRoutes = [
       },  
       {
         method: 'POST',
+        url: '/api/user/formation/:id',
+        handler: userController.recommendFormation
+      },  
+      {
+        method: 'PUT',
+        url: '/api/user/formation/:id',
+        handler: userController.confirmFormation
+      },  
+      {
+        method: 'POST',
         url: '/api/user/fusion',
         handler: userController.FuseUsers
       },    

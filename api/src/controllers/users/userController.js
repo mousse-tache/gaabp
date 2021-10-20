@@ -239,7 +239,7 @@ exports.getSingleUser = async (req, reply) => {
 
 exports.getMultipleUsers = async (req, reply) => {
   try {
-    const ids = req.body
+    const ids = req.body.map(x => mongoose.Types.ObjectId(x));
     const user = await User.find({_id: {$in: ids }},{"details":0})
     return user
   } catch (err) {
@@ -250,16 +250,11 @@ exports.getMultipleUsers = async (req, reply) => {
 // Add a new user
 exports.addUser = async (req, reply) => {
   try {
-    const userModel = req.body
+    const userModel = req.body;
 
-    const user = new User(
-    {
-      courriel: userModel.courriel,
-      prenom: userModel.prenom,
-      nom: userModel.nom,
-      details: userModel.details
-    })
-    return user.save()
+    await User.updateOne({courriel: userModel.courriel}, {$set: userModel}, { new: true })
+
+    return true;
   } catch (err) {
     throw boom.boomify(err)
   }
@@ -368,5 +363,53 @@ exports.FuseUsers = async (req, reply) => {
   else {
     reply.code(401)
     return "Vous n'avez pas le droit de fusionner des dossiers"
+  }
+}
+
+exports.recommendFormation = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation))
+  {
+    try {
+      const id = req.params.id
+      const formation = req.body
+
+      await User.updateOne({_id: id}, 
+        {$addToSet: {
+          formations: formation
+        }
+      });
+
+      return true
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de recommender une formation"
+  }
+}
+
+exports.confirmFormation = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.ConfirmFormation))
+  {
+    try {
+      const id = req.params.id
+      const formations = req.body
+
+      await User.updateOne({_id: id}, 
+        {$set: {
+          formations: formations
+        }
+      });
+
+      return true
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(401)
+    return "Vous n'avez pas le droit de recommender une formation"
   }
 }

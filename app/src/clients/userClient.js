@@ -68,6 +68,14 @@ export class UserClient {
     removeFromUnit = (userId, unitId, type) => {
         return this._apiClient.post("user/removefromunit", { userId, unitId, type });
     }
+
+    confirmFormation = (userId, formations) => {
+        return this._apiClient.put(`user/formation/${userId}`, formations);
+    }
+
+    recommendFormation = (userId, formation) => {
+        return this._apiClient.post(`user/formation/${userId}`, formation);
+    }
 }    
 
 export default UserClient;

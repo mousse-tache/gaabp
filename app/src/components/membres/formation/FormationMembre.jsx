@@ -10,7 +10,7 @@ const FormationMembre = () => {
     formations.sort();
 
     const userClient = new UserClient();
-    const [formateurs, setFormateurs] = useState({});
+    const [formateurs, setFormateurs] = useState();
 
     // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
     Array.prototype.unique = function() {
@@ -26,10 +26,9 @@ const FormationMembre = () => {
     };
 
     const FetchFormateurs = async() => {
-
         try {
             var ids = formations.map(x => x.recommendedBy);
-            ids.concat(formations.map(x => x.confirmedBy)).unique();
+            ids = ids.concat(formations.map(x => x.confirmedBy)).unique();
             if(ids.length < 1) {
                 return;
             }
