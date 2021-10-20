@@ -4,6 +4,7 @@ import { Paper, Tabs, Tab } from "@material-ui/core";
 import Cotisation from "./cotisation";
 import Reglements from "./reglements/reglements";
 import AGA2021 from "./aga/AGA2021";
+import Documents from "./Documents";
 
 import "./ressources.scss";
 
@@ -27,6 +28,7 @@ const AccueilRessources = () => {
              >
                 <Tab disableRipple component="a" label="Cotisation" />
                 <Tab disableRipple component="a" label="Règlements" />
+                <Tab disableRipple component="a" label="Documents" />
                 <Tab disableRipple component="a" label="AGA 2021" />
             </Tabs>
             {
@@ -36,7 +38,10 @@ const AccueilRessources = () => {
                 value === 1 && <Reglements />
             }
             {
-                value === 2 && <AGA2021 />
+                value === 2 && <Documents />
+            }
+            {
+                value === 3 && <AGA2021 />
             }
         </Paper>        
     );
