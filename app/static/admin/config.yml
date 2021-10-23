@@ -2,7 +2,7 @@ backend:
   name: github
   repo: msieurmoustache/gaabp
 
-media_folder: static/assets
+media_folder: app/static/assets
 public_folder: /assets
 
 collections:
@@ -16,6 +16,15 @@ collections:
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
       - { name: thumbnail, label: Thumbnail, widget: image }
+  - name: documents
+    label: Documents
+    folder: app/src/markdown-pages/docs
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: date, label: Date, widget: datetime }
+      - { name: title, label: Title }
+      - { name: file, label: File, widget: file }
   - name: formation
     label: Formation
     folder: app/src/markdown-pages/formation
