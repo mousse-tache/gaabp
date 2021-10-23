@@ -1,5 +1,5 @@
 ---
-path: recenser-des-membres
+path: aide/recenser-des-membres
 date: 2021-10-23T16:56:32.819Z
 title: Recenser des membres
 thumbnail: /assets/promesse.gif
