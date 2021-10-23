@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { IconButton, Dialog, DialogTitle, Tooltip } from "@material-ui/core";
 import Bottin from "../bottin/bottin";
+import { Link } from "gatsby";
 
 const Help = () => {
     const [open, setOpen] = useState(false);
@@ -18,6 +19,11 @@ const Help = () => {
             <Dialog open={open} onClose={() => {setOpen(false);}}>
                 <DialogTitle>
                     <HelpOutlineIcon fontSize="large" color="primary" label="bottin"/>
+                    <Link to="/aide" target="_blank">
+                        <h3>
+                            Centre d'aide
+                        </h3>
+                    </Link>
                 </DialogTitle>
                 <Bottin />
             </Dialog>

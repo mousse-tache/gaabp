@@ -43,6 +43,11 @@ const Footer = () => (
                     Infolettre
                 </a>
               </Grid>
+              <Grid item xs={12}>  
+                <Link to="/aide">
+                    Centre d'aide
+                </Link>
+              </Grid>
           </Grid>
         </div>
         <div>    

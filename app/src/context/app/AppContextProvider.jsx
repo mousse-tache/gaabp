@@ -4,7 +4,7 @@ import AppContext from "./appContext";
 
 import LogoSpinner from '@aabp/components/spinner/LogoSpinner';
 
-import Login from '@aabp/login/login';
+import LoginPage from "@aabp/login/LoginPage";
 import useAuthentication, { isAuthenticated } from "@aabp/auth/useAuthentication";
 import useFeatures from "@aabp/features/useFeatures";
 
@@ -13,7 +13,7 @@ const AppContextProvider = ({children}) => {
     const features = useFeatures();
 
     if (!isAuthenticated()) {
-        return <Login  />;
+        return <LoginPage  />;
     }
   
     if(!(auth.claims && auth.init) || (!auth.jwtToken && auth.authedUser) || features == undefined)  {

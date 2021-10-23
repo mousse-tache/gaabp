@@ -61,12 +61,12 @@ const EligibiliteTable = ({canEdit}) => {
     }
 
     if(provalore) {
-      f = data.filter(x => x.service >= 15);
+      f = data.filter(x => x.service >= 15).map(x => {return {...x, honor: "Provalore Sua"};});
       users = users.concat(f);
     }
 
     if(snm) {
-      f = data.filter(x => x.serviceNational >= 5);
+      f = data.filter(x => x.serviceNational >= 5).map(x => {return {...x, honor: "Service national méritoire"};});
       users = users.concat(f);
     }
 
