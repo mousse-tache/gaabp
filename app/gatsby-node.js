@@ -47,6 +47,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: `slug`,
       value: slug,
     });
+    
+    const aide = createFilePath({ node, getNode, basePath: `aide` });
+    createNodeField({
+      node,
+      name: `slug`,
+      value: aide,
+    });
   }
 };
 exports.createPages = async ({ graphql, actions }) => {
