@@ -1,5 +1,5 @@
 ---
-path: comment-inscription
+path: /aide/comment-inscription
 date: 2021-10-23T17:20:32.721Z
 title: Comment s'inscrire
 ---
