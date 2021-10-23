@@ -111,7 +111,7 @@ exports.createPages = async ({ graphql, actions }) => {
   aideResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
-      component: path.resolve(`./src/templates/blog-post.js`),
+      component: path.resolve(`./src/templates/AidePost.jsx`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
