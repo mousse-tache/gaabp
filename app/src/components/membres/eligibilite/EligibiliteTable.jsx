@@ -44,12 +44,13 @@ const EligibiliteTable = ({canEdit}) => {
     }
   }
 
+
   useEffect(() => {
     FetchUsers();
   }, []);
 
   useEffect(() => {
-    const { buchettes, provalore } = honors;
+    const { buchettes, provalore, snm } = honors;
 
     var users = [];
     var f;
@@ -64,7 +65,12 @@ const EligibiliteTable = ({canEdit}) => {
       users = users.concat(f);
     }
 
-    if(!(buchettes || provalore)) {
+    if(snm) {
+      f = data.filter(x => x.serviceNational >= 5);
+      users = users.concat(f);
+    }
+
+    if(!(buchettes || provalore || snm)) {
       setFilteredData(data);
     }    
     else {

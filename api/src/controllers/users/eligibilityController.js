@@ -20,12 +20,15 @@ exports.getEligibilityByHonor = async (req, reply) => {
         }}
       ]);
       const filteredUsers = []
+      const unitesNationales = process.env.unites_nationales ? process.env.unites_nationales.split(",") : [];
+
       users.forEach(x => {
           var u = {"_id": x._id, 
           courriel: x.courriel, 
           nom: `${x.prenom} ${x.nom}`,
           formations: x.formations && x.formations.filter(x => Boolean(x.dateConfirme)),
-          service: getAnneeDeService(x.nominations)
+          service: getAnneeDeService(x.nominations),
+          serviceNational: getAnneeDeService(x.nominations.filter(x => unitesNationales.includes(x.unitId)))
         }
 
         if(u.service >= 5) {
