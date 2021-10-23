@@ -1,5 +1,5 @@
 ---
-path: connexion-safari
+path: /aide/connexion-safari
 date: 2021-10-23T17:18:39.320Z
 title: Comment se connecter en utilisant Safari
 ---
