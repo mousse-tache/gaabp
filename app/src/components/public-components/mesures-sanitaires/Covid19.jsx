@@ -2,7 +2,6 @@ import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
 import HealingIcon from '@material-ui/icons/Healing';
 
-import Mesures from "@aabp/docs/covid19/Mesures-camp-dété-camp-de-jour.pdf";
 import "./covid19.scss";
 
 const Covid19 = () => (
@@ -23,7 +22,7 @@ const Covid19 = () => (
             component="a" 
             rel="noopener noreferrer" 
             target="_blank" 
-            href={Mesures}>
+            href={"/assets/mesures-covid-19_2021-09-09.pdf"}>
             <ListItemIcon>
                 <HealingIcon color="primary"/> 
               </ListItemIcon>
