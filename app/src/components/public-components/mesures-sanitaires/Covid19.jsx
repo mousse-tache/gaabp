@@ -15,14 +15,14 @@ const Covid19 = () => (
               <ListItemIcon>
                 <HealingIcon color="primary" /> 
               </ListItemIcon>
-              <ListItemText primary="Avec les récentes annonces gouvernementales, la tenue de camps sera possible cet été à condition de respecter les mesures décrites dans le document suivant" /> 
+              <ListItemText primary="Voici les dernières mesures en vigueur par rapport à la Covid-19 (2021-01-31)" /> 
           </ListItem>
           <ListItem 
             button 
             component="a" 
             rel="noopener noreferrer" 
             target="_blank" 
-            href={"/assets/mesures-covid-19_2021-09-09.pdf"}>
+            href={"/assets/2022-01-30_mesures-covid-19.pdf"}>
             <ListItemIcon>
                 <HealingIcon color="primary"/> 
               </ListItemIcon>
