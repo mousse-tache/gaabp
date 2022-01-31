@@ -8,7 +8,7 @@ const Covid19 = () => (
   <section className="wrapper covid19">
     <div className="full-bleed">        
       <Typography variant="h5" gutterBottom>
-        Mesures sanitaires en camp d'été 
+        Mesures sanitaires
       </Typography>
       <List>
           <ListItem>          
@@ -20,7 +20,7 @@ const Covid19 = () => (
           <ListItem 
             button 
             component="a" 
-            rel="noopener noreferrer" 
+            rel="noopener noreferrer" git pull
             target="_blank" 
             href={"/assets/2022-01-30_mesures-covid-19.pdf"}>
             <ListItemIcon>
