@@ -10,9 +10,8 @@ export class ApiClient {
         const axiosDefaultConfiguration = {
             timeout: 0,
             headers: { 
-                "X-Requested-With": "XMLHttpRequest", 
                 Authorization: jwtToken
-                }
+            }
         };
 
         this._client = axios.create({
