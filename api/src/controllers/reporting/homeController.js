@@ -17,7 +17,7 @@ function getLastRecensementPeriod() {
         nextRecensementPeriod.add(1, 'y');
     }
 
-    return moment(nextRecensementPeriod).add(-1, 'y').toDate();
+    return nextRecensementPeriod.add(-1, 'y').toDate();
 }; 
 
 exports.getGlobalReport = async (req, reply) => {
