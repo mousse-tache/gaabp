@@ -30,6 +30,10 @@ const NominationStepper = () => {
                         nomination.approvers[1]._id !== undefined;
 
     const SubmitNomination = async() => {
+        if(isSubmitting) {
+            return;
+        }
+
         setIsSubmitting(true);
         await nominationClient.addDemandeNomination(
             {...nomination, user: authedUser._id,
