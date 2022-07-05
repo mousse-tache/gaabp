@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 import Layout from "@aabp/components/public-components/Layout";
 import BlogCard from "@aabp/components/blog/blogCard";
 
-const NotFoundPage = () => {
+const BlogPage = () => {
     const data = useStaticQuery(graphql`
     query {
       allMarkdownRemark(
@@ -44,4 +44,4 @@ const NotFoundPage = () => {
     );
 };
 
-export default NotFoundPage;
+export default BlogPage;

@@ -1,8 +1,8 @@
 import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
 import { List, ListItem } from "@material-ui/core";
-import { useStaticQuery } from "gatsby";
 
-const Documents = () => {
+const AGA2022 = () => {
     const data = useStaticQuery(graphql`
     query {
         allMarkdownRemark(
@@ -28,9 +28,9 @@ const Documents = () => {
         <List>
             {docs && docs.map(
                 (x, i) => {
-                   if(x.node.frontmatter.path.includes("aga2022")) {
-                     return null;
-                   }
+                    if(!x.node.frontmatter.path.includes("aga2022")) {
+                      return null;
+                    }
 
                     return (
                         <ListItem key={i}
@@ -48,4 +48,4 @@ const Documents = () => {
     );
 };
 
-export default Documents;
+export default AGA2022;
