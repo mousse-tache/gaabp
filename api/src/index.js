@@ -11,12 +11,12 @@ const PublicRoutes = require('./routes/PublicRoutes')
 
 if(process.env.dev_env) {
   fastify.register(require('fastify-cors'), { 
-    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", /localhost/]
+    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", "https://aventuriersdebadenpowell.org/", /localhost/]
   })
 }
 else {
   fastify.register(require('fastify-cors'), { 
-    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org"]
+    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org/", "https://aventuriersdebadenpowell.org"]
   })
 }
 

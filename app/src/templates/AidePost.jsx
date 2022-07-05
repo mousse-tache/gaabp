@@ -26,7 +26,7 @@ export default function AidePost({ data }) {
             <div>{post.frontmatter.title}</div>
           </Breadcrumbs>                    
           <div>
-              <div  dangerouslySetInnerHTML={{ __html: post.html }} />
+              <div dangerouslySetInnerHTML={{ __html: post.html }} />
           </div>
         </section>
       </Layout>
