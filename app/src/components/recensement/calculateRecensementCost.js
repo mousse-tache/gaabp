@@ -3,7 +3,7 @@ import NominationTypes from "@aabp/utils/nominationTypes";
 function CalculateCost(unitMembers, isUniteCadette = true) {
     var totalCount = unitMembers.length;
 
-    var basePrice = isUniteCadette ? 75 : 25;
+    var basePrice = isUniteCadette ? 85 : 25;
     var today = new Date();
     
     switch(today.getMonth()) {

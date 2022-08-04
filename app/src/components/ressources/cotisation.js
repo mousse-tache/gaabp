@@ -6,10 +6,10 @@ const Cotisation = () => {
     return (
         <List>
             <ListItem>
-                75$ par membre de moins de 17 ans (donc les jeunes des branches bleue, jaune et verte).                        
+                85$ par membre de moins de 17 ans (donc les jeunes des branches bleue, jaune et verte).                        
             </ListItem>
             <ListItem>
-                    25$ par membre de moins de 17 ans (donc les jeunes des branches bleue, jaune et verte)recensé après le 1er avril de l'année suivante.
+                25$ par membre de moins de 17 ans (donc les jeunes des branches bleue, jaune et verte)recensé après le 1er avril de l'année suivante.
             </ListItem>
             <ListItem>
                 25 $par membre de moins de 17 ans d'une unité en fondation.                        
