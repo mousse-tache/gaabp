@@ -1,4 +1,5 @@
 import React from "react";
+import { graphql } from 'gatsby';
 import { List, ListItem } from "@material-ui/core";
 import { useStaticQuery } from "gatsby";
 
