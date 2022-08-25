@@ -79,7 +79,11 @@ exports.confirmNomination = async (req, reply) => {
   try {
       const { nominationId, confirmerId } = req.body
       
-      const nomination = await DemandeNomination.findOne({_id: nominationId})
+      const nomination = await DemandeNomination.findOne({_id: nominationId, complete:false});
+
+      if(!nomination) {
+        return;
+      }
 
       var groupId = nomination.group !== "" ? nomination.group : null;
       var unitId = nomination.unit !== "" ? nomination.unit : null;

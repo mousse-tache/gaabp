@@ -25,6 +25,7 @@ const NominationsMembres = () => {
 
     const [memberUnits, setMemberUnits] = useState(false);
     const [groups, setGroups] = useState(false);
+    const [shouldSave, setShouldSave] = useState(false);
 
 
     const unitClient = new UnitClient();
@@ -55,6 +56,18 @@ const NominationsMembres = () => {
             console.log(e.message);   
         }
     }
+
+    const SetAndSave = async(newMember) => {
+        await setMember(newMember);
+        await setShouldSave(true);
+    };
+    
+    useEffect(() => {
+        if(shouldSave) {
+            saveUser();
+            setShouldSave(false);
+        }
+    }, [shouldSave]);
 
     useEffect(() => {
         if(member?.nominations) {
@@ -98,23 +111,21 @@ const NominationsMembres = () => {
                 isDeleteHidden: () => !Permissions(PermissionTypes.RemoveNomination, authedUser),
                 onRowDelete: (newData) =>
                 new Promise((resolve) => {
-                        setTimeout(() => {
+                        setTimeout(async() => {
                             let nominations = member?.nominations.filter(x => x.tableData.id !== newData.tableData.id );
-                            setMember({...member, nominations: nominations});
-                            saveUser();
+                            await SetAndSave({...member, nominations: nominations});
                             resolve();
                     }, 1000);
                 }),
                 onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
                 onRowUpdate: (newData, oldData) =>
                 new Promise((resolve) => {
-                        setTimeout(() => {
+                        setTimeout(async() => {
                             const index = oldData.tableData.id;
                             let nominations = member?.nominations;
                             nominations[index] = newData;
                             nominations[index].approvedBy = authedUser._id;
-                            setMember({...member, nominations: nominations});
-                            saveUser();
+                            await SetAndSave({...member, nominations: nominations});
                             resolve();
                     }, 1000);                
                 })

@@ -11,6 +11,7 @@ import MemberFormationsUniform from "./formation/MemberFormationsUniform";
 const MemberDetails = ({canEdit, isPersonalProfile}) => {
     const { authedUser } = useContext(AppContext);
     const { member, setMember, saveUser } = useContext(UserContext);
+    console.log(member);
 
     return (
         <div className="membres">
@@ -118,7 +119,7 @@ const MemberDetails = ({canEdit, isPersonalProfile}) => {
                                 control={
                                 <Switch
                                     disabled={!authedUser?.isAdmin}
-                                    checked={member?.isAdmin}
+                                    checked={!!member?.isAdmin}
                                     onChange={() => setMember({...member, isAdmin: !member?.isAdmin})}
                                     name="checkedB"
                                     className="switch"
