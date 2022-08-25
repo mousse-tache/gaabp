@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, navigate } from "gatsby";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Help from "./Help";
+import { useTranslation } from "react-i18next";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
+
+import Help from "./Help";
+
 import { logout } from "@aabp/login/login";
 import useAuthUser from "@aabp/auth/useAuthUser";
 import Permissions from "@aabp/auth/permissions";
@@ -14,6 +17,8 @@ import "./account-menu.scss";
 const UserMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const authedUser = useAuthUser();
+
+    const { t } = useTranslation("menu");
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -45,7 +50,7 @@ const UserMenu = () => {
             onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>
-                    <Link to="/app/account">Mon profil</Link>
+                    <Link to="/app/account">{t("myProfile")}</Link>
                 </MenuItem>
                 {
                     Permissions(PermissionTypes.FeatureManagement, authedUser) && 
@@ -53,7 +58,7 @@ const UserMenu = () => {
                         <Link to="/app/features">Fonctionnalités</Link>
                     </MenuItem> 
                 }          
-                <MenuItem onClick={handleLogout}>Déconnexion</MenuItem>
+                <MenuItem onClick={handleLogout}>{t("logout")}</MenuItem>
             </Menu>
         </div>
     );

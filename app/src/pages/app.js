@@ -8,6 +8,8 @@ import UnitContextProvider from "@aabp/context/unit/unitContextProvider";
 import Layout from "@aabp/components/Layout";
 import AppRouter from "@aabp/components/routers/AppRouter";
 
+import "@aabp/utils/i18n";
+
 const App = () => {    
     return (        
         <AppContextProvider> 
