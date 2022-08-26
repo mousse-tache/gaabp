@@ -31,8 +31,6 @@ fastify
     } catch (error) {
       reply.code(401)
     }  
-
-    done() // pass an error if the authentication fails
   })
 .register(require('@fastify/auth'))
 .after(() => {

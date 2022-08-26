@@ -284,7 +284,7 @@ exports.updateProfile = async (req, reply) => {
       const user = req.body
       const id = user.id
       const { ...updateData } = user
-      const update = await User.findByIdAndUpdate(id, updateData, { new: true })
+      const update = await User.updateOne({_id:id}, {$set: updateData}, { new: true })
       return update
     } catch (err) {
       throw boom.boomify(err)
@@ -305,7 +305,7 @@ exports.updateUser = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser) || userId == id) {
     try {
       const { ...updateData } = user
-      const update = await User.findByIdAndUpdate(id, updateData, { new: true })
+      const update = await User.updateOne({_id:id}, {$set: updateData}, { new: true })
       return update
     } catch (err) {
       throw boom.boomify(err)

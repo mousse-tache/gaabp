@@ -76,10 +76,15 @@ exports.refuseNomination = async (req, reply) => {
 }
 
 exports.confirmNomination = async (req, reply) => {
+  if(!Permissions(req.headers.authorization, PermissionTypes.ValidateNomination)) {     
+    reply.code(401)
+    return "Vous n'avez pas le droit d'accepter' une nomination"
+  }
+
   try {
       const { nominationId, confirmerId } = req.body
       
-      const nomination = await DemandeNomination.findOne({_id: nominationId, complete:false});
+      const nomination = await DemandeNomination.findOne({_id: nominationId, complete: {$ne: true}});
 
       if(!nomination) {
         return;
@@ -91,14 +96,23 @@ exports.confirmNomination = async (req, reply) => {
         groupId: groupId, 
         unitId: unitId, 
         type: nomination.role, 
-        sd: new Date(), 
+        sd: getDateWithoutTime(), 
         approvedBy: confirmerId, 
         approved:true
       }
 
       await DemandeNomination.updateOne({_id: nominationId}, {$set: {confirmerId: confirmerId, complete: true}})
-      return await User.updateOne({_id: nomination.user}, {$addToSet: { nominations: newNomination}})      
+      await User.updateOne({_id: nomination.user}, {$addToSet: { nominations: newNomination}})  
+      return true    
     } catch (err) {
       throw boom.boomify(err)
     }
+}
+
+function getDateWithoutTime(date = new Date()) {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
 }
