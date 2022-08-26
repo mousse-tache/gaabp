@@ -11,7 +11,6 @@ import MemberFormationsUniform from "./formation/MemberFormationsUniform";
 const MemberDetails = ({canEdit, isPersonalProfile}) => {
     const { authedUser } = useContext(AppContext);
     const { member, setMember, saveUser } = useContext(UserContext);
-    console.log(member);
 
     return (
         <div className="membres">

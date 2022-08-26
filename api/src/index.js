@@ -57,12 +57,13 @@ mongoose.connect(process.env.mlab, {
   .catch(err => console.log(err))
 
 const start = async () => {
-  try {
-    await fastify.listen( { port : (process.env.port == undefined ? process.env.PORT : process.env.port)})
+  let port = (!!process.env.port ? process.env.PORT : process.env.port);
+  await fastify.listen( { port }, function (err, address) {
+    if (err) {
+      fastify.log.error(err)
+      process.exit(1)
+    }
     fastify.log.info(`server listening on ${fastify.server.address().port}`)
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
+  })
 }
 start()
