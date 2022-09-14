@@ -13,7 +13,7 @@ import useFeatures from "@aabp/features/useFeatures";
 const AppContextProvider = ({children}) => {
     const auth = useAuthentication();
     const features = useFeatures();
-    const { authState } = useOktaAuth();
+    const authState = (typeof useOktaAuth === "function" && useOktaAuth())?.authState;
   
     if(!authState)  {
         return (
