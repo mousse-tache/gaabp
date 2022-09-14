@@ -16,20 +16,20 @@ exports.onCreatePage = async ({ page, actions }) => {
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === 'build-html') {
-    // Exclude Sign-In Widget from compilation path
+    // Exclude Okta from compilation path
     actions.setWebpackConfig({
       module: {
         rules: [
           {
-            test: /okta-sign-in/,
+            test: /okta-auth/,
+            use: loaders.null(),
+          },
+          {
+            test: /okta-signin-widget/,
             use: loaders.null(),
           },
           {
             test: /okta-react/,
-            use: loaders.null(),
-          },
-          {
-            test: /okta-auth/,
             use: loaders.null(),
           }
         ],

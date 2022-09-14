@@ -1,3 +1,5 @@
+import NominationTypes from "@aabp/utils/nominationTypes";
+import { getKeyByValue } from "@aabp/utils/enum";
 import PermissionTypes from "./permissionTypes";
 
 const Permissions = (permission, authedUser = null, unitId = null) => {
@@ -18,7 +20,7 @@ const Permissions = (permission, authedUser = null, unitId = null) => {
     };
 
     const isBranchCommissionner = () => {
-        return authedUser.nominations.filter(x => x.type.includes("Commissaire") && x.type.includes("branche") && !x.ed).length > 0;
+        return authedUser.nominations.filter(x => x.type.includes("Commissaire") && getKeyByValue(NominationTypes, x.type).includes("branche") && !x.ed).length > 0;
     };
 
     const isGroupCommissionner = () => {
