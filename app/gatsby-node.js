@@ -23,6 +23,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           {
             test: /okta-sign-in/,
             use: loaders.null(),
+          },
+          {
+            test: /okta-react/,
+            use: loaders.null(),
+          },
+          {
+            test: /okta-auth/,
+            use: loaders.null(),
           }
         ],
       }
