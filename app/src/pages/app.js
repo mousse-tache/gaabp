@@ -27,9 +27,8 @@ const App = () => {
                     </Layout>
                 </UnitContextProvider>        
             </AppContextProvider>
-
         </OktaContextProvider>  
-          );
+    );
 };
 
 export default App;

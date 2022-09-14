@@ -14,7 +14,6 @@ const AppContextProvider = ({children}) => {
     const auth = useAuthentication();
     const features = useFeatures();
     const { authState } = useOktaAuth();
-
   
     if(!authState)  {
         return (

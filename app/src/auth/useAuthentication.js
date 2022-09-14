@@ -22,7 +22,7 @@ function useAuthentication() {
 
     const fetchAuth = async() => {
         const token = await signIn.authClient.tokenManager.get('idToken');
-        console.log(token);
+        
         if (token) {
           await setUser(token.claims);
           await setIdToken(token.idToken);

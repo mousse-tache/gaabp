@@ -4,13 +4,16 @@ import { Security, LoginCallback } from '@okta/okta-react';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Router } from "@reach/router";
 
-const oktaAuth = new OktaAuth({
+const oktaAuth = typeof window !== 'undefined' && new OktaAuth({
     issuer: 'https://dev-132704.okta.com/oauth2/default',
     clientId: '0oa5i1e8aXo6JNxOx4x6',
     redirectUri: window.location.origin + '/app/login/callback'
   });
 
 const OktaContextProvider = ({children}) => {
+    if(window === "undefined") {
+        return null;
+    }
 
     return (            
         <Security oktaAuth={oktaAuth} restoreOriginalUri={window.location.origin + "/app"}>
