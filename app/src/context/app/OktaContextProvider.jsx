@@ -11,7 +11,7 @@ const oktaAuth = typeof window !== 'undefined' && new OktaAuth({
   });
 
 const OktaContextProvider = ({children}) => {
-    if(window === "undefined") {
+    if(typeof window === "undefined") {
         return null;
     }
 
