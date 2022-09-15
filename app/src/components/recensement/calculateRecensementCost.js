@@ -5,6 +5,7 @@ function CalculateCost(unitMembers, isUniteCadette = true) {
 
     var basePrice = isUniteCadette ? 85 : 25;
     var today = new Date();
+    let day = today.getDate();
     
     switch(today.getMonth()) {
         case 3:
@@ -13,6 +14,14 @@ function CalculateCost(unitMembers, isUniteCadette = true) {
         case 6:
         case 7:
             basePrice=25;
+            break;
+        case 8:
+            basePrice=75;
+            break;
+        case 9:
+            if(day < 15) {
+                basePrice=75;
+            }
             break;
         default:
             break;
