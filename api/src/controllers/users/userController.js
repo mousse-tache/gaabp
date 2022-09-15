@@ -252,7 +252,7 @@ exports.addUser = async (req, reply) => {
   try {
     const userModel = req.body;
 
-    await User.updateOne({courriel: userModel.courriel}, {$set: userModel}, { new: true })
+    await User.updateOne({courriel: userModel.courriel}, {$set: userModel}, { upsert: true })
 
     return true;
   } catch (err) {
