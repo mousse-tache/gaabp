@@ -64,7 +64,9 @@ function useAuthentication() {
     }, []);
 
     useEffect(() => {
-        FetchUser();
+        if(idToken) {
+            FetchUser();
+        }
     }, [idToken]);
 
     return { claims: user, authedUser, FetchUser, setAuthedUser, jwtToken, init };
