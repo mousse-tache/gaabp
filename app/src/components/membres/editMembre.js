@@ -66,7 +66,7 @@ const EditMembre = ({id}) => {
     }
 
     return  (
-        <UserContext.Provider value={{member, setMember, saveUser}}>
+        <UserContext.Provider value={{member, setMember, saveUser, FetchUser}}>
             <Paper className="profile">
                 <h2 style={{display:"flex", justifyContent:"space-between"}}>
                     <Breadcrumbs aria-label="breadcrumb" className="crumbs">

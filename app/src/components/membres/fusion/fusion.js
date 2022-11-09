@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 
 import UserContext from '@aabp/context/userContext';
 
-import { Dialog, Button, Grid, TextField } from "@material-ui/core";
+import { Dialog, Button, Grid, TextField, Switch } from "@material-ui/core";
 import { Alert, Autocomplete } from "@material-ui/lab";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 
@@ -13,10 +13,11 @@ import UserClient from '@aabp/clients/userClient';
 const Fusion = () => {
     const [open, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
-    const { member } = useContext(UserContext);    
+    const { member, FetchUser } = useContext(UserContext);    
     const [query, setQuery] = useState("");
     const [searchedMembers, setSearchedMembers] = useState([]);
     const [fusionEnCours, setFusionEnCours] = useState(false);
+    const [isInverted, setIsInverted] = useState(false);
 
     const userClient = new UserClient();
     const { enqueueSnackbar } = useSnackbar();
@@ -45,12 +46,24 @@ const Fusion = () => {
         }
 
         try {
-            var data = await userClient.fuseUsers(member, selectedUser);
-            if(data) {
-                enqueueSnackbar("Fusion complétée!", { variant: "success"});
+            if(isInverted) {
+                let data = await userClient.fuseUsers(selectedUser, member);
+
+                if(data) {
+                    enqueueSnackbar("Fusion complétée!", { variant: "success"});
+                }
+                setOpen(false);
+                FetchUser();
             }
-            setOpen(false);
-            navigate(`/app/membre/${selectedUser._id}`);            
+            else {
+                let data = await userClient.fuseUsers(member, selectedUser);
+
+                if(data) {
+                    enqueueSnackbar("Fusion complétée!", { variant: "success"});
+                }
+                setOpen(false);
+                navigate(`/app/membre/${selectedUser._id}`); 
+            }           
         } catch (e) {
             console.log(e.message);  
             enqueueSnackbar(e?.error?.response?.data, { variant: "error"});
@@ -108,14 +121,22 @@ const Fusion = () => {
                                     renderInput={(params) => <TextField {...params} onChange={(event) => setQuery(event.target.value)} label="Cherchez un membre" variant="outlined" />}
                                 />
                         </Grid>
+                        <Grid item xs={12}>
+                            <b>Inverser la fusion</b>
+                            <Switch
+                                checked={isInverted}
+                                onChange={() => setIsInverted(!isInverted)}
+                                name="fusionSwitch"
+                                className="fusion-switch" />
+                        </Grid>
                         <Grid item xs={6}>
-                            <b>Membre fusionné: </b>
+                            <b>{isInverted ? "Membre destinataire" : "Membre fusionné"}: </b>
 
                             {`${member.prenom} ${member.nom}`}
                             <MemberDetails />
                         </Grid>
                         <Grid item xs={6}>
-                            <b>Membre destinataire: </b>
+                            <b>{!isInverted ? "Membre destinataire" : "Membre fusionné"}: </b>
                             {selectedUser ?`${selectedUser?.prenom} ${selectedUser?.nom}` : "à sélectionner"}
                             <UserContext.Provider value={{member: selectedUser}}>
                                     <MemberDetails />
