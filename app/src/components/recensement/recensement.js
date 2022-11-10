@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import RecensementClient from "../../clients/recensementClient";
+import { Divider } from "@material-ui/core";
+
+import RecensementContext from "@aabp/context/recensementContext";
 import CalculateCost from "./calculateRecensementCost";
 import SoumettreRecensement from "./SoumettreRecensement";
 import PreviewCost from "./previewCost";
 import RecensementDetails from "./RecensementDetails";
 import Loading from "../loading/loading";
-import { Divider } from "@material-ui/core";
+
+import RecensementClient from "../../clients/recensementClient";
+
 import "./recensement.css";
-import RecensementContext from "../../context/recensementContext";
 
 const Recensement = ({unitId, unitMembers, uniteCadette}) => {
     const [latestRecensement, setLatestRecensement] = useState(1);
