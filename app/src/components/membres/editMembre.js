@@ -54,6 +54,7 @@ const EditMembre = ({id}) => {
         try {
             if(member?._id) {
                 await userClient.updateUser({...member, id: member._id});
+                await FetchUser();
             }
             enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`);
         } catch (error) {

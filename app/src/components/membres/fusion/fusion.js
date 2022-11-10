@@ -52,8 +52,8 @@ const Fusion = () => {
                 if(data) {
                     enqueueSnackbar("Fusion complétée!", { variant: "success"});
                 }
-                setOpen(false);
-                FetchUser();
+                await setOpen(false);
+                await FetchUser();
             }
             else {
                 let data = await userClient.fuseUsers(member, selectedUser);
@@ -61,13 +61,13 @@ const Fusion = () => {
                 if(data) {
                     enqueueSnackbar("Fusion complétée!", { variant: "success"});
                 }
-                setOpen(false);
-                navigate(`/app/membre/${selectedUser._id}`); 
+                await setOpen(false);
+                await navigate(`/app/membre/${selectedUser._id}`); 
             }           
         } catch (e) {
             console.log(e.message);  
             enqueueSnackbar(e?.error?.response?.data, { variant: "error"});
-            setFusionEnCours(false);          
+            await setFusionEnCours(false);          
         }
         
     }

@@ -2,15 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from 'material-table';
 import CardContent from "@material-ui/core/CardContent";
-import UserClient from "@aabp/clients/userClient";
+
+import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
+import UserClient from "@aabp/clients/userClient";
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+
 const FormationMembre = () => {
-    const { formations } = useContext(UserContext)?.member;
+    const { authedUser } = useContext(AppContext);
+    const { member, setMember, saveUser } = useContext(UserContext);
+    let formations = member?.formations;
     formations.sort();
 
     const userClient = new UserClient();
     const [formateurs, setFormateurs] = useState();
+    const [shouldSave, setShouldSave] = useState(false);
 
     // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
     Array.prototype.unique = function() {
@@ -51,12 +59,24 @@ const FormationMembre = () => {
             console.log(e);
         }
     };
+    
+    const SetAndSave = async(newMember) => {
+        await setMember(newMember);
+        await setShouldSave(true);
+    };
 
     useEffect(() => {
         if (!formateurs) {
             FetchFormateurs();
         }
     }, [formations]);
+    
+    useEffect(() => {
+        if(shouldSave) {
+            saveUser();
+            setShouldSave(false);
+        }
+    }, [shouldSave]);
 
     return (
         <CardContent>
@@ -67,9 +87,9 @@ const FormationMembre = () => {
                     { title: 'Niveau', field: 'niveau.name' },
                     { title: 'Branche', field: 'branche.couleur' },
                     { title: 'Émis le', field: 'dateConfirme' },
-                    { title: 'Émis par', field: 'confirmedBy', lookup: formateurs },   
+                    { title: 'Émis par', field: 'confirmedBy', lookup: formateurs, editable:false },   
                     { title: 'Recommendé le', field: 'dateRecommende' },
-                    { title: 'Recommander par', field: 'recommendedBy', lookup: formateurs },                    
+                    { title: 'Recommander par', field: 'recommendedBy', lookup: formateurs, editable:false },                    
                 ]
             }
             data={formations}
@@ -81,6 +101,32 @@ const FormationMembre = () => {
                 exportButton: true
                 }
             }
+            editable={{
+                isEditable: () => Permissions(PermissionTypes.ConfirmFormation, authedUser),
+                isEditHidden: () => !Permissions(PermissionTypes.ConfirmFormation, authedUser),
+                isDeletable: () => Permissions(PermissionTypes.ConfirmFormation, authedUser),                
+                isDeleteHidden: () => !Permissions(PermissionTypes.ConfirmFormation, authedUser),
+                onRowDelete: (newData) =>
+                new Promise((resolve) => {
+                        setTimeout(async() => {
+                            let formations = member?.formations.filter(x => x.tableData.id !== newData.tableData.id );
+                            await SetAndSave({...member, formations: formations});
+                            resolve();
+                    }, 1000);
+                }),
+                onRowUpdateCancelled: () => enqueueSnackbar("Aucune modification apportée"),
+                onRowUpdate: (newData, oldData) =>
+                new Promise((resolve) => {
+                        setTimeout(async() => {
+                            const index = oldData.tableData.id;
+                            let formations = member?.formations;
+                            formations[index] = newData;
+                            formations[index].approvedBy = authedUser._id;
+                            await SetAndSave({...member, formations: formations});
+                            resolve();
+                    }, 1000);                
+                })
+            }}
             />
         </CardContent>
     );
