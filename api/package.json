@@ -14,7 +14,7 @@
     "axios": "^0.21.2",
     "boom": "^7.3.0",
     "dotenv": "^8.2.0",
-    "fastify": "^4.5.2",
+    "fastify": "^4.10.2",
     "fastify-bearer-auth": "^5.0.2",
     "fastify-cors": "^3.0.3",
     "fastify-jwt": "^2.1.3",
