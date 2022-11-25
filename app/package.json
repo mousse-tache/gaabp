@@ -11,7 +11,7 @@
     "@material/react-material-icon": "^0.15.0",
     "@okta/okta-auth-js": "^6.8.0",
     "@okta/okta-react": "^6.6.0",
-    "@okta/okta-signin-widget": "^5.1.0",
+    "@okta/okta-signin-widget": "^7.0.2",
     "core-js": "^3.6.5",
     "eslint": "^7.27.0",
     "eslint-webpack-plugin": "^2.5.4",
