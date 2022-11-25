@@ -1,0 +1,14 @@
+version: 2
+updates:
+
+  # Maintain dependencies for api
+  - package-ecosystem: "npm"
+    directory: "/api"
+    schedule:
+      interval: "weekly"
+
+  # Maintain dependencies for app
+  - package-ecosystem: "npm"
+    directory: "/app"
+    schedule:
+      interval: "weekly"
