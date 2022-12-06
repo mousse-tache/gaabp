@@ -21,5 +21,9 @@
     "moment": "^2.29.4",
     "mongoose": "^6.7.5",
     "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "prettier": "^2.8.0"
   }
 }

@@ -15,16 +15,19 @@ const fastify = Fastify({
   logger: true
 });
 
-if(process.env.dev_env) {
-  fastify.register(cors, { 
-    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", "https://aventuriersdebadenpowell.org/", /localhost/]
-  })
-}
-else {
-  fastify.register(cors , { 
-    origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org/", "https://aventuriersdebadenpowell.org"]
-  })
-}
+fastify.register(cors, (instance) => {
+  return (req, callback) => {
+    const corsOptions = {
+      origin: ["https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org/", "https://aventuriersdebadenpowell.org"]
+    };
+
+    if(process.env.dev_env) {
+      corsOptions.origin.push(/localhost/)
+    }
+
+    callback(null, corsOptions)
+  }
+})
 
 fastify.decorate('onRequest', function (request, reply, done) {
     try {    

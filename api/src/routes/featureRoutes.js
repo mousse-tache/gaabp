@@ -11,11 +11,6 @@ const FeatureRoutes = [
     handler: getList
   },
   {
-    method: 'GET',
-    url: '/api/activefeatures',
-    handler: getActiveFeatures
-  },
-  {
     method: 'PUT',
     url: '/api/feature',
     handler: updateFeature
