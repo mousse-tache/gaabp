@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useSnackbar } from 'notistack';
 import PropTypes from "prop-types";
 import MaterialTable from 'material-table';
 import CardContent from "@material-ui/core/CardContent";
@@ -12,6 +13,7 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 
 const FormationMembre = () => {
     const { authedUser } = useContext(AppContext);
+    const { enqueueSnackbar } = useSnackbar();
     const { member, setMember, saveUser } = useContext(UserContext);
     let formations = member?.formations;
     formations.sort();
@@ -84,8 +86,8 @@ const FormationMembre = () => {
             title=""
             columns={
                 [
-                    { title: 'Niveau', field: 'niveau.name' },
-                    { title: 'Branche', field: 'branche.couleur' },
+                    { title: 'Niveau', field: 'niveau.name', editable:false },
+                    { title: 'Branche', field: 'branche.couleur', editable:false },
                     { title: 'Émis le', field: 'dateConfirme' },
                     { title: 'Émis par', field: 'confirmedBy', lookup: formateurs, editable:false },   
                     { title: 'Recommendé le', field: 'dateRecommende' },
