@@ -1,24 +1,23 @@
-// Import our Controllers
-const identityController = require('../controllers/users/identityController')
-const userController = require('../controllers/users/userController')
-const groupController = require('../controllers/groupController')
+import { initializeSession } from '../controllers/users/identityController.js'
+import { addUser } from '../controllers/users/userController.js'
+import { getPublicGroups } from '../controllers/groupController.js'
 
 const PublicRoutes = [
   {
     method: 'POST',
     url: '/api/identity',
-    handler: identityController.initializeSession
+    handler: initializeSession
   },
   {
     method: 'POST',
     url: '/api/completeSignup',
-    handler: userController.addUser
+    handler: addUser
   },
   {
     method: 'GET',
     url: '/api/groups/public',
-    handler: groupController.getPublicGroups
+    handler: getPublicGroups
   }
 ]
 
-module.exports = PublicRoutes;
+export default PublicRoutes;

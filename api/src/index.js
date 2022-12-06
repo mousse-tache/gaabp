@@ -1,51 +1,43 @@
-require('dotenv').config()
 
-const jwt = require('jsonwebtoken');
-const fastify = require('fastify')({
+import Fastify from "fastify";
+import fastifyAuth from '@fastify/auth';
+import cors from '@fastify/cors';
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+import mongoose from "mongoose";
+
+import { RegisterRoutes } from "./routes/registration.js";
+
+dotenv.config()
+
+const fastify = Fastify({
   logger: true
-})
-
-const mongoose = require('mongoose')
-const routes = require('./routes')
-const PublicRoutes = require('./routes/PublicRoutes')
+});
 
 if(process.env.dev_env) {
-  fastify.register(require('fastify-cors'), { 
+  fastify.register(cors, { 
     origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org", "https://aventuriersdebadenpowell.org/", /localhost/]
   })
 }
 else {
-  fastify.register(require('fastify-cors'), { 
+  fastify.register(cors , { 
     origin: ["https://aabp-dev.netlify.app", "https://aabp-prod.netlify.app", "https://aventuriersdebadenpowell.org/", "https://aventuriersdebadenpowell.org"]
   })
 }
 
-const validateAsync = async (token) => {
-  jwt.verify(token, process.env.signingsecret).identity
-}
-
-fastify
-  .decorate('verifyJwt', async function (request, reply, done) {
+fastify.decorate('onRequest', function (request, reply, done) {
     try {    
-      await validateAsync(request.headers.authorization) 
+      jwt.verify(request.headers.authorization).identity
     } catch (error) {
       reply.code(401)
-    }  
+    }
+
+    done()
   })
-.register(require('@fastify/auth'))
-.after(() => {
-  PublicRoutes.forEach((route, index) => {
-    fastify.route(route)
-  })
-  
-  routes.forEach((route, index) => {
-    fastify.route({...route, 
-      preHandler: fastify.auth([
-        fastify.verifyJwt
-      ])
-    })
-  })
-})
+.register(fastifyAuth)
+
+fastify.register(RegisterRoutes)
 
 mongoose.connect(process.env.mlab, {
   useNewUrlParser: true,

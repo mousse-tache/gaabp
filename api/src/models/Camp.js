@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const Camp = new mongoose.Schema({
   unit: String,
@@ -16,4 +16,4 @@ const Camp = new mongoose.Schema({
   evaluation: String
 });
 
-module.exports = mongoose.model('camp', Camp);
+export default mongoose.model('camp', Camp);

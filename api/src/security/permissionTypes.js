@@ -1,4 +1,4 @@
-exports.PermissionTypes = {
+const PermissionTypes = {
     // users
     CreateUser: "createUser",
     UpdateUser: "updateUser",
@@ -40,5 +40,8 @@ exports.PermissionTypes = {
 
     // feature
     FeatureManagement: "featureManagement"
+}
 
+export {
+    PermissionTypes
 }

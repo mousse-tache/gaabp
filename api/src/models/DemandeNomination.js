@@ -1,5 +1,4 @@
-// External Dependancies
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const DemandeNomination = new mongoose.Schema({
   user: mongoose.Types.ObjectId,
@@ -17,4 +16,4 @@ const DemandeNomination = new mongoose.Schema({
   complete: Boolean
 })
 
-module.exports = mongoose.model('DemandeNomination', DemandeNomination)
+export default mongoose.model('DemandeNomination', DemandeNomination)

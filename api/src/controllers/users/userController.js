@@ -1,15 +1,16 @@
-const boom = require('boom')
-const mongoose = require('mongoose');
-const User = require('../../models/User');
-const Decoration = require('../../models/Decoration');
-const DemandeNomination = require('../../models/DemandeNomination')
-const { PermissionTypes } = require('../../security/permissionTypes');
-const { Permissions } = require('../../security/permissions');
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
+import boom from 'boom'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+
+import User from '../../models/User.js'
+import Decoration from '../../models/Decoration.js'
+import DemandeNomination from '../../models/DemandeNomination.js'
+
+import { PermissionTypes } from '../../security/permissionTypes.js'
+import { Permissions } from '../../security/permissions.js'
 
 // Get all users
-exports.getPendingNominationUsers = async (req, reply) => {
+const getPendingNominationUsers = async (req, reply) => {
   try {
     const users = await User.find({nominations: {$elemMatch: { $or: [{sd: {$gte: new Date("2020-09-01")}}, {sd: null}, {sd: {$exists:false}}], type: {$ne: "Membre"}, "approved": {$ne: true}, "ed": null}}},{"details":0, formations: 0})
     return users
@@ -19,7 +20,7 @@ exports.getPendingNominationUsers = async (req, reply) => {
 }
 
 // Get all contactable users
-exports.getContacts = async (req, reply) => {
+const getContacts = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
     try {
       const users = await User.find({nominations: {$elemMatch: { type: {$ne: "Membre"}, "ed": null }}},{_id:1, courriel:1, nom:1, prenom:1})
@@ -34,7 +35,7 @@ exports.getContacts = async (req, reply) => {
   }  
 }
 
-exports.getBasicUsersWithPaging = async (req, reply) => {  
+const getBasicUsersWithPaging = async (req, reply) => {  
   if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
     try {
       const {page, pageSize, query, activeOnly} = req.query
@@ -98,7 +99,7 @@ exports.getBasicUsersWithPaging = async (req, reply) => {
 }
 
 // Search in users
-exports.searchUsers = async (req, reply) => {
+const searchUsers = async (req, reply) => {
   try {
     const { query } = req.body
     const users = await User.find({ 
@@ -112,7 +113,7 @@ exports.searchUsers = async (req, reply) => {
 }
 
 // Search in users
-exports.searchUsersWithFormations = async (req, reply) => {
+const searchUsersWithFormations = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation)) {
     try {
       const { query } = req.body
@@ -135,7 +136,7 @@ exports.searchUsersWithFormations = async (req, reply) => {
 }
 
 // Search users by formation
-exports.searchUsersWithPendingFormations = async (req, reply) => {
+const searchUsersWithPendingFormations = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation)) {
     try {
       const users = await User.find({formations: {$elemMatch: {dateConfirme: null, dateRecommende: {$ne: null}}}},{nominations:0,details:0})
@@ -150,7 +151,7 @@ exports.searchUsersWithPendingFormations = async (req, reply) => {
   }  
 }
 
-exports.getUsersByUnit = async (req, reply) => {
+const getUsersByUnit = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
     try {
       const id = req.params.id
@@ -173,7 +174,7 @@ exports.getUsersByUnit = async (req, reply) => {
   }
 }
 
-exports.removeFromUnit = async (req, reply) => {
+const removeFromUnit = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
     try {    
       const { userId, unitId, type} = req.body
@@ -210,7 +211,7 @@ exports.removeFromUnit = async (req, reply) => {
   }
 }
 
-exports.getUsersByGroup = async (req, reply) => {
+const getUsersByGroup = async (req, reply) => {
   try {
     const id = req.params.id
     const users = await User.find({"nominations.groupId": id},{"details":0})
@@ -221,7 +222,7 @@ exports.getUsersByGroup = async (req, reply) => {
 }
 
 // Get single user by ID
-exports.getSingleUser = async (req, reply) => {
+const getSingleUser = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.ViewUsers)) {
     try {
       const id = req.params.id
@@ -237,7 +238,7 @@ exports.getSingleUser = async (req, reply) => {
   }
 }
 
-exports.getMultipleUsers = async (req, reply) => {
+const getMultipleUsers = async (req, reply) => {
   try {
     const ids = req.body.map(x => mongoose.Types.ObjectId(x));
     const user = await User.find({_id: {$in: ids }},{"details":0})
@@ -248,7 +249,7 @@ exports.getMultipleUsers = async (req, reply) => {
 }
 
 // Add a new user
-exports.addUser = async (req, reply) => {
+const addUser = async (req, reply) => {
   try {
     const userModel = req.body;
 
@@ -261,7 +262,7 @@ exports.addUser = async (req, reply) => {
 }
 
 // Add a new user
-exports.addUsers = async (req, reply) => {
+const addUsers = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) {
     try {
       const userModels = req.body
@@ -278,7 +279,7 @@ exports.addUsers = async (req, reply) => {
 }
 
 // Update an existing user
-exports.updateProfile = async (req, reply) => {
+const updateProfile = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateUser)) {
     try {
       const user = req.body
@@ -297,7 +298,7 @@ exports.updateProfile = async (req, reply) => {
 }
 
 // Update an existing user
-exports.updateUser = async (req, reply) => {
+const updateUser = async (req, reply) => {
   var userId = jwt.verify(req.headers.authorization, process.env.signingsecret).permissions._id; 
   const user = req.body
   const id = user.id
@@ -318,7 +319,7 @@ exports.updateUser = async (req, reply) => {
 }
 
 // Delete a user
-exports.deleteUser = async (req, reply) => {
+const deleteUser = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.DeleteUser))
   {
     try {
@@ -335,7 +336,7 @@ exports.deleteUser = async (req, reply) => {
   }
 }
 
-exports.FuseUsers = async (req, reply) => {
+const FuseUsers = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.FuseUsers)) {
     try {
       const { memberToFuse, targetMember } = req.body
@@ -366,7 +367,7 @@ exports.FuseUsers = async (req, reply) => {
   }
 }
 
-exports.recommendFormation = async (req, reply) => {
+const recommendFormation = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.RecommendFormation))
   {
     try {
@@ -390,7 +391,7 @@ exports.recommendFormation = async (req, reply) => {
   }
 }
 
-exports.confirmFormation = async (req, reply) => {
+const confirmFormation = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.ConfirmFormation))
   {
     try {
@@ -412,4 +413,26 @@ exports.confirmFormation = async (req, reply) => {
     reply.code(401)
     return "Vous n'avez pas le droit de recommender une formation"
   }
+}
+
+export {
+  getPendingNominationUsers,
+  getContacts,
+  getBasicUsersWithPaging,
+  searchUsers,
+  searchUsersWithFormations,
+  searchUsersWithPendingFormations,
+  getUsersByUnit,
+  removeFromUnit,
+  getUsersByGroup,
+  getSingleUser,
+  getMultipleUsers,
+  addUser,
+  addUsers,
+  updateProfile,
+  updateUser,
+  deleteUser,
+  FuseUsers,
+  recommendFormation,
+  confirmFormation
 }

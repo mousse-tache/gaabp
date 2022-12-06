@@ -1,9 +1,7 @@
-const boom = require('boom')
-const mongoose = require('mongoose')
-const User = require('../../models/User')
-const axios = require("axios")
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
+import boom from 'boom'
+import axios from "axios"
+import jwt from 'jsonwebtoken'
+import User from '../../models/User.js'
 
 // This should probably only be used if all JSON elements are strings
 function xwwwfurlenc(srcjson){
@@ -12,7 +10,7 @@ function xwwwfurlenc(srcjson){
         console.log("\"srcjson\" is not a JSON object");
         return null;
       }
-    u = encodeURIComponent;
+    var u = encodeURIComponent;
     var urljson = "";
     var keys = Object.keys(srcjson);
     for(var i=0; i <keys.length; i++){
@@ -35,7 +33,7 @@ async function getIdentityFromToken(response) {
     }
 }
 
-exports.initializeSession = async (req, reply) => {
+const initializeSession = async (req, reply) => {
   try {
     const { token } = req.body
     const url = `${"https://dev-132704.okta.com"}/oauth2/default/v1/introspect`
@@ -76,3 +74,4 @@ exports.initializeSession = async (req, reply) => {
   }
 }
 
+export { initializeSession }

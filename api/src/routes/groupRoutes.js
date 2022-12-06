@@ -1,42 +1,50 @@
 // Import our Controllers
-const groupController = require('../controllers/groupController')
+import  {
+  getGroups,
+  getSingleGroup,
+  getGroupsById,
+  getSingleGroupByNumber,
+  addGroup,
+  updateGroup,
+  deleteGroup
+} from '../controllers/groupController.js'
 
 const GroupRoutes = [
     {
         method: 'GET',
         url: '/api/groups',
-        handler: groupController.getGroups
+        handler: getGroups
       },
       {
         method: 'GET',
         url: '/api/group/:id',
-        handler: groupController.getSingleGroup
+        handler: getSingleGroup
       },
       {
         method: 'GET',
         url: '/api/group/numero/:numero',
-        handler: groupController.getSingleGroupByNumber
+        handler: getSingleGroupByNumber
       },  
       {
         method: 'POST',
         url: '/api/group',
-        handler: groupController.addGroup
+        handler: addGroup
       },
       {
         method: 'PUT',
         url: '/api/group/:id',
-        handler: groupController.updateGroup
+        handler: updateGroup
       },
       {
         method: 'DELETE',
         url: '/api/group/:id',
-        handler: groupController.deleteGroup
+        handler: deleteGroup
       },
       {
         method: 'POST',
         url: '/api/groups/ids',
-        handler: groupController.getGroupsById
+        handler: getGroupsById
       },
 ]
 
-module.exports = GroupRoutes;
+export default GroupRoutes;

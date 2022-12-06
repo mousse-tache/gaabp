@@ -1,13 +1,12 @@
-const boom = require('boom')
-const User = require('../../models/User')
-const Unit = require('../../models/Unit')
-const Recensement = require('../../models/Recensement')
-const axios = require("axios")
-const moment = require("moment");
-require('dotenv').config()
+import boom from 'boom'
+import moment from "moment"
 
-const { PermissionTypes } = require('../../security/permissionTypes');
-const { Permissions } = require('../../security/permissions');
+import User from '../../models/User.js'
+import Unit from '../../models/Unit.js'
+import Recensement from '../../models/Recensement.js'
+
+import { PermissionTypes } from '../../security/permissionTypes.js'
+import { Permissions } from '../../security/permissions.js'
 
 function getLastRecensementPeriod() {
     var y = moment().year();
@@ -20,7 +19,7 @@ function getLastRecensementPeriod() {
     return nextRecensementPeriod.add(-1, 'y').toDate();
 }; 
 
-exports.getGlobalReport = async (req, reply) => {
+const getGlobalReport = async (req, reply) => {
     if(Permissions(req.headers.authorization, PermissionTypes.ViewRecensementSummary)) { 
       try {  
          
@@ -79,3 +78,5 @@ exports.getGlobalReport = async (req, reply) => {
       return "Vous n'avez pas le droit d'accéder d'effectuer cette action"
     }
   }
+
+  export { getGlobalReport }

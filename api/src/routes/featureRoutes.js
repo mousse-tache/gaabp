@@ -1,22 +1,25 @@
-// Import our Controllers
-const featureController = require('../controllers/featureController')
+import {
+  getList,
+  getActiveFeatures,
+  updateFeature
+} from '../controllers/featureController.js'
 
 const FeatureRoutes = [
   {
     method: 'GET',
     url: '/api/features',
-    handler: featureController.getList
+    handler: getList
   },
   {
     method: 'GET',
     url: '/api/activefeatures',
-    handler: featureController.getActiveFeatures
+    handler: getActiveFeatures
   },
   {
     method: 'PUT',
     url: '/api/feature',
-    handler: featureController.updateFeature
+    handler: updateFeature
   }
 ]
 
-module.exports = FeatureRoutes;
+export default FeatureRoutes;

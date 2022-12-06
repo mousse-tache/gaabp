@@ -1,5 +1,5 @@
 // External Dependancies
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const Feature = new mongoose.Schema({
   _id: Number,
@@ -7,4 +7,4 @@ const Feature = new mongoose.Schema({
   activated: Boolean
 })
 
-module.exports = mongoose.model('Feature', Feature)
+export default mongoose.model('Feature', Feature)

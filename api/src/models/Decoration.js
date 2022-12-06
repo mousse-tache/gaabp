@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const Decoration = new mongoose.Schema({
   membre: mongoose.Types.ObjectId,
@@ -7,4 +7,4 @@ const Decoration = new mongoose.Schema({
   comments: String
 });
 
-module.exports = mongoose.model('decoration', Decoration);
+export default mongoose.model('decoration', Decoration);

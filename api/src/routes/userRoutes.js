@@ -1,97 +1,116 @@
 // Import our Controllers
-const userController = require('../controllers/users/userController')
+import {
+  getPendingNominationUsers,
+  getContacts,
+  getBasicUsersWithPaging,
+  searchUsers,
+  searchUsersWithFormations,
+  searchUsersWithPendingFormations,
+  getUsersByUnit,
+  removeFromUnit,
+  getUsersByGroup,
+  getSingleUser,
+  getMultipleUsers,
+  addUser,
+  addUsers,
+  updateProfile,
+  updateUser,
+  deleteUser,
+  FuseUsers,
+  recommendFormation,
+  confirmFormation } from '../controllers/users/userController.js'
 
 const UserRoutes = [
       {
         method: 'GET',
         url: '/api/pendingNominations',
-        handler: userController.getPendingNominationUsers
+        handler: getPendingNominationUsers
       },
       {
         method: 'GET',
         url: '/api/users/exportcontacts',
-        handler: userController.getContacts
+        handler: getContacts
       },
       {
         method: 'GET',
         url: '/api/users/paged',
-        handler: userController.getBasicUsersWithPaging
+        handler: getBasicUsersWithPaging
       },
       {
         method: 'POST',
         url: '/api/users/search',
-        handler: userController.searchUsers
+        handler: searchUsers
       },
       {
         method: 'POST',
         url: '/api/users/formations/search',
-        handler: userController.searchUsersWithFormations
+        handler: searchUsersWithFormations
       },
       {
         method: 'GET',
         url: '/api/user/:id',
-        handler: userController.getSingleUser
+        handler: getSingleUser
       },
       {
         method: 'POST',
         url: '/api/users/ids',
-        handler: userController.getMultipleUsers
+        handler: getMultipleUsers
       },
       {
         method: 'POST',
         url: '/api/user/removefromunit',
-        handler: userController.removeFromUnit
+        handler: removeFromUnit
       },
       {
         method: 'GET',
         url: '/api/users/unit/:id',
-        handler: userController.getUsersByUnit
+        handler: getUsersByUnit
       },
       {
         method: 'GET',
         url: '/api/users/group/:id',
-        handler: userController.getUsersByGroup
+        handler: getUsersByGroup
       },
       {
         method: 'POST',
         url: '/api/user',
-        handler: userController.addUser
+        handler: addUser
       },  
       {
         method: 'POST',
         url: '/api/users',
-        handler: userController.addUsers
+        handler: addUsers
       },
       {
         method: 'PUT',
         url: '/api/user/:id',
-        handler: userController.updateUser
+        handler: updateUser
       },
       {
         method: 'DELETE',
         url: '/api/user/:id',
-        handler: userController.deleteUser
+        handler: deleteUser
       },
       {
         method: 'GET',
         url: '/api/users/pendingFormations',
-        handler: userController.searchUsersWithPendingFormations
+        handler: searchUsersWithPendingFormations
       },  
       {
         method: 'POST',
         url: '/api/user/formation/:id',
-        handler: userController.recommendFormation
+        handler: recommendFormation
       },  
       {
         method: 'PUT',
         url: '/api/user/formation/:id',
-        handler: userController.confirmFormation
+        handler: confirmFormation
       },  
       {
         method: 'POST',
         url: '/api/user/fusion',
-        handler: userController.FuseUsers
+        handler: FuseUsers
       },    
 ]
 
-module.exports = UserRoutes;
+export default UserRoutes;

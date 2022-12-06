@@ -1,11 +1,11 @@
-const homeController = require('../controllers/reporting/homeController')
+import { getGlobalReport } from '../controllers/reporting/homeController.js'
 
 const DecorationsRoutes = [
   {
     method: 'GET',
     url: '/api/reports/global',
-    handler: homeController.getGlobalReport
+    handler: getGlobalReport
   }
 ]
 
-module.exports = DecorationsRoutes;
+export default DecorationsRoutes;
