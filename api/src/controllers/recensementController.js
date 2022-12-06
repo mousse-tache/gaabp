@@ -38,40 +38,24 @@ const getbyPayment = async (req, reply) => {
     const { paid } = req.params
     var isPaid = paid === "true" ? true : false
 
-    if(isPaid) {
-      const recensements = await Recensement.aggregate([
-        {$match: {paiementComplet:true}},
-        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
-        {$lookup:
-          {
-            from: "units",
-            localField: "unitId",
-            foreignField: "_id",
-            as: "unit"
-          }
-        },
-        {$unwind: "$unit"}
-      ]);
+    const recensements = await Recensement.aggregate([
+      {$match: {paiementComplet: isPaid ? true : {$ne: true}}},
+      {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
+      {$lookup:
+        {
+          from: "units",
+          localField: "unitId",
+          foreignField: "_id",
+          as: "unit"
+        }
+      },
+      {$unwind: "$unit"},
+      {$sort: {
+        _id: -1
+      }}
+    ]);
 
-      return recensements
-    }
-    else {
-      const recensements = await Recensement.aggregate([
-        {$match: {paiementComplet: {$ne: true}}},
-        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
-        {$lookup:
-          {
-            from: "units",
-            localField: "unitId",
-            foreignField: "_id",
-            as: "unit"
-          }
-        },
-        {$unwind: "$unit"}
-      ]);
-
-      return recensements
-    }
+    return recensements
 
   } catch (err) {
     throw boom.boomify(err)
