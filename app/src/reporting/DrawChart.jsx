@@ -45,7 +45,7 @@ const DrawChart = (element, data, innerRadius, outerRadius) => {
   arcs
     .append("text")
     .attr("text-anchor", "middle")
-    .text((d) => `${d.data.value}% (${d.data.label})`) // label text
+    .text((d) => `${d.data.value} (${d.data.label})`) // label text
     .style("fill", "#fff")
     .style("font-size", "30px")
     .attr("transform", (d) => {
