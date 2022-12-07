@@ -11,6 +11,24 @@ const getBranchFromId = (id) => {
     return Branches.find(x => id == x.id).couleur;
 };
 
-export {getBranchFromId};
+const getBranchColorFromId = (id) => {
+    switch(id) {
+        case 0:
+            return "blue";
+        case 1:
+            return "#EEC72C";
+        case 2:
+            return "green";
+        case 3:
+            return "red";
+        default:
+            return "#A3233A";
+    }
+};
+
+export {
+    getBranchFromId,
+    getBranchColorFromId
+};
 
 export default Branches;

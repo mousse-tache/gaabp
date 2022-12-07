@@ -31,7 +31,7 @@ const DrawChart = (element, data, innerRadius, outerRadius) => {
   arcs
     .append("path")
     .attr("d", arcGenerator)
-    .style("fill", (d, i) => colorScale(i))
+    .style("fill", (d, i) => d.data.color ?? colorScale(i))
     .transition()
     .duration(700)
     .attrTween("d", function (d) {
