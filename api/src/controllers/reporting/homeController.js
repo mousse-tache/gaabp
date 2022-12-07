@@ -72,11 +72,26 @@ const getGlobalReport = async (req, reply) => {
             {$project: {_id: 0, label: "$_id", value:1}}
         ]);
   
-        return {nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
+        let usersByBranch = await User.aggregate([
+            {$unwind: "$nominations"},
+            {$match: {"nominations.ed": null}},
+            {$lookup: {
+                   from: "units",
+                   localField: "nominations.unitId",
+                   foreignField: "_id",
+                   as: "unit"
+                 }},
+            {$group: { _id: "$unit.branche", value: {$sum:1}}},
+            {$project: {_id: 0, label: "$_id", value:1}}
+        ]);
+
+        return {
+            nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
             uniteRecenses: uniteRecenses.length > 0 ? uniteRecenses[0].uniteRecenses : 0, 
             unitsPaye: unitsPaye.length > 0 ? unitsPaye[0].unitsPaye : 0,
             totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0,
-            usersByType
+            usersByType,
+            usersByBranch
         };
       } catch (err) {
         throw boom.boomify(err)

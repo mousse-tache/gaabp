@@ -5,7 +5,7 @@ import HelpOutline from "@material-ui/icons/HelpOutline";
 import { Skeleton } from "@material-ui/lab";
 
 import DonutChart from "@aabp/reporting/DonutChart";
-
+import { getBranchFromId } from "@aabp/utils/branches";
 import ReportingClient from "@aabp/clients/reportingClient";
 
 import "./global-report.scss";
@@ -26,7 +26,7 @@ const GlobalReport = () => {
         fetchReport();
     }, []);
 
-    const { nbOfUsers, uniteRecenses, unitsPaye, totalCashForYear, usersByType } = report;
+    const { nbOfUsers, uniteRecenses, unitsPaye, totalCashForYear, usersByType, usersByBranch } = report;
 
     if (!init) {
         return <Skeleton />;
@@ -76,6 +76,17 @@ const GlobalReport = () => {
                         </Tooltip>
                         <div>
                             <DonutChart data={usersByType} outerRadius={500} />
+                        </div>
+                    </div>
+                }
+                {
+                    usersByBranch &&
+                    <div className="globalreport-tile-item">
+                        <Tooltip title="Compte chaque nomination individuellement">
+                            <h3>Membres par branche <HelpOutline className="icon-align" /></h3>
+                        </Tooltip>
+                        <div>
+                            <DonutChart data={usersByBranch.map(x => {return {value: x.value, label: getBranchFromId(x.label)};})} outerRadius={500} />
                         </div>
                     </div>
                 }

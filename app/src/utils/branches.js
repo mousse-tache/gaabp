@@ -6,4 +6,10 @@ const Branches = [
     {id: 4, couleur: "Multibranche"}
 ];
 
+const getBranchFromId = (id) => {
+    return Branches.find(x => id == x.id).couleur;
+};
+
+export {getBranchFromId};
+
 export default Branches;
