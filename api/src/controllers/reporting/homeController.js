@@ -64,11 +64,20 @@ const getGlobalReport = async (req, reply) => {
             {$match: {paiementComplet: true}},
             {$group: {_id: "money", n: {$sum: "$details.cost.totalPrice"}}}
         ]);
+
+        let usersByType = await User.aggregate([
+            {$unwind: "$nominations"},
+            {$match: {"nominations.ed": null}},
+            {$group: { _id: "$nominations.type", value: {$sum:1}}},
+            {$project: {_id: 0, label: "$_id", value:1}}
+        ]);
   
         return {nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
             uniteRecenses: uniteRecenses.length > 0 ? uniteRecenses[0].uniteRecenses : 0, 
             unitsPaye: unitsPaye.length > 0 ? unitsPaye[0].unitsPaye : 0,
-            totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0};
+            totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0,
+            usersByType
+        };
       } catch (err) {
         throw boom.boomify(err)
       }
