@@ -137,7 +137,7 @@ const toggleIsActive = async (req, reply) => {
       await Unit.findByIdAndUpdate(id, {a: isActive}, { new: true })
 
       if(!isActive) {
-        await User.updateMany({"nominations.unitId": id}, {
+        await User.updateMany({"nominations.unitId": id, "nominations.ed": null}, {
           $set: {"nominations.$.ed": new Date()}
         });
       }
