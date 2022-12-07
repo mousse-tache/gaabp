@@ -6,7 +6,8 @@ import {
   getUnitsById,
   addUnit,
   updateUnit,
-  deleteUnit
+  deleteUnit,
+  toggleIsActive
 } from '../controllers/unitController.js'
 
 const UnitRoutes = [
@@ -44,6 +45,11 @@ const UnitRoutes = [
         method: 'DELETE',
         url: '/api/unit/:id',
         handler: deleteUnit
+      },
+      {
+        method: 'PUT',
+        url: '/api/unit/:id/status/:active',
+        handler: toggleIsActive
       }
 ]
 

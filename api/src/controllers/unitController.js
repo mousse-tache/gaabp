@@ -1,6 +1,7 @@
 import boom from 'boom'
 
 import Unit from '../models/Unit.js'
+import User from '../models/User.js'
 
 import { PermissionTypes } from '../security/permissionTypes.js'
 import { Permissions } from '../security/permissions.js'
@@ -26,7 +27,7 @@ const getUnits = async (req, reply) => {
           as: "recensements"
         }
       },
-      {$project: {nom:1, genre:1, branche:1, "g.nom":1, "g.numero":1, recensements: { $arrayElemAt: [ "$recensements", -1 ] }}},
+      {$project: {nom:1, genre:1, branche:1, a:1, "g.nom":1, "g.numero":1, recensements: { $arrayElemAt: [ "$recensements", -1 ] }}},
       {$sort: {nom:1}}
     ]);
 
@@ -126,6 +127,30 @@ const deleteUnit = async (req, reply) => {
   }
 }
 
+// Toggle as active or not
+const toggleIsActive = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.DeactivateUnit)) { 
+    try {
+      const isActive = req.params.active
+      const id = req.params.id
+      
+      await Unit.findByIdAndUpdate(id, {a: isActive}, { new: true })
+
+      await User.updateMany({"nominations.unitId": id}, {
+        $set: {"nominations.$.ed": new Date()}
+      });
+
+      return true
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
+  }
+}
+
 export {
   getUnits,
   getByGroupId,
@@ -133,5 +158,6 @@ export {
   getUnitsById,
   addUnit,
   updateUnit,
-  deleteUnit
+  deleteUnit,
+  toggleIsActive
 }

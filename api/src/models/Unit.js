@@ -9,7 +9,9 @@ const unitSchema = new mongoose.Schema({
   cd: Date,
   branche: Number,
   genre: Number,
-  membres: Array
+  membres: Array,
+  // Active
+  a: Boolean
 })
 
 export default mongoose.model('Unit', unitSchema)
