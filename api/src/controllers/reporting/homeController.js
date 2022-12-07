@@ -75,12 +75,18 @@ const getGlobalReport = async (req, reply) => {
         let usersByBranch = await User.aggregate([
             {$unwind: "$nominations"},
             {$match: {"nominations.ed": null}},
+            {
+               $addFields: {
+                  unitId: { $toObjectId: "$nominations.unitId" }
+               }
+            },
             {$lookup: {
-                   from: "units",
-                   localField: "nominations.unitId",
-                   foreignField: "_id",
-                   as: "unit"
-                 }},
+               from: "units",
+               localField: "unitId",
+               foreignField: "_id",
+               as: "unit"
+             }},
+            {$unwind: "$unit"},
             {$group: { _id: "$unit.branche", value: {$sum:1}}},
             {$project: {_id: 0, label: "$_id", value:1}}
         ]);
