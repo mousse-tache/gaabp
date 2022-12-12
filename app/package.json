@@ -31,7 +31,7 @@
     "gatsby-remark-images-native-lazy-load": "^1.0.0",
     "gatsby-remark-responsive-iframe": "^5.21.0",
     "gatsby-source-filesystem": "^4.21.1",
-    "gatsby-transformer-remark": "^5.21.0",
+    "gatsby-transformer-remark": "^5.25.0",
     "gatsby-transformer-sharp": "^4.21.0",
     "i18next": "^21.9.1",
     "i18next-browser-languagedetector": "^6.1.5",
