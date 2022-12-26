@@ -1,5 +1,5 @@
 // External Dependancies
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const inscriptionSchema = new mongoose.Schema({
   nom: String,
@@ -11,4 +11,4 @@ const inscriptionSchema = new mongoose.Schema({
   comment: String
 })
 
-module.exports = mongoose.model('Inscription', inscriptionSchema)
+export default mongoose.model('Inscription', inscriptionSchema)

@@ -1,11 +1,12 @@
-const boom = require('boom')
-const mongoose = require('mongoose');
-const Camp = require('../models/Camp');
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
-require('dotenv').config()
+import boom from 'boom'
+import mongoose from 'mongoose'
 
-exports.createNewCamp = async (req, reply) => {
+import Camp from '../models/Camp.js'
+
+import { PermissionTypes } from '../security/permissionTypes.js'
+import { Permissions } from '../security/permissions.js'
+
+const createNewCamp = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitCamp)) { 
     try {
         const { camp } = req.body
@@ -29,7 +30,7 @@ exports.createNewCamp = async (req, reply) => {
   }
 }
 
-exports.getLast = async (req, reply) => {
+const getLast = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitCamp)) { 
     try {
         const unitId = req.params.unitId
@@ -47,7 +48,7 @@ exports.getLast = async (req, reply) => {
   }
 }
 
-exports.getList = async (req, reply) => {
+const getList = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.ApproveCamp)) { 
     try {  
       const camp = Camp.aggregate([
@@ -89,3 +90,8 @@ exports.getList = async (req, reply) => {
   }
 }
 
+export { 
+  createNewCamp,
+  getLast,
+  getList
+}

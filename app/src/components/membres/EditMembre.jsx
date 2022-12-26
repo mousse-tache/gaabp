@@ -8,7 +8,7 @@ import UserContext from "@aabp/context/userContext";
 
 import Loading from "@aabp/components/loading/loading";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
-import UserDetailsTabs from "@aabp/components/membres/userDetailsTabs";
+import UserDetailsTabs from "@aabp/components/membres/UserDetailsTabs";
 import Fusion from "./fusion/fusion";
 
 import UserClient from "@aabp/clients/userClient";

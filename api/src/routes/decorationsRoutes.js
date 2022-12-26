@@ -1,17 +1,19 @@
-// Import our Controllers
-const decorationsController = require('../controllers/decorationsController')
+import { 
+  getDecorationsForUser,
+  saveDecoration
+} from '../controllers/decorationsController.js'
 
 const DecorationsRoutes = [
   {
     method: 'GET',
     url: '/api/decorations/:id',
-    handler: decorationsController.getDecorationsForUser
+    handler: getDecorationsForUser
   },
   {
     method: 'PUT',
     url: '/api/decorations',
-    handler: decorationsController.saveDecoration
+    handler: saveDecoration
   }
 ]
 
-module.exports = DecorationsRoutes;
+export default DecorationsRoutes;

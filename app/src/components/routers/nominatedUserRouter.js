@@ -4,7 +4,7 @@ import { Router } from "@reach/router";
 import AppContext from "@aabp/context/app/appContext";
 
 const Profile = React.lazy(() => import("@aabp/components/profile/profile"));
-const EditMembre = React.lazy(() => import("@aabp/components/membres/editMembre"));
+const EditMembre = React.lazy(() => import("@aabp/components/membres/EditMembre"));
 const Group = React.lazy(() => import("@aabp/components/groups/Group"));
 const EditGroup = React.lazy(() => import("@aabp/components/groups/editGroup"));
 const UnitSection = React.lazy(() => import("@aabp/components/units/UnitSection"));

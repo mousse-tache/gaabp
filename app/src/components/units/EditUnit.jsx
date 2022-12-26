@@ -15,7 +15,8 @@ import UnitDetails from "./unitDetails";
 import Loading from "../loading/loading";
 import UnitRecensementTab from "./tabs/unitRecensementTab";
 import CampTab from "./tabs/CampTab";
-import DeleteUnit from "./delete-unit/DeleteUnit";
+import DeleteUnit from "./operations/DeleteUnit";
+import ToggleActivationUnit from "./operations/ToggleActivationUnit";
 
 import UnitClient from "@aabp/clients/unitClient";
 
@@ -65,8 +66,16 @@ const EditUnit = ({id}) => {
                 </Link>
                 <Typography color="textPrimary">{`${unit.nom}`}</Typography>
             </Breadcrumbs>
-            {Permissions(PermissionTypes.DeleteUnit, authedUser, id) && 
-            <DeleteUnit />}
+            <div>
+            {
+                Permissions(PermissionTypes.DeactivateUnit, authedUser, id) && 
+                <ToggleActivationUnit />
+            }
+            {
+                Permissions(PermissionTypes.DeleteUnit, authedUser, id) && 
+                <DeleteUnit />
+            }
+            </div>
         </div>
         <div>
             <Tabs 
@@ -75,12 +84,12 @@ const EditUnit = ({id}) => {
             scrollButtons="auto"
             onChange={(event, newValue) => setTab(newValue)} aria-label="simple tabs for user details">
                 <Tab label="Informations" />
-                <Tab label="Recensement" disabled={!Permissions(PermissionTypes.SubmitRecensement, authedUser, id)} />
-                <Tab label="Camps" disabled={!Permissions(PermissionTypes.SubmitCamp, authedUser, id)} />
+                <Tab label="Recensement" disabled={!Permissions(PermissionTypes.SubmitRecensement, authedUser, id) || !unit.a} />
+                <Tab label="Camps" disabled={!Permissions(PermissionTypes.SubmitCamp, authedUser, id) || !unit.a} />
             </Tabs>
             {tab === 0 && <UnitDetails disabled={!Permissions(PermissionTypes.UpdateUnit, authedUser, id)}/>}
             {tab === 1 && <UnitRecensementTab />}  
-            {tab === 2 && <CampTab />}
+            {tab === 2 && <CampTab/>}
         </div>
     </Paper>
     );

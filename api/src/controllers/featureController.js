@@ -1,11 +1,12 @@
-const boom = require('boom')
-const Feature = require('../models/Feature');
-const Features = require('../features/features');
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
-require('dotenv').config()
+import boom from 'boom'
 
-exports.getList = async (req, reply) => {
+import Feature from '../models/Feature.js'
+import Features from '../features/features.js'
+
+import { PermissionTypes } from '../security/permissionTypes.js'
+import { Permissions } from '../security/permissions.js'
+
+const getList = async (req, reply) => {
     if(Permissions(req.headers.authorization, PermissionTypes.FeatureManagement)) {       
         try {
             var dbFeatures = await Feature.find({})
@@ -31,7 +32,7 @@ exports.getList = async (req, reply) => {
     }
 }
 
-exports.getActiveFeatures = async (req, reply) => {     
+const getActiveFeatures = async (req, reply) => {     
     try {
         var dbFeatures = await Feature.find({activated:true})
 
@@ -42,7 +43,7 @@ exports.getActiveFeatures = async (req, reply) => {
     }
 }
 
-exports.updateFeature = async (req, reply) => {
+const updateFeature = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.FeatureManagement)) { 
     try {
         const { feature } = req.body
@@ -65,4 +66,10 @@ exports.updateFeature = async (req, reply) => {
     reply.code(401)
     return "Cette opération vous est interdite"
   }
+}
+
+export {
+  getList,
+  getActiveFeatures,
+  updateFeature
 }

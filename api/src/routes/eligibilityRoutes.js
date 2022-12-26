@@ -1,12 +1,12 @@
 // Import our Controllers
-const eligibilityController = require('../controllers/users/eligibilityController')
+import { getEligibilityByHonor } from '../controllers/users/eligibilityController.js'
 
 const CampRoutes = [
   {
     method: 'GET',
     url: '/api/eligibility/users',
-    handler: eligibilityController.getEligibilityByHonor
+    handler: getEligibilityByHonor
   },
 ]
 
-module.exports = CampRoutes;
+export default CampRoutes;

@@ -1,13 +1,12 @@
-const boom = require('boom');
-const Recensement = require('../models/Recensement');
-const User = require('../models/User');
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+import boom from 'boom'
 
+import Recensement from '../models/Recensement.js'
+import User from '../models/User.js'
 
-exports.getLatestRecensementbyUnit = async (req, reply) => {
+import { PermissionTypes } from '../security/permissionTypes.js'
+import { Permissions } from '../security/permissions.js'
+
+const getLatestRecensementbyUnit = async (req, reply) => {
   try {
     const unit = req.params.id
     const recensement = await Recensement.findOne({unitId: unit}).sort({_id: -1})
@@ -24,7 +23,7 @@ exports.getLatestRecensementbyUnit = async (req, reply) => {
   }
 }
 
-exports.getbyUnit = async (req, reply) => {
+const getbyUnit = async (req, reply) => {
     try {
       const unit = req.params.id
       const recensements = await Recensement.find({unitId: unit}).sort({_id: -1})
@@ -34,52 +33,36 @@ exports.getbyUnit = async (req, reply) => {
     }
   }
 
-exports.getbyPayment = async (req, reply) => {
+const getbyPayment = async (req, reply) => {
   try {
     const { paid } = req.params
     var isPaid = paid === "true" ? true : false
 
-    if(isPaid) {
-      const recensements = await Recensement.aggregate([
-        {$match: {paiementComplet:true}},
-        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
-        {$lookup:
-          {
-            from: "units",
-            localField: "unitId",
-            foreignField: "_id",
-            as: "unit"
-          }
-        },
-        {$unwind: "$unit"}
-      ]);
+    const recensements = await Recensement.aggregate([
+      {$match: {paiementComplet: isPaid ? true : {$ne: true}}},
+      {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
+      {$lookup:
+        {
+          from: "units",
+          localField: "unitId",
+          foreignField: "_id",
+          as: "unit"
+        }
+      },
+      {$unwind: "$unit"},
+      {$sort: {
+        _id: -1
+      }}
+    ]);
 
-      return recensements
-    }
-    else {
-      const recensements = await Recensement.aggregate([
-        {$match: {paiementComplet: {$ne: true}}},
-        {$project: {details:1, date:1, paiementComplet: 1, unitId : { "$toObjectId": "$unitId" }}},
-        {$lookup:
-          {
-            from: "units",
-            localField: "unitId",
-            foreignField: "_id",
-            as: "unit"
-          }
-        },
-        {$unwind: "$unit"}
-      ]);
-
-      return recensements
-    }
+    return recensements
 
   } catch (err) {
     throw boom.boomify(err)
   }
 }
 
-exports.updateOne = async (req, reply) => {
+const updateOne = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
         const recensement = req.body
@@ -97,7 +80,7 @@ exports.updateOne = async (req, reply) => {
   }
 }
 
-exports.addOne = async (req, reply) => {
+const addOne = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
       const recensementModel = req.body
@@ -113,7 +96,7 @@ exports.addOne = async (req, reply) => {
   }    
 }
 
-exports.deleteOne = async (req, reply) => {
+const deleteOne = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.SubmitRecensement)) { 
     try {
       const recensementModel = req.body
@@ -129,4 +112,13 @@ exports.deleteOne = async (req, reply) => {
     reply.code(401)
     return "Vous n'avez pas le droit de soumettre un recensement"
   }    
+}
+
+export {
+  getLatestRecensementbyUnit,
+  getbyUnit,
+  getbyPayment,
+  updateOne,
+  addOne,
+  deleteOne 
 }

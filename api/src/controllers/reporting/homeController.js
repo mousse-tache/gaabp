@@ -1,13 +1,12 @@
-const boom = require('boom')
-const User = require('../../models/User')
-const Unit = require('../../models/Unit')
-const Recensement = require('../../models/Recensement')
-const axios = require("axios")
-const moment = require("moment");
-require('dotenv').config()
+import boom from 'boom'
+import moment from "moment"
 
-const { PermissionTypes } = require('../../security/permissionTypes');
-const { Permissions } = require('../../security/permissions');
+import User from '../../models/User.js'
+import Unit from '../../models/Unit.js'
+import Recensement from '../../models/Recensement.js'
+
+import { PermissionTypes } from '../../security/permissionTypes.js'
+import { Permissions } from '../../security/permissions.js'
 
 function getLastRecensementPeriod() {
     var y = moment().year();
@@ -20,7 +19,7 @@ function getLastRecensementPeriod() {
     return nextRecensementPeriod.add(-1, 'y').toDate();
 }; 
 
-exports.getGlobalReport = async (req, reply) => {
+const getGlobalReport = async (req, reply) => {
     if(Permissions(req.headers.authorization, PermissionTypes.ViewRecensementSummary)) { 
       try {  
          
@@ -65,11 +64,41 @@ exports.getGlobalReport = async (req, reply) => {
             {$match: {paiementComplet: true}},
             {$group: {_id: "money", n: {$sum: "$details.cost.totalPrice"}}}
         ]);
+
+        let usersByType = await User.aggregate([
+            {$unwind: "$nominations"},
+            {$match: {"nominations.ed": null}},
+            {$group: { _id: "$nominations.type", value: {$sum:1}}},
+            {$project: {_id: 0, label: "$_id", value:1}}
+        ]);
   
-        return {nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
+        let usersByBranch = await User.aggregate([
+            {$unwind: "$nominations"},
+            {$match: {"nominations.ed": null}},
+            {
+               $addFields: {
+                  unitId: { $toObjectId: "$nominations.unitId" }
+               }
+            },
+            {$lookup: {
+               from: "units",
+               localField: "unitId",
+               foreignField: "_id",
+               as: "unit"
+             }},
+            {$unwind: "$unit"},
+            {$group: { _id: "$unit.branche", value: {$sum:1}}},
+            {$project: {_id: 0, label: "$_id", value:1}}
+        ]);
+
+        return {
+            nbOfUsers: nbOfUsers.length > 0 ? nbOfUsers[0].nbOfUsers : 0, 
             uniteRecenses: uniteRecenses.length > 0 ? uniteRecenses[0].uniteRecenses : 0, 
             unitsPaye: unitsPaye.length > 0 ? unitsPaye[0].unitsPaye : 0,
-            totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0};
+            totalCashForYear: totalCashForYear.length > 0 ? totalCashForYear[0].n : 0,
+            usersByType,
+            usersByBranch
+        };
       } catch (err) {
         throw boom.boomify(err)
       }
@@ -79,3 +108,5 @@ exports.getGlobalReport = async (req, reply) => {
       return "Vous n'avez pas le droit d'accéder d'effectuer cette action"
     }
   }
+
+  export { getGlobalReport }

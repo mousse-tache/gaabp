@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import Proptypes from "prop-types";
 import MaterialTable from 'material-table';
 import { navigate } from 'gatsby';
+import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 
 import AppContext from '@aabp/context/app/appContext';
+import UnitContext from '@aabp/context/unit/unitContext';
 
-import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import UnitContext from '@aabp/context/unit/unitContext';
+import { sortMemberPriority } from '@aabp/utils/tableExtensions';
 
 const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
   const { authedUser } = useContext(AppContext);
@@ -22,28 +23,23 @@ const UnitMembresTable = ({users, unitId, removeFromUnit}) => {
     setUserToDelete(false);
   };
 
+  let columns = [
+    { title: "Nom", field:'prenom' },
+    { title:"", field:'nom'},
+    { title: 'Courriel', field: 'courriel' },
+    { title: "Début", field:"sd", type:"date"},
+    { title: "Rôle", field: 'nominations.type', customSort: (a, b) => {return sortMemberPriority(a, b);}, defaultSort: "desc" }      
+  ];
+
   const [state, setState] = React.useState({
-    columns: [
-      { title: "Nom", field:'prenom' },
-      { title:"", field:'nom'},
-      { title: 'Courriel', field: 'courriel' },
-      { title: "Début", field:"sd", type:"date"},
-      { title: "Fin", field:"ed", type:"date"},
-      { title: "Rôle", field: 'nominations.type' }      
-    ],
+    columns,
     data: users,
   });
 
   useEffect(() => {
     setState(
       {
-      columns: [
-        { title: "Nom", field:'prenom' },
-        { title:"", field:'nom'},
-        { title: 'Courriel', field: 'courriel' },
-        { title: "Début", field:"nominations.sd", type:"date"},
-        { title: "Rôle", field: 'nominations.type'}
-      ],
+      columns,
       data: users,
     });
   }, [users, unitId]);

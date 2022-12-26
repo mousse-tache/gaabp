@@ -33,6 +33,10 @@ export class UnitClient {
         return this._apiClient.delete(`unit/${id}`);
     }
 
+    toggleIsActive = (id, isActive) => {
+        return this._apiClient.put(`unit/${id}/status/${isActive}`);
+    }
+
 }    
 
 export default UnitClient;

@@ -1,5 +1,5 @@
 // External Dependancies
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const Recensement = new mongoose.Schema({
   date: Date,
@@ -10,4 +10,4 @@ const Recensement = new mongoose.Schema({
   unitId: mongoose.Types.ObjectId || String
 })
 
-module.exports = mongoose.model('Recensement', Recensement)
+export default mongoose.model('Recensement', Recensement)

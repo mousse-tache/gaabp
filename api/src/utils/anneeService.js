@@ -82,9 +82,11 @@ const getDetailedService = (nominations) => {
     return getYearsAndDaysElapsed(fy);
 };
 
-exports.getAnneeDeService = (nominations) => {
+const getAnneeDeService = (nominations) => {
     var sorted = sortNominations(nominations);
     var fy = getFlattenedYears(sorted);
 
     return getYearsElapsed(fy);
 };
+
+export { getAnneeDeService }

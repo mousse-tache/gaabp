@@ -1,42 +1,56 @@
 // Import our Controllers
-const unitController = require('../controllers/unitController')
+import {
+  getUnits,
+  getByGroupId,
+  getSingleUnit,
+  getUnitsById,
+  addUnit,
+  updateUnit,
+  deleteUnit,
+  toggleIsActive
+} from '../controllers/unitController.js'
 
 const UnitRoutes = [
     {
         method: 'GET',
         url: '/api/units',
-        handler: unitController.getUnits
+        handler: getUnits
       },
       {
         method: 'GET',
         url: '/api/unit/:id',
-        handler: unitController.getSingleUnit
+        handler: getSingleUnit
       },
       {
         method: 'POST',
         url: '/api/units/ids',
-        handler: unitController.getUnitsById
+        handler: getUnitsById
       },
       {
         method: 'GET',
         url: '/api/unit/group/:id',
-        handler: unitController.getByGroupId
+        handler: getByGroupId
       },
       {
         method: 'POST',
         url: '/api/unit',
-        handler: unitController.addUnit
+        handler: addUnit
       },
       {
         method: 'PUT',
         url: '/api/unit/:id',
-        handler: unitController.updateUnit
+        handler: updateUnit
       },
       {
         method: 'DELETE',
         url: '/api/unit/:id',
-        handler: unitController.deleteUnit
+        handler: deleteUnit
+      },
+      {
+        method: 'PUT',
+        url: '/api/unit/:id/status/:active',
+        handler: toggleIsActive
       }
 ]
 
-module.exports = UnitRoutes;
+export default UnitRoutes;

@@ -12,7 +12,7 @@ import UserContext from "@aabp/context/userContext";
 import UserClient from "@aabp/clients/userClient";
 
 import MemberDetails from "@aabp/components/membres/MemberDetails";
-import UserDetailsTab from "@aabp/components/membres/userDetailsTabs";
+import UserDetailsTab from "@aabp/components/membres/UserDetailsTabs";
 
 const Profile = () => {
     const { authedUser, claims, init } = useContext(AppContext);

@@ -5,8 +5,8 @@ import { navigate } from 'gatsby';
 import { Dialog, DialogTitle, Button, DialogActions } from "@material-ui/core";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import NominationTypes from "@aabp/utils/nominationTypes";
 import AppContext from '@aabp/context/app/appContext';
+import { sortMemberPriority } from '@aabp/utils/tableExtensions';
 
 const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
   const { authedUser } = useContext(AppContext);
@@ -18,29 +18,29 @@ const GroupMembresTable = ({users, groupId, removeFromGroup}) => {
     setUserToDelete(false);
   };
 
+  let columns =  [
+    { title: "Nom", field:'prenom' },
+    { title:"", field:'nom'},
+    { title: 'Courriel', field: 'courriel' },
+    { title: "Début", field:"sd", type:"date"},
+    { title: "Fin", field:"ed", type:"date"},
+    { 
+      title: "Rôle", 
+      field: 'nominations', 
+      render: row => row.nominations.filter(x => x.groupId === groupId)[0]?.type, 
+      customSort: (a, b) => {return sortMemberPriority(a, b);}, 
+      defaultSort: "desc"  }  
+  ];
+
   const [state, setState] = React.useState({
-    columns: [
-      { title: "Nom", field:'prenom' },
-      { title:"", field:'nom'},
-      { title: 'Courriel', field: 'courriel' },
-      { title: "Début", field:"sd", type:"date"},
-      { title: "Fin", field:"ed", type:"date"},
-      { title: "Rôle", field: 'nominations', render: row => row.nominations.filter(x => x.groupId === groupId)[0]?.type }
-      
-    ],
+    columns,
     data: users,
   });
 
   useEffect(() => {
     setState(
       {
-      columns: [
-        { title: "Nom", field:'prenom' },
-        { title:"", field:'nom'},
-        { title: 'Courriel', field: 'courriel' },
-        { title: "Début", field:"sd", type:"date", render: row => row.nominations.filter(x => x.groupId === groupId).sort(function(a, b){return a.sd > b.sd;})[0]?.sd},
-        { title: "Rôle", field: 'nominations', render: row => NominationTypes[row.nominations.filter(x => x.groupId === groupId && !x.ed)[0]?.type]}
-      ],
+      columns,
       data: users,
     });
   }, [users]);

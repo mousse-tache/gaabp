@@ -1,11 +1,9 @@
-// External Dependancies
-const boom = require('boom')
+import boom from 'boom'
 
-// Get Data Models
-const Inscription = require('../models/Inscription')
+import Inscription from '../models/Inscription.js'
 
 // Get all inscriptions
-exports.getInscriptions = async (req, reply) => {
+const getInscriptions = async (req, reply) => {
   try {
     const inscriptions = await Inscription.find()
     return inscriptions
@@ -15,7 +13,7 @@ exports.getInscriptions = async (req, reply) => {
 }
 
 // Get single inscription by ID
-exports.getSingleInscription = async (req, reply) => {
+const getSingleInscription = async (req, reply) => {
   try {
     const id = req.params.id
     const inscription = await Inscription.findById(id)
@@ -26,7 +24,7 @@ exports.getSingleInscription = async (req, reply) => {
 }
 
 // Add a new inscription
-exports.addInscription = async (req, reply) => {
+const addInscription = async (req, reply) => {
   try {
     const inscription = new Inscription(req.body)
     return inscription.save()
@@ -36,7 +34,7 @@ exports.addInscription = async (req, reply) => {
 }
 
 // Update an existing inscription
-exports.updateInscription = async (req, reply) => {
+const updateInscription = async (req, reply) => {
   try {
     const id = req.params.id
     const inscription = req.body
@@ -49,7 +47,7 @@ exports.updateInscription = async (req, reply) => {
 }
 
 // Delete a inscription
-exports.deleteInscription = async (req, reply) => {
+const deleteInscription = async (req, reply) => {
   try {
     const id = req.params.id
     const inscription = await Inscription.findByIdAndRemove(id)
@@ -57,4 +55,12 @@ exports.deleteInscription = async (req, reply) => {
   } catch (err) {
     throw boom.boomify(err)
   }
+}
+
+export {
+  getInscriptions,
+  getSingleInscription,
+  addInscription,
+  updateInscription,
+  deleteInscription
 }

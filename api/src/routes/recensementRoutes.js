@@ -1,37 +1,44 @@
 // Import our Controllers
-const recensementController = require('../controllers/recensementController')
+import {
+  getLatestRecensementbyUnit,
+  getbyUnit,
+  getbyPayment,
+  updateOne,
+  addOne,
+  deleteOne 
+} from '../controllers/recensementController.js'
 
 const RecensementRoutes = [
   {
     method: 'GET',
     url: '/api/recensement/:id',
-    handler: recensementController.getbyUnit
+    handler: getbyUnit
   },
   {
     method: 'GET',
     url: '/api/recensement/latest/:id',
-    handler: recensementController.getLatestRecensementbyUnit
+    handler: getLatestRecensementbyUnit
   },
   {
     method: 'GET',
     url: '/api/recensement/paid/:paid',
-    handler: recensementController.getbyPayment
+    handler: getbyPayment
   },
   {
     method: 'POST',
     url: '/api/recensement',
-    handler: recensementController.addOne
+    handler: addOne
   },
   {
     method: 'POST',
     url: '/api/recensement/remove',
-    handler: recensementController.deleteOne
+    handler: deleteOne
   },
   {
     method: 'PUT',
     url: '/api/recensement',
-    handler: recensementController.updateOne
+    handler: updateOne
   }
 ]
 
-module.exports = RecensementRoutes;
+export default RecensementRoutes;

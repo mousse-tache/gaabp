@@ -1,11 +1,12 @@
-const boom = require('boom');
-const DemandeNomination = require('../../models/DemandeNomination')
-const User = require('../../models/User')
-const { PermissionTypes } = require('../../security/permissionTypes');
-const { Permissions } = require('../../security/permissions');
-require('dotenv').config()
+import boom from 'boom'
 
-exports.getByCompletion = async (req, reply) => {
+import DemandeNomination from '../../models/DemandeNomination.js'
+import User from '../../models/User.js'
+
+import { PermissionTypes } from '../../security/permissionTypes.js'
+import { Permissions } from '../../security/permissions.js'
+
+const getByCompletion = async (req, reply) => {
   try {
     const completion = req.params.completion;
 
@@ -23,7 +24,7 @@ exports.getByCompletion = async (req, reply) => {
   }
 }
 
-exports.getByApprover = async (req, reply) => {
+const getByApprover = async (req, reply) => {
   try {
     const { userId } = req.params;
     const nominations = await DemandeNomination.find({"approvers": {$elemMatch: {_id: userId}}}).sort({_id: -1})
@@ -33,7 +34,7 @@ exports.getByApprover = async (req, reply) => {
   }
 }
 
-exports.updateOne = async (req, reply) => {
+const updateOne = async (req, reply) => {
     try {
         const nomination = req.body
         const id = nomination._id
@@ -45,7 +46,7 @@ exports.updateOne = async (req, reply) => {
       }
 }
 
-exports.addOne = async (req, reply) => {
+const addOne = async (req, reply) => {
     try {
         const model = req.body
     
@@ -57,7 +58,7 @@ exports.addOne = async (req, reply) => {
       }
 }
 
-exports.refuseNomination = async (req, reply) => {
+const refuseNomination = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.ValidateNomination)) { 
     try {
       const { nominationId, confirmerId } = req.body
@@ -75,7 +76,7 @@ exports.refuseNomination = async (req, reply) => {
   }
 }
 
-exports.confirmNomination = async (req, reply) => {
+const confirmNomination = async (req, reply) => {
   if(!Permissions(req.headers.authorization, PermissionTypes.ValidateNomination)) {     
     reply.code(401)
     return "Vous n'avez pas le droit d'accepter' une nomination"
@@ -115,4 +116,13 @@ function getDateWithoutTime(date = new Date()) {
     date.getMonth(),
     date.getDate()
   );
+}
+
+export {
+  getByCompletion,
+  getByApprover,
+  updateOne,
+  addOne,
+  refuseNomination,
+  confirmNomination
 }

@@ -1,15 +1,13 @@
-// External Dependancies
-const boom = require('boom')
+import boom from 'boom'
 
-// Get Data Models
-const Unit = require('../models/Unit')
+import Unit from '../models/Unit.js'
+import User from '../models/User.js'
 
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
-require('dotenv').config();
+import { PermissionTypes } from '../security/permissionTypes.js'
+import { Permissions } from '../security/permissions.js'
 
 // Get all units
-exports.getUnits = async (req, reply) => {
+const getUnits = async (req, reply) => {
   try {
     const units = await Unit.aggregate([
       {$lookup:
@@ -29,7 +27,7 @@ exports.getUnits = async (req, reply) => {
           as: "recensements"
         }
       },
-      {$project: {nom:1, genre:1, branche:1, "g.nom":1, "g.numero":1, recensements: { $arrayElemAt: [ "$recensements", -1 ] }}},
+      {$project: {nom:1, genre:1, branche:1, a:1, "g.nom":1, "g.numero":1, recensements: { $arrayElemAt: [ "$recensements", -1 ] }}},
       {$sort: {nom:1}}
     ]);
 
@@ -40,7 +38,7 @@ exports.getUnits = async (req, reply) => {
 }
 
 // Get units by group id
-exports.getByGroupId = async (req, reply) => {
+const getByGroupId = async (req, reply) => {
   try {
     const id = req.params.id
     const units = await Unit.find({group: id})
@@ -52,7 +50,7 @@ exports.getByGroupId = async (req, reply) => {
 
 
 // Get single unit by ID
-exports.getSingleUnit = async (req, reply) => {
+const getSingleUnit = async (req, reply) => {
   try {
     const id = req.params.id
     const unit = await Unit.findById(id)
@@ -62,7 +60,7 @@ exports.getSingleUnit = async (req, reply) => {
   }
 }
 
-exports.getUnitsById = async (req, reply) => {
+const getUnitsById = async (req, reply) => {
   try {
     const ids = req.body
     const units = await Unit.find({_id: {$in: ids}},{nom:1})
@@ -73,7 +71,7 @@ exports.getUnitsById = async (req, reply) => {
 }
 
 // Add a new unit
-exports.addUnit = async (req, reply) => {
+const addUnit = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.CreateUnit)) { 
     try {
       const unitModel = req.body
@@ -94,7 +92,7 @@ exports.addUnit = async (req, reply) => {
 }
 
 // Update an existing unit
-exports.updateUnit = async (req, reply) => {
+const updateUnit = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateUnit)) { 
     try {
       const unit = req.body
@@ -113,7 +111,7 @@ exports.updateUnit = async (req, reply) => {
 }
 
 // Delete a unit
-exports.deleteUnit = async (req, reply) => {
+const deleteUnit = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.DeleteUnit)) { 
     try {
       const id = req.params.id
@@ -127,4 +125,41 @@ exports.deleteUnit = async (req, reply) => {
     reply.code(403)
     return "Unauthorized"
   }
+}
+
+// Toggle as active or not
+const toggleIsActive = async (req, reply) => {
+  if(Permissions(req.headers.authorization, PermissionTypes.DeactivateUnit)) { 
+    try {
+      const isActive = req.params.active
+      const id = req.params.id
+      
+      await Unit.findByIdAndUpdate(id, {a: isActive}, { new: true })
+
+      if(!isActive) {
+        await User.updateMany({"nominations.unitId": id, "nominations.ed": null}, {
+          $set: {"nominations.$.ed": new Date()}
+        });
+      }
+
+      return true
+    } catch (err) {
+      throw boom.boomify(err)
+    }
+  }
+  else {
+    reply.code(403)
+    return "Unauthorized"
+  }
+}
+
+export {
+  getUnits,
+  getByGroupId,
+  getSingleUnit,
+  getUnitsById,
+  addUnit,
+  updateUnit,
+  deleteUnit,
+  toggleIsActive
 }

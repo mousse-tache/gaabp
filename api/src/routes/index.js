@@ -1,42 +1,44 @@
 // Import our Controllers
-const inscriptionController = require('../controllers/inscriptionController')
+import { getInscriptions, getSingleInscription, addInscription, updateInscription, deleteInscription } from '../controllers/inscriptionController.js'
 
-const UserRoutes = require('./userRoutes')
-const GroupRoutes = require('./groupRoutes')
-const UnitRoutes = require('./unitRoutes')
-const RecensementRoutes = require('./recensementRoutes')
-const NominationsRoutes = require('./nominationsRoutes')
-const DecorationsRoutes = require('./decorationsRoutes')
-const ReportingRoutes = require('./reportingRoutes')
-const CampRoutes = require('./campRoutes')
-const FeatureRoutes = require('./featureRoutes')
-const EligibilityRoutes = require('./eligibilityRoutes')
+import UserRoutes from './userRoutes.js'
+import GroupRoutes from './groupRoutes.js'
+import UnitRoutes from './unitRoutes.js'
+import RecensementRoutes from './recensementRoutes.js'
+import NominationsRoutes from './nominationsRoutes.js'
+import DecorationsRoutes from './decorationsRoutes.js'
+import ReportingRoutes from './reportingRoutes.js'
+import CampRoutes from './campRoutes.js'
+import FeatureRoutes from './featureRoutes.js'
+import EligibilityRoutes from './eligibilityRoutes.js'
+
+import PublicRoutes from './PublicRoutes.js'
 
 const otherRoutes = [
   {
     method: 'GET',
     url: '/api/inscriptions',
-    handler: inscriptionController.getInscriptions
+    handler: getInscriptions
   },
   {
     method: 'GET',
     url: '/api/inscription/:id',
-    handler: inscriptionController.getSingleInscription
+    handler: getSingleInscription
   },
   {
     method: 'POST',
     url: '/api/inscription',
-    handler: inscriptionController.addInscription,
+    handler: addInscription,
   },
   {
     method: 'PUT',
     url: '/api/inscription/:id',
-    handler: inscriptionController.updateInscription
+    handler: updateInscription
   },
   {
     method: 'DELETE',
     url: '/api/inscription/:id',
-    handler: inscriptionController.deleteInscription
+    handler: deleteInscription
   }
 ]
 
@@ -51,4 +53,8 @@ var routes = otherRoutes.concat(RecensementRoutes)
               .concat(FeatureRoutes)
               .concat(EligibilityRoutes)
 
-module.exports = routes
+export default routes;
+
+export {
+  PublicRoutes
+}

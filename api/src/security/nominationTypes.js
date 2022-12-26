@@ -1,4 +1,4 @@
-exports.NominationTypes = {
+const NominationTypes = {
     Assistant: "Assistant(e)-Chef(taine)",
     Chef: "Chef(taine)",
     Commissaire: "Commissaire",
@@ -22,4 +22,8 @@ exports.NominationTypes = {
     Administrateur: "Administrateur/Administratrice",
     ConseillerSpiri: "Conseiller spirituel",
     DCC: "Deputy Camp Chief"
+}
+
+export {
+    NominationTypes
 }

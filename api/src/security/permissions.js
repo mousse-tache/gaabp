@@ -1,10 +1,10 @@
-const { PermissionTypes } = require("./permissionTypes")
-const { NominationTypes } = require("./nominationTypes")
+import jwt from 'jsonwebtoken'
 
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
+import { PermissionTypes } from "./permissionTypes.js"
+import { NominationTypes } from "./nominationTypes.js"
 
-exports.Permissions = (userJwt, permission, unitId = null) => {
+
+const Permissions = (userJwt, permission, unitId = null) => {
     const user = jwt.verify(userJwt, process.env.signingsecret).permissions; 
 
     if (!user || !user.nominations) {
@@ -86,3 +86,5 @@ exports.Permissions = (userJwt, permission, unitId = null) => {
           return false;
       } 
 };
+
+export { Permissions }

@@ -1,22 +1,26 @@
-// Import our Controllers
-const campController = require('../controllers/campController')
+import { 
+  createNewCamp,
+  getLast,
+  getList
+}
+ from '../controllers/campController.js'
 
 const CampRoutes = [
   {
     method: 'POST',
     url: '/api/camp',
-    handler: campController.createNewCamp
+    handler: createNewCamp
   },
   {
     method: 'GET',
     url: '/api/camp/last/:unitId',
-    handler: campController.getLast
+    handler: getLast
   },
   {
     method: 'GET',
     url: '/api/camps/list',
-    handler: campController.getList
+    handler: getList
   }
 ]
 
-module.exports = CampRoutes;
+export default CampRoutes;

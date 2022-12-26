@@ -1,15 +1,12 @@
-const boom = require('boom')
-const mongoose = require('mongoose');
-const User = require('../../models/User');
-const Decoration = require('../../models/Decoration');
-const DemandeNomination = require('../../models/DemandeNomination')
-const { PermissionTypes } = require('../../security/permissionTypes');
-const { Permissions } = require('../../security/permissions');
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
-const { getAnneeDeService } = require('../../utils/anneeService');
+import boom from 'boom'
 
-exports.getEligibilityByHonor = async (req, reply) => {
+import User from '../../models/User.js'
+
+import { PermissionTypes } from '../../security/permissionTypes.js'
+import { Permissions } from '../../security/permissions.js'
+import { getAnneeDeService } from '../../utils/anneeService.js'
+
+const getEligibilityByHonor = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.AddDecoration)) {
     try {
       const id = req.params.id
@@ -46,3 +43,5 @@ exports.getEligibilityByHonor = async (req, reply) => {
     return "Forbidden"
   }
 }
+
+export { getEligibilityByHonor }

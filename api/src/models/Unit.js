@@ -1,5 +1,5 @@
 // External Dependancies
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const unitSchema = new mongoose.Schema({
   nom: String,
@@ -9,7 +9,9 @@ const unitSchema = new mongoose.Schema({
   cd: Date,
   branche: Number,
   genre: Number,
-  membres: Array
+  membres: Array,
+  // Active
+  a: Boolean
 })
 
-module.exports = mongoose.model('Unit', unitSchema)
+export default mongoose.model('Unit', unitSchema)

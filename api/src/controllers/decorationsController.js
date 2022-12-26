@@ -1,11 +1,12 @@
-const boom = require('boom')
-const mongoose = require('mongoose');
-const Decoration = require('../models/Decoration');
-const { PermissionTypes } = require('../security/permissionTypes');
-const { Permissions } = require('../security/permissions');
-require('dotenv').config()
+import boom from 'boom'
+import mongoose from 'mongoose'
 
-exports.getDecorationsForUser = async (req, reply) => {
+import Decoration from '../models/Decoration.js'
+
+import { PermissionTypes } from '../security/permissionTypes.js'
+import { Permissions } from '../security/permissions.js'
+
+const getDecorationsForUser = async (req, reply) => {
     try {
         const id = req.params.id
         return await Decoration.find({membre: mongoose.Types.ObjectId(id)})
@@ -14,7 +15,7 @@ exports.getDecorationsForUser = async (req, reply) => {
       }
 }
 
-exports.saveDecoration = async (req, reply) => {
+const saveDecoration = async (req, reply) => {
   if(Permissions(req.headers.authorization, PermissionTypes.UpdateDecorations)) { 
     try {
       const { decoration } = req.body
@@ -36,4 +37,9 @@ exports.saveDecoration = async (req, reply) => {
     reply.code(401)
     return "Vous n'avez pas le droit de faire modifier les décorations"
   }
+}
+
+export { 
+  getDecorationsForUser,
+  saveDecoration
 }

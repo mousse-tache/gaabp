@@ -1,11 +1,9 @@
-// External Dependancies
-const boom = require('boom')
+import boom from 'boom'
 
-// Get Data Models
-const Group = require('../models/Group')
+import Group from '../models/Group.js'
 
 // Get all groups
-exports.getGroups = async (req, reply) => {
+const getGroups = async (req, reply) => {
   try {
     const groups = await Group.find().sort({numero:1})
     return groups
@@ -14,7 +12,7 @@ exports.getGroups = async (req, reply) => {
   }
 }
 
-exports.getPublicGroups = async (req, reply) => {
+const getPublicGroups = async (req, reply) => {
   try {
     const groups = await Group.find({public: true})
     return groups
@@ -24,7 +22,7 @@ exports.getPublicGroups = async (req, reply) => {
 }
 
 // Get single group by ID
-exports.getSingleGroup = async (req, reply) => {
+const getSingleGroup = async (req, reply) => {
   try {
     const id = req.params.id
     const group = await Group.findById(id)
@@ -34,7 +32,7 @@ exports.getSingleGroup = async (req, reply) => {
   }
 }
 
-exports.getGroupsById = async (req, reply) => {
+const getGroupsById = async (req, reply) => {
   try {
     const ids = req.body
     const groups = await Group.find({_id: {$in: ids}},{numero:1, nom:1})
@@ -45,7 +43,7 @@ exports.getGroupsById = async (req, reply) => {
 }
 
 // Get single group by ID
-exports.getSingleGroupByNumber = async (req, reply) => {
+const getSingleGroupByNumber = async (req, reply) => {
   try {
     const numero = req.params.numero
     const group = await Group.find({numero: numero})
@@ -56,7 +54,7 @@ exports.getSingleGroupByNumber = async (req, reply) => {
 }
 
 // Add a new group
-exports.addGroup = async (req, reply) => {
+const addGroup = async (req, reply) => {
   try {
     const groupModel = req.body
 
@@ -71,7 +69,7 @@ exports.addGroup = async (req, reply) => {
 }
 
 // Update an existing group
-exports.updateGroup = async (req, reply) => {
+const updateGroup = async (req, reply) => {
   try {
     const group = req.body
     const id = group.id
@@ -84,7 +82,7 @@ exports.updateGroup = async (req, reply) => {
 }
 
 // Delete a group
-exports.deleteGroup = async (req, reply) => {
+const deleteGroup = async (req, reply) => {
   try {
     const id = req.params.id
     const group = await Group.findByIdAndRemove(id)
@@ -92,4 +90,15 @@ exports.deleteGroup = async (req, reply) => {
   } catch (err) {
     throw boom.boomify(err)
   }
+}
+
+export {
+  getGroups,
+  getPublicGroups,
+  getSingleGroup,
+  getGroupsById,
+  getSingleGroupByNumber,
+  addGroup,
+  updateGroup,
+  deleteGroup
 }
