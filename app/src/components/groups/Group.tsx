@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import Loading from "../loading/loading";
-import GroupClient from "../../clients/groupClient";
-import { Input, Paper, Button, Fab, InputLabel, Modal } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import { Input, Paper, InputLabel, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
+
+import AppContext from "@aabp/context/app/appContext";
+
+import Loading from "../loading/loading";
 import GroupTable from "./groupTable";
+import Button from "@aabp/components/design-system/Button/Button";
+
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
-import { useSnackbar } from 'notistack';
-import AppContext from "@aabp/context/app/appContext";
+
+import GroupClient from "../../clients/groupClient";
 
 const Group = () => {
     const { authedUser } = useContext(AppContext);
@@ -76,9 +81,9 @@ const Group = () => {
         <h2 className="membres-title">
             <span className="membres-title-element">Groupes</span>
             <span className="membres-title-element">
-                <Fab aria-label="add" size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup, authedUser)} onClick={handleOpen}>
+                <Button size="small" color="secondary" disabled={!Permissions(PermissionTypes.CreateGroup, authedUser)} onClick={handleOpen}>
                     <AddIcon />
-                </Fab>
+                </Button>
             </span>
         </h2>
         <Modal 
@@ -90,9 +95,9 @@ const Group = () => {
             <Paper>
                 <form className="unit-modal-content">
                     <div className="close-icon">    
-                        <Fab aria-label="add" size="small" color="secondary" onClick={handleClose}>
+                        <Button aria-label="add" size="small" color="secondary" onClick={handleClose}>
                             <CloseIcon />
-                        </Fab> 
+                        </Button> 
                     </div>   
                     <h3>Nouveau groupe</h3>
                     

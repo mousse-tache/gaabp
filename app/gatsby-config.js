@@ -87,7 +87,8 @@ module.exports = {
         transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
         generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
       },
-    }
+    },    
+    'gatsby-plugin-postcss'
 
   ],
   flags: {

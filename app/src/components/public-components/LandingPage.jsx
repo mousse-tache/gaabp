@@ -31,7 +31,7 @@ const LandingPage = () => {
             <section name="home" className="sitename anchor">
               <Typography className="title-container full-bleed" variant="h3" gutterBottom> 
                 <div className="title-asso-logo">
-                    <img className="morelinks hidden-logo" width="80" src={Logo} alt="Logo AABP"/>
+                    <img className="morelinks hidden-logo m-auto" width="80" src={Logo} alt="Logo AABP"/>
                     <div>
                         <span>Association des aventuriers de Baden-Powell</span> 
                     </div>
