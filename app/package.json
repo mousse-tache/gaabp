@@ -33,7 +33,7 @@
     "gatsby-source-filesystem": "^4.21.1",
     "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.25.0",
-    "i18next": "^21.9.1",
+    "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^1.4.1",
     "material-table": "^1.69.2",
