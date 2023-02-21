@@ -12,7 +12,7 @@ const Inscrire = () => (
         <Typography>  
           <Box component="span" lineHeight={2.5}>
 
-              L'inscription pour les jeunes se fait directement auprès des groupes scouts. Notre association offre une structure décentralisée pour nos groupes membres. Par le biais de nos règlements, de nos formations et de nos activités nationales, nous assurons une cohésion chez l'ensemble de nos membres, mais c'est dans vos localités que notre scoutisme se vie pleinement!
+              L'inscription pour les jeunes se fait directement auprès des groupes. Notre association offre une structure décentralisée pour nos groupes membres. Par le biais de nos règlements, de nos formations et de nos activités nationales, nous assurons une cohésion chez l'ensemble de nos membres, mais c'est dans vos localités que notre aventure se vie pleinement!
             
           </Box>
         </Typography>

@@ -16,7 +16,7 @@ export default function BlogPost({ data }) {
       <Layout>
         <Helmet>
             <meta name="description" content={`Blog de l'Association des aventurier de baden-powell | ${post.frontmatter.title}`}/>
-            <meta name="keywords" content="scout, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
+            <meta name="keywords" content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
             <title>AABP | {post.frontmatter.title}</title>
             <html lang="fr" />
         </Helmet>

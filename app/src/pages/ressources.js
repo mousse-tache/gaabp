@@ -9,8 +9,8 @@ import Reglements from "../components/ressources/reglements/reglements";
 const ReglementsPage = () => (
   <div>
     <Helmet>
-          <meta name="description" content="L'Association des Aventuriers de Baden-Powell est une association de scoutisme traditionnel pour les 7 ans et plus."/>
-          <meta name="keywords" content="scout, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association,"></meta>
+          <meta name="description" content="Ressources et règlements de l'Association des Aventuriers de Baden-Powell."/>
+          <meta name="keywords" content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association,"></meta>
           <meta name="google-site-verification" content="Q2zhljR5H-cSJKdJBwFZaky-pEMiHM9NPK2pIgnVm6c" />
           <title>AABP | Règlements</title>
           <html lang="fr" />

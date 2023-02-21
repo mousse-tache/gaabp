@@ -18,7 +18,7 @@ const CastorModal = ({open, handleClose}) => {
                     </IconButton>
                     <CardContent>
                         <Typography variant="h5">
-                            Les castors sont les plus jeunes scouts à l'AABP.
+                            Les castors sont les plus jeunes membres à l'AABP.
                         </Typography>
                     </CardContent>
 
@@ -30,7 +30,7 @@ const CastorModal = ({open, handleClose}) => {
 
                     <CardContent>
                         <Typography>
-                            Comme pour tous les scouts, l'apprentissage par le jeu est une partie importante du cursus des castors. Les activités courantes incluent également le bricolage, le partage d'histoire, le jeu actif et l'apprentissage de techniques de base du scoutisme.
+                            Comme pour tous les membres, l'apprentissage par le jeu est une partie importante du cursus des castors. Les activités courantes incluent également le bricolage, le partage d'histoire, le jeu actif et l'apprentissage de techniques de base.
                         </Typography>
                     </CardContent>
 

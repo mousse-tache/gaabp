@@ -14,7 +14,7 @@ export default function AidePost({ data }) {
       <Layout>
         <Helmet>
             <meta name="description" content={`Centre d'aide de l'Association des aventurier de baden-powell | ${post.frontmatter.title}`}/>
-            <meta name="keywords" content="scout, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, aide, help"></meta>
+            <meta name="keywords" content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, aide, help"></meta>
             <title>AABP | {post.frontmatter.title}</title>
             <html lang="fr" />
         </Helmet>

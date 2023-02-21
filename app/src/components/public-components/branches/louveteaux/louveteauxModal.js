@@ -49,7 +49,7 @@ const LouveteauxModal = ({open, handleClose}) => {
                     </CardContent>
                     <CardContent>
                         <Typography>
-                            Comme pour tous les scouts, l'apprentissage par le jeu est une partie importante du cursus. À la branche jaune, les compétences techniques prennent galon avec des enseignements variés sur la nature, le mattelotage, l'expression, le campisme et les activités en plein air. 
+                            Comme pour tous les membres, l'apprentissage par le jeu est une partie importante du cursus. À la branche jaune, les compétences techniques prennent galon avec des enseignements variés sur la nature, le mattelotage, l'expression, le campisme et les activités en plein air. 
                         </Typography>
                     </CardContent>
 
