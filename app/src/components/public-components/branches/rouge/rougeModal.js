@@ -23,7 +23,7 @@ const RougeModal = ({open, handleClose}) => {
                     </CardContent>                                  
                     <CardContent>
                         <Typography gutterBottom>     
-                            Les scouts de la Branche rouge s'impliquent au sein d'un Clan routier. Le choix du clan n'est pas banal, puisque de nos nombreuses affinités et spécialités existent à l'AABP. Certains clans sont plutôt familiaux, alors que d'autres s'unissent dans le service ou même dans une spécialité marine. 
+                            Les membres de la Branche rouge s'impliquent au sein d'un Clan routier. Le choix du clan n'est pas banal, puisque de nos nombreuses affinités et spécialités existent à l'AABP. Certains clans sont plutôt familiaux, alors que d'autres s'unissent dans le service ou même dans une spécialité marine. 
                         </Typography>
 
                         <Typography gutterBottom>     

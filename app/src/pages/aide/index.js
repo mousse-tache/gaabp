@@ -32,7 +32,7 @@ const NotFoundPage = () => {
     <Layout>
       <Helmet>
           <meta name="description" content="Blog de l'Association des aventuriers de Baden-Powell"/>
-          <meta name="keywords" content="scout, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
+          <meta name="keywords" content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
           <title>AABP | Centre d'aide</title>
           <html lang="fr" />
       </Helmet>

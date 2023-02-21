@@ -170,7 +170,7 @@ const EditGroup = ({id}) => {
                 
                 <TextField label="Numéro" fullWidth type="text" value={group.numero} disabled={!canEdit} required={true} placeholder="1er" onChange={event => setGroup({...group, numero: event.target.value})} />
 
-                <TextField label="Nom du groupe" fullWidth type="text" value={group.nom} disabled={!canEdit} placeholder="Groupe scout de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
+                <TextField label="Nom du groupe" fullWidth type="text" value={group.nom} disabled={!canEdit} placeholder="Groupe de Glasgow" onChange={event => setGroup({...group, nom: event.target.value})} />
 
                 <TextField label="Ville" fullWidth type="text" value={group.ville} disabled={!canEdit} placeholder="Glasgow" onChange={event => setGroup({...group, ville: event.target.value})} />
                 

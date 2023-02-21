@@ -6,7 +6,6 @@ import Inscrire from "@aabp/components/public-components/Inscrire";
 import Impliquer from "@aabp/components/public-components/Impliquer";
 import Contact from "@aabp/components/public-components/Contact";
 import ImageCarousel from "@aabp/components/public-components/ImageCarousel";
-import Covid19 from "@aabp/components/public-components/mesures-sanitaires/Covid19";
 
 import LogoSpinner from "@aabp/components/spinner/LogoSpinner";
 import Logo from "@aabp/images/Logo_AABP.png";
@@ -38,7 +37,6 @@ const LandingPage = () => {
                 </div>   
                 <ImageCarousel />
               </Typography>
-            <Covid19 />
             </section>
             <About/>
             <Inscrire />
