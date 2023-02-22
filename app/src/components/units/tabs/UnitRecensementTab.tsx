@@ -8,16 +8,20 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AppContext from "@aabp/context/app/appContext";
 import UnitContext from "@aabp/context/unit/unitContext";
 
-import Permissions from "@aabp/auth/permissions";
-import PermissionTypes from "@aabp/auth/permissionTypes";
-import NominationTypes from "@aabp/utils/nominationTypes";
+import { isFeatureActivated } from "@aabp/features/useFeatures";
 
 import Recensement from "@aabp/components/recensement/recensement";
 import AddNewUsers from "@aabp/components/recensement/AddNewUsers";
 import Loading from "@aabp/components/loading/loading";
 import UnitMembersTable from "@aabp/components/units/unitMembersTable";
 
+import Permissions from "@aabp/auth/permissions";
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import NominationTypes from "@aabp/utils/nominationTypes";
+
 import UserClient from "@aabp/clients/userClient";
+
+import Features from "@aabp/features/Features";
 
 import "../unit.scss";
 
@@ -125,7 +129,7 @@ const UnitRecensementTab = () => {
                 uniteCadette={unit.branche !== 3 && unit.branche !== 4} />
             </AccordionDetails>
         </Accordion>
-        <Accordion>
+        {isFeatureActivated(Features.Recensement) && <Accordion>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h5">Ajouter des membres dans l'unité</Typography>                
@@ -168,9 +172,9 @@ const UnitRecensementTab = () => {
                     </div>
                 </div>
             </AccordionDetails>
-        </Accordion>
+        </Accordion>}
         {
-            Permissions(PermissionTypes.CreateUser, authedUser) && Permissions(PermissionTypes.UpdateUnit, authedUser) && 
+            Permissions(PermissionTypes.CreateUser, authedUser) && Permissions(PermissionTypes.UpdateUnit, authedUser) && isFeatureActivated(Features.Recensement) && 
             <AddNewUsers unitId={unit?._id} 
                         uniteCadette={unit.branche?.couleur !== "Rouge" && unit.branche?.couleur !== "Multibranche"}
                         triggerUpdateMembres={FetchMembres}

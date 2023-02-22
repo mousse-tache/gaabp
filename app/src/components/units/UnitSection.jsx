@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Proptypes from "prop-types";
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
-import Unit from "./unit";
-import RecensementOverview from "../recensement/recensementOverview";
+import Unit from "./Unit";
+import RecensementOverview from "../recensement/RecensementOverview";
 import SuspenseNoSSR from "@aabp/components/lazy-load/SuspenseNoSSR";
 
 import Permissions from "@aabp/auth/permissions";

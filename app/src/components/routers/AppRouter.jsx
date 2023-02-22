@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import NominatedUserRouter from "@aabp/components/routers/nominatedUserRouter";
-import AnonymousUserRouter from "@aabp/components/routers/anonymousUserRouter";
+import NominatedUserRouter from "@aabp/components/routers/NominatedUserRouter";
+import AnonymousUserRouter from "@aabp/components/routers/AnonymousUserRouter";
 import AppContext from "@aabp/context/app/appContext";
 
 const AppRouter = () => {    
