@@ -19,7 +19,7 @@
     "fastify": "^4.13.0",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
-    "mongoose": "^6.8.3",
+    "mongoose": "^6.10.0",
     "nodemon": "^2.0.6"
   },
   "devDependencies": {
