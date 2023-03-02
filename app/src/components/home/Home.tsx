@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import { Skeleton } from "@material-ui/lab";
 
@@ -11,8 +11,6 @@ import ApprobationCamp from "@aabp/components/units/camp/ApprobationCamp";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
-import "./home.scss";
-
 const Home = () => {
   const { authedUser, init } = useContext(AppContext);
 
@@ -21,22 +19,22 @@ const Home = () => {
   }
 
   return (
-    <div className="home-container">
+    <div className="flex flex-col">
       {!authedUser.isAdmin &&
         !Permissions(PermissionTypes.ApproveCamp, authedUser) && (
-          <div className="home-item">
+          <div className="m-4">
             <Profile />
           </div>
         )}
 
       {authedUser.isAdmin && (
-        <div className="home-item">
+        <div className="m-4">
           <GlobalReport />
         </div>
       )}
 
       {Permissions(PermissionTypes.ApproveCamp, authedUser) && (
-        <div className="home-item">
+        <div className="m-4">
           <ApprobationCamp />
         </div>
       )}
