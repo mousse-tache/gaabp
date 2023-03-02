@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
-import Loading from "@aabp/components/loading/loading";
+import Loading from "@aabp/components/loading/Loading";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 import UserDetailsTabs from "@aabp/components/membres/UserDetailsTabs";
 import Fusion from "./fusion/Fusion";

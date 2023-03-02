@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "@aabp/context/app/appContext";
 
 import Button from "@aabp/components/design-system/Button/Button";
-import Loading from "../loading/loading";
+import Loading from "../loading/Loading";
 import GroupTable from "./groupTable";
 
 import Permissions from "../../auth/permissions";

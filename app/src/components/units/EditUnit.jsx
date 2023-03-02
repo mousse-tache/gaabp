@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { Breadcrumbs, Paper, Tab, Tabs, Typography } from "@material-ui/core";
 
-import Features from "@aabp/features/Features";
+import Features from "@aabp/features/features";
 import { isFeatureActivated } from "@aabp/features/useFeatures";
 
 import AppContext from "@aabp/context/app/appContext";
@@ -13,7 +13,7 @@ import UnitContext from "@aabp/context/unit/unitContext";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
-import Loading from "../loading/loading";
+import Loading from "../loading/Loading";
 import DeleteUnit from "./operations/DeleteUnit";
 import ToggleActivationUnit from "./operations/ToggleActivationUnit";
 import CampTab from "./tabs/CampTab";
