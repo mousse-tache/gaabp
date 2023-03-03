@@ -1,90 +1,95 @@
-import React, { useState, useContext, useEffect } from "react";
+import { Breadcrumbs, Paper, Typography } from "@material-ui/core";
 import { Link } from "gatsby";
-import { Paper, Breadcrumbs, Typography } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
+import { useContext, useEffect, useState } from "react";
 
 import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
 
-import Loading from "@aabp/components/loading/loading";
+import Loading from "@aabp/components/loading/Loading";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 import UserDetailsTabs from "@aabp/components/membres/UserDetailsTabs";
-import Fusion from "./fusion/fusion";
+import Fusion from "./fusion/Fusion";
 
-import UserClient from "@aabp/clients/userClient";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
+import UserClient from "@aabp/clients/userClient";
 
 import "./membres.scss";
 
-const EditMembre = ({id}) => {
-    const { authedUser } = useContext(AppContext);
-    const [isFecthingUser, setIsFetchingUser] = useState(true);
+const EditMembre = ({ id }) => {
+  const { authedUser } = useContext(AppContext);
+  const [isFecthingUser, setIsFetchingUser] = useState(true);
 
-    const [canEdit, setCanEdit] = useState(Permissions(PermissionTypes.UpdateUser, authedUser));
-    const [member, setMember] = useState(false);
-    
-    const userClient = new UserClient();
+  const [canEdit, setCanEdit] = useState(
+    Permissions(PermissionTypes.UpdateUser, authedUser)
+  );
+  const [member, setMember] = useState(false);
 
-    const { enqueueSnackbar } = useSnackbar();
+  const userClient = new UserClient();
 
-    useEffect(() => {
-        setCanEdit(Permissions(PermissionTypes.UpdateUser, authedUser));
-    }, [authedUser]);
+  const { enqueueSnackbar } = useSnackbar();
 
-    useEffect(() => {
-        FetchUser();
-    }, [id]);
+  useEffect(() => {
+    setCanEdit(Permissions(PermissionTypes.UpdateUser, authedUser));
+  }, [authedUser]);
 
-    async function FetchUser() {
-        try {               
-            var data = await userClient.getById(id);
-            if(data !== null)
-            {
-                setMember(data[0]);
-            }            
-        } catch (e) {
-            console.log(e.message);   
-        }
+  useEffect(() => {
+    FetchUser();
+  }, [id]);
 
-        setIsFetchingUser(false);
+  async function FetchUser() {
+    try {
+      var data = await userClient.getById(id);
+      if (data !== null) {
+        setMember(data[0]);
+      }
+    } catch (e) {
+      console.log(e.message);
     }
 
-    async function saveUser() {       
-        try {
-            if(member?._id) {
-                await userClient.updateUser({...member, id: member._id});
-                await FetchUser();
-            }
-            enqueueSnackbar(`Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`);
-        } catch (error) {
-            enqueueSnackbar(error?.error?.response?.data, { variant: "error"});
-        }
-    }
+    setIsFetchingUser(false);
+  }
 
-    if(isFecthingUser || !member ) {
-        return (<Loading />);
+  async function saveUser() {
+    try {
+      if (member?._id) {
+        await userClient.updateUser({ ...member, id: member._id });
+        await FetchUser();
+      }
+      enqueueSnackbar(
+        `Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`
+      );
+    } catch (error) {
+      enqueueSnackbar(error?.error?.response?.data, { variant: "error" });
     }
+  }
 
-    return  (
-        <UserContext.Provider value={{member, setMember, saveUser, FetchUser}}>
-            <Paper className="profile">
-                <h2 style={{display:"flex", justifyContent:"space-between"}}>
-                    <Breadcrumbs aria-label="breadcrumb" className="crumbs">
-                        <Link color="inherit" to="/app/membres">
-                            Membres
-                        </Link>
-                        <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
-                    </Breadcrumbs>
-                    {authedUser.isAdmin && <div>
-                        <Fusion />
-                    </div>}
-                </h2>
-                <MemberDetails canEdit={canEdit} />            
-                <UserDetailsTabs />           
-            </Paper>
-        </UserContext.Provider>
-        );
+  if (isFecthingUser || !member) {
+    return <Loading />;
+  }
+
+  return (
+    <UserContext.Provider value={{ member, setMember, saveUser, FetchUser }}>
+      <Paper className="profile">
+        <h2 style={{ display: "flex", justifyContent: "space-between" }}>
+          <Breadcrumbs aria-label="breadcrumb" className="crumbs">
+            <Link color="inherit" to="/app/membres">
+              Membres
+            </Link>
+            <Typography color="textPrimary">{`${member.prenom} ${member.nom}`}</Typography>
+          </Breadcrumbs>
+          {authedUser.isAdmin && (
+            <div>
+              <Fusion />
+            </div>
+          )}
+        </h2>
+        <MemberDetails canEdit={canEdit} />
+        <UserDetailsTabs />
+      </Paper>
+    </UserContext.Provider>
+  );
 };
 
 export default EditMembre;

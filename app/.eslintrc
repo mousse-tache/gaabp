@@ -19,6 +19,7 @@
     "react/no-unescaped-entities": 0,
     "react/display-name": 0,
     "no-async-promise-executor": 0,
-    "semi": 2
+    "semi": 2,
+    "react/react-in-jsx-scope": 0
   }
 }

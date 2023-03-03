@@ -1,0 +1,45 @@
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+
+import { AppBar, Button, Toolbar } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import UserMenu from "./AccountMenu";
+import Sidebar from "./Sidebar";
+
+import Logo from "@aabp/images/Logo_AABP.png";
+import "./header.scss";
+
+const Header = () => {
+  const MenuButton = () => {
+    return (
+      <Button
+        style={{ backgroundColor: "transparent" }}
+        color="inherit"
+        className="logo sidebar-logo"
+        onClick={() => setOpen(!open)}
+      >
+        <img src={Logo} style={{ maxWidth: "3rem" }} alt="Logo" />
+        <MenuIcon className="mobile-only" />
+      </Button>
+    );
+  };
+  const [open, setOpen] = useState(window.innerWidth > 800);
+
+  return (
+    <header className="sticky">
+      <Sidebar open={open} setOpen={setOpen} />
+      <AppBar position="fixed" color="inherit">
+        <Toolbar>
+          {!open && <MenuButton />}
+          <UserMenu />
+        </Toolbar>
+      </AppBar>
+    </header>
+  );
+};
+
+Header.propTypes = {
+  username: PropTypes.string,
+};
+
+export default React.memo(Header);
