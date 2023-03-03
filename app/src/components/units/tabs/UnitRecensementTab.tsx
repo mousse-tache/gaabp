@@ -70,7 +70,7 @@ const UnitRecensementTab = () => {
     }
 
     try {
-      var data = await userClient.searchUsers(query);
+      const data = await userClient.searchUsers(query);
       if (data !== null) {
         setAllMembers(data);
       }
@@ -85,7 +85,7 @@ const UnitRecensementTab = () => {
     }
 
     try {
-      var data = await userClient.getByUnitId(unit._id);
+      const data = await userClient.getByUnitId(unit._id);
       if (data !== null) {
         setMembres(data);
       }
@@ -235,7 +235,7 @@ const UnitRecensementTab = () => {
             <li>
               {
                 activeMembers.filter(
-                  (user) => user.nominations.type === NominationTypes.Membre
+                  (user) => user.nominations.type === NominationTypes.Membre,
                 ).length
               }{" "}
               membre(s) régulier(s)
@@ -243,7 +243,7 @@ const UnitRecensementTab = () => {
             <li>
               {
                 activeMembers.filter(
-                  (user) => user.nominations.type !== NominationTypes.Membre
+                  (user) => user.nominations.type !== NominationTypes.Membre,
                 ).length
               }{" "}
               membre(s) de maîtrise

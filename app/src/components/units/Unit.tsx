@@ -57,7 +57,7 @@ const Unit = () => {
   useEffect(() => {
     async function FetchGroups() {
       try {
-        var data = await groupClient.getGroups();
+        const data = await groupClient.getGroups();
         if (data !== null) {
           setGroupList(data);
           setIsFetchingGroupList(false);
@@ -69,7 +69,7 @@ const Unit = () => {
 
     async function FetchUnits() {
       try {
-        var data = await unitClient.getUnits();
+        const data = await unitClient.getUnits();
         if (data !== null) {
           setUnitList(data);
         }

@@ -34,8 +34,8 @@ const NominationsMembres = () => {
 
   async function FetchMemberUnits() {
     try {
-      var data = await unitClient.getMultipleById(
-        member?.nominations?.map((x) => x.unitId)
+      const data = await unitClient.getMultipleById(
+        member?.nominations?.map((x) => x.unitId),
       );
       if (data !== null) {
         setMemberUnits(data);
@@ -47,8 +47,8 @@ const NominationsMembres = () => {
 
   async function FetchGroups() {
     try {
-      var data = await groupClient.getMultipleById(
-        member?.nominations?.map((x) => x.groupId)
+      const data = await groupClient.getMultipleById(
+        member?.nominations?.map((x) => x.groupId),
       );
       if (data !== null) {
         setGroups(data);
@@ -136,8 +136,8 @@ const NominationsMembres = () => {
           onRowDelete: (newData) =>
             new Promise((resolve) => {
               setTimeout(async () => {
-                let nominations = member?.nominations.filter(
-                  (x) => x.tableData.id !== newData.tableData.id
+                const nominations = member?.nominations.filter(
+                  (x) => x.tableData.id !== newData.tableData.id,
                 );
                 await SetAndSave({ ...member, nominations: nominations });
                 resolve();
@@ -149,7 +149,7 @@ const NominationsMembres = () => {
             new Promise((resolve) => {
               setTimeout(async () => {
                 const index = oldData.tableData.id;
-                let nominations = member?.nominations;
+                const nominations = member?.nominations;
                 nominations[index] = newData;
                 nominations[index].approvedBy = authedUser._id;
                 await SetAndSave({ ...member, nominations: nominations });

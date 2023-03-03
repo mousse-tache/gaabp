@@ -28,7 +28,7 @@ const Fusion = () => {
     }
 
     try {
-      var data = await userClient.searchUsers(query);
+      const data = await userClient.searchUsers(query);
       if (data !== null) {
         setSearchedMembers(data.filter((x) => x._id !== member._id));
       }
@@ -45,7 +45,7 @@ const Fusion = () => {
 
     try {
       if (isInverted) {
-        let data = await userClient.fuseUsers(selectedUser, member);
+        const data = await userClient.fuseUsers(selectedUser, member);
 
         if (data) {
           enqueueSnackbar("Fusion complétée!", { variant: "success" });
@@ -53,7 +53,7 @@ const Fusion = () => {
         await setOpen(false);
         await FetchUser();
       } else {
-        let data = await userClient.fuseUsers(member, selectedUser);
+        const data = await userClient.fuseUsers(member, selectedUser);
 
         if (data) {
           enqueueSnackbar("Fusion complétée!", { variant: "success" });

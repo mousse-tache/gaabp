@@ -54,7 +54,7 @@ const ReconnaissancesMembre = () => {
   }, [member]);
 
   async function saveDecoration(decoration) {
-    let dec = { ...decoration, membre: member._id };
+    const dec = { ...decoration, membre: member._id };
     await decorationClient.save(dec);
     init();
   }

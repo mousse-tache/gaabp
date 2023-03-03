@@ -15,7 +15,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 };
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html') {
+  if (stage === "build-html") {
     // Exclude Okta from compilation path
     actions.setWebpackConfig({
       module: {
@@ -31,9 +31,9 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           {
             test: /okta-react/,
             use: loaders.null(),
-          }
+          },
         ],
-      }
+      },
     });
   }
 
@@ -41,9 +41,9 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     resolve: {
       alias: {
         "@components": path.resolve(__dirname, "src/components"),
-        "@aabp": path.resolve(__dirname, "src")
-      }
-    }
+        "@aabp": path.resolve(__dirname, "src"),
+      },
+    },
   });
 };
 
@@ -56,7 +56,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: `slug`,
       value: slug,
     });
-    
+
     const aide = createFilePath({ node, getNode, basePath: `aide` });
     createNodeField({
       node,
@@ -69,9 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allMarkdownRemark(
-        filter: {fileAbsolutePath: {regex: "/blog/"}}
-      ) {
+      allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/blog/" } }) {
         edges {
           node {
             frontmatter {
@@ -100,9 +98,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const aideResult = await graphql(`
     query {
-      allMarkdownRemark(
-        filter: {fileAbsolutePath: {regex: "/aide/"}}
-      ) {
+      allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/aide/" } }) {
         edges {
           node {
             frontmatter {
@@ -120,7 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
   aideResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
-      component: path.resolve(`./src/templates/AidePost.jsx`),
+      component: path.resolve(`./src/templates/AidePost.tsx`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
@@ -130,11 +126,19 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 };
 
-
 exports.onPostBuild = () => {
   console.log("Copying locales");
   fs.copySync(
     path.join(__dirname, "/src/locales"),
-    path.join(__dirname, "/public/locales")
+    path.join(__dirname, "/public/locales"),
   );
+};
+
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPlugin({
+    name: "@babel/plugin-transform-react-jsx",
+    options: {
+      runtime: "automatic",
+    },
+  });
 };
