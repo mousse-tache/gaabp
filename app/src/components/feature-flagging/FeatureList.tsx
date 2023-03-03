@@ -34,7 +34,7 @@ const FeatureList = () => {
   ];
 
   const HandleChangeVisibility = async (feature) => {
-    var f = { ...feature, activated: !feature.activated };
+    const f = { ...feature, activated: !feature.activated };
 
     await featureClient.save(f);
 
@@ -42,7 +42,7 @@ const FeatureList = () => {
   };
 
   const getList = async () => {
-    var data = await featureClient.getList();
+    const data = await featureClient.getList();
 
     if (data) {
       setFeatures(data);

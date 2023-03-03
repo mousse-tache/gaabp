@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint", // uses babel-eslint transforms
+  "parser": "@typescript-eslint/parser",
   "settings": {
     "react": {
       "version": "detect" // detect react version
@@ -10,7 +10,10 @@
   },
   "extends": [
     "eslint:recommended", // use recommended configs
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ],
   "rules": {
     "no-undef": 0,

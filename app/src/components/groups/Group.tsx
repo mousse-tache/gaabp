@@ -42,7 +42,7 @@ const Group = () => {
 
   async function FetchGroups() {
     try {
-      var data = await groupClient.getGroups();
+      const data = await groupClient.getGroups();
       if (data !== null) {
         setGroupList(data);
       }

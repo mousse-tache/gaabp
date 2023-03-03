@@ -1,26 +1,21 @@
 .nomination-flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem;
-    max-width: 31%;
-    margin:auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1rem;
+  max-width: 31%;
+  margin: auto;
 }
 
-.nomination-flex-container > div { 
-    min-width: 10rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-
+.nomination-flex-container > div {
+  min-width: 10rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .step-main-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.header-nomination-button {
-    min-height: 3.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

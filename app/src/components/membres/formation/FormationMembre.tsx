@@ -15,7 +15,7 @@ const FormationMembre = () => {
   const { authedUser } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const { member, setMember, saveUser } = useContext(UserContext);
-  let formations = member?.formations;
+  const formations = member?.formations;
   formations.sort();
 
   const userClient = new UserClient();
@@ -24,9 +24,9 @@ const FormationMembre = () => {
 
   // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
   Array.prototype.unique = function () {
-    var a = this.concat();
-    for (var i = 0; i < a.length; ++i) {
-      for (var j = i + 1; j < a.length; ++j) {
+    const a = this.concat();
+    for (let i = 0; i < a.length; ++i) {
+      for (let j = i + 1; j < a.length; ++j) {
         if (a[i] === a[j]) a.splice(j--, 1);
       }
     }
@@ -36,15 +36,15 @@ const FormationMembre = () => {
 
   const FetchFormateurs = async () => {
     try {
-      var ids = formations.map((x) => x.recommendedBy);
+      let ids = formations.map((x) => x.recommendedBy);
       ids = ids.concat(formations.map((x) => x.confirmedBy)).unique();
       if (ids.length < 1) {
         return;
       }
 
-      var formateurArray = [];
+      const formateurArray = [];
       const reducedFormateurs = {};
-      var data = await userClient.getByIds(ids);
+      const data = await userClient.getByIds(ids);
 
       data.forEach((formateur) => {
         if (formateurArray.filter((x) => x._id === formateur._id).length < 1) {
@@ -120,8 +120,8 @@ const FormationMembre = () => {
           onRowDelete: (newData) =>
             new Promise((resolve) => {
               setTimeout(async () => {
-                let formations = member?.formations.filter(
-                  (x) => x.tableData.id !== newData.tableData.id
+                const formations = member?.formations.filter(
+                  (x) => x.tableData.id !== newData.tableData.id,
                 );
                 await SetAndSave({ ...member, formations: formations });
                 resolve();
@@ -133,7 +133,7 @@ const FormationMembre = () => {
             new Promise((resolve) => {
               setTimeout(async () => {
                 const index = oldData.tableData.id;
-                let formations = member?.formations;
+                const formations = member?.formations;
                 formations[index] = newData;
                 formations[index].approvedBy = authedUser._id;
                 await SetAndSave({ ...member, formations: formations });

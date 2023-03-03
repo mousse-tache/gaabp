@@ -5,36 +5,34 @@ import FeatureClient from "@aabp/clients/featureClient";
 import AppContext from "@aabp/context/app/appContext";
 
 const isFeatureActivated = (feature) => {
-    var { features } = useContext(AppContext);
+  const { features } = useContext(AppContext);
 
-    var f = features.find(x => x._id == feature);
+  const f = features.find((x) => x._id == feature);
 
-    if (f) {
-        return true;
-    }
+  if (f) {
+    return true;
+  }
 
-    return false;
+  return false;
 };
 
 function useFeatures() {
-    const [features, setFeatures] = useState([]);    
+  const [features, setFeatures] = useState([]);
 
-    const featureClient = new FeatureClient();
+  const featureClient = new FeatureClient();
 
-    const fetchFeatures = async() => {
-        var f = await featureClient.getActiveFeatures();
-        setFeatures(f);     
-    };
+  const fetchFeatures = async () => {
+    const f = await featureClient.getActiveFeatures();
+    setFeatures(f);
+  };
 
-    useEffect(() => {
-        fetchFeatures();
-    }, []);
+  useEffect(() => {
+    fetchFeatures();
+  }, []);
 
-    return features;
+  return features;
 }
 
-export {
-    isFeatureActivated
-};
+export { isFeatureActivated };
 
 export default useFeatures;
