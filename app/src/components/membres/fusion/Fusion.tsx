@@ -5,10 +5,11 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "@aabp/context/userContext";
 
 import MemberDetails from "@aabp/components/membres/MemberDetails";
-import { Button, Dialog, Grid, Switch, TextField } from "@material-ui/core";
+import { Button, Dialog, Grid, TextField } from "@material-ui/core";
 import { Alert, Autocomplete } from "@material-ui/lab";
 
 import UserClient from "@aabp/clients/userClient";
+import Toggle from "@aabp/components/design-system/Toggle/Toggle";
 
 const Fusion = () => {
   const [open, setOpen] = useState(false);
@@ -122,11 +123,9 @@ const Fusion = () => {
             </Grid>
             <Grid item xs={12}>
               <b>Inverser la fusion</b>
-              <Switch
+              <Toggle
                 checked={isInverted}
-                onChange={() => setIsInverted(!isInverted)}
-                name="fusionSwitch"
-                className="fusion-switch"
+                onClick={() => setIsInverted(!isInverted)}
               />
             </Grid>
             <Grid item xs={6}>

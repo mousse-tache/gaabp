@@ -7,7 +7,7 @@ import AppContext from "@aabp/context/app/appContext";
 
 import FeatureClient from "@aabp/clients/featureClient";
 
-import { Switch } from "@material-ui/core";
+import Toggle from "../design-system/Toggle/Toggle";
 
 const FeatureList = () => {
   const { init } = useContext(AppContext);
@@ -25,9 +25,9 @@ const FeatureList = () => {
       title: "",
       field: "",
       render: (rowData) => (
-        <Switch
+        <Toggle
           checked={rowData.activated}
-          onChange={() => HandleChangeVisibility(rowData)}
+          onClick={() => HandleChangeVisibility(rowData)}
         />
       ),
     },
