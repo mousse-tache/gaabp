@@ -1,13 +1,12 @@
-@import '@aabp/components/sass/theme';
+@import "@aabp/components/sass/theme";
 
 html {
   font-family: Roboto, sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  font-size:16px;
+  font-size: 16px;
   scroll-behavior: smooth;
   line-height: 20px;
-
 }
 
 body {
@@ -19,13 +18,19 @@ body {
 
 .lined-paper {
   background-color: #fff;
-  background-image:
-    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-    linear-gradient(#eee .1em, transparent .1em);
+  background-image: linear-gradient(
+      90deg,
+      transparent 79px,
+      #abced4 79px,
+      #abced4 81px,
+      transparent 81px
+    ),
+    linear-gradient(#eee 0.1em, transparent 0.1em);
   background-size: 100% 1.2em;
 }
 
-.jss6, .jss7 {
+.jss6,
+.jss7 {
   display: none;
 }
 
@@ -34,15 +39,18 @@ main {
   margin: auto;
 }
 
-main h1, h2, h3, h4 {
+main h1,
+h2,
+h3,
+h4 {
   text-align: center;
-  padding-bottom:1em;
+  padding-bottom: 1em;
   word-wrap: none;
   word-break: keep-all;
 }
 
 .break {
-  height:5rem;
+  height: 5rem;
 }
 
 .main-container {
@@ -51,14 +59,15 @@ main h1, h2, h3, h4 {
 
 /* fallback */
 @font-face {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
-  src: url("../components/styles/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format('woff2');
+  src: url("../components/styles/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2")
+    format("woff2");
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -69,7 +78,7 @@ main h1, h2, h3, h4 {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -moz-font-feature-settings: 'liga';
+  -moz-font-feature-settings: "liga";
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -79,9 +88,9 @@ main h1, h2, h3, h4 {
 
 section {
   padding: 5px 5px;
-  box-sizing:border-box;
-  height:100%;
-  overflow-x:visible;;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-x: visible;
   min-height: 10em;
   justify-content: center;
 }
@@ -97,7 +106,7 @@ section {
   width: 40%;
   margin-top: 1em;
   margin-bottom: 1em;
-  padding:1em;
+  padding: 1em;
   transition: width 2s;
 }
 
@@ -150,7 +159,7 @@ section {
 }
 
 form > div {
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 form {
@@ -174,20 +183,6 @@ form {
   .title-asso-logo {
     margin: 1rem;
     max-width: 400px;
-  }
-
-  .title-image {
-    padding: 1rem;
-    margin: 1rem;
-    width: 500px;
-
-    img {
-      width: inherit;
-      margin: auto;
-      border-left: 1rem solid $primary;
-      border-top: 1rem solid $secondary;
-      border-radius: .5rem;
-    }
   }
 }
 
@@ -214,7 +209,7 @@ form {
 
 @media only screen and (max-width: 1000px) {
   html {
-    margin-left:0%;
+    margin-left: 0%;
     text-align: justify;
   }
 
@@ -232,7 +227,7 @@ form {
 
   .branches {
     flex-direction: column;
-    margin:auto;
+    margin: auto;
   }
 
   .branchecard {
@@ -248,6 +243,6 @@ form {
   }
 
   .formation-recommender-card div {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 }

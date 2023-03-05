@@ -3,9 +3,10 @@ import { useContext } from "react";
 
 import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
-import { Button, FormControlLabel, Switch, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import AnneesService from "./anneesService";
 
+import Toggle from "../design-system/Toggle/Toggle";
 import MemberFormationsUniform from "./formation/MemberFormationsUniform";
 
 const MemberDetails = ({ canEdit, isPersonalProfile }) => {
@@ -136,18 +137,12 @@ const MemberDetails = ({ canEdit, isPersonalProfile }) => {
         {authedUser?.isAdmin && (
           <div className="membres-information-section">
             <h3>Permissions</h3>
-            <FormControlLabel
+
+            <Toggle
               disabled={!authedUser?.isAdmin}
-              control={
-                <Switch
-                  disabled={!authedUser?.isAdmin}
-                  checked={!!member?.isAdmin}
-                  onChange={() =>
-                    setMember({ ...member, isAdmin: !member?.isAdmin })
-                  }
-                  name="checkedB"
-                  className="switch"
-                />
+              checked={!!member?.isAdmin}
+              onClick={() =>
+                setMember({ ...member, isAdmin: !member?.isAdmin })
               }
               label="Administrateur de la base de donnée"
             />
