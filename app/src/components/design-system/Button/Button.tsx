@@ -20,7 +20,7 @@ const Button = ({
       className={`${className} ${getSizeClasses(size)}
       ${getColorClasses(
         color,
-      )} font-bold rounded disabled:opacity-75 disabled:bg-neutral-500 disabled:cursor-not-allowed`}
+      )} font-bold rounded drop-shadow-lg disabled:opacity-75 disabled:bg-neutral-500 disabled:cursor-not-allowed`}
       {...props}
     >
       {children}

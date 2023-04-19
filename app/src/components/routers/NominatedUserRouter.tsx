@@ -5,32 +5,32 @@ import AppContext from "@aabp/context/app/appContext";
 
 const Profile = React.lazy(() => import("@aabp/components/profile/profile"));
 const EditMembre = React.lazy(
-  () => import("@aabp/components/membres/EditMembre")
+  () => import("@aabp/components/membres/EditMembre"),
 );
 const Group = React.lazy(() => import("@aabp/components/groups/Group"));
 const EditGroup = React.lazy(() => import("@aabp/components/groups/editGroup"));
 const UnitSection = React.lazy(
-  () => import("@aabp/components/units/UnitSection")
+  () => import("@aabp/components/units/UnitSection"),
 );
 const EditUnit = React.lazy(() => import("@aabp/components/units/EditUnit"));
 const Formation = React.lazy(
-  () => import("@aabp/components/formation/formation")
+  () => import("@aabp/components/formation/Formation"),
 );
 const AccueilRessources = React.lazy(
-  () => import("@aabp/components/ressources/accueilRessources")
+  () => import("@aabp/components/ressources/accueilRessources"),
 );
 const RecommendFormation = React.lazy(
-  () => import("@aabp/components/formation/recommendFormation")
+  () => import("@aabp/components/formation/RecommendFormation"),
 );
 const FormationResume = React.lazy(
-  () => import("@aabp/components/formation/components/formationResume")
+  () => import("@aabp/components/formation/components/FormationResume"),
 );
 const Home = React.lazy(() => import("@aabp/components/home/Home"));
 const SectionMembre = React.lazy(
-  () => import("@aabp/components/membres/SectionMembre")
+  () => import("@aabp/components/membres/SectionMembre"),
 );
 const FeatureList = React.lazy(
-  () => import("@aabp/components/feature-flagging/FeatureList")
+  () => import("@aabp/components/feature-flagging/FeatureList"),
 );
 
 import Permissions from "@aabp/auth/permissions";
