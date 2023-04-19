@@ -8,7 +8,7 @@ import MaterialTable from "material-table";
 
 import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
-import NewFormationForm from "./components/newFormationForm";
+import NewFormationForm from "./components/NewFormationForm";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";

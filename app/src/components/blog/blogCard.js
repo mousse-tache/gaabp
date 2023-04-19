@@ -1,7 +1,7 @@
 import Img from "gatsby-image";
 import moment from "moment";
 
-import { CardContent, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
 import Card from "../design-system/Card/Card";
@@ -30,19 +30,17 @@ const BlogCard = ({ article }) => {
 
   return (
     <Card className="blog-card">
-      <CardContent>
-        <Link to={path} className="blog-card-link">
-          <div>
-            <div className="thumbnail">
-              {thumbnail ? <Img fluid={thumbnail} /> : <DefaultThumbnail />}
-            </div>
+      <Link to={path} className="blog-card-link">
+        <div>
+          <div className="thumbnail">
+            {thumbnail ? <Img fluid={thumbnail} /> : <DefaultThumbnail />}
           </div>
-          <div>
-            <Typography>{title}</Typography>
-            publié le {formattedDate}
-          </div>
-        </Link>
-      </CardContent>
+        </div>
+        <div>
+          <Typography>{title}</Typography>
+          publié le {formattedDate}
+        </div>
+      </Link>
     </Card>
   );
 };

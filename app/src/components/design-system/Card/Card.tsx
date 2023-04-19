@@ -6,7 +6,7 @@ const Card = ({
   children: React.ReactChildren
 }): React.ReactNode => {
   return (
-    <div className={`${className} bg-white rounded drop-shadow-md`}>
+    <div className={`${className} bg-white rounded drop-shadow-md p-5`}>
       {children}
     </div>
   );

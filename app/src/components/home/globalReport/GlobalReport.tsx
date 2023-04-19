@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Card, CardContent, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import { Skeleton } from "@material-ui/lab";
 
-import DonutChart from "@aabp/reporting/DonutChart";
-import { getBranchFromId, getBranchColorFromId } from "@aabp/utils/branches";
 import ReportingClient from "@aabp/clients/reportingClient";
+import Card from "@aabp/components/design-system/Card/Card";
+import DonutChart from "@aabp/reporting/DonutChart";
+import { getBranchColorFromId, getBranchFromId } from "@aabp/utils/branches";
 
 const GlobalReport = () => {
   const [report, setReport] = useState({});
@@ -40,7 +41,7 @@ const GlobalReport = () => {
   return (
     <Card className="globalreport">
       <h2>Portrait de l'Association</h2>
-      <CardContent className="flex flex-row flex-wrap content-between">
+      <div className="flex flex-row flex-wrap content-between">
         <div className="block m-auto">
           <Tooltip title="Membres avec une nomination sans date de fin">
             <h3>
@@ -117,7 +118,7 @@ const GlobalReport = () => {
             </div>
           </div>
         )}
-      </CardContent>
+      </div>
     </Card>
   );
 };

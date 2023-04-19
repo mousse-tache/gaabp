@@ -8,7 +8,7 @@ const EditMembre = React.lazy(
   () => import("@aabp/components/membres/EditMembre"),
 );
 const Group = React.lazy(() => import("@aabp/components/groups/Group"));
-const EditGroup = React.lazy(() => import("@aabp/components/groups/editGroup"));
+const EditGroup = React.lazy(() => import("@aabp/components/groups/EditGroup"));
 const UnitSection = React.lazy(
   () => import("@aabp/components/units/UnitSection"),
 );
