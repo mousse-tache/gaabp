@@ -1,12 +1,15 @@
-
 // https://medium.com/tinyso/how-to-create-pie-donut-chart-in-react-using-d3-js-9ea695bcf819
 import * as d3 from "d3";
 
-const DrawChart = (element, data, innerRadius, outerRadius) => {
-
-  const colorScale = d3     
-    .scaleSequential()      
-    .interpolator(d3.interpolateCool)      
+const DrawChart = (
+  element: unknown,
+  data: unknown,
+  innerRadius: unknown,
+  outerRadius: unknown,
+): void => {
+  const colorScale = d3
+    .scaleSequential()
+    .interpolator(d3.interpolateCool)
     .domain([0, data.length]);
 
   const boxSize = outerRadius * 2;
@@ -23,7 +26,12 @@ const DrawChart = (element, data, innerRadius, outerRadius) => {
     .append("g")
     .attr("transform", `translate(${boxSize / 2}, ${boxSize / 2})`);
 
-  const arcGenerator = d3.arc().cornerRadius(10).padAngle(0.02).innerRadius(innerRadius).outerRadius(outerRadius);
+  const arcGenerator = d3
+    .arc()
+    .cornerRadius(10)
+    .padAngle(0.02)
+    .innerRadius(innerRadius)
+    .outerRadius(outerRadius);
 
   const pieGenerator = d3.pie().value((d) => d.value);
 
@@ -49,7 +57,7 @@ const DrawChart = (element, data, innerRadius, outerRadius) => {
     .style("fill", "#fff")
     .style("font-size", "30px")
     .attr("transform", (d) => {
-      const [x,y] = arcGenerator.centroid(d);
+      const [x, y] = arcGenerator.centroid(d);
       return `translate(${x}, ${y})`;
     });
 };

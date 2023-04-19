@@ -7,7 +7,7 @@ import Loading from "../loading/Loading";
 
 import Card from "../design-system/Card/Card";
 
-import "./formation.css";
+import "./formation.scss";
 
 const Formation = () => {
   const { authedUser } = useContext(AppContext);

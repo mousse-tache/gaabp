@@ -1,7 +1,6 @@
 import {
   Breadcrumbs,
   Button,
-  Card,
   CardContent,
   Checkbox,
   FormControlLabel,
@@ -20,6 +19,7 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import GroupClient from "@aabp/clients/groupClient";
 import UnitClient from "@aabp/clients/unitClient";
 import Regions from "@aabp/utils/regions";
+import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 
 import UserClient from "@aabp/clients/userClient";
@@ -29,7 +29,7 @@ import GroupMembresTable from "./groupMembersTable";
 //import GeoClient from "@aabp/clients/geoClient";
 import AppContext from "@aabp/context/app/appContext";
 
-const EditGroup = ({ id }) => {
+const EditGroup = ({ id }: { id: string }) => {
   const { authedUser } = useContext(AppContext);
   const [isFetchingGroup, setIsFetchingGroup] = useState(true);
   const [units, setUnits] = useState([]);
@@ -56,7 +56,7 @@ const EditGroup = ({ id }) => {
   const userClient = new UserClient();
   //const geoClient = new GeoClient();
 
-  var canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
+  let canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
 
   useEffect(() => {
     canEdit = Permissions(PermissionTypes.UpdateGroup, authedUser);
@@ -85,7 +85,7 @@ const EditGroup = ({ id }) => {
     }
 
     try {
-      var data = await userClient.searchUsers(query);
+      const data = await userClient.searchUsers(query);
       if (data !== null) {
         setAllMembers(data);
       }
@@ -96,7 +96,7 @@ const EditGroup = ({ id }) => {
 
   async function FetchUnits() {
     try {
-      var data = await unitClient.getByGroupId(id);
+      const data = await unitClient.getByGroupId(id);
       if (data !== null) {
         setUnits(data);
       }
@@ -109,7 +109,7 @@ const EditGroup = ({ id }) => {
 
   async function FetchGroup() {
     try {
-      var data = await groupClient.getById(id);
+      const data = await groupClient.getById(id);
       if (data !== null) {
         setGroup(data);
       }
@@ -122,7 +122,7 @@ const EditGroup = ({ id }) => {
 
   async function FetchMembres() {
     try {
-      var data = await userClient.getByGroupId(id);
+      const data = await userClient.getByGroupId(id);
       if (data !== null) {
         setMembres(data);
       }
@@ -134,7 +134,7 @@ const EditGroup = ({ id }) => {
   const RemoveFromGroup = async (user) => {
     try {
       user.nominations.filter(
-        (x) => x.ed === undefined && x.groupId === group._id
+        (x) => x.ed === undefined && x.groupId === group._id,
       )[0].ed = new Date();
       await userClient.updateUser({ ...user, id: user._id });
       setMembres(membres?.filter((x) => x._id !== user._id));
@@ -348,7 +348,7 @@ const EditGroup = ({ id }) => {
             users={membres.filter(
               (user) =>
                 user.nominations.filter((x) => !x.ed && x.groupId === group._id)
-                  .length !== 0
+                  .length !== 0,
             )}
             groupId={group._id}
             removeFromGroup={RemoveFromGroup}

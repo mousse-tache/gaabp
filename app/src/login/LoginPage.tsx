@@ -5,7 +5,7 @@ import Login from "@aabp/login/login";
 
 import "./login-page.scss";
 
-const LoginPage = () => {
+const LoginPage = (): React.ReactNode => {
   return (
     <>
       <Login />
