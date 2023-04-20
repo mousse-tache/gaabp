@@ -1,10 +1,13 @@
 import AppContext from "@aabp/context/app/appContext";
-import { Button, Card, List, ListItem, ListItemIcon } from "@material-ui/core";
+import { Button, List, ListItem, ListItemIcon } from "@material-ui/core";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import { navigate } from "gatsby";
 import { useContext } from "react";
 import Loading from "../loading/Loading";
-import "./formation.css";
+
+import Card from "../design-system/Card/Card";
+
+import "./formation.scss";
 
 const Formation = () => {
   const { authedUser } = useContext(AppContext);

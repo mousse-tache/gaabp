@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from "react";
 
 import AppContext from "@aabp/context/app/appContext";
 
-import { Card, Paper, Typography } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import MaterialTable from "material-table";
+
+import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
-import NewFormationForm from "./components/newFormationForm";
+import NewFormationForm from "./components/NewFormationForm";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
@@ -49,12 +51,12 @@ const RecommendFormation = () => {
   };
 
   const confirmFormation = async (user) => {
-    var userFormations = [
+    const userFormations = [
       ...allPendingFormationMembers.filter((x) => x._id == user._id)[0]
         .formations,
     ];
 
-    var formationToUpdate = user.formation;
+    const formationToUpdate = user.formation;
     console.log(formationToUpdate);
 
     try {
@@ -63,27 +65,27 @@ const RecommendFormation = () => {
           (x) =>
             !x.dateConfirme &&
             formationToUpdate.niveau == x.niveau &&
-            formationToUpdate.branche == x.branche
+            formationToUpdate.branche == x.branche,
         ).length > 0
       ) {
         userFormations.filter(
           (x) =>
             !x.dateConfirme &&
             formationToUpdate.niveau == x.niveau &&
-            formationToUpdate.branche == x.branche
+            formationToUpdate.branche == x.branche,
         )[0].confirmedBy = authedUser._id;
         userFormations.filter(
           (x) =>
             !x.dateConfirme &&
             formationToUpdate.niveau == x.niveau &&
-            formationToUpdate.branche == x.branche
+            formationToUpdate.branche == x.branche,
         )[0].dateConfirme = new Date();
       }
 
       console.log(userFormations);
       await userClient.confirmFormation(user._id, userFormations);
       enqueueSnackbar(
-        `La formation de ${user.prenom} a bien été reconnue par toi, ${authedUser.prenom}`
+        `La formation de ${user.prenom} a bien été reconnue par toi, ${authedUser.prenom}`,
       );
       FetchAllUsers();
     } catch (e) {
@@ -97,11 +99,11 @@ const RecommendFormation = () => {
 
   useEffect(() => {
     if (allPendingFormationMembers) {
-      var allPendingFormationMembersToConfirm =
+      const allPendingFormationMembersToConfirm =
         allPendingFormationMembers.filter(
-          (x) => x.formations.filter((y) => !y.dateConfirme).length > 0
+          (x) => x.formations.filter((y) => !y.dateConfirme).length > 0,
         );
-      var formations = [];
+      const formations = [];
       allPendingFormationMembersToConfirm.forEach((user) => {
         user.formations
           .filter((y) => !y.dateConfirme && y.dateRecommende)
@@ -130,7 +132,7 @@ const RecommendFormation = () => {
   const FetchFormateurs = async () => {
     try {
       const formateursIds = allFormation.map((x) => x.formation.recommendedBy);
-      var data = await userClient.getByIds(formateursIds);
+      const data = await userClient.getByIds(formateursIds);
       if (data !== null) {
         setFormateurs(data);
       }
@@ -145,7 +147,7 @@ const RecommendFormation = () => {
     }
 
     try {
-      var data = await userClient.searchUsersWithFormations(query);
+      const data = await userClient.searchUsersWithFormations(query);
       if (data !== null) {
         setQueriedUsers(data);
       }
@@ -156,7 +158,7 @@ const RecommendFormation = () => {
 
   async function FetchAllUsers() {
     try {
-      var data = await userClient.searchUsersWithPendingFormations();
+      const data = await userClient.searchUsersWithPendingFormations();
       if (data !== null) {
         setAllPendingFormationMembers(data);
       }
@@ -210,7 +212,7 @@ const RecommendFormation = () => {
               onClick: (event, rowData) => confirmFormation(rowData),
               disabled: !Permissions(
                 PermissionTypes.ConfirmFormation,
-                authedUser
+                authedUser,
               ),
             },
           ]}
@@ -239,11 +241,11 @@ const RecommendFormation = () => {
               render: (rowData) =>
                 `${
                   formateurs.filter(
-                    (member) => member._id == rowData.formation.recommendedBy
+                    (member) => member._id == rowData.formation.recommendedBy,
                   )[0]?.prenom
                 } ${
                   formateurs.filter(
-                    (member) => member._id == rowData.formation.recommendedBy
+                    (member) => member._id == rowData.formation.recommendedBy,
                   )[0]?.nom
                 }`,
             },

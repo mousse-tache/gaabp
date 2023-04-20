@@ -5,7 +5,17 @@ const BadgeStyles = {
   Rounded: 2,
 };
 
-const BaseBadge = ({ className, style, children, ...props }) => {
+const BaseBadge = ({
+  className,
+  style,
+  children,
+  ...props
+}: {
+  className: string
+  style: string
+  children: unknown
+  props: unknown
+}): React.ReactNode => {
   const appliedStyle = getStyle();
 
   function getStyle() {
