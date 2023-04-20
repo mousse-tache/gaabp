@@ -76,7 +76,6 @@ const PosteStep = () => {
                   groupOnly: !nomination.groupOnly,
                 })
               }
-              color="primary"
             />
           }
           label={nomination.groupOnly ? "de groupe" : "d'unité"}
