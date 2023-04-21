@@ -1,7 +1,7 @@
 import { Box, Typography } from "@material-ui/core";
 import Button from "../design-system/Button/Button";
 
-const Inscrire = () => (
+const Inscrire = (): React.ReactNode => (
   <section>
     <div className="break" id="inscrire"></div>
     <div className="wrapper">

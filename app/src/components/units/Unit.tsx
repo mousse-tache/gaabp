@@ -8,7 +8,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Button from "../design-system/Button/Button";
 import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
-import UnitTable from "./unitTable";
+import UnitTable from "./UnitTable";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";

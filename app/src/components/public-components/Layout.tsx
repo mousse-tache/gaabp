@@ -9,7 +9,11 @@ import Header from "./header/Header";
 import "fontsource-roboto";
 import "../layout.scss";
 
-const Layout = ({ children }: { children: any }) => {
+const Layout = ({
+  children,
+}: {
+  children: React.ReactNode
+}): React.ReactNode => {
   const theme = createMuiTheme({
     palette: {
       primary: {

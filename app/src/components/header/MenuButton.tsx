@@ -8,7 +8,7 @@ const MenuButton = ({
 }: {
   open: boolean
   setOpen: (arg: boolean) => void
-}) => {
+}): React.ReactNode => {
   return (
     <Button
       color="ghost"

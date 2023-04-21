@@ -1,19 +1,18 @@
-import { useSnackbar } from "notistack";
-import React, { useContext, useState } from "react";
-
-import { Button, Fab, Modal, TextField } from "@material-ui/core";
+import { Fab, Modal, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
 
-import AppContext from "@aabp/context/app/appContext";
-
-import Permissions from "@aabp/auth/permissions";
-import PermissionTypes from "@aabp/auth/permissionTypes";
-import UserClient from "@aabp/clients/userClient";
+import Button from "@aabp/components/design-system/Button/Button";
 import Card from "@aabp/components/design-system/Card/Card";
 
+import PermissionTypes from "@aabp/auth/permissionTypes";
+import usePermissions from "@aabp/auth/usePermissions";
+import UserClient from "@aabp/clients/userClient";
+
 const MembreListHeader = (): React.ReactNode => {
-  const { authedUser } = useContext(AppContext);
+  const perms = usePermissions();
   const [courriel, setCourriel] = useState("");
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
@@ -50,9 +49,7 @@ const MembreListHeader = (): React.ReactNode => {
             aria-label="add"
             size="small"
             color="secondary"
-            disabled={
-              open || !Permissions(PermissionTypes.CreateUser, authedUser)
-            }
+            disabled={open || !perms(PermissionTypes.CreateUser)}
             onClick={handleOpen}
           >
             <AddIcon />
@@ -110,9 +107,8 @@ const MembreListHeader = (): React.ReactNode => {
 
             <Button
               className="submit-button"
-              variant="contained"
               color="secondary"
-              disabled={!Permissions(PermissionTypes.CreateUser, authedUser)}
+              disabled={!perms(PermissionTypes.CreateUser)}
               onClick={async () => await AddUser()}
             >
               Ajouter
