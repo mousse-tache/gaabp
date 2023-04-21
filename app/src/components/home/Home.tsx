@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import { Skeleton } from "@material-ui/lab";
 
 import AppContext from "@aabp/context/app/appContext";
 
 import GlobalReport from "@aabp/components/home/globalReport/GlobalReport";
-import Profile from "@aabp/components/profile/profile";
+import Profile from "@aabp/components/profile/Profile";
 import ApprobationCamp from "@aabp/components/units/camp/ApprobationCamp";
 
 import Permissions from "@aabp/auth/permissions";

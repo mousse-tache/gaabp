@@ -1,4 +1,4 @@
-import { Input, InputLabel, Modal, Paper } from "@material-ui/core";
+import { Input, InputLabel, Modal } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import { useSnackbar } from "notistack";
@@ -7,6 +7,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "@aabp/context/app/appContext";
 
 import Button from "@aabp/components/design-system/Button/Button";
+import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 import GroupTable from "./groupTable";
 
@@ -15,7 +16,7 @@ import PermissionTypes from "../../auth/permissionTypes";
 
 import GroupClient from "../../clients/groupClient";
 
-const Group = () => {
+const Group = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const [groupList, setGroupList] = useState([]);
   const [numero, setNumero] = useState(null);
@@ -74,7 +75,7 @@ const Group = () => {
   }
 
   return (
-    <Paper className="membres">
+    <Card className="membres">
       <h2 className="membres-title">
         <span className="membres-title-element">Groupes</span>
         <span className="membres-title-element">
@@ -95,7 +96,7 @@ const Group = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <Paper>
+        <Card>
           <form className="unit-modal-content">
             <div className="close-icon">
               <Button
@@ -152,11 +153,11 @@ const Group = () => {
               Ajouter
             </Button>
           </form>
-        </Paper>
+        </Card>
       </Modal>
 
       <GroupTable groups={groupList} canSee={true} />
-    </Paper>
+    </Card>
   );
 };
 

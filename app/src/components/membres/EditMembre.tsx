@@ -1,4 +1,4 @@
-import { Breadcrumbs, Paper, Typography } from "@material-ui/core";
+import { Breadcrumbs, Typography } from "@material-ui/core";
 import { Link } from "gatsby";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import UserContext from "@aabp/context/userContext";
 import Loading from "@aabp/components/loading/Loading";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
 import UserDetailsTabs from "@aabp/components/membres/UserDetailsTabs";
+import Card from "../design-system/Card/Card";
 import Fusion from "./fusion/Fusion";
 
 import Permissions from "@aabp/auth/permissions";
@@ -17,12 +18,12 @@ import UserClient from "@aabp/clients/userClient";
 
 import "./membres.scss";
 
-const EditMembre = ({ id }) => {
+const EditMembre = ({ id }: { id: string }): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const [isFecthingUser, setIsFetchingUser] = useState(true);
 
   const [canEdit, setCanEdit] = useState(
-    Permissions(PermissionTypes.UpdateUser, authedUser)
+    Permissions(PermissionTypes.UpdateUser, authedUser),
   );
   const [member, setMember] = useState(false);
 
@@ -40,7 +41,7 @@ const EditMembre = ({ id }) => {
 
   async function FetchUser() {
     try {
-      var data = await userClient.getById(id);
+      const data = await userClient.getById(id);
       if (data !== null) {
         setMember(data[0]);
       }
@@ -58,7 +59,7 @@ const EditMembre = ({ id }) => {
         await FetchUser();
       }
       enqueueSnackbar(
-        `Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`
+        `Le profil de ${member?.prenom} ${member?.nom} a été mis à jour.`,
       );
     } catch (error) {
       enqueueSnackbar(error?.error?.response?.data, { variant: "error" });
@@ -71,7 +72,7 @@ const EditMembre = ({ id }) => {
 
   return (
     <UserContext.Provider value={{ member, setMember, saveUser, FetchUser }}>
-      <Paper className="profile">
+      <Card className="profile">
         <h2 style={{ display: "flex", justifyContent: "space-between" }}>
           <Breadcrumbs aria-label="breadcrumb" className="crumbs">
             <Link color="inherit" to="/app/membres">
@@ -87,7 +88,7 @@ const EditMembre = ({ id }) => {
         </h2>
         <MemberDetails canEdit={canEdit} />
         <UserDetailsTabs />
-      </Paper>
+      </Card>
     </UserContext.Provider>
   );
 };

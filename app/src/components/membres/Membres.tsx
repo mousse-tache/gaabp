@@ -4,17 +4,17 @@ import AppContext from "@aabp/context/app/appContext";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
-import { Paper } from "@material-ui/core";
 
+import Card from "@aabp/components/design-system/Card/Card";
 import MembresTable from "./list/MembresTable";
 
 import "./membres.scss";
 
-const Membres = () => {
+const Membres = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
 
   return (
-    <Paper className="membres">
+    <Card className="membres">
       {!Permissions(PermissionTypes.ViewUsers, authedUser) && (
         <div>Vous n'avez pas accès à consulter la liste des membres</div>
       )}
@@ -23,7 +23,7 @@ const Membres = () => {
           canEdit={Permissions(PermissionTypes.UpdateUser, authedUser)}
         />
       )}
-    </Paper>
+    </Card>
   );
 };
 

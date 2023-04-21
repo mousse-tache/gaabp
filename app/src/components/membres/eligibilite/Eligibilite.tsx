@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Chip, Paper } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 
+import Card from "@aabp/components/design-system/Card/Card";
 import EligibliteContext from "@aabp/context/eligibiliteContext";
 import EligibiliteTable from "./EligibiliteTable";
 
 import "./eligibilite.scss";
 
-const Eligibilite = () => {
+const Eligibilite = (): React.ReactNode => {
   // select honor / formation, fetch users with matching criterias
   // criteres: annee de service + formations
   const [buchettes, setBuchettes] = useState(false);
@@ -22,7 +23,7 @@ const Eligibilite = () => {
 
   return (
     <EligibliteContext.Provider value={honneurs}>
-      <Paper>
+      <Card>
         <li className="eligibilite-list-chips">
           <Chip
             className="eligibilite-chip"
@@ -44,7 +45,7 @@ const Eligibilite = () => {
           />
         </li>
         <EligibiliteTable />
-      </Paper>
+      </Card>
     </EligibliteContext.Provider>
   );
 };
