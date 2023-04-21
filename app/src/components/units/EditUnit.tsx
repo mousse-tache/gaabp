@@ -2,7 +2,7 @@ import { Link, navigate } from "gatsby";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 
-import { Breadcrumbs, Paper, Tab, Tabs, Typography } from "@material-ui/core";
+import { Breadcrumbs, Tab, Tabs, Typography } from "@material-ui/core";
 
 import Features from "@aabp/features/features";
 import { isFeatureActivated } from "@aabp/features/useFeatures";
@@ -13,6 +13,7 @@ import UnitContext from "@aabp/context/unit/unitContext";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 
+import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 import DeleteUnit from "./operations/DeleteUnit";
 import ToggleActivationUnit from "./operations/ToggleActivationUnit";
@@ -24,7 +25,7 @@ import UnitClient from "@aabp/clients/unitClient";
 
 import "./unit.scss";
 
-const EditUnit = ({ id }) => {
+const EditUnit = ({ id }: { id: string }): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const { unit, setUnit } = useContext(UnitContext);
   const [isFetchingUnit, setIsFetchingUnit] = useState(true);
@@ -38,7 +39,7 @@ const EditUnit = ({ id }) => {
 
   async function FetchUnit() {
     try {
-      var data = await unitClient.getById(id);
+      const data = await unitClient.getById(id);
       if (data !== null && data._id) {
         setUnit(data);
       } else {
@@ -58,7 +59,7 @@ const EditUnit = ({ id }) => {
   }
 
   return (
-    <Paper className="unit">
+    <Card>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
           <Link color="inherit" to="/app/unites">
@@ -108,7 +109,7 @@ const EditUnit = ({ id }) => {
         {tab === 1 && <UnitRecensementTab />}
         {tab === 2 && <CampTab />}
       </div>
-    </Paper>
+    </Card>
   );
 };
 

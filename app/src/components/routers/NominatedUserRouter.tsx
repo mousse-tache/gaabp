@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 
 import AppContext from "@aabp/context/app/appContext";
 
-const Profile = React.lazy(() => import("@aabp/components/profile/profile"));
+const Profile = React.lazy(() => import("@aabp/components/profile/Profile"));
 const EditMembre = React.lazy(
   () => import("@aabp/components/membres/EditMembre"),
 );

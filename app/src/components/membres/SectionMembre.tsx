@@ -1,4 +1,4 @@
-import { Paper, Tab, Tabs } from "@material-ui/core";
+import { Tab, Tabs } from "@material-ui/core";
 import Proptypes from "prop-types";
 import React, { useState } from "react";
 
@@ -8,13 +8,14 @@ import { isFeatureActivated } from "@aabp/features/useFeatures";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import useAuthUser from "@aabp/auth/useAuthUser";
+import Card from "../design-system/Card/Card";
 
 const Membres = React.lazy(() => import("./Membres"));
-const NominationsOverview = React.lazy(() =>
-  import("@aabp/components/nominations/NominationsOverview")
+const NominationsOverview = React.lazy(
+  () => import("@aabp/components/nominations/NominationsOverview"),
 );
-const Eligibilite = React.lazy(() =>
-  import("@aabp/components/membres/eligibilite/Eligibilite")
+const Eligibilite = React.lazy(
+  () => import("@aabp/components/membres/eligibilite/Eligibilite"),
 );
 
 import SuspenseNoSSR from "../lazy-load/SuspenseNoSSR";
@@ -29,7 +30,7 @@ const SectionMembre = ({ defaultValue }) => {
   };
 
   return (
-    <Paper className="section-membres">
+    <Card className="section-membres">
       <Tabs
         value={value}
         indicatorColor="primary"
@@ -50,7 +51,7 @@ const SectionMembre = ({ defaultValue }) => {
         {value === 1 && <NominationsOverview />}
         {value === 2 && <Eligibilite />}
       </SuspenseNoSSR>
-    </Paper>
+    </Card>
   );
 };
 

@@ -33,7 +33,7 @@ import Features from "@aabp/features/features";
 
 import "../unit.scss";
 
-const UnitRecensementTab = () => {
+const UnitRecensementTab = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const { unit } = useContext(UnitContext);
   const [allMembers, setAllMembers] = useState([]);

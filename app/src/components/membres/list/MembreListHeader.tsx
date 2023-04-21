@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 import React, { useContext, useState } from "react";
 
-import { Button, Fab, Modal, Paper, TextField } from "@material-ui/core";
+import { Button, Fab, Modal, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -10,8 +10,9 @@ import AppContext from "@aabp/context/app/appContext";
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import UserClient from "@aabp/clients/userClient";
+import Card from "@aabp/components/design-system/Card/Card";
 
-const MembreListHeader = () => {
+const MembreListHeader = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const [courriel, setCourriel] = useState("");
   const [prenom, setPrenom] = useState("");
@@ -65,7 +66,7 @@ const MembreListHeader = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <Paper>
+        <Card>
           <div className="close-icon">
             <Fab
               aria-label="add"
@@ -117,7 +118,7 @@ const MembreListHeader = () => {
               Ajouter
             </Button>
           </form>
-        </Paper>
+        </Card>
       </Modal>
     </div>
   );
