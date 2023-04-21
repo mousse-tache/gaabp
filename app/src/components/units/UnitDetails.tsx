@@ -2,7 +2,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Input,
   InputLabel,
   MenuItem,
@@ -14,12 +13,17 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useSnackbar } from "notistack";
 import Proptypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
-import GroupClient from "../../clients/groupClient";
-import UnitClient from "../../clients/unitClient";
+
 import UnitContext from "../../context/unit/unitContext";
+
+import Button from "../design-system/Button/Button";
+import Loading from "../loading/Loading";
+
 import Branches from "../../utils/branches";
 import Genre from "../../utils/genre";
-import Loading from "../loading/Loading";
+
+import GroupClient from "../../clients/groupClient";
+import UnitClient from "../../clients/unitClient";
 
 const UnitDetails = ({ disabled }) => {
   const unitContext = useContext(UnitContext);
@@ -41,7 +45,7 @@ const UnitDetails = ({ disabled }) => {
         await FetchGroups();
       } else {
         try {
-          var data = await groupClient.getById(groupId);
+          const data = await groupClient.getById(groupId);
           if (data !== null) {
             setGroup(data);
           }
@@ -55,7 +59,7 @@ const UnitDetails = ({ disabled }) => {
 
     async function FetchGroups() {
       try {
-        var data = await groupClient.getGroups();
+        const data = await groupClient.getGroups();
         if (data !== null) {
           setGroupList(data);
         }
@@ -152,17 +156,13 @@ const UnitDetails = ({ disabled }) => {
             ))}
           </Select>
 
-          <div className="save-unit-button">
-            <Button
-              variant="contained"
-              color="secondary"
-              hidden={disabled}
-              disabled={disabled}
-              onClick={SaveUnit}
-            >
-              Sauvegarder
-            </Button>
-          </div>
+          {!disabled && (
+            <div className="save-unit-button">
+              <Button color="secondary" disabled={disabled} onClick={SaveUnit}>
+                Sauvegarder
+              </Button>
+            </div>
+          )}
         </form>
       </AccordionDetails>
     </Accordion>

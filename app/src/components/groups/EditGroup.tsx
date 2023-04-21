@@ -1,6 +1,5 @@
 import {
   Breadcrumbs,
-  Button,
   Checkbox,
   FormControlLabel,
   MenuItem,
@@ -17,13 +16,14 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import GroupClient from "@aabp/clients/groupClient";
 import UnitClient from "@aabp/clients/unitClient";
 import Regions from "@aabp/utils/regions";
+import Button from "../design-system/Button/Button";
 import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 
 import UserClient from "@aabp/clients/userClient";
 import NominationTypes from "@aabp/utils/nominationTypes";
-import UnitTable from "../units/unitTable";
-import GroupMembresTable from "./groupMembersTable";
+import UnitTable from "../units/UnitTable";
+import GroupMembersTable from "./GroupMembersTable";
 //import GeoClient from "@aabp/clients/geoClient";
 import AppContext from "@aabp/context/app/appContext";
 
@@ -269,7 +269,6 @@ const EditGroup = ({ id }: { id: string }): React.ReactNode => {
 
           <Typography>
             <Button
-              variant="contained"
               color="secondary"
               disabled={!canEdit}
               hidden={!canEdit}
@@ -323,8 +322,7 @@ const EditGroup = ({ id }: { id: string }): React.ReactNode => {
 
           <div className="add-user-button">
             <Button
-              variant={selectUser?._id !== null ? "contained" : "outlined"}
-              color={selectUser?._id !== null ? "primary" : "secondary"}
+              color={selectUser?._id !== null ? "primary" : "ghost"}
               disabled={
                 !Permissions(PermissionTypes.UpdateGroup, authedUser) ||
                 selectUser._id === 0 ||
@@ -339,7 +337,7 @@ const EditGroup = ({ id }: { id: string }): React.ReactNode => {
       )}
       <div className="p-3">
         <Typography variant="h5">Maîtrise de groupe</Typography>
-        <GroupMembresTable
+        <GroupMembersTable
           users={membres.filter(
             (user) =>
               user.nominations.filter((x) => !x.ed && x.groupId === group._id)

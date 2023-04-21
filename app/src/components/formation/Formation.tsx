@@ -1,16 +1,16 @@
-import AppContext from "@aabp/context/app/appContext";
-import { Button, List, ListItem, ListItemIcon } from "@material-ui/core";
+import { List, ListItem, ListItemIcon } from "@material-ui/core";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import { navigate } from "gatsby";
-import { useContext } from "react";
 import Loading from "../loading/Loading";
 
+import Button from "../design-system/Button/Button";
 import Card from "../design-system/Card/Card";
 
+import useAuthUser from "@aabp/auth/useAuthUser";
 import "./formation.scss";
 
-const Formation = () => {
-  const { authedUser } = useContext(AppContext);
+const Formation = (): React.ReactNode => {
+  const authedUser = useAuthUser();
 
   if (authedUser?._id == undefined) {
     return <Loading />;
@@ -116,8 +116,7 @@ const Formation = () => {
             </blockquote>
             <div>
               <Button
-                variant="outlined"
-                color="primary"
+                color="ghost"
                 target="_blank"
                 href="https://forms.gle/Qn7mP9VBKoDYGbCMA"
               >

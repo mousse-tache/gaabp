@@ -1,17 +1,18 @@
+import { Dialog, Grid, TextField } from "@material-ui/core";
+import { Alert, Autocomplete } from "@material-ui/lab";
 import { navigate } from "gatsby";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 
 import UserContext from "@aabp/context/userContext";
 
+import Button from "@aabp/components/design-system/Button/Button";
+import Toggle from "@aabp/components/design-system/Toggle/Toggle";
 import MemberDetails from "@aabp/components/membres/MemberDetails";
-import { Button, Dialog, Grid, TextField } from "@material-ui/core";
-import { Alert, Autocomplete } from "@material-ui/lab";
 
 import UserClient from "@aabp/clients/userClient";
-import Toggle from "@aabp/components/design-system/Toggle/Toggle";
 
-const Fusion = () => {
+const Fusion = (): React.ReactNode => {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const { member, FetchUser } = useContext(UserContext);
@@ -152,7 +153,6 @@ const Fusion = () => {
               <div>
                 <Button
                   disabled={!selectedUser || fusionEnCours}
-                  variant="contained"
                   color="primary"
                   onClick={() => Fuse()}
                 >

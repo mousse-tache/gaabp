@@ -1,16 +1,22 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
 
-import AppContext from "@aabp/context/app/appContext";
 import UserContext from "@aabp/context/userContext";
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import AnneesService from "./anneesService";
 
+import useAuthUser from "@aabp/auth/useAuthUser";
+import Button from "../design-system/Button/Button";
 import Toggle from "../design-system/Toggle/Toggle";
 import MemberFormationsUniform from "./formation/MemberFormationsUniform";
 
-const MemberDetails = ({ canEdit, isPersonalProfile }) => {
-  const { authedUser } = useContext(AppContext);
+const MemberDetails = ({
+  canEdit,
+  isPersonalProfile,
+}: {
+  canEdit: boolean
+  isPersonalProfile: boolean
+}): React.ReactNode => {
+  const authedUser = useAuthUser();
   const { member, setMember, saveUser } = useContext(UserContext);
 
   return (
@@ -150,7 +156,7 @@ const MemberDetails = ({ canEdit, isPersonalProfile }) => {
         )}
         {(canEdit || isPersonalProfile) && (
           <div className="membres-information-section">
-            <Button variant="contained" color="secondary" onClick={saveUser}>
+            <Button color="secondary" onClick={saveUser}>
               {member?._id ? "Sauvegarder" : "Compléter l'inscription"}
             </Button>
           </div>
@@ -158,12 +164,6 @@ const MemberDetails = ({ canEdit, isPersonalProfile }) => {
       </form>
     </div>
   );
-};
-
-MemberDetails.propTypes = {
-  setMember: PropTypes.func,
-  canEdit: PropTypes.bool,
-  isPersonalProfile: PropTypes.bool,
 };
 
 export default MemberDetails;

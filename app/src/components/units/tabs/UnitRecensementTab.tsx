@@ -21,7 +21,7 @@ import { isFeatureActivated } from "@aabp/features/useFeatures";
 import Loading from "@aabp/components/loading/Loading";
 import AddNewUsers from "@aabp/components/recensement/AddNewUsers";
 import Recensement from "@aabp/components/recensement/recensement";
-import UnitMembersTable from "@aabp/components/units/unitMembersTable";
+import UnitMembersTable from "@aabp/components/units/UnitMembersTable";
 
 import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";

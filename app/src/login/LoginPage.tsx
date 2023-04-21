@@ -3,19 +3,13 @@ import { Link } from "gatsby";
 
 import Login from "@aabp/login/login";
 
-import "./login-page.scss";
-
 const LoginPage = (): React.ReactNode => {
   return (
     <>
       <Login />
-      <Link to="/aide" target="_blank" className="login-help-container">
-        <HelpOutlineIcon
-          className="login-help-item"
-          fontSize="large"
-          label="bottin"
-        />
-        <h3 className="login-help-item">Centre d'aide</h3>
+      <Link to="/aide" target="_blank" className="flex flex-col items-center">
+        <HelpOutlineIcon fontSize="large" label="bottin" />
+        <h3>Centre d'aide</h3>
       </Link>
     </>
   );

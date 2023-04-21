@@ -19,7 +19,7 @@ import DeleteUnit from "./operations/DeleteUnit";
 import ToggleActivationUnit from "./operations/ToggleActivationUnit";
 import CampTab from "./tabs/CampTab";
 import UnitRecensementTab from "./tabs/UnitRecensementTab";
-import UnitDetails from "./unitDetails";
+import UnitDetails from "./UnitDetails";
 
 import UnitClient from "@aabp/clients/unitClient";
 

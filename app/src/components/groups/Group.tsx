@@ -9,7 +9,7 @@ import AppContext from "@aabp/context/app/appContext";
 import Button from "@aabp/components/design-system/Button/Button";
 import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
-import GroupTable from "./groupTable";
+import GroupTable from "./GroupTable";
 
 import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
