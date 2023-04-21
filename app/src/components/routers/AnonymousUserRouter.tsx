@@ -1,7 +1,7 @@
 import { Router } from "@reach/router";
 import Profile from "./../profile/Profile";
 
-const AnonymousUserRouter = () => {
+const AnonymousUserRouter = (): React.ReactNode => {
   return (
     <Router basepath="/app">
       <Profile path="/account" />

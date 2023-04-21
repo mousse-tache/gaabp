@@ -1,19 +1,12 @@
 import { useSnackbar } from "notistack";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Button,
-  Fab,
-  MenuItem,
-  Modal,
-  Paper,
-  TextField,
-} from "@material-ui/core";
+import { Fab, MenuItem, Modal, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import AppContext from "@aabp/context/app/appContext";
-
+import Button from "../design-system/Button/Button";
+import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 import UnitTable from "./unitTable";
 
@@ -24,10 +17,12 @@ import UnitClient from "@aabp/clients/unitClient";
 import Branches from "@aabp/utils/branches";
 import Genre from "@aabp/utils/genre";
 
+import useAuthUser from "@aabp/auth/useAuthUser";
+
 import "./unit.scss";
 
 const Unit = () => {
-  const { authedUser } = useContext(AppContext);
+  const authedUser = useAuthUser();
   const [unitList, setUnitList] = useState([]);
   const [isFetchingUnitList, setIsFetchingUnitList] = useState(true);
   const [isFetchingGroupList, setIsFetchingGroupList] = useState(true);
@@ -101,7 +96,7 @@ const Unit = () => {
   }
 
   return (
-    <Paper className="membres">
+    <Card>
       <h2 className="membres-title">
         <span className="membres-title-element">Liste des unités</span>
         <span className="membres-title-element">
@@ -123,7 +118,7 @@ const Unit = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <Paper>
+        <Card>
           <div className="close-icon">
             <Fab
               aria-label="close"
@@ -198,7 +193,6 @@ const Unit = () => {
 
             <Button
               className="submit-button"
-              variant="contained"
               color="secondary"
               disabled={!Permissions(PermissionTypes.CreateUser, authedUser)}
               onClick={AddUnit}
@@ -206,14 +200,14 @@ const Unit = () => {
               Ajouter
             </Button>
           </form>
-        </Paper>
+        </Card>
       </Modal>
 
       <UnitTable
         units={unitList}
         canEdit={Permissions(PermissionTypes.UpdateUnit, authedUser)}
       />
-    </Paper>
+    </Card>
   );
 };
 

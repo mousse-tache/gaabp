@@ -1,11 +1,9 @@
-import { useContext } from "react";
-
+import useAuthUser from "@aabp/auth/useAuthUser";
 import AnonymousUserRouter from "@aabp/components/routers/AnonymousUserRouter";
 import NominatedUserRouter from "@aabp/components/routers/NominatedUserRouter";
-import AppContext from "@aabp/context/app/appContext";
 
-const AppRouter = () => {
-  const { authedUser } = useContext(AppContext);
+const AppRouter = (): React.ReactNode => {
+  const authedUser = useAuthUser();
 
   return (
     <>

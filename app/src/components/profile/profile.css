@@ -1,0 +1,10 @@
+
+.profile form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile h3 {
+    margin:2em;
+}

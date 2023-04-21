@@ -17,7 +17,7 @@ const Formation = React.lazy(
   () => import("@aabp/components/formation/Formation"),
 );
 const AccueilRessources = React.lazy(
-  () => import("@aabp/components/ressources/accueilRessources"),
+  () => import("@aabp/components/ressources/AccueilRessources"),
 );
 const RecommendFormation = React.lazy(
   () => import("@aabp/components/formation/RecommendFormation"),
@@ -37,7 +37,7 @@ import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import SuspenseNoSSR from "@aabp/components/lazy-load/SuspenseNoSSR";
 
-const NominatedUserRouter = () => {
+const NominatedUserRouter = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
 
   return (
