@@ -8,24 +8,24 @@ const BrancheModal = ({
   children,
   color,
   open,
-  handleClose,
+  onClose,
 }: {
   title: string
   open: boolean
   color: string
   children: React.ReactNode
-  handleClose: () => void
+  onClose: () => void
 }): React.ReactNode => {
   return (
     <Dialog
       className="branche-modal"
       open={open}
-      onClose={handleClose}
+      onClose={onClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
       <Card className={color}>
-        <IconButton onClick={handleClose}>
+        <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>
         <div className="p-3">
