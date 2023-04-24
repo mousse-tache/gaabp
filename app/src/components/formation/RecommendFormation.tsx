@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 import AppContext from "@aabp/context/app/appContext";
 
-import { Paper, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import MaterialTable from "material-table";
 
 import Card from "../design-system/Card/Card";
@@ -14,7 +14,7 @@ import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import UserClient from "@aabp/clients/userClient";
 
-const RecommendFormation = () => {
+const RecommendFormation = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const [formation, setFormation] = useState({
@@ -172,7 +172,7 @@ const RecommendFormation = () => {
   }
 
   return (
-    <Paper>
+    <Card>
       <Typography component="h4">Recommander des formations</Typography>
       <NewFormationForm
         authedUser={authedUser}
@@ -184,77 +184,75 @@ const RecommendFormation = () => {
         addFormation={addFormation}
         setFormation={setFormation}
       />
-      <Card>
-        <MaterialTable
-          title="Recommandations en attente d'approbation"
-          localization={{
-            toolbar: {
-              searchPlaceholder: "Chercher",
-            },
-            body: {
-              deleteTooltip: "Supprimer",
-              editTooltip: "Modifier",
-              addTooltip: "Nouveau",
-            },
-          }}
-          options={{
-            pageSize: 10,
-            headerStyle: {
-              zIndex: 8,
-            },
-            exportButton: true,
-            exportAllData: true,
-          }}
-          actions={[
-            {
-              icon: "check",
-              tooltip: "Approuver la recommandation",
-              onClick: (event, rowData) => confirmFormation(rowData),
-              disabled: !Permissions(
-                PermissionTypes.ConfirmFormation,
-                authedUser,
-              ),
-            },
-          ]}
-          columns={[
-            {
-              title: "Membre",
-              field: "prenom",
-              render: (rowData) => `${rowData.prenom} ${rowData.nom}`,
-            },
-            {
-              title: "Formation",
-              field: "formation",
-              render: (rowData) =>
-                `${
-                  rowData.formation.niveau.name
-                } ${rowData.formation.branche.couleur.toLowerCase()}`,
-            },
-            {
-              title: "Recommandé le",
-              field: "formation.dateRecommended",
-              render: (rowData) => `${rowData.formation.dateRecommende}`,
-            },
-            {
-              title: "Recommandé par",
-              field: "formation.recommendedBy",
-              render: (rowData) =>
-                `${
-                  formateurs.filter(
-                    (member) => member._id == rowData.formation.recommendedBy,
-                  )[0]?.prenom
-                } ${
-                  formateurs.filter(
-                    (member) => member._id == rowData.formation.recommendedBy,
-                  )[0]?.nom
-                }`,
-            },
-          ]}
-          // Limitation for now, view only a single formation at a time
-          data={allFormation}
-        />
-      </Card>
-    </Paper>
+      <MaterialTable
+        title="Recommandations en attente d'approbation"
+        localization={{
+          toolbar: {
+            searchPlaceholder: "Chercher",
+          },
+          body: {
+            deleteTooltip: "Supprimer",
+            editTooltip: "Modifier",
+            addTooltip: "Nouveau",
+          },
+        }}
+        options={{
+          pageSize: 10,
+          headerStyle: {
+            zIndex: 8,
+          },
+          exportButton: true,
+          exportAllData: true,
+        }}
+        actions={[
+          {
+            icon: "check",
+            tooltip: "Approuver la recommandation",
+            onClick: (event, rowData) => confirmFormation(rowData),
+            disabled: !Permissions(
+              PermissionTypes.ConfirmFormation,
+              authedUser,
+            ),
+          },
+        ]}
+        columns={[
+          {
+            title: "Membre",
+            field: "prenom",
+            render: (rowData) => `${rowData.prenom} ${rowData.nom}`,
+          },
+          {
+            title: "Formation",
+            field: "formation",
+            render: (rowData) =>
+              `${
+                rowData.formation.niveau.name
+              } ${rowData.formation.branche.couleur.toLowerCase()}`,
+          },
+          {
+            title: "Recommandé le",
+            field: "formation.dateRecommended",
+            render: (rowData) => `${rowData.formation.dateRecommende}`,
+          },
+          {
+            title: "Recommandé par",
+            field: "formation.recommendedBy",
+            render: (rowData) =>
+              `${
+                formateurs.filter(
+                  (member) => member._id == rowData.formation.recommendedBy,
+                )[0]?.prenom
+              } ${
+                formateurs.filter(
+                  (member) => member._id == rowData.formation.recommendedBy,
+                )[0]?.nom
+              }`,
+          },
+        ]}
+        // Limitation for now, view only a single formation at a time
+        data={allFormation}
+      />
+    </Card>
   );
 };
 

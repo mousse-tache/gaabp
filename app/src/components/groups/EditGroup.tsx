@@ -1,11 +1,8 @@
 import {
   Breadcrumbs,
-  Button,
-  CardContent,
   Checkbox,
   FormControlLabel,
   MenuItem,
-  Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -19,17 +16,18 @@ import PermissionTypes from "@aabp/auth/permissionTypes";
 import GroupClient from "@aabp/clients/groupClient";
 import UnitClient from "@aabp/clients/unitClient";
 import Regions from "@aabp/utils/regions";
+import Button from "../design-system/Button/Button";
 import Card from "../design-system/Card/Card";
 import Loading from "../loading/Loading";
 
 import UserClient from "@aabp/clients/userClient";
 import NominationTypes from "@aabp/utils/nominationTypes";
-import UnitTable from "../units/unitTable";
-import GroupMembresTable from "./groupMembersTable";
+import UnitTable from "../units/UnitTable";
+import GroupMembersTable from "./GroupMembersTable";
 //import GeoClient from "@aabp/clients/geoClient";
 import AppContext from "@aabp/context/app/appContext";
 
-const EditGroup = ({ id }: { id: string }) => {
+const EditGroup = ({ id }: { id: string }): React.ReactNode => {
   const { authedUser } = useContext(AppContext);
   const [isFetchingGroup, setIsFetchingGroup] = useState(true);
   const [units, setUnits] = useState([]);
@@ -179,189 +177,183 @@ const EditGroup = ({ id }: { id: string }) => {
   }
 
   return (
-    <Paper className="profile">
+    <Card className="profile">
       <Breadcrumbs aria-label="breadcrumb" className="crumbs">
         <Link color="inherit" to="/app/groupes">
           Groupes
         </Link>
         <Typography color="textPrimary">{`${group.numero} ${group.nom}`}</Typography>
       </Breadcrumbs>
-      <Card>
-        <CardContent>
-          <Typography variant="h5">Informations de base</Typography>
-          <form className="form">
-            <TextField
-              label="Numéro"
-              fullWidth
-              type="text"
-              value={group.numero}
-              disabled={!canEdit}
-              required={true}
-              placeholder="1er"
-              onChange={(event) =>
-                setGroup({ ...group, numero: event.target.value })
-              }
-            />
-
-            <TextField
-              label="Nom du groupe"
-              fullWidth
-              type="text"
-              value={group.nom}
-              disabled={!canEdit}
-              placeholder="Groupe de Glasgow"
-              onChange={(event) =>
-                setGroup({ ...group, nom: event.target.value })
-              }
-            />
-
-            <TextField
-              label="Ville"
-              fullWidth
-              type="text"
-              value={group.ville}
-              disabled={!canEdit}
-              placeholder="Glasgow"
-              onChange={(event) =>
-                setGroup({ ...group, ville: event.target.value })
-              }
-            />
-
-            <TextField
-              label="Région"
-              select
-              fullWidth
-              value={group.region}
-              disabled={!canEdit}
-              onChange={(x) => setGroup({ ...group, region: x.target.value })}
-            >
-              {regions}
-            </TextField>
-            <TextField
-              label="Adresse"
-              fullWidth
-              value={group.adresse}
-              disabled={!canEdit}
-              onChange={(x) => setGroup({ ...group, adresse: x.target.value })}
-            ></TextField>
-            <FormControlLabel
-              value={group.public}
-              disabled={!group.region || !group.adresse || !group.ville}
-              control={
-                <Checkbox
-                  onClick={() => setGroup({ ...group, public: !group.public })}
-                />
-              }
-              label={
-                !group.region || !group.adresse || !group.ville
-                  ? "Afficher sur le site public (Requiert ville, région et adresse)"
-                  : "Afficher sur le site public"
-              }
-            />
-            <FormControlLabel
-              value={group.website}
-              control={
-                <TextField
-                  onChange={(event) =>
-                    setGroup({ ...group, website: event.target.value })
-                  }
-                />
-              }
-              label="Site web (pour affichage public)"
-            />
-
-            <Typography>
-              <Button
-                variant="contained"
-                color="secondary"
-                disabled={!canEdit}
-                hidden={!canEdit}
-                onClick={SaveGroup}
-              >
-                Sauvegarder
-              </Button>
-            </Typography>
-          </form>
-        </CardContent>
-
-        {Permissions(PermissionTypes.UpdateGroup, authedUser) && (
-          <CardContent>
-            <div className="add-user-search">
-              <Autocomplete
-                autoSelect
-                blurOnSelect
-                disableClearable
-                onChange={(event, newValue) => {
-                  setSelectUser(newValue);
-                }}
-                value={selectUser}
-                defaultValue={{ prenom: "", nom: "" }}
-                options={[...allMembers, { prenom: "", nom: "", _id: 0 }]}
-                getOptionLabel={(option) => option.prenom + " " + option.nom}
-                style={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField
-                    fullWidth
-                    onChange={(event) => setQuery(event.target.value)}
-                    {...params}
-                    label="Cherchez un membre"
-                    variant="outlined"
-                  />
-                )}
-              />
-
-              <TextField
-                label="Rôle"
-                select
-                fullWidth
-                value={selectRole}
-                variant="outlined"
-                onChange={(x) => setSelectRole(x.target.value)}
-              >
-                {Object.keys(NominationTypes).map((x) => (
-                  <MenuItem key={x} value={x}>
-                    {NominationTypes[x]}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <div className="add-user-button">
-                <Button
-                  variant={selectUser?._id !== null ? "contained" : "outlined"}
-                  color={selectUser?._id !== null ? "primary" : "secondary"}
-                  disabled={
-                    !Permissions(PermissionTypes.UpdateGroup, authedUser) ||
-                    selectUser._id === 0 ||
-                    !selectRole
-                  }
-                  onClick={addToGroup}
-                >
-                  Ajouter au groupe
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        )}
-        <CardContent>
-          <Typography variant="h5">Maîtrise de groupe</Typography>
-          <GroupMembresTable
-            users={membres.filter(
-              (user) =>
-                user.nominations.filter((x) => !x.ed && x.groupId === group._id)
-                  .length !== 0,
-            )}
-            groupId={group._id}
-            removeFromGroup={RemoveFromGroup}
+      <div className="p-3">
+        <Typography variant="h5">Informations de base</Typography>
+        <form className="form">
+          <TextField
+            label="Numéro"
+            fullWidth
+            type="text"
+            value={group.numero}
+            disabled={!canEdit}
+            required={true}
+            placeholder="1er"
+            onChange={(event) =>
+              setGroup({ ...group, numero: event.target.value })
+            }
           />
-        </CardContent>
 
-        <CardContent>
-          <Typography variant="h5">Unités</Typography>
-          {isFetchingUnits && <Loading />}
-          {!isFetchingUnits && <UnitTable units={units} groups={[group]} />}
-        </CardContent>
-      </Card>
-    </Paper>
+          <TextField
+            label="Nom du groupe"
+            fullWidth
+            type="text"
+            value={group.nom}
+            disabled={!canEdit}
+            placeholder="Groupe de Glasgow"
+            onChange={(event) =>
+              setGroup({ ...group, nom: event.target.value })
+            }
+          />
+
+          <TextField
+            label="Ville"
+            fullWidth
+            type="text"
+            value={group.ville}
+            disabled={!canEdit}
+            placeholder="Glasgow"
+            onChange={(event) =>
+              setGroup({ ...group, ville: event.target.value })
+            }
+          />
+
+          <TextField
+            label="Région"
+            select
+            fullWidth
+            value={group.region}
+            disabled={!canEdit}
+            onChange={(x) => setGroup({ ...group, region: x.target.value })}
+          >
+            {regions}
+          </TextField>
+          <TextField
+            label="Adresse"
+            fullWidth
+            value={group.adresse}
+            disabled={!canEdit}
+            onChange={(x) => setGroup({ ...group, adresse: x.target.value })}
+          ></TextField>
+          <FormControlLabel
+            value={group.public}
+            disabled={!group.region || !group.adresse || !group.ville}
+            control={
+              <Checkbox
+                onClick={() => setGroup({ ...group, public: !group.public })}
+              />
+            }
+            label={
+              !group.region || !group.adresse || !group.ville
+                ? "Afficher sur le site public (Requiert ville, région et adresse)"
+                : "Afficher sur le site public"
+            }
+          />
+          <FormControlLabel
+            value={group.website}
+            control={
+              <TextField
+                onChange={(event) =>
+                  setGroup({ ...group, website: event.target.value })
+                }
+              />
+            }
+            label="Site web (pour affichage public)"
+          />
+
+          <Typography>
+            <Button
+              color="secondary"
+              disabled={!canEdit}
+              hidden={!canEdit}
+              onClick={SaveGroup}
+            >
+              Sauvegarder
+            </Button>
+          </Typography>
+        </form>
+      </div>
+
+      {Permissions(PermissionTypes.UpdateGroup, authedUser) && (
+        <div className="add-user-search p-3">
+          <Autocomplete
+            autoSelect
+            blurOnSelect
+            disableClearable
+            onChange={(event, newValue) => {
+              setSelectUser(newValue);
+            }}
+            value={selectUser}
+            defaultValue={{ prenom: "", nom: "" }}
+            options={[...allMembers, { prenom: "", nom: "", _id: 0 }]}
+            getOptionLabel={(option) => option.prenom + " " + option.nom}
+            style={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField
+                fullWidth
+                onChange={(event) => setQuery(event.target.value)}
+                {...params}
+                label="Cherchez un membre"
+                variant="outlined"
+              />
+            )}
+          />
+
+          <TextField
+            label="Rôle"
+            select
+            fullWidth
+            value={selectRole}
+            variant="outlined"
+            onChange={(x) => setSelectRole(x.target.value)}
+          >
+            {Object.keys(NominationTypes).map((x) => (
+              <MenuItem key={x} value={x}>
+                {NominationTypes[x]}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <div className="add-user-button">
+            <Button
+              color={selectUser?._id !== null ? "primary" : "ghost"}
+              disabled={
+                !Permissions(PermissionTypes.UpdateGroup, authedUser) ||
+                selectUser._id === 0 ||
+                !selectRole
+              }
+              onClick={addToGroup}
+            >
+              Ajouter au groupe
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="p-3">
+        <Typography variant="h5">Maîtrise de groupe</Typography>
+        <GroupMembersTable
+          users={membres.filter(
+            (user) =>
+              user.nominations.filter((x) => !x.ed && x.groupId === group._id)
+                .length !== 0,
+          )}
+          groupId={group._id}
+          removeFromGroup={RemoveFromGroup}
+        />
+      </div>
+
+      <div className="p-3">
+        <Typography variant="h5">Unités</Typography>
+        {isFetchingUnits && <Loading />}
+        {!isFetchingUnits && <UnitTable units={units} groups={[group]} />}
+      </div>
+    </Card>
   );
 };
 

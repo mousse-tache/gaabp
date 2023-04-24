@@ -5,7 +5,7 @@ import MarinCard from "./branches/marin/MarinCard";
 import RougeCard from "./branches/rouge/RougeCard";
 import VerteCard from "./branches/verte/VerteCard";
 
-const About = () => (
+const About = (): React.ReactNode => (
   <section className="wrapper">
     <div className="break" id="about"></div>
     <div className="about">

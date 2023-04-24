@@ -1,6 +1,5 @@
 import {
   Breadcrumbs,
-  Button,
   List,
   ListItem,
   ListItemIcon,
@@ -9,6 +8,7 @@ import {
 import LibraryBooksRoundedIcon from "@material-ui/icons/LibraryBooksRounded";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
+import Button from "@aabp/components/design-system/Button/Button";
 import Card from "@aabp/components/design-system/Card/Card";
 
 const FormationResume = ({
@@ -81,8 +81,7 @@ const FormationResume = ({
             />
             <div>
               <Button
-                variant="outlined"
-                color="primary"
+                color="ghost"
                 target="_blank"
                 href="https://forms.gle/Qn7mP9VBKoDYGbCMA"
               >

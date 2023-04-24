@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 
 import Card from "../design-system/Card/Card";
 
-const Contact = () => (
+const Contact = (): React.ReactNode => (
   <section>
     <div className="break" id="contact"></div>
     <Card>

@@ -2,7 +2,7 @@ import { Box, Typography } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import Button from "../design-system/Button/Button";
 
-const Impliquer = () => {
+const Impliquer = (): React.ReactNode => {
   return (
     <section className="anchor">
       <Helmet>

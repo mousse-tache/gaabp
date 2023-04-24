@@ -5,8 +5,6 @@ import { Helmet } from "react-helmet";
 
 import Layout from "@aabp/components/public-components/Layout";
 
-import "./aide-post.scss";
-
 export default function AidePost({ data }: { data: unknown }): React.ReactNode {
   const post = data?.markdownRemark;
 
@@ -24,7 +22,7 @@ export default function AidePost({ data }: { data: unknown }): React.ReactNode {
         <title>AABP | {post.frontmatter.title}</title>
         <html lang="fr" />
       </Helmet>
-      <section className="wrapper aide-post">
+      <section className="wrapper overflow-hidden">
         <Breadcrumbs aria-label="breadcrumb" className="crumbs">
           <Link color="inherit" to="/aide">
             Centre d'aide
