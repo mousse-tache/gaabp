@@ -20,7 +20,7 @@
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mongoose": "^7.0.3",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "eslint": "^8.38.0",
