@@ -4,7 +4,7 @@ import FeatureClient from "@aabp/clients/featureClient";
 
 import AppContext from "@aabp/context/app/appContext";
 
-const isFeatureActivated = (feature) => {
+const isFeatureActivated = (feature: number): bool => {
   const { features } = useContext(AppContext);
 
   const f = features.find((x) => x._id == feature);
@@ -16,7 +16,7 @@ const isFeatureActivated = (feature) => {
   return false;
 };
 
-function useFeatures() {
+function useFeatures(): Array<number> {
   const [features, setFeatures] = useState([]);
 
   const featureClient = new FeatureClient();

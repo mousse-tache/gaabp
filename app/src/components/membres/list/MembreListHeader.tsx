@@ -1,18 +1,18 @@
-import { useSnackbar } from "notistack";
-import React, { useContext, useState } from "react";
-
-import { Button, Fab, Modal, Paper, TextField } from "@material-ui/core";
+import { Fab, Modal, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
 
-import AppContext from "@aabp/context/app/appContext";
+import Button from "@aabp/components/design-system/Button/Button";
+import Card from "@aabp/components/design-system/Card/Card";
 
-import Permissions from "@aabp/auth/permissions";
 import PermissionTypes from "@aabp/auth/permissionTypes";
+import usePermissions from "@aabp/auth/usePermissions";
 import UserClient from "@aabp/clients/userClient";
 
-const MembreListHeader = () => {
-  const { authedUser } = useContext(AppContext);
+const MembreListHeader = (): React.ReactNode => {
+  const perms = usePermissions();
   const [courriel, setCourriel] = useState("");
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
@@ -49,9 +49,7 @@ const MembreListHeader = () => {
             aria-label="add"
             size="small"
             color="secondary"
-            disabled={
-              open || !Permissions(PermissionTypes.CreateUser, authedUser)
-            }
+            disabled={open || !perms(PermissionTypes.CreateUser)}
             onClick={handleOpen}
           >
             <AddIcon />
@@ -65,7 +63,7 @@ const MembreListHeader = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <Paper>
+        <Card>
           <div className="close-icon">
             <Fab
               aria-label="add"
@@ -109,15 +107,14 @@ const MembreListHeader = () => {
 
             <Button
               className="submit-button"
-              variant="contained"
               color="secondary"
-              disabled={!Permissions(PermissionTypes.CreateUser, authedUser)}
+              disabled={!perms(PermissionTypes.CreateUser)}
               onClick={async () => await AddUser()}
             >
               Ajouter
             </Button>
           </form>
-        </Paper>
+        </Card>
       </Modal>
     </div>
   );

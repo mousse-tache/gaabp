@@ -10,7 +10,7 @@ import { Typography } from "@material-ui/core";
 import LogoSpinner from "@aabp/components/spinner/LogoSpinner";
 import Logo from "@aabp/images/Logo_AABP.png";
 
-const LandingPage = () => {
+const LandingPage = (): React.ReactNode => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {

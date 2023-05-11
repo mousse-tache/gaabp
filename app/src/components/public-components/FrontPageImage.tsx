@@ -1,6 +1,6 @@
 import image1 from "@aabp/images/formation2022.jpeg";
 
-const FrontPageImage = () => {
+const FrontPageImage = (): React.ReactNode => {
   return (
     <div className="p-4 m-4">
       <img
