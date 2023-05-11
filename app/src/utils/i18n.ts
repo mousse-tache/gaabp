@@ -17,7 +17,7 @@ i18n
   .use(initReactI18next)
   .init({
     backend: backendOptions,
-    fallbackLng: "fr",
+    fallbackLng: "fr-ca",
     debug: process.env.isDebug,
 
     ns: ["dashboard", "menu", "settings", "common"],
