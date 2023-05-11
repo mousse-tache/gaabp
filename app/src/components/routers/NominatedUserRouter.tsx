@@ -11,17 +11,12 @@ const UnitSection = React.lazy(
   () => import("@aabp/components/units/UnitSection"),
 );
 const EditUnit = React.lazy(() => import("@aabp/components/units/EditUnit"));
-const Formation = React.lazy(
-  () => import("@aabp/components/formation/Formation"),
-);
+
 const AccueilRessources = React.lazy(
   () => import("@aabp/components/ressources/AccueilRessources"),
 );
 const RecommendFormation = React.lazy(
   () => import("@aabp/components/formation/RecommendFormation"),
-);
-const FormationResume = React.lazy(
-  () => import("@aabp/components/formation/components/FormationResume"),
 );
 const Home = React.lazy(() => import("@aabp/components/home/Home"));
 const SectionMembre = React.lazy(
@@ -48,9 +43,6 @@ const NominatedUserRouter = (): React.ReactNode => {
         <EditGroup path="/groupe/:id" />
         <UnitSection path="/unites" />
         <EditUnit path="/unite/:id" />
-        <Formation path="/formation" />
-        <FormationResume path="/formation/:niveau/" />
-        <FormationResume path="/formation/:niveau/:branche" />
         {perms(PermissionTypes.RecommendFormation) && (
           <RecommendFormation path="/formation/recommandations" />
         )}

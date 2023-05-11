@@ -2,12 +2,13 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  List,
-  ListItem,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const Bottin = () => {
+import List from "../design-system/List/List";
+import ListItem from "../design-system/List/ListItem";
+
+const Bottin = (): React.ReactNode => {
   return (
     <div>
       <Accordion>
@@ -18,7 +19,6 @@ const Bottin = () => {
           <List>
             Vous devez envoyer votre demande de permis de camp à votre branche,
             votre chef de groupe et info@badenpowell.ca
-            <ListItem></ListItem>
             <ListItem>Castors: bleu@badenpowell.ca</ListItem>
             <ListItem>
               Louveteaux/Louvettes/Jeannettes: jaune@badenpowell.ca

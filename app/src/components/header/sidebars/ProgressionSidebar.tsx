@@ -17,27 +17,16 @@ const ProgressionSidebar = (): React.ReactNode => {
   return (
     <div>
       <List>
-        <ListItem button onClick={() => setOpen(!open)}>
+        <ListItem
+          button
+          disabled={!perms(PermissionTypes.RecommendFormation)}
+          onClick={() => setOpen(!open)}
+        >
           <ListItemText primary="Progression" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem
-              divider
-              button
-              disableRipple
-              onClick={() => navigate("/app/formation")}
-            >
-              <Link
-                className=""
-                to="/app/formation"
-                partiallyActive={true}
-                activeClassName="active"
-              >
-                Formation
-              </Link>
-            </ListItem>
             {perms(PermissionTypes.RecommendFormation) && (
               <ListItem
                 divider
