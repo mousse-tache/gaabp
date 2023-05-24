@@ -51,7 +51,6 @@ const NominatedUserRouter = (): React.ReactNode => {
           <UnitSection defaultValue={1} path="/recensements" />
         )}
         <SectionMembre defaultValue={1} path="/nominations" />
-        <SectionMembre defaultValue={2} path="/eligibilite" />
         <FeatureList path="/features" />
         <Home default />
       </Router>
