@@ -16,7 +16,32 @@ const EligibiliteTable = (): React.ReactNode => {
   const columns = [
     { title: "Nom", field: "nom", filtering: false },
     { title: "Courriel", field: "courriel", filtering: false },
-    { title: "Éligible pour", field: "honor", filtering: false },
+    {
+      title: "Éligible pour",
+      field: "honors",
+      filtering: false,
+    },
+    {
+      title: "Éligible pour Service National Méritoire",
+      field: "eligibleServiceNational",
+      filtering: false,
+      width: "10%",
+      type: "boolean",
+    },
+    {
+      title: "Éligible pour Bûchettes",
+      field: "eligibleBuchettes",
+      filtering: false,
+      width: "10%",
+      type: "boolean",
+    },
+    {
+      title: "Éligible pour Pro Valore Sua",
+      field: "eligibleProvalore",
+      filtering: false,
+      width: "10%",
+      type: "boolean",
+    },
     {
       title: "",
       field: "formations",
@@ -73,34 +98,17 @@ const EligibiliteTable = (): React.ReactNode => {
     let f;
 
     if (buchettes) {
-      f = data
-        .filter(
-          (x) =>
-            x.service >= 5 &&
-            x.formations &&
-            x.formations.filter((u) => u.niveau.id == "8").length > 0,
-        )
-        .map((x) => {
-          return { ...x, honor: "Bûchettes" };
-        });
+      f = data.filter((x) => x.eligibleBuchettes);
       users = users.concat(f);
     }
 
     if (provalore) {
-      f = data
-        .filter((x) => x.service >= 15)
-        .map((x) => {
-          return { ...x, honor: "Provalore Sua" };
-        });
+      f = data.filter((x) => x.eligibleProvalore);
       users = users.concat(f);
     }
 
     if (snm) {
-      f = data
-        .filter((x) => x.serviceNational >= 5)
-        .map((x) => {
-          return { ...x, honor: "Service national méritoire" };
-        });
+      f = data.filter((x) => x.eligibleServiceNational >= 5);
       users = users.concat(f);
     }
 
