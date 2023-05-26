@@ -24,7 +24,11 @@ const Eligibilite = (): React.ReactNode => {
   return (
     <EligibliteContext.Provider value={honneurs}>
       <Card>
-        <li className="eligibilite-list-chips">
+        <h2>
+          Montre l'éligibilité, mais ne valide pas si une personne a déjà
+          l'honneur en question.
+        </h2>
+        <div className="eligibilite-list-chips">
           <Chip
             className="eligibilite-chip"
             label="Bûchettes"
@@ -43,7 +47,7 @@ const Eligibilite = (): React.ReactNode => {
             onClick={() => setSnm(!snm)}
             color={snm ? "primary" : "default"}
           />
-        </li>
+        </div>
         <EligibiliteTable />
       </Card>
     </EligibliteContext.Provider>

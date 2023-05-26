@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid } from "@material-ui/core";
 import { Link } from "gatsby";
 import Logo from "../../../images/Logo_AABP.png";
@@ -10,7 +9,7 @@ const Footer = () => (
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Link to="/">
-            <img className="logo" src={Logo} alt="Logo" />
+            <img className="logo ml-0" src={Logo} alt="Logo" />
           </Link>
         </Grid>
         <Grid item xs={12}>
@@ -21,6 +20,9 @@ const Footer = () => (
         </Grid>
         <Grid item xs={12}>
           <Link to="/blog">Blog</Link>
+        </Grid>
+        <Grid item xs={12}>
+          <Link to="/aide">Centre d'aide</Link>
         </Grid>
       </Grid>
     </div>
@@ -33,6 +35,15 @@ const Footer = () => (
             rel="noopener noreferrer"
           >
             Carrick (boutique)
+          </a>
+        </Grid>
+        <Grid item xs={12}>
+          <a
+            href="https://sites.google.com/view/bibliothequecastorindulgent/accueil"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Bibliothèque du Castor Indulgent
           </a>
         </Grid>
         <Grid item xs={12}>
@@ -52,9 +63,6 @@ const Footer = () => (
           >
             Infolettre
           </a>
-        </Grid>
-        <Grid item xs={12}>
-          <Link to="/aide">Centre d'aide</Link>
         </Grid>
       </Grid>
     </div>
