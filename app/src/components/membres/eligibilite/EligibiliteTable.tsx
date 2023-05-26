@@ -17,11 +17,6 @@ const EligibiliteTable = (): React.ReactNode => {
     { title: "Nom", field: "nom", filtering: false },
     { title: "Courriel", field: "courriel", filtering: false },
     {
-      title: "Éligible pour",
-      field: "honors",
-      filtering: false,
-    },
-    {
       title: "Éligible pour Service National Méritoire",
       field: "eligibleServiceNational",
       filtering: false,
@@ -108,7 +103,7 @@ const EligibiliteTable = (): React.ReactNode => {
     }
 
     if (snm) {
-      f = data.filter((x) => x.eligibleServiceNational >= 5);
+      f = data.filter((x) => x.eligibleServiceNational);
       users = users.concat(f);
     }
 
@@ -129,6 +124,7 @@ const EligibiliteTable = (): React.ReactNode => {
           exportCSVName: "Export CSV",
         },
       }}
+      z
       options={{
         pageSize: 10,
         exportButton: true,

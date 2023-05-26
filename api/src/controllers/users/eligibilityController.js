@@ -38,12 +38,15 @@ const getEligibilityByHonor = async (req, reply) => {
             getAnneeDeService(
               x.nominations.filter((x) => unitesNationales.includes(x.unitId))
             ) > 5,
-          eligibleBuchettes:
-            x.service >= 5 &&
-            x.formations &&
-            x.formations.filter((u) => u.niveau.id == "8").length > 0,
-          eligibleProvalore: x.service >= 15,
         };
+
+        u.eligibleBuchettes =
+          u.service >= 5 &&
+          u.formations &&
+          u.formations.filter((f) => f.niveau.id == "8" || f.niveau.id == "BC2")
+            .length > 0;
+
+        u.eligibleProvalore = u.service >= 15;
 
         u.honors = [];
 
