@@ -1,22 +1,20 @@
 import {
-  Accordion,
-  AccordionActions,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  List,
-  ListItem,
   MenuItem,
-  TextField,
-  Typography,
+  TextField
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import CloseIcon from "@material-ui/icons/Close";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
+
+import Button from "../design-system/Button/Button";
+import Accordion from "../design-system/Collapsible/Accordion";
+import List from "../design-system/List/List";
+import ListItem from "../design-system/List/ListItem";
+
 import UserClient from "../../clients/userClient";
 import NominationTypes from "../../utils/nominationTypes";
+
 
 const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
   const defaultUserState = {
@@ -57,17 +55,13 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
   };
 
   return (
-    <Accordion>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h5">
-          Recenser des membres pour la première fois
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <div className="add-new-users-recensement">
-          <List className="add-new-users-recensement">
-            <ListItem className="add-new-users-recensement-item" divider>
+    <Accordion header="Recenser des membres pour la première fois">
+      <div className="flex flex-col gap-5 w-full">
+        <div className="w-full">
+          <List className="flex flex-col w-full">
+            <ListItem className="flex flex-row flex-wrap justify-between w-full gap-3">
               <TextField
+                className="w-56"
                 fullWidth
                 required
                 value={nextUserToCreate.prenom}
@@ -80,6 +74,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                 label="Prénom"
               />
               <TextField
+                className="w-56"
                 fullWidth
                 required
                 value={nextUserToCreate.nom}
@@ -92,6 +87,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                 label="Nom"
               />
               <TextField
+                className="w-56"
                 fullWidth
                 value={nextUserToCreate.courriel}
                 onChange={(x) =>
@@ -103,6 +99,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                 label="Courriel de contact"
               />
               <TextField
+                className="w-56"
                 label="Rôle"
                 select
                 fullWidth
@@ -133,33 +130,32 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
               >
                 <AddCircleOutlineIcon
                   size="large"
-                  color={
-                    nextUserToCreate.prenom == "" || nextUserToCreate.nom == ""
-                      ? "inherit"
-                      : "primary"
-                  }
                 />
               </Button>
             </ListItem>
             {usersToCreate.length > 0 && (
               <ListItem>
-                <Typography>Membres qui seront ajoutés:</Typography>
+                <span className="text-xl">Membres qui seront ajoutés:</span>
               </ListItem>
             )}
             {usersToCreate.map((x, index) => (
               <ListItem
                 key={index}
-                className="add-new-users-recensement-item"
+                className="flex flex-row flex-wrap justify-between w-full max-w-full gap-3"
                 divider
               >
-                <TextField fullWidth value={x.prenom} label="Prénom" />
-                <TextField fullWidth value={x.nom} label="Nom" />
+                <TextField 
+                className="w-56" fullWidth value={x.prenom} label="Prénom" />
+                <TextField 
+                className="w-56" fullWidth value={x.nom} label="Nom" />
                 <TextField
+                  className="w-56"
                   fullWidth
                   value={nextUserToCreate.courriel}
                   label="Courriel de contact"
                 />
                 <TextField
+                  className="w-56"
                   label="Rôle"
                   select
                   fullWidth
@@ -172,15 +168,14 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                   ))}
                 </TextField>
                 <Button onClick={() => removeRow(x)}>
-                  <CloseIcon size="large" color="primary" />
+                  <CloseIcon size="large" />
                 </Button>
               </ListItem>
             ))}
           </List>
         </div>
-      </AccordionDetails>
       {usersToCreate.length > 0 && (
-        <AccordionActions>
+        <div className="flex flex-row-reverse gap-3 justify-items-end">
           <Button
             size="small"
             onClick={() =>
@@ -189,11 +184,15 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
           >
             Annuler
           </Button>
-          <Button size="small" color="primary" onClick={addUsers}>
+          <Button 
+            size="small" 
+            color="secondary" 
+            onClick={addUsers}>
             Sauvegarder
           </Button>
-        </AccordionActions>
+        </div>
       )}
+      </div>
     </Accordion>
   );
 };

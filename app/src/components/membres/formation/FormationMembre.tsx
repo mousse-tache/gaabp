@@ -93,7 +93,7 @@ const FormationMembre = () => {
             lookup: formateurs,
             editable: false,
           },
-          { title: "Recommendé le", field: "dateRecommende" },
+          { title: "Recommandé le", field: "dateRecommende" },
           {
             title: "Recommander par",
             field: "recommendedBy",

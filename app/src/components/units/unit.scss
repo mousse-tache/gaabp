@@ -69,26 +69,6 @@
 
 }
 
-.add-new-users-recensement {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.add-new-users-recensement-item {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 100%;
-}
-
-.add-new-users-recensement-item > div {
-    max-width: 15rem;
-    padding: .5rem;
-}
-
 .add-user-row-button {
     right: 0rem;
 }
