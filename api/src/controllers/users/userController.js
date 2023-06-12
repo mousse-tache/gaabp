@@ -6,8 +6,13 @@ import Decoration from "../../models/Decoration.js";
 import DemandeNomination from "../../models/DemandeNomination.js";
 import User from "../../models/User.js";
 
-import { Permissions } from "../../security/permissions.js";
+import FeatureManager from "../../features/featureManager.js";
+import Features from "../../features/features.js";
+import UserSearchQuery from "../../management/users/UserSearchQuery.js";
 import { PermissionTypes } from "../../security/permissionTypes.js";
+import { Permissions } from "../../security/permissions.js";
+
+let featureManager = new FeatureManager;
 
 // Get all users
 const getPendingNominationUsers = async (req, reply) => {
@@ -70,6 +75,10 @@ const getBasicUsersWithPaging = async (req, reply) => {
         nominationFilter = { $elemMatch: { ed: null } };
       } else {
         nominationFilter = { $exists: true };
+      }
+
+      if(await featureManager.isFeatureEnabledAsync(Features.UserSearchAtlas)) {
+        return await (new UserSearchQuery()).Handle(page, pageSize, query, activeOnly);
       }
 
       if (query && query.trim() !== "") {
@@ -520,23 +529,10 @@ const confirmFormation = async (req, reply) => {
 };
 
 export {
-  getPendingNominationUsers,
-  getContacts,
-  getBasicUsersWithPaging,
-  searchUsers,
+  FuseUsers, addUser,
+  addUsers, confirmFormation, deleteUser, getBasicUsersWithPaging, getContacts, getMultipleUsers, getPendingNominationUsers, getSingleUser, getUsersByGroup, getUsersByUnit, recommendFormation, removeFromUnit, searchUsers,
   searchUsersWithFormations,
-  searchUsersWithPendingFormations,
-  getUsersByUnit,
-  removeFromUnit,
-  getUsersByGroup,
-  getSingleUser,
-  getMultipleUsers,
-  addUser,
-  addUsers,
-  updateProfile,
-  updateUser,
-  deleteUser,
-  FuseUsers,
-  recommendFormation,
-  confirmFormation,
+  searchUsersWithPendingFormations, updateProfile,
+  updateUser
 };
+

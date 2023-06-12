@@ -1,15 +1,10 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Input,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
-  Typography,
+  TextField
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useSnackbar } from "notistack";
 import Proptypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
@@ -17,6 +12,7 @@ import { useContext, useEffect, useState } from "react";
 import UnitContext from "../../context/unit/unitContext";
 
 import Button from "../design-system/Button/Button";
+import Accordion from "../design-system/Collapsible/Accordion";
 import Loading from "../loading/Loading";
 
 import Branches from "../../utils/branches";
@@ -31,7 +27,6 @@ const UnitDetails = ({ disabled }) => {
 
   const [isFetchingGroup, setIsFetchingGroup] = useState(true);
   const [group, setGroup] = useState(null);
-  const [expanded, setExpanded] = useState(true);
 
   const [groupList, setGroupList] = useState([]);
 
@@ -87,12 +82,8 @@ const UnitDetails = ({ disabled }) => {
   }
 
   return (
-    <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h5">Informations de base</Typography>
-      </AccordionSummary>
-
-      <AccordionDetails>
+    <Accordion header="Informations de base">
+      <div className="w-full">
         <form className="form">
           <InputLabel>Nom de l'unité</InputLabel>
           <TextField
@@ -164,7 +155,7 @@ const UnitDetails = ({ disabled }) => {
             </div>
           )}
         </form>
-      </AccordionDetails>
+      </div>
     </Accordion>
   );
 };

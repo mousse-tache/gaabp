@@ -108,6 +108,7 @@ const MembresTable = ({ canEdit }, { canEdit: boolean }): React.ReactNode => {
         exportFileName: "membres",
         exportAllData: true,
         tableLayout: "fixed",
+        sorting: false
       }}
       data={(query) =>
         new Promise(async (resolve) => {

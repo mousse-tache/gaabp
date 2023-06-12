@@ -1,3 +1,4 @@
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import classNames from "classnames";
 import React, { ReactNode, useState } from "react";
 
@@ -19,11 +20,11 @@ const Accordion = ({
   );
   return (
     <div className={classes} {...props}>
-      <div onClick={() => setOpen(!open)} className="accordion-header">
-        <div className={`caret ${open ? "toggle-up" : "toggle-down"}`}>^</div>
-        <div className="accordion-header-title">{header}</div>
+      <div onClick={() => setOpen(!open)} className="accordion-header w-full">
+        <div className="accordion-header-title text-xl">{header}</div>
+        <div className={`caret ${open ? "toggle-up" : "toggle-down"}`}><ExpandMoreIcon /></div>
       </div>
-      <div className={`accordion-content content-${open ? "open" : "closed"}`}>
+      <div className={`accordion-content content-${open ? "open" : "closed"} w-full`}>
         {children}
       </div>
     </div>
