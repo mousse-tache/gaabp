@@ -1,4 +1,4 @@
-import image1 from "@aabp/images/formation2022.jpeg";
+import image1 from "@aabp/images/formation2022.webp";
 
 const FrontPageImage = (): React.ReactNode => {
   return (
@@ -7,7 +7,7 @@ const FrontPageImage = (): React.ReactNode => {
         className="m-auto rounded-lg"
         src={image1}
         width="600"
-        height="338"
+        height="450"
         alt="Formation 2022"
         loading="lazy"
       />
