@@ -9,7 +9,6 @@ const FrontPageImage = (): React.ReactNode => {
         width="600"
         height="450"
         alt="Formation 2022"
-        loading="lazy"
       />
     </div>
   );
