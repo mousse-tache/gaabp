@@ -12,7 +12,6 @@ class UserSearchQuery {
             var skip = parseInt(page) > 1 ? parseInt(page - 1) * pageSize : 0;
             var active = activeOnly == "true" ? true : false;
             let users;
-            let count;
 
             let stages = [];
             let metaStages = []
@@ -64,7 +63,7 @@ class UserSearchQuery {
       
             stages.push(projectStage); 
 
-            if(!query) {
+            if(!!!query) {
                 stages.push({
                     $sort: {
                         "nom": 1

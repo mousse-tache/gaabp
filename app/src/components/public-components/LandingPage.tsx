@@ -7,7 +7,6 @@ import Impliquer from "@aabp/components/public-components/Impliquer";
 import Inscrire from "@aabp/components/public-components/Inscrire";
 import { Typography } from "@material-ui/core";
 
-import LogoSpinner from "@aabp/components/spinner/LogoSpinner";
 import Logo from "@aabp/images/Logo_AABP.png";
 
 const LandingPage = (): React.ReactNode => {
@@ -16,14 +15,6 @@ const LandingPage = (): React.ReactNode => {
   useEffect(() => {
     setInit(true);
   }, []);
-
-  if (!init) {
-    return (
-      <h4>
-        <LogoSpinner />
-      </h4>
-    );
-  }
 
   return (
     <>
@@ -47,10 +38,13 @@ const LandingPage = (): React.ReactNode => {
           <FrontPageImage />
         </Typography>
       </section>
-      <About />
-      <Inscrire />
-      <Impliquer />
-      <Contact />
+      {init && 
+      <>
+        <About />
+        <Inscrire />
+        <Impliquer />
+        <Contact />
+      </>}
     </>
   );
 };
