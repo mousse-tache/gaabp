@@ -6,8 +6,6 @@ import Card from "@aabp/components/design-system/Card/Card";
 import EligibliteContext from "@aabp/context/eligibiliteContext";
 import EligibiliteTable from "./EligibiliteTable";
 
-import "./eligibilite.scss";
-
 const Eligibilite = (): React.ReactNode => {
   // select honor / formation, fetch users with matching criterias
   // criteres: annee de service + formations
@@ -24,26 +22,27 @@ const Eligibilite = (): React.ReactNode => {
   return (
     <EligibliteContext.Provider value={honneurs}>
       <Card>
-        <li className="eligibilite-list-chips">
+        <h2>
+          Montre l'éligibilité, mais ne valide pas si une personne a déjà
+          l'honneur en question.
+        </h2>
+        <div className="m-auto p-3 flex flex-row gap-2">
           <Chip
-            className="eligibilite-chip"
             label="Bûchettes"
             onClick={() => setBuchettes(!buchettes)}
             color={buchettes ? "primary" : "default"}
           />
           <Chip
-            className="eligibilite-chip"
             label="Pro Valore Sua"
             onClick={() => setProvalore(!provalore)}
             color={provalore ? "primary" : "default"}
           />
           <Chip
-            className="eligibilite-chip"
             label="Service national méritoire"
             onClick={() => setSnm(!snm)}
             color={snm ? "primary" : "default"}
           />
-        </li>
+        </div>
         <EligibiliteTable />
       </Card>
     </EligibliteContext.Provider>

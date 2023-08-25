@@ -1,92 +1,42 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import Accordion from "../design-system/Collapsible/Accordion";
 import List from "../design-system/List/List";
 import ListItem from "../design-system/List/ListItem";
 
 const Bottin = (): React.ReactNode => {
   return (
-    <div>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Permis de camp
-        </AccordionSummary>
-        <AccordionDetails>
-          <List>
-            Vous devez envoyer votre demande de permis de camp à votre branche,
-            votre chef de groupe et info@badenpowell.ca
-            <ListItem>Castors: bleu@badenpowell.ca</ListItem>
-            <ListItem>
-              Louveteaux/Louvettes/Jeannettes: jaune@badenpowell.ca
-            </ListItem>
-            <ListItem>Guides/Éclaireurs: vert@badenpowell.ca</ListItem>
-            <ListItem>Routiers/Guides aînées: rouge@badenpowell.ca</ListItem>
-          </List>
-        </AccordionDetails>
+    <div className="p-5">
+      <Accordion header="Permis de camp">
+        <List>
+          Vous devez envoyer votre demande de permis de camp à votre branche,
+          votre chef de groupe et info@badenpowell.ca
+          <ListItem>Castors: bleu@badenpowell.ca</ListItem>
+          <ListItem>
+            Louveteaux/Louvettes/Jeannettes: jaune@badenpowell.ca
+          </ListItem>
+          <ListItem>Guides/Éclaireurs: vert@badenpowell.ca</ListItem>
+          <ListItem>Routiers/Guides aînées: rouge@badenpowell.ca</ListItem>
+        </List>
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Cotisation
-        </AccordionSummary>
-        <AccordionDetails>
-          info@badenpowell.ca ou gestion@badenpowell.ca
-        </AccordionDetails>
+      <Accordion header="Cotisation">
+        info@badenpowell.ca ou gestion@badenpowell.ca
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Méthodologie
-        </AccordionSummary>
-        <AccordionDetails>commissariat@badenpowell.ca</AccordionDetails>
+      <Accordion header="Méthodologie">commissariat@badenpowell.ca</Accordion>
+      <Accordion header="Groupes">groupe@badenpowell.ca</Accordion>
+      <Accordion header="Initiatives jeunesses">
+        jeunesse@badenpowell.ca
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Groupes
-        </AccordionSummary>
-        <AccordionDetails>groupe@badenpowell.ca</AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Initiatives jeunesses
-        </AccordionSummary>
-        <AccordionDetails>jeunesse@badenpowell.ca</AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Spiritualité
-        </AccordionSummary>
-        <AccordionDetails>spiritualite@badenpowell.ca</AccordionDetails>
+      <Accordion header="Spiritualité">
+        spiritualite@badenpowell.CampClient
       </Accordion>
 
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Éthique et déontologie
-        </AccordionSummary>
-        <AccordionDetails>ethique@badenpowell.ca</AccordionDetails>
+      <Accordion header="Éthique et déontologie">
+        ethique@badenpowell.ca
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Dénonciations
-        </AccordionSummary>
-        <AccordionDetails>
-          ethique@badenpowell.ca ou presidence@badenpowell.ca
-        </AccordionDetails>
+      <Accordion header="Dénonciations">
+        ethique@badenpowell.ca ou presidence@badenpowell.ca
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Le site web
-        </AccordionSummary>
-        <AccordionDetails>informatique@badenpowell.ca</AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Toute autre question
-        </AccordionSummary>
-        <AccordionDetails>info@badenpowell.ca</AccordionDetails>
-      </Accordion>
+      <Accordion header="Le site web">fbrobillard@gmail.com</Accordion>
+      <Accordion header="Toute autre question">info@badenpowell.ca</Accordion>
     </div>
   );
 };

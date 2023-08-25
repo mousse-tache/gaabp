@@ -1,10 +1,9 @@
 import {
-  AccordionDetails,
   Divider,
   Grid,
   List,
   ListItem,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
@@ -23,7 +22,7 @@ const RecensementDetails = () => {
   }
 
   return (
-    <AccordionDetails>
+    <div>
       <Grid container spacing={3} className="recensement-detail-container">
         <Grid item xs={12}>
           <Typography variant="h5">Dernier recensement</Typography>
@@ -150,7 +149,7 @@ const RecensementDetails = () => {
           </List>
         </Grid>
       </Grid>
-    </AccordionDetails>
+    </div>
   );
 };
 

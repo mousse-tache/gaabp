@@ -34,7 +34,7 @@ const MembresTable = ({ canEdit }, { canEdit: boolean }): React.ReactNode => {
             flexWrap: "wrap",
           }}
         >
-          {row.formations.map((x, i) => {
+          {row.formations && row.formations.map((x, i) => {
             return (
               <BadgeMapper
                 key={i}
@@ -108,6 +108,7 @@ const MembresTable = ({ canEdit }, { canEdit: boolean }): React.ReactNode => {
         exportFileName: "membres",
         exportAllData: true,
         tableLayout: "fixed",
+        sorting: false
       }}
       data={(query) =>
         new Promise(async (resolve) => {

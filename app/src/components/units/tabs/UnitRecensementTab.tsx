@@ -2,21 +2,18 @@ import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Button,
   MenuItem,
-  TextField,
-  Typography,
+  TextField
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Autocomplete } from "@material-ui/lab";
 
 import AppContext from "@aabp/context/app/appContext";
 import UnitContext from "@aabp/context/unit/unitContext";
 
 import { isFeatureActivated } from "@aabp/features/useFeatures";
+
+import Accordion from "@aabp/components/design-system/Collapsible/Accordion";
 
 import Loading from "@aabp/components/loading/Loading";
 import AddNewUsers from "@aabp/components/recensement/AddNewUsers";
@@ -132,26 +129,16 @@ const UnitRecensementTab = (): React.ReactNode => {
 
   return (
     <div>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5">Recensement</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+      <Accordion header="Recensement">
           <Recensement
             unitId={unit._id}
             unitMembers={activeMembers}
             uniteCadette={unit.branche !== 3 && unit.branche !== 4}
           />
-        </AccordionDetails>
       </Accordion>
       {isFeatureActivated(Features.Recensement) && (
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="h5">
-              Ajouter des membres dans l'unité
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
+        <Accordion header=" Ajouter des membres dans l'unité">
+          <div className="w-full">
             <div className="add-user-search">
               <Autocomplete
                 fullWidth={true}
@@ -209,7 +196,7 @@ const UnitRecensementTab = (): React.ReactNode => {
                 </Button>
               </div>
             </div>
-          </AccordionDetails>
+          </div>
         </Accordion>
       )}
       {Permissions(PermissionTypes.CreateUser, authedUser) &&
@@ -224,12 +211,8 @@ const UnitRecensementTab = (): React.ReactNode => {
             triggerUpdateMembres={FetchMembres}
           />
         )}
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5">Membres de l'unité</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>En résumé</Typography>
+      <Accordion header="Membres de l'unité">
+        <div className="w-full flex flex-col gap-3">
           <ul>
             <li>{activeMembers.length} membre(s) actif(s)</li>
             <li>
@@ -249,14 +232,12 @@ const UnitRecensementTab = (): React.ReactNode => {
               membre(s) de maîtrise
             </li>
           </ul>
-        </AccordionDetails>
-        <AccordionDetails>
           <UnitMembersTable
             users={activeMembers}
             unitId={unit._id}
             removeFromUnit={RemoveFromUnit}
           />
-        </AccordionDetails>
+        </div>
       </Accordion>
     </div>
   );
