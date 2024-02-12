@@ -21,6 +21,7 @@ const saveDecoration = async (req, reply) => {
   ) {
     try {
       const { decoration } = req.body;
+      console.log(req.body);
 
       if (decoration._id) {
         const update = await Decoration.findByIdAndUpdate(
@@ -32,7 +33,12 @@ const saveDecoration = async (req, reply) => {
         return update;
       }
 
-      const insert = await Decoration.collection.insertOne(decoration);
+      const insert = await Decoration.collection.insertOne({
+        membre: new mongoose.Types.ObjectId(decoration.membre),
+        type: decoration.type,
+        dateObtention: decoration.dateObtention,
+        comments: decoration.comments,
+      });
 
       return insert;
     } catch (err) {
@@ -45,3 +51,4 @@ const saveDecoration = async (req, reply) => {
 };
 
 export { getDecorationsForUser, saveDecoration };
+
