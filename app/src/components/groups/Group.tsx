@@ -1,6 +1,4 @@
 import { Input, InputLabel, Modal } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
 import { useSnackbar } from "notistack";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -15,6 +13,8 @@ import Permissions from "../../auth/permissions";
 import PermissionTypes from "../../auth/permissionTypes";
 
 import GroupClient from "../../clients/groupClient";
+import AddIcon from "../design-system/Icons/AddIcon";
+import CloseIcon from "../design-system/Icons/CloseIcon";
 
 const Group = (): React.ReactNode => {
   const { authedUser } = useContext(AppContext);

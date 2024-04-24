@@ -1,4 +1,3 @@
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import classNames from "classnames";
 import React, { ReactNode, useState } from "react";
 
@@ -22,7 +21,20 @@ const Accordion = ({
     <div className={classes} {...props}>
       <div onClick={() => setOpen(!open)} className="accordion-header w-full">
         <div className="accordion-header-title text-xl">{header}</div>
-        <div className={`caret ${open ? "toggle-up" : "toggle-down"}`}><ExpandMoreIcon /></div>
+        <div className={`caret ${open ? "toggle-up" : "toggle-down"}`}>
+          <svg className="h-8 w-8 text-slate-500"  
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          strokeWidth="2" 
+          stroke="currentColor" 
+          fill="none" 
+          strokeLinecap="round" 
+          strokeLinejoin="round">  
+            <path stroke="none" d="M0 0h24v24H0z"/>  
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
       <div className={`accordion-content content-${open ? "open" : "closed"} w-full`}>
         {children}

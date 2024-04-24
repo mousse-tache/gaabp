@@ -1,9 +1,7 @@
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 
-import { Fab, MenuItem, Modal, TextField } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
+import { MenuItem, Modal, TextField } from "@material-ui/core";
 
 import Button from "../design-system/Button/Button";
 import Card from "../design-system/Card/Card";
@@ -19,9 +17,11 @@ import Genre from "@aabp/utils/genre";
 
 import useAuthUser from "@aabp/auth/useAuthUser";
 
+import AddIcon from "../design-system/Icons/AddIcon";
+import CloseIcon from "../design-system/Icons/CloseIcon";
 import "./unit.scss";
 
-const Unit = () => {
+const Unit = (): React.ReactNode => {
   const authedUser = useAuthUser();
   const [unitList, setUnitList] = useState([]);
   const [isFetchingUnitList, setIsFetchingUnitList] = useState(true);
@@ -100,7 +100,7 @@ const Unit = () => {
       <h2 className="membres-title">
         <span className="membres-title-element">Liste des unités</span>
         <span className="membres-title-element">
-          <Fab
+          <Button
             aria-label="add"
             size="small"
             color="secondary"
@@ -108,7 +108,7 @@ const Unit = () => {
             onClick={handleOpen}
           >
             <AddIcon />
-          </Fab>
+          </Button>
         </span>
       </h2>
       <Modal
@@ -120,14 +120,14 @@ const Unit = () => {
       >
         <Card>
           <div className="close-icon">
-            <Fab
+            <Button
               aria-label="close"
               size="small"
               color="secondary"
               onClick={handleClose}
             >
               <CloseIcon />
-            </Fab>
+            </Button>
           </div>
           <form className="unit-modal-content">
             <h3>Nouvelle unité</h3>

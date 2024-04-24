@@ -1,6 +1,6 @@
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { Link } from "gatsby";
 
+import HelpIcon from "@aabp/components/design-system/Icons/HelpIcon";
 import Login from "@aabp/login/login";
 
 const LoginPage = (): React.ReactNode => {
@@ -8,7 +8,7 @@ const LoginPage = (): React.ReactNode => {
     <>
       <Login />
       <Link to="/aide" target="_blank" className="flex flex-col items-center">
-        <HelpOutlineIcon fontSize="large" label="bottin" />
+        <HelpIcon />
         <h3>Centre d'aide</h3>
       </Link>
     </>

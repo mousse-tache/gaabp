@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 type Size = "small" | "medium" | "large"
 
 type Color = "primary" | "secondary" | "ghost"
@@ -9,12 +11,11 @@ const Button = ({
   color,
   ...props
 }: {
-  children: any
+  children: ReactNode
   className: string
   size: Size
   color: Color
-  props: any
-}) => {
+}): React.ReactNode  => {
   return (
     <button
       className={`${className} ${getSizeClasses(size)}
@@ -31,7 +32,7 @@ const Button = ({
 const getColorClasses = (color) => {
   switch (color) {
     case "ghost":
-      return "text-base py-1 px-2";
+      return "text-base hover:text-rose-800 py-1 px-2 hover:bg-slate-200";
     case "secondary":
       return "bg-yellow-500 hover:bg-yellow-600 text-black";
     case "primary":

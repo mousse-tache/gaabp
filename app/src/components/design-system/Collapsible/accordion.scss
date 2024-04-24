@@ -28,40 +28,27 @@
     }
 
     .caret {
-        transition: all 0.3s 0.15s;
-        //max-width: 15px;
-        //max-height: 15px;
+        transition: all 0.3s ease-out;
         text-align: right;
         vertical-align: center;
         position: absolute;
         right: 1rem;
-
-        svg {
-            //max-width: 15px;
-            //max-height: 15px;
-
-            path {
-                fill: grey;
-            }
-        }
     }
 
     .accordion-content {
-        transition: all .3s .15s linear;
         margin: .5rem;
         display: flex;
-        height: inherit;
+        overflow: hidden;
     }
     
     .content-open {
-        opacity: 1;
-        max-height: fit-content;
+        height: fit-content;
+        max-height: 2000px;
+        transition: max-height 0.3s ease-in;
     }
 
     .content-closed {
-        transition: all 3s .15s linear;
-        opacity: 0;
         max-height: 0px;
-        overflow: hidden;
+        transition: max-height 0.3s ease-out;
     }
 }

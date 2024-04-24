@@ -2,8 +2,6 @@ import {
   MenuItem,
   TextField
 } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import CloseIcon from "@material-ui/icons/Close";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 
@@ -14,9 +12,14 @@ import ListItem from "../design-system/List/ListItem";
 
 import UserClient from "../../clients/userClient";
 import NominationTypes from "../../utils/nominationTypes";
+import AddIcon from "../design-system/Icons/AddIcon";
+import CloseIcon from "../design-system/Icons/CloseIcon";
 
 
-const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
+const AddNewUsers = ({ unitId, triggerUpdateMembres }: {
+  unitId: string
+  triggerUpdateMembres: () => void
+}): React.ReactNode => {
   const defaultUserState = {
     prenom: "",
     nom: "",
@@ -59,7 +62,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
       <div className="flex flex-col gap-5 w-full">
         <div className="w-full">
           <List className="flex flex-col w-full">
-            <ListItem className="flex flex-row flex-wrap justify-between w-full gap-3">
+            <ListItem className="flex flex-row flex-wrap justify-between self-auto w-full gap-3">
               <TextField
                 className="w-56"
                 fullWidth
@@ -128,9 +131,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                 }
                 onClick={addPreviewUser}
               >
-                <AddCircleOutlineIcon
-                  size="large"
-                />
+                <AddIcon />
               </Button>
             </ListItem>
             {usersToCreate.length > 0 && (
@@ -168,7 +169,7 @@ const AddNewUsers = ({ unitId, triggerUpdateMembres }) => {
                   ))}
                 </TextField>
                 <Button onClick={() => removeRow(x)}>
-                  <CloseIcon size="large" />
+                  <CloseIcon />
                 </Button>
               </ListItem>
             ))}

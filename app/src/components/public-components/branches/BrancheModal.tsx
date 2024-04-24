@@ -1,7 +1,7 @@
 import { Dialog, IconButton, Typography } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 
 import Card from "@aabp/components/design-system/Card/Card";
+import CloseIcon from "@aabp/components/design-system/Icons/CloseIcon";
 
 const BrancheModal = ({
   title,
