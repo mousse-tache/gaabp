@@ -1,6 +1,4 @@
 import { Fab, Modal, TextField } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 
@@ -10,6 +8,8 @@ import Card from "@aabp/components/design-system/Card/Card";
 import PermissionTypes from "@aabp/auth/permissionTypes";
 import usePermissions from "@aabp/auth/usePermissions";
 import UserClient from "@aabp/clients/userClient";
+import AddIcon from "@aabp/components/design-system/Icons/AddIcon";
+import CloseIcon from "@aabp/components/design-system/Icons/CloseIcon";
 
 const MembreListHeader = (): React.ReactNode => {
   const perms = usePermissions();

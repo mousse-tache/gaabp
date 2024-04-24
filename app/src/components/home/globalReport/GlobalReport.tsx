@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { Tooltip } from "@material-ui/core";
-import HelpOutline from "@material-ui/icons/HelpOutline";
 import { Skeleton } from "@material-ui/lab";
 
 import ReportingClient from "@aabp/clients/reportingClient";
 import Card from "@aabp/components/design-system/Card/Card";
+import HelpIcon from "@aabp/components/design-system/Icons/HelpIcon";
 import DonutChart from "@aabp/reporting/DonutChart";
 import { getBranchColorFromId, getBranchFromId } from "@aabp/utils/branches";
 
@@ -45,7 +45,7 @@ const GlobalReport = () => {
         <div className="block m-auto">
           <Tooltip title="Membres avec une nomination sans date de fin">
             <h3>
-              Membres actifs <HelpOutline className="align-text-bottom" />
+              Membres actifs <HelpIcon className="inline h-6 w-6" />
             </h3>
           </Tooltip>
           <div>
@@ -55,7 +55,7 @@ const GlobalReport = () => {
         <div className="block m-auto">
           <Tooltip title="Unités ayant soumis leur recensement">
             <h3>
-              Unités recensées <HelpOutline className="align-text-bottom" />
+              Unités recensées <HelpIcon className="inline h-6 w-6" />
             </h3>
           </Tooltip>
           <div>
@@ -65,7 +65,7 @@ const GlobalReport = () => {
         <div className="block m-auto">
           <Tooltip title="Unités ayant payé leur recensement">
             <h3>
-              Unités payées <HelpOutline className="align-text-bottom" />
+              Unités payées <HelpIcon className="inline h-6 w-6" />
             </h3>
           </Tooltip>
           <div>
@@ -76,7 +76,7 @@ const GlobalReport = () => {
           <Tooltip title="Somme des recensements marqués comme payés">
             <h3>
               Revenus des recensements{" "}
-              <HelpOutline className="align-text-bottom" />
+              <HelpIcon className="inline h-6 w-6" />
             </h3>
           </Tooltip>
           <div>
@@ -88,7 +88,7 @@ const GlobalReport = () => {
             <Tooltip title="Compte chaque nomination individuellement">
               <h3>
                 Membres par type de nomination{" "}
-                <HelpOutline className="align-text-bottom" />
+                <HelpIcon className="inline h-6 w-6" />
               </h3>
             </Tooltip>
             <div>
@@ -101,7 +101,7 @@ const GlobalReport = () => {
             <Tooltip title="Compte chaque nomination individuellement">
               <h3>
                 Membres par branche{" "}
-                <HelpOutline className="align-text-bottom" />
+                <HelpIcon className="inline h-6 w-6" />
               </h3>
             </Tooltip>
             <div>
