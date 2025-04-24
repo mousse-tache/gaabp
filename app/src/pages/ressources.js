@@ -16,7 +16,7 @@ const ReglementsPage = () => (
       />
       <meta
         name="keywords"
-        content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association,"
+        content="aventure, scouts, scoutisme aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association,"
       ></meta>
       <meta
         name="google-site-verification"

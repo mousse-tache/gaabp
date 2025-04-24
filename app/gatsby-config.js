@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: process.env.GATSBY_SITE_URL ? process.env.GATSBY_SITE_URL : "http://localhost:8000/",
     title: `AABP`,
-    description: `Site web de l'Association des Aventuriers de Baden-Powell qui offre de l'aventure pour les jeunes et les moins jeunes à partir de 7 ans.`,
+    description: `Site web de l'Association des Aventuriers de Baden-Powell qui offre du scoutisme traditionnel pour les jeunes et les moins jeunes à partir de 7 ans.`,
     author: `AABP`,
   },
   plugins: [

@@ -1,10 +1,9 @@
-import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
 
 
-import Layout from "@aabp/components/public-components/Layout";
 import BlogCard from "@aabp/components/blog/blogCard";
+import Layout from "@aabp/components/public-components/Layout";
 
 const NotFoundPage = () => {
     const data = useStaticQuery(graphql`
@@ -32,7 +31,7 @@ const NotFoundPage = () => {
     <Layout>
       <Helmet>
           <meta name="description" content="Blog de l'Association des aventuriers de Baden-Powell"/>
-          <meta name="keywords" content="aventure, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
+          <meta name="keywords" content="aventure, scouts, scoutisme, aabp, Baden-Powell, aventuriers, jeunes, éclaireurs, louveteaux, activités, association, blog"></meta>
           <title>AABP | Centre d'aide</title>
           <html lang="fr" />
       </Helmet>
