@@ -15,7 +15,7 @@ const About = (): React.ReactNode => (
         </Typography>
         <Typography>
           <Box component="span" lineHeight={2}>
-            Nous sommes un mouvement d'aventure traditionnel d’éducation pour et
+            Nous sommes un mouvement de scoutisme traditionnel d’éducation pour et
             par les jeunes ayant comme objectif la formation de meilleurs
             citoyens.
           </Box>
