@@ -31,13 +31,6 @@ const BrancheModal = ({
         <div className="p-3">
           <Typography variant="h5">{title}</Typography>
         </div>
-
-        <div className="p-3">
-          <Typography>
-            Ils sont amenés à apprendre la vie en groupe par le biais des
-            aventures de Pistache le castor et de ses amis de la nature.
-          </Typography>
-        </div>
         {children}
       </Card>
     </Dialog>
